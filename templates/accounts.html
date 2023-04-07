@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% extends './layouts/base.html' %}
+    {% load static %}
+
+    {% block links %}
+
+    <link rel="stylesheet" href="{% static 'core/Assets/css/accounts.css' %}">
+    <script src="https://kit.fontawesome.com/0d5a0a2089.js" crossorigin="anonymous"></script>
+    
+    {% endblock %}
+
+    <title>{% block title %}Todo Accounts{% endblock %}</title>
+</head>
+
+<body>
+    {% block body %}
+    <section class="authentication-section">
+        <div class="authentication-container">
+            <div class="authentication-card">
+                <div class="authentication-radio-group">
+                    <div class="authentication-radio-btn">
+                        <input id="login" type="radio" checked name="authentication_radio">
+                        <label for="login" class="radio-label">Login</label>
+                    </div>
+                    <div class="authentication-radio-btn">
+                        <input id="register" type="radio" name="authentication_radio">
+                        <label for="register" class="radio-label">Register</label>
+                    </div>
+                </div>
+                <div class="login-auth-content" id="login-content">
+                    <div class="third-party-auth-btn">
+                        <button>Sign in with Google</button>
+                        <button>Sign in with Facebook</button>
+                    </div>
+                    <hr />
+                    <div class="input-container">
+                        <div class="input-group">
+                            <div class="input">
+                                <span class="input-label">Email</span>
+                                <input class="input-field" required type="email" name="email" />
+                            </div>
+                            <div class="password-input">
+                                <div>
+                                    <span class="input-label">Password</span>
+                                    <a href="javascript:void(0)">Forgot Password?</a>
+                                </div>
+                                <div>
+                                    <i class="fa fa-eye-slash hide-password-field"></i>
+                                    <input class="input-field login-password-field" required type="password" name="password" />
+                                </div>
+                            </div>
+                        </div>
+                        <a href="{% url 'settings' %}">
+                            <button class="login-btn">Login</button>
+                        </a>
+                    </div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+                </div>
+                <div class="register-auth-content hide" id="register-content">
+                    <div class="third-party-auth-btn">
+                        <button>Sign in with Google</button>
+                        <button>Sign in with Facebook</button>
+                    </div>
+                    <hr />
+                    <div class="input-container">
+                        <div class="input-group">
+                            <div class="input">
+                                <span class="input-label">First Name</span>
+                                <input class="input-field" required type="text" name="first_name" />
+                            </div>
+                            <div class="input">
+                                <span class="input-label">Last Name</span>
+                                <input class="input-field" required type="text" name="last_name" />
+                            </div>
+                            <div class="input">
+                                <span class="input-label">Email</span>
+                                <input class="input-field" required type="email" name="email" />
+                            </div>
+                            <div class="password-input">
+                                <span class="input-label">Password</span>
+                                <div>
+                                    <i class="fa fa-eye-slash hide-password-field"></i>
+                                    <input class="input-field register-password-field" required type="password"
+                                        name="password" />
+                                </div>
+                            </div>
+                            <div class="password-input">
+                                <span class="input-label">Confirm Password</span>
+                                <div>
+                                    <i class="fa fa-eye-slash hide-password-field"></i>
+                                    <input class="input-field register-confirm-password-field" required type="password"
+                                        name="confirm_password" />
+                                </div>
+                            </div>
+                        </div>
+                        <button class="register-btn" id="register-btn">Register</button>
+                    </div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
+                <div class="post-registration-content hide" id="post-registration-content">
+                    <div class="post-registration-message">
+                        <h2>Ya estamos casi listos!</h2>
+                        <p>
+                            Por favor active su cuenta haciendo click en el link que le acaba de llegar por correo
+                            electronico.
+                        </p>
+                        <p>No recibio el correo? Por favor revise su buzon de mensajes no deseados, si no esta ahi,
+                            podemos volver a intentar.</p>
+                    </div>
+                    <a href="javascript:void(0)">Reenviar correo</a>
+                </div>
+            </div>
+        </div>
+        <div class="bottom-page-ad">
+            <div>
+                <span>Google Adsense</span>
+            </div>
+        </div>
+    </section>
+
+    {% endblock %}
+</body>
+{% block scripts %}
+<script src="{% static 'core/Assets/js/accounts.js' %}"></script>
+{% endblock %}
+</html>

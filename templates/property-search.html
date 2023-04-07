@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% extends './layouts/base.html' %}
+    {% load static %}
+
+    {% block links %}
+
+    <link rel="stylesheet" href="{% static 'core/Assets/css/property_search_page.css' %}">
+    
+    {% endblock %}
+
+    <title>{% block title %}Todo Search Property{% endblock %}</title>
+</head>
+
+<body>
+    {% block body %}
+
+    <section class="property-search-top-ads">
+        <div class="ad">
+            <span>Paid Publicity</span>
+        </div>
+        <div class="focused-ad">
+            <span>Google Adsense</span>
+        </div>
+        <div class="ad">
+            <span>Paid Publicity</span>
+        </div>
+        <!-- <div class="left-ad-column">    
+        </div> -->
+    </section>
+
+    <section class="property-search-content">
+        <div class="property-search-filter-container">
+            <div class="filter-form-wrapper" id="filter-form-wrapper">
+                <form class="filter-form" id="filter-form">
+                    <div class="criteria-search">
+                        <span>Criteria</span>
+                        <div class="criteria-radio-group">
+                            <div class="criteria-radio-btn">
+                                <input id="buy" type="radio" checked name="criteria_radio">
+                                <label for="buy" class="radio-label">Buy</label>
+                            </div>
+                            <div class="criteria-radio-btn">
+                                <input id="rent" type="radio" name="criteria_radio">
+                                <label for="rent" class="radio-label">Rent</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="property-type-filter">
+                        <span>Property Type</span>
+                        <div class="property-type-checkbox-group">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="house" id="house">
+                                <label class="form-check-label" for="house">
+                                    House
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="apartment" id="apartment">
+                                <label class="form-check-label" for="apartment">
+                                    Apartment
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="land" id="land">
+                                <label class="form-check-label" for="land">
+                                    Land
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="retail" id="retail">
+                                <label class="form-check-label" for="retail">
+                                    Retail Space
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="office" id="office">
+                                <label class="form-check-label" for="office">
+                                    Office
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="practice" id="practice">
+                                <label class="form-check-label" for="practice">
+                                    Practice
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="warehouse" id="warehouse">
+                                <label class="form-check-label" for="warehouse">
+                                    Warehouse
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="suite" id="suite">
+                                <label class="form-check-label" for="suite">
+                                    Suite
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="property-price">
+                        <span>Price</span>
+                        <div class="property-minmax-price-input-group">
+                            <input type="number" name="min_price" id="" placeholder="Min">
+                            <input type="number" name="max_price" id="" placeholder="Max">
+                        </div>
+                    </div>
+                    <div class="bedroom-count-filter">
+                        <span>Bedrooms</span>
+                        <div class="btn-group bedroom-count-radio-group" role="group"
+                            aria-label="Basic radio toggle button group">
+                            <input type="radio" class="btn-check" name="bedroombtnradio" id="bedroombtnradio1" checked>
+                            <label class="btn btn-outline-primary bedroom-count-radio-btn" for="bedroombtnradio1">1</label>
+        
+                            <input type="radio" class="btn-check" name="bedroombtnradio" id="bedroombtnradio2">
+                            <label class="btn btn-outline-primary bedroom-count-radio-btn" for="bedroombtnradio2">2</label>
+        
+                            <input type="radio" class="btn-check" name="bedroombtnradio" id="bedroombtnradio3">
+                            <label class="btn btn-outline-primary bedroom-count-radio-btn" for="bedroombtnradio3">3</label>
+        
+                            <input type="radio" class="btn-check" name="bedroombtnradio" id="bedroombtnradio4">
+                            <label class="btn btn-outline-primary bedroom-count-radio-btn" for="bedroombtnradio4">4</label>
+        
+                            <input type="radio" class="btn-check" name="bedroombtnradio" id="bedroombtnradio5">
+                            <label class="btn btn-outline-primary bedroom-count-radio-btn" for="bedroombtnradio5">5+</label>
+                        </div>
+                    </div>
+                    <div class="bedroom-count-filter">
+                        <span>Bathrooms</span>
+                        <div class="btn-group bedroom-count-radio-group" role="group"
+                            aria-label="Basic radio toggle button group">
+                            <input type="radio" class="btn-check" name="bathroombtnradio" id="bathroombtnradio1" checked>
+                            <label class="btn btn-outline-primary bedroom-count-radio-btn" for="bathroombtnradio1">1</label>
+        
+                            <input type="radio" class="btn-check" name="bathroombtnradio" id="bathroombtnradio2">
+                            <label class="btn btn-outline-primary bedroom-count-radio-btn" for="bathroombtnradio2">2</label>
+        
+                            <input type="radio" class="btn-check" name="bathroombtnradio" id="bathroombtnradio3">
+                            <label class="btn btn-outline-primary bedroom-count-radio-btn" for="bathroombtnradio3">3</label>
+        
+                            <input type="radio" class="btn-check" name="bathroombtnradio" id="bathroombtnradio4">
+                            <label class="btn btn-outline-primary bedroom-count-radio-btn" for="bathroombtnradio4">4</label>
+        
+                            <input type="radio" class="btn-check" name="bathroombtnradio" id="bathroombtnradio5">
+                            <label class="btn btn-outline-primary bedroom-count-radio-btn" for="bathroombtnradio5">5+</label>
+                        </div>
+                    </div>
+                    <div class="property-price">
+                        <span>Construction</span>
+                        <div class="property-minmax-price-input-group">
+                            <input type="number" name="min_price" id="" placeholder="Min">
+                            <input type="number" name="max_price" id="" placeholder="Max">
+                        </div>
+                    </div>
+                    <div class="property-price">
+                        <span>Land</span>
+                        <div class="property-minmax-price-input-group">
+                            <input type="number" name="min_price" id="" placeholder="Min">
+                            <input type="number" name="max_price" id="" placeholder="Max">
+                        </div>
+                    </div>
+                    <div class="property-type-filter">
+                        <span>Ameneties</span>
+                        <div class="property-type-checkbox-group">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="pool" id="pool">
+                                <label class="form-check-label" for="pool">
+                                    Pool
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="park" id="park">
+                                <label class="form-check-label" for="park">
+                                    Park
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="parking" id="parking">
+                                <label class="form-check-label" for="parking">
+                                    Parking
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="gated_community" id="gated-community">
+                                <label class="form-check-label" for="gated-community">
+                                    Gated Community
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="gym" id="gym">
+                                <label class="form-check-label" for="gym">
+                                    Gym
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="courts" id="courts">
+                                <label class="form-check-label" for="courts">
+                                    Courts
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="quiet" id="quiet">
+                                <label class="form-check-label" for="quiet">
+                                    Quiet
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="central_ac" id="central-ac">
+                                <label class="form-check-label" for="central-ac">
+                                    Central A/C
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="side-publicity-ad">
+                <span>Paid Publicity</span>
+            </div>
+        </div>
+        <div class="property-search-results">
+            <div class="property-search-results-header">
+                <span>Search Results</span>
+                <div>
+                    <button class="filter-btn" id="filter-btn">
+                        <span>Filters</span>
+                        <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 0.863883C9.95436 1.10388 9.77171 1.24788 9.63473 1.43988C8.26486 2.87988 6.895 4.31988 5.52514 5.75988C5.29683 5.99988 5.06852 6.09588 4.74888 5.95188C4.65756 5.95188 4.52057 5.85588 4.47491 5.75988C3.05938 4.27188 1.64386 2.78388 0.228334 1.29588C-0.136963 0.911883 -0.0456384 0.287883 0.410983 0.0958825C0.639293 -0.0481175 0.913266 -0.000117473 1.09591 0.143883C1.14158 0.143883 1.18724 0.239883 1.2329 0.287883C2.46578 1.58388 3.65299 2.83188 4.88587 4.12788C4.88587 4.12788 4.93153 4.17588 4.97719 4.22388C4.97719 4.22388 5.02286 4.17588 5.06852 4.12788C6.30139 2.83188 7.53427 1.53588 8.76715 0.239883C8.99546 -0.000117473 9.22377 -0.0961175 9.5434 0.0478825C9.77171 0.143883 9.9087 0.287883 10 0.527883C10 0.527883 10 0.575883 10 0.623883V0.911883V0.863883Z" fill="#9A9A9A"/>
+                        </svg>                            
+                    </button>
+                    <div class="filter-dropdown" id="filter-dropdown">
+                    </div>
+                    <button class="view-map-btn">
+                        <span>View Map</span>
+                        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_21_121)">
+                                <path
+                                    d="M6.16627 0C6.36987 0 6.57347 0 6.77707 0C6.81271 0.0076306 6.85088 0.0203483 6.88651 0.0228918C7.84853 0.142438 8.64767 0.564664 9.21521 1.3557C9.938 2.36549 10.0907 3.49481 9.80566 4.69028C9.6326 5.41518 9.30938 6.07904 8.94798 6.72765C8.92253 6.77343 8.89963 6.81921 8.86909 6.88026C9.34501 6.88026 9.79293 6.88534 10.2409 6.88026C10.475 6.87771 10.6175 6.97691 10.7091 7.19057C11.2741 8.51829 11.8442 9.84602 12.4143 11.1737C12.6077 11.6239 12.8037 12.0691 12.9997 12.5167V12.7202C12.908 12.8983 12.7808 13.0025 12.5645 13.0025C8.51787 13 4.47128 13.0025 0.424686 13.0025C0.0836526 13.0025 -0.0894093 12.7406 0.0454772 12.4252C0.79626 10.6701 1.54959 8.91763 2.30037 7.16005C2.38181 6.96928 2.51924 6.88026 2.72539 6.8828C3.14023 6.88534 3.55507 6.8828 3.96991 6.8828C4.01572 6.8828 4.05899 6.8828 4.12261 6.8828C4.09207 6.8243 4.07171 6.7836 4.0539 6.74291C3.85538 6.33594 3.64415 5.93661 3.46599 5.52201C3.08933 4.65212 2.94681 3.74917 3.14787 2.8106C3.45072 1.39894 4.26768 0.462923 5.6878 0.0941107C5.84559 0.0534142 6.00848 0.0305224 6.16881 0L6.16627 0ZM6.49712 8.95578C6.57602 8.85658 6.64219 8.77265 6.7109 8.68617C7.46932 7.70691 8.16666 6.69204 8.68839 5.56525C9.03197 4.82254 9.25339 4.05948 9.14395 3.22266C8.95307 1.74995 7.92997 0.84954 6.67273 0.775778C5.72089 0.71982 4.91411 1.04539 4.36439 1.84152C3.78412 2.68343 3.69759 3.62199 3.94955 4.59616C4.13279 5.29564 4.46364 5.93406 4.82504 6.55723C5.31368 7.39405 5.87614 8.18255 6.49712 8.95578ZM11.1902 10.2911C11.1902 10.2708 11.1902 10.2606 11.1902 10.2555C10.8288 9.40853 10.4648 8.56408 10.1034 7.71708C10.0729 7.64586 10.0245 7.64332 9.96345 7.64332C9.47735 7.64332 8.99125 7.64332 8.5026 7.64332C8.42625 7.64332 8.38044 7.66875 8.33718 7.73234C8.17939 7.97143 8.02159 8.21307 7.84853 8.44199C7.51004 8.88965 7.16392 9.33477 6.81271 9.77226C6.62437 10.0063 6.37242 9.99863 6.17645 9.77226C6.12809 9.71884 6.08228 9.66288 6.03647 9.60693C5.92195 9.46703 5.80996 9.32714 5.69544 9.18724C5.23224 9.42379 4.77923 9.65525 4.31858 9.8918C4.3593 9.93504 4.38729 9.96556 4.41783 9.99609C5.00828 10.5862 5.59618 11.1737 6.18663 11.7638C6.34188 11.919 6.47422 12.1327 6.66255 12.2115C6.85597 12.2904 7.10284 12.2395 7.3268 12.2344C7.40824 12.2344 7.49477 12.214 7.56603 12.1784C8.59422 11.6494 9.62242 11.1127 10.6481 10.5811C10.8313 10.487 11.012 10.3903 11.1902 10.2962V10.2911ZM3.57034 10.2708C2.84246 10.6421 2.09677 11.0237 1.35108 11.4052C1.32563 11.4179 1.29763 11.4383 1.28745 11.4637C1.17801 11.713 1.07112 11.9648 0.959142 12.2242H5.52238C4.87848 11.5807 4.23205 10.9321 3.5678 10.2708H3.57034ZM1.79137 10.2886C1.799 10.2962 1.80664 10.3013 1.81427 10.3089C2.94935 9.72902 4.08189 9.14909 5.22461 8.56408C5.02101 8.26394 4.82249 7.97143 4.61635 7.68147C4.59599 7.65349 4.53491 7.64332 4.49419 7.64332C4.00809 7.64077 3.52198 7.64332 3.03588 7.63823C2.94935 7.63823 2.91118 7.66621 2.87809 7.74506C2.58796 8.43181 2.29019 9.11857 1.99751 9.80532C1.9288 9.96556 1.86008 10.1284 1.78882 10.2886H1.79137ZM11.5057 10.9881C10.7142 11.4001 9.938 11.802 9.16177 12.2064L9.17195 12.2242H12.0326C11.8544 11.8096 11.6813 11.4077 11.5032 10.9906L11.5057 10.9881Z"
+                                    fill="#9A9A9A" />
+                                <path
+                                    d="M5.35218 3.43627C5.35218 2.80548 5.87391 2.28914 6.50253 2.29423C7.13625 2.29931 7.64525 2.81056 7.64271 3.44645C7.64271 4.07724 7.12098 4.59358 6.49235 4.58849C5.86119 4.58341 5.34964 4.06707 5.35218 3.43627ZM6.50762 3.06237C6.29893 3.05729 6.12333 3.22007 6.11569 3.42864C6.10806 3.63976 6.28112 3.82289 6.49235 3.82543C6.69596 3.82798 6.87411 3.65502 6.8792 3.45153C6.88429 3.24296 6.71632 3.07 6.50762 3.06492V3.06237Z"
+                                    fill="#9A9A9A" />
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_21_121">
+                                    <rect width="13" height="13" fill="white" />
+                                </clipPath>
+                            </defs>
+                        </svg>
+                    </button>
+                    <button class="view-grid-btn hide">
+                        <span>Grid View</span>
+                        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="6" height="6" rx="1" fill="#D9D9D9" />
+                            <rect y="7" width="6" height="6" rx="1" fill="#D9D9D9" />
+                            <rect x="7" width="6" height="6" rx="1" fill="#D9D9D9" />
+                            <rect x="7" y="7" width="6" height="6" rx="1" fill="#D9D9D9" />
+                        </svg>
+                    </button>
+                    <select name="order" id="">
+                        <option value="" disabled selected hidden>Order</option>
+                        <option value="order1">Order1</option>
+                        <option value="order2">Order2</option>
+                    </select>
+                </div>
+            </div>
+            <div class="property-search-result-container">
+                <div class="map-view hide">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13612.269782401412!2d74.2686174!3d31.4673308!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3919051533e95177%3A0xd55e06f9aed17bb8!2sCrymzee%20Networks%20(Pvt.)%20Ltd.!5e0!3m2!1sen!2s!4v1680426688403!5m2!1sen!2s"
+                        width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+                <div class="property-search-result-card-container">
+                    <div class="property-card">
+                        <div class="property-card-image-container">
+                            <div class="card-type">
+                                <span>Nuevo</span>
+                            </div>
+                            <img src="{% static 'core/Assets/images/property_image.png' %}" alt="Property Image">
+                        </div>
+                        <div class="property-card-details">
+                            <div class="details-row1">
+                                <div class="details-row1-column1">
+                                    <span>Casa</span>
+                                    <span>Samborondon</span>
+                                </div>
+                                <div class="details-row1-column2">
+                                    <svg width="14" height="13" viewBox="0 0 25 22" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M22.6377 3.15345C21.1419 1.47213 19.2008 0.801797 16.9286 1.08202C15.4613 1.26334 14.2681 1.97762 13.2747 3.01608C13.0635 3.23586 12.8751 3.46663 12.6695 3.6974C12.4583 3.45564 12.2699 3.21938 12.0586 3.00509C10.2488 1.16993 8.06794 0.560039 5.56733 1.31828C3.22086 2.03257 1.85066 3.67542 1.23408 5.92817C1.11989 6.35674 1.07422 6.8018 1 7.24136V8.25235C1.01142 8.3018 1.02855 8.35125 1.03425 8.4007C1.15415 9.73586 1.65655 10.9337 2.41016 12.0491C3.20374 13.2304 4.18 14.2688 5.26474 15.1974C7.39997 17.0326 9.56945 18.8293 11.7332 20.637C12.3441 21.148 13.0292 21.1205 13.6686 20.593C15.3243 19.2194 16.9856 17.8458 18.6356 16.4666C20.0343 15.2963 21.3931 14.0765 22.5064 12.6425C23.3571 11.5436 24.0079 10.3512 24.2249 8.98861C24.5674 6.82927 24.1335 4.84575 22.6377 3.15894V3.15345Z"
+                                            fill="none" stroke="#000000" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="details-row2">
+                                <div class="details-row2-column">
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/area_logo.svg' %}" alt="area">
+                                        <span>400 m2</span>                                        
+                                    </div>
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/house_logo.svg' %}" alt="house">                                        
+                                        <span>320 m2</span>
+                                    </div>
+                                </div>
+                                <div class="details-row2-column">
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/bed_logo.svg' %}" alt="bed">
+                                        <span>4</span>                                        
+                                    </div>
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/bathroom_logo.svg' %}" alt="bathroom">
+                                        <span>4.5</span>                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="details-row3">
+                                <span>Samborondon, Guayas</span>
+                                <span class="price">$320,000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="property-card">
+                        <div class="property-card-image-container">
+                            <img src="{% static 'core/Assets/images/property_image.png' %}" alt="Property Image">
+                        </div>
+                        <div class="property-card-details">
+                            <div class="details-row1">
+                                <div class="details-row1-column1">
+                                    <span>Casa</span>
+                                    <span>Samborondon</span>
+                                </div>
+                                <div class="details-row1-column2">
+                                    <svg width="14" height="13" viewBox="0 0 25 22" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M22.6377 3.15345C21.1419 1.47213 19.2008 0.801797 16.9286 1.08202C15.4613 1.26334 14.2681 1.97762 13.2747 3.01608C13.0635 3.23586 12.8751 3.46663 12.6695 3.6974C12.4583 3.45564 12.2699 3.21938 12.0586 3.00509C10.2488 1.16993 8.06794 0.560039 5.56733 1.31828C3.22086 2.03257 1.85066 3.67542 1.23408 5.92817C1.11989 6.35674 1.07422 6.8018 1 7.24136V8.25235C1.01142 8.3018 1.02855 8.35125 1.03425 8.4007C1.15415 9.73586 1.65655 10.9337 2.41016 12.0491C3.20374 13.2304 4.18 14.2688 5.26474 15.1974C7.39997 17.0326 9.56945 18.8293 11.7332 20.637C12.3441 21.148 13.0292 21.1205 13.6686 20.593C15.3243 19.2194 16.9856 17.8458 18.6356 16.4666C20.0343 15.2963 21.3931 14.0765 22.5064 12.6425C23.3571 11.5436 24.0079 10.3512 24.2249 8.98861C24.5674 6.82927 24.1335 4.84575 22.6377 3.15894V3.15345Z"
+                                            fill="none" stroke="#000000" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="details-row2">
+                                <div class="details-row2-column">
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/area_logo.svg' %}" alt="area">
+                                        <span>400 m2</span>                                        
+                                    </div>
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/house_logo.svg' %}" alt="house">                                        
+                                        <span>320 m2</span>
+                                    </div>
+                                </div>
+                                <div class="details-row2-column">
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/bed_logo.svg' %}" alt="bed">
+                                        <span>4</span>                                        
+                                    </div>
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/bathroom_logo.svg' %}" alt="bathroom">
+                                        <span>4.5</span>                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="details-row3">
+                                <span>Samborondon, Guayas</span>
+                                <span class="price">$320,000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="property-card">
+                        <div class="property-card-image-container">
+                            <img src="{% static 'core/Assets/images/property_image.png' %}" alt="Property Image">
+                        </div>
+                        <div class="property-card-details">
+                            <div class="details-row1">
+                                <div class="details-row1-column1">
+                                    <span>Casa</span>
+                                    <span>Samborondon</span>
+                                </div>
+                                <div class="details-row1-column2">
+                                    <svg width="14" height="13" viewBox="0 0 25 22" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M22.6377 3.15345C21.1419 1.47213 19.2008 0.801797 16.9286 1.08202C15.4613 1.26334 14.2681 1.97762 13.2747 3.01608C13.0635 3.23586 12.8751 3.46663 12.6695 3.6974C12.4583 3.45564 12.2699 3.21938 12.0586 3.00509C10.2488 1.16993 8.06794 0.560039 5.56733 1.31828C3.22086 2.03257 1.85066 3.67542 1.23408 5.92817C1.11989 6.35674 1.07422 6.8018 1 7.24136V8.25235C1.01142 8.3018 1.02855 8.35125 1.03425 8.4007C1.15415 9.73586 1.65655 10.9337 2.41016 12.0491C3.20374 13.2304 4.18 14.2688 5.26474 15.1974C7.39997 17.0326 9.56945 18.8293 11.7332 20.637C12.3441 21.148 13.0292 21.1205 13.6686 20.593C15.3243 19.2194 16.9856 17.8458 18.6356 16.4666C20.0343 15.2963 21.3931 14.0765 22.5064 12.6425C23.3571 11.5436 24.0079 10.3512 24.2249 8.98861C24.5674 6.82927 24.1335 4.84575 22.6377 3.15894V3.15345Z"
+                                            fill="#8DC63F" stroke="#8DC63F" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="details-row2">
+                                <div class="details-row2-column">
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/area_logo.svg' %}" alt="area">
+                                        <span>400 m2</span>                                        
+                                    </div>
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/house_logo.svg' %}" alt="house">                                        
+                                        <span>320 m2</span>
+                                    </div>
+                                </div>
+                                <div class="details-row2-column">
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/bed_logo.svg' %}" alt="bed">
+                                        <span>4</span>                                        
+                                    </div>
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/bathroom_logo.svg' %}" alt="bathroom">
+                                        <span>4.5</span>                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="details-row3">
+                                <span>Samborondon, Guayas</span>
+                                <span class="price">$320,000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="property-card">
+                        <div class="property-card-image-container">
+                            <img src="{% static 'core/Assets/images/property_image.png' %}" alt="Property Image">
+                        </div>
+                        <div class="property-card-details">
+                            <div class="details-row1">
+                                <div class="details-row1-column1">
+                                    <span>Casa</span>
+                                    <span>Samborondon</span>
+                                </div>
+                                <div class="details-row1-column2">
+                                    <svg width="14" height="13" viewBox="0 0 25 22" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M22.6377 3.15345C21.1419 1.47213 19.2008 0.801797 16.9286 1.08202C15.4613 1.26334 14.2681 1.97762 13.2747 3.01608C13.0635 3.23586 12.8751 3.46663 12.6695 3.6974C12.4583 3.45564 12.2699 3.21938 12.0586 3.00509C10.2488 1.16993 8.06794 0.560039 5.56733 1.31828C3.22086 2.03257 1.85066 3.67542 1.23408 5.92817C1.11989 6.35674 1.07422 6.8018 1 7.24136V8.25235C1.01142 8.3018 1.02855 8.35125 1.03425 8.4007C1.15415 9.73586 1.65655 10.9337 2.41016 12.0491C3.20374 13.2304 4.18 14.2688 5.26474 15.1974C7.39997 17.0326 9.56945 18.8293 11.7332 20.637C12.3441 21.148 13.0292 21.1205 13.6686 20.593C15.3243 19.2194 16.9856 17.8458 18.6356 16.4666C20.0343 15.2963 21.3931 14.0765 22.5064 12.6425C23.3571 11.5436 24.0079 10.3512 24.2249 8.98861C24.5674 6.82927 24.1335 4.84575 22.6377 3.15894V3.15345Z"
+                                            fill="none" stroke="#000000" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="details-row2">
+                                <div class="details-row2-column">
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/area_logo.svg' %}" alt="area">
+                                        <span>400 m2</span>                                        
+                                    </div>
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/house_logo.svg' %}" alt="house">                                        
+                                        <span>320 m2</span>
+                                    </div>
+                                </div>
+                                <div class="details-row2-column">
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/bed_logo.svg' %}" alt="bed">
+                                        <span>4</span>                                        
+                                    </div>
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/bathroom_logo.svg' %}" alt="bathroom">
+                                        <span>4.5</span>                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="details-row3">
+                                <span>Samborondon, Guayas</span>
+                                <span class="price">$320,000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="property-card">
+                        <div class="property-card-image-container">
+                            <img src="{% static 'core/Assets/images/property_image.png' %}" alt="Property Image">
+                        </div>
+                        <div class="property-card-details">
+                            <div class="details-row1">
+                                <div class="details-row1-column1">
+                                    <span>Casa</span>
+                                    <span>Samborondon</span>
+                                </div>
+                                <div class="details-row1-column2">
+                                    <svg width="14" height="13" viewBox="0 0 25 22" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M22.6377 3.15345C21.1419 1.47213 19.2008 0.801797 16.9286 1.08202C15.4613 1.26334 14.2681 1.97762 13.2747 3.01608C13.0635 3.23586 12.8751 3.46663 12.6695 3.6974C12.4583 3.45564 12.2699 3.21938 12.0586 3.00509C10.2488 1.16993 8.06794 0.560039 5.56733 1.31828C3.22086 2.03257 1.85066 3.67542 1.23408 5.92817C1.11989 6.35674 1.07422 6.8018 1 7.24136V8.25235C1.01142 8.3018 1.02855 8.35125 1.03425 8.4007C1.15415 9.73586 1.65655 10.9337 2.41016 12.0491C3.20374 13.2304 4.18 14.2688 5.26474 15.1974C7.39997 17.0326 9.56945 18.8293 11.7332 20.637C12.3441 21.148 13.0292 21.1205 13.6686 20.593C15.3243 19.2194 16.9856 17.8458 18.6356 16.4666C20.0343 15.2963 21.3931 14.0765 22.5064 12.6425C23.3571 11.5436 24.0079 10.3512 24.2249 8.98861C24.5674 6.82927 24.1335 4.84575 22.6377 3.15894V3.15345Z"
+                                            fill="none" stroke="#000000" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="details-row2">
+                                <div class="details-row2-column">
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/area_logo.svg' %}" alt="area">
+                                        <span>400 m2</span>                                        
+                                    </div>
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/house_logo.svg' %}" alt="house">                                        
+                                        <span>320 m2</span>
+                                    </div>
+                                </div>
+                                <div class="details-row2-column">
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/bed_logo.svg' %}" alt="bed">
+                                        <span>4</span>                                        
+                                    </div>
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/bathroom_logo.svg' %}" alt="bathroom">
+                                        <span>4.5</span>                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="details-row3">
+                                <span>Samborondon, Guayas</span>
+                                <span class="price">$320,000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="property-card">
+                        <div class="property-card-image-container">
+                            <div class="card-type">
+                                <span>Nuevo</span>
+                            </div>
+                            <img src="{% static 'core/Assets/images/property_image.png' %}" alt="Property Image">
+                        </div>
+                        <div class="property-card-details">
+                            <div class="details-row1">
+                                <div class="details-row1-column1">
+                                    <span>Casa</span>
+                                    <span>Samborondon</span>
+                                </div>
+                                <div class="details-row1-column2">
+                                    <svg width="14" height="13" viewBox="0 0 25 22" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M22.6377 3.15345C21.1419 1.47213 19.2008 0.801797 16.9286 1.08202C15.4613 1.26334 14.2681 1.97762 13.2747 3.01608C13.0635 3.23586 12.8751 3.46663 12.6695 3.6974C12.4583 3.45564 12.2699 3.21938 12.0586 3.00509C10.2488 1.16993 8.06794 0.560039 5.56733 1.31828C3.22086 2.03257 1.85066 3.67542 1.23408 5.92817C1.11989 6.35674 1.07422 6.8018 1 7.24136V8.25235C1.01142 8.3018 1.02855 8.35125 1.03425 8.4007C1.15415 9.73586 1.65655 10.9337 2.41016 12.0491C3.20374 13.2304 4.18 14.2688 5.26474 15.1974C7.39997 17.0326 9.56945 18.8293 11.7332 20.637C12.3441 21.148 13.0292 21.1205 13.6686 20.593C15.3243 19.2194 16.9856 17.8458 18.6356 16.4666C20.0343 15.2963 21.3931 14.0765 22.5064 12.6425C23.3571 11.5436 24.0079 10.3512 24.2249 8.98861C24.5674 6.82927 24.1335 4.84575 22.6377 3.15894V3.15345Z"
+                                            fill="none" stroke="#000000" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="details-row2">
+                                <div class="details-row2-column">
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/area_logo.svg' %}" alt="area">
+                                        <span>400 m2</span>                                        
+                                    </div>
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/house_logo.svg' %}" alt="house">                                        
+                                        <span>320 m2</span>
+                                    </div>
+                                </div>
+                                <div class="details-row2-column">
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/bed_logo.svg' %}" alt="bed">
+                                        <span>4</span>                                        
+                                    </div>
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/bathroom_logo.svg' %}" alt="bathroom">
+                                        <span>4.5</span>                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="details-row3">
+                                <span>Samborondon, Guayas</span>
+                                <span class="price">$320,000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="property-card">
+                        <div class="property-card-image-container">
+                            <img src="{% static 'core/Assets/images/property_image.png' %}" alt="Property Image">
+                        </div>
+                        <div class="property-card-details">
+                            <div class="details-row1">
+                                <div class="details-row1-column1">
+                                    <span>Casa</span>
+                                    <span>Samborondon</span>
+                                </div>
+                                <div class="details-row1-column2">
+                                    <svg width="14" height="13" viewBox="0 0 25 22" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M22.6377 3.15345C21.1419 1.47213 19.2008 0.801797 16.9286 1.08202C15.4613 1.26334 14.2681 1.97762 13.2747 3.01608C13.0635 3.23586 12.8751 3.46663 12.6695 3.6974C12.4583 3.45564 12.2699 3.21938 12.0586 3.00509C10.2488 1.16993 8.06794 0.560039 5.56733 1.31828C3.22086 2.03257 1.85066 3.67542 1.23408 5.92817C1.11989 6.35674 1.07422 6.8018 1 7.24136V8.25235C1.01142 8.3018 1.02855 8.35125 1.03425 8.4007C1.15415 9.73586 1.65655 10.9337 2.41016 12.0491C3.20374 13.2304 4.18 14.2688 5.26474 15.1974C7.39997 17.0326 9.56945 18.8293 11.7332 20.637C12.3441 21.148 13.0292 21.1205 13.6686 20.593C15.3243 19.2194 16.9856 17.8458 18.6356 16.4666C20.0343 15.2963 21.3931 14.0765 22.5064 12.6425C23.3571 11.5436 24.0079 10.3512 24.2249 8.98861C24.5674 6.82927 24.1335 4.84575 22.6377 3.15894V3.15345Z"
+                                            fill="none" stroke="#000000" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="details-row2">
+                                <div class="details-row2-column">
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/area_logo.svg' %}" alt="area">
+                                        <span>400 m2</span>                                        
+                                    </div>
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/house_logo.svg' %}" alt="house">                                        
+                                        <span>320 m2</span>
+                                    </div>
+                                </div>
+                                <div class="details-row2-column">
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/bed_logo.svg' %}" alt="bed">
+                                        <span>4</span>                                        
+                                    </div>
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/bathroom_logo.svg' %}" alt="bathroom">
+                                        <span>4.5</span>                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="details-row3">
+                                <span>Samborondon, Guayas</span>
+                                <span class="price">$320,000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="property-card">
+                        <div class="property-card-image-container">
+                            <img src="{% static 'core/Assets/images/property_image.png' %}" alt="Property Image">
+                        </div>
+                        <div class="property-card-details">
+                            <div class="details-row1">
+                                <div class="details-row1-column1">
+                                    <span>Casa</span>
+                                    <span>Samborondon</span>
+                                </div>
+                                <div class="details-row1-column2">
+                                    <svg width="14" height="13" viewBox="0 0 25 22" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M22.6377 3.15345C21.1419 1.47213 19.2008 0.801797 16.9286 1.08202C15.4613 1.26334 14.2681 1.97762 13.2747 3.01608C13.0635 3.23586 12.8751 3.46663 12.6695 3.6974C12.4583 3.45564 12.2699 3.21938 12.0586 3.00509C10.2488 1.16993 8.06794 0.560039 5.56733 1.31828C3.22086 2.03257 1.85066 3.67542 1.23408 5.92817C1.11989 6.35674 1.07422 6.8018 1 7.24136V8.25235C1.01142 8.3018 1.02855 8.35125 1.03425 8.4007C1.15415 9.73586 1.65655 10.9337 2.41016 12.0491C3.20374 13.2304 4.18 14.2688 5.26474 15.1974C7.39997 17.0326 9.56945 18.8293 11.7332 20.637C12.3441 21.148 13.0292 21.1205 13.6686 20.593C15.3243 19.2194 16.9856 17.8458 18.6356 16.4666C20.0343 15.2963 21.3931 14.0765 22.5064 12.6425C23.3571 11.5436 24.0079 10.3512 24.2249 8.98861C24.5674 6.82927 24.1335 4.84575 22.6377 3.15894V3.15345Z"
+                                            fill="#8DC63F" stroke="#8DC63F" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="details-row2">
+                                <div class="details-row2-column">
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/area_logo.svg' %}" alt="area">
+                                        <span>400 m2</span>                                        
+                                    </div>
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/house_logo.svg' %}" alt="house">                                        
+                                        <span>320 m2</span>
+                                    </div>
+                                </div>
+                                <div class="details-row2-column">
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/bed_logo.svg' %}" alt="bed">
+                                        <span>4</span>                                        
+                                    </div>
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/bathroom_logo.svg' %}" alt="bathroom">
+                                        <span>4.5</span>                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="details-row3">
+                                <span>Samborondon, Guayas</span>
+                                <span class="price">$320,000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="property-card">
+                        <div class="property-card-image-container">
+                            <img src="{% static 'core/Assets/images/property_image.png' %}" alt="Property Image">
+                        </div>
+                        <div class="property-card-details">
+                            <div class="details-row1">
+                                <div class="details-row1-column1">
+                                    <span>Casa</span>
+                                    <span>Samborondon</span>
+                                </div>
+                                <div class="details-row1-column2">
+                                    <svg width="14" height="13" viewBox="0 0 25 22" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M22.6377 3.15345C21.1419 1.47213 19.2008 0.801797 16.9286 1.08202C15.4613 1.26334 14.2681 1.97762 13.2747 3.01608C13.0635 3.23586 12.8751 3.46663 12.6695 3.6974C12.4583 3.45564 12.2699 3.21938 12.0586 3.00509C10.2488 1.16993 8.06794 0.560039 5.56733 1.31828C3.22086 2.03257 1.85066 3.67542 1.23408 5.92817C1.11989 6.35674 1.07422 6.8018 1 7.24136V8.25235C1.01142 8.3018 1.02855 8.35125 1.03425 8.4007C1.15415 9.73586 1.65655 10.9337 2.41016 12.0491C3.20374 13.2304 4.18 14.2688 5.26474 15.1974C7.39997 17.0326 9.56945 18.8293 11.7332 20.637C12.3441 21.148 13.0292 21.1205 13.6686 20.593C15.3243 19.2194 16.9856 17.8458 18.6356 16.4666C20.0343 15.2963 21.3931 14.0765 22.5064 12.6425C23.3571 11.5436 24.0079 10.3512 24.2249 8.98861C24.5674 6.82927 24.1335 4.84575 22.6377 3.15894V3.15345Z"
+                                            fill="none" stroke="#000000" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="details-row2">
+                                <div class="details-row2-column">
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/area_logo.svg' %}" alt="area">
+                                        <span>400 m2</span>                                        
+                                    </div>
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/house_logo.svg' %}" alt="house">                                        
+                                        <span>320 m2</span>
+                                    </div>
+                                </div>
+                                <div class="details-row2-column">
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/bed_logo.svg' %}" alt="bed">
+                                        <span>4</span>                                        
+                                    </div>
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/bathroom_logo.svg' %}" alt="bathroom">
+                                        <span>4.5</span>                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="details-row3">
+                                <span>Samborondon, Guayas</span>
+                                <span class="price">$320,000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="property-card">
+                        <div class="property-card-image-container">
+                            <img src="{% static 'core/Assets/images/property_image.png' %}" alt="Property Image">
+                        </div>
+                        <div class="property-card-details">
+                            <div class="details-row1">
+                                <div class="details-row1-column1">
+                                    <span>Casa</span>
+                                    <span>Samborondon</span>
+                                </div>
+                                <div class="details-row1-column2">
+                                    <svg width="14" height="13" viewBox="0 0 25 22" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M22.6377 3.15345C21.1419 1.47213 19.2008 0.801797 16.9286 1.08202C15.4613 1.26334 14.2681 1.97762 13.2747 3.01608C13.0635 3.23586 12.8751 3.46663 12.6695 3.6974C12.4583 3.45564 12.2699 3.21938 12.0586 3.00509C10.2488 1.16993 8.06794 0.560039 5.56733 1.31828C3.22086 2.03257 1.85066 3.67542 1.23408 5.92817C1.11989 6.35674 1.07422 6.8018 1 7.24136V8.25235C1.01142 8.3018 1.02855 8.35125 1.03425 8.4007C1.15415 9.73586 1.65655 10.9337 2.41016 12.0491C3.20374 13.2304 4.18 14.2688 5.26474 15.1974C7.39997 17.0326 9.56945 18.8293 11.7332 20.637C12.3441 21.148 13.0292 21.1205 13.6686 20.593C15.3243 19.2194 16.9856 17.8458 18.6356 16.4666C20.0343 15.2963 21.3931 14.0765 22.5064 12.6425C23.3571 11.5436 24.0079 10.3512 24.2249 8.98861C24.5674 6.82927 24.1335 4.84575 22.6377 3.15894V3.15345Z"
+                                            fill="none" stroke="#000000" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="details-row2">
+                                <div class="details-row2-column">
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/area_logo.svg' %}" alt="area">
+                                        <span>400 m2</span>                                        
+                                    </div>
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/house_logo.svg' %}" alt="house">                                        
+                                        <span>320 m2</span>
+                                    </div>
+                                </div>
+                                <div class="details-row2-column">
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/bed_logo.svg' %}" alt="bed">
+                                        <span>4</span>                                        
+                                    </div>
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/bathroom_logo.svg' %}" alt="bathroom">
+                                        <span>4.5</span>                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="details-row3">
+                                <span>Samborondon, Guayas</span>
+                                <span class="price">$320,000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="property-card">
+                        <div class="property-card-image-container">
+                            <div class="card-type">
+                                <span>Nuevo</span>
+                            </div>
+                            <img src="{% static 'core/Assets/images/property_image.png' %}" alt="Property Image">
+                        </div>
+                        <div class="property-card-details">
+                            <div class="details-row1">
+                                <div class="details-row1-column1">
+                                    <span>Casa</span>
+                                    <span>Samborondon</span>
+                                </div>
+                                <div class="details-row1-column2">
+                                    <svg width="14" height="13" viewBox="0 0 25 22" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M22.6377 3.15345C21.1419 1.47213 19.2008 0.801797 16.9286 1.08202C15.4613 1.26334 14.2681 1.97762 13.2747 3.01608C13.0635 3.23586 12.8751 3.46663 12.6695 3.6974C12.4583 3.45564 12.2699 3.21938 12.0586 3.00509C10.2488 1.16993 8.06794 0.560039 5.56733 1.31828C3.22086 2.03257 1.85066 3.67542 1.23408 5.92817C1.11989 6.35674 1.07422 6.8018 1 7.24136V8.25235C1.01142 8.3018 1.02855 8.35125 1.03425 8.4007C1.15415 9.73586 1.65655 10.9337 2.41016 12.0491C3.20374 13.2304 4.18 14.2688 5.26474 15.1974C7.39997 17.0326 9.56945 18.8293 11.7332 20.637C12.3441 21.148 13.0292 21.1205 13.6686 20.593C15.3243 19.2194 16.9856 17.8458 18.6356 16.4666C20.0343 15.2963 21.3931 14.0765 22.5064 12.6425C23.3571 11.5436 24.0079 10.3512 24.2249 8.98861C24.5674 6.82927 24.1335 4.84575 22.6377 3.15894V3.15345Z"
+                                            fill="none" stroke="#000000" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="details-row2">
+                                <div class="details-row2-column">
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/area_logo.svg' %}" alt="area">
+                                        <span>400 m2</span>                                        
+                                    </div>
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/house_logo.svg' %}" alt="house">                                        
+                                        <span>320 m2</span>
+                                    </div>
+                                </div>
+                                <div class="details-row2-column">
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/bed_logo.svg' %}" alt="bed">
+                                        <span>4</span>                                        
+                                    </div>
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/bathroom_logo.svg' %}" alt="bathroom">
+                                        <span>4.5</span>                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="details-row3">
+                                <span>Samborondon, Guayas</span>
+                                <span class="price">$320,000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="property-card">
+                        <div class="property-card-image-container">
+                            <img src="{% static 'core/Assets/images/property_image.png' %}" alt="Property Image">
+                        </div>
+                        <div class="property-card-details">
+                            <div class="details-row1">
+                                <div class="details-row1-column1">
+                                    <span>Casa</span>
+                                    <span>Samborondon</span>
+                                </div>
+                                <div class="details-row1-column2">
+                                    <svg width="14" height="13" viewBox="0 0 25 22" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M22.6377 3.15345C21.1419 1.47213 19.2008 0.801797 16.9286 1.08202C15.4613 1.26334 14.2681 1.97762 13.2747 3.01608C13.0635 3.23586 12.8751 3.46663 12.6695 3.6974C12.4583 3.45564 12.2699 3.21938 12.0586 3.00509C10.2488 1.16993 8.06794 0.560039 5.56733 1.31828C3.22086 2.03257 1.85066 3.67542 1.23408 5.92817C1.11989 6.35674 1.07422 6.8018 1 7.24136V8.25235C1.01142 8.3018 1.02855 8.35125 1.03425 8.4007C1.15415 9.73586 1.65655 10.9337 2.41016 12.0491C3.20374 13.2304 4.18 14.2688 5.26474 15.1974C7.39997 17.0326 9.56945 18.8293 11.7332 20.637C12.3441 21.148 13.0292 21.1205 13.6686 20.593C15.3243 19.2194 16.9856 17.8458 18.6356 16.4666C20.0343 15.2963 21.3931 14.0765 22.5064 12.6425C23.3571 11.5436 24.0079 10.3512 24.2249 8.98861C24.5674 6.82927 24.1335 4.84575 22.6377 3.15894V3.15345Z"
+                                            fill="none" stroke="#000000" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="details-row2">
+                                <div class="details-row2-column">
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/area_logo.svg' %}" alt="area">
+                                        <span>400 m2</span>                                        
+                                    </div>
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/house_logo.svg' %}" alt="house">                                        
+                                        <span>320 m2</span>
+                                    </div>
+                                </div>
+                                <div class="details-row2-column">
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/bed_logo.svg' %}" alt="bed">
+                                        <span>4</span>                                        
+                                    </div>
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/bathroom_logo.svg' %}" alt="bathroom">
+                                        <span>4.5</span>                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="details-row3">
+                                <span>Samborondon, Guayas</span>
+                                <span class="price">$320,000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="property-card">
+                        <div class="property-card-image-container">
+                            <img src="{% static 'core/Assets/images/property_image.png' %}" alt="Property Image">
+                        </div>
+                        <div class="property-card-details">
+                            <div class="details-row1">
+                                <div class="details-row1-column1">
+                                    <span>Casa</span>
+                                    <span>Samborondon</span>
+                                </div>
+                                <div class="details-row1-column2">
+                                    <svg width="14" height="13" viewBox="0 0 25 22" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M22.6377 3.15345C21.1419 1.47213 19.2008 0.801797 16.9286 1.08202C15.4613 1.26334 14.2681 1.97762 13.2747 3.01608C13.0635 3.23586 12.8751 3.46663 12.6695 3.6974C12.4583 3.45564 12.2699 3.21938 12.0586 3.00509C10.2488 1.16993 8.06794 0.560039 5.56733 1.31828C3.22086 2.03257 1.85066 3.67542 1.23408 5.92817C1.11989 6.35674 1.07422 6.8018 1 7.24136V8.25235C1.01142 8.3018 1.02855 8.35125 1.03425 8.4007C1.15415 9.73586 1.65655 10.9337 2.41016 12.0491C3.20374 13.2304 4.18 14.2688 5.26474 15.1974C7.39997 17.0326 9.56945 18.8293 11.7332 20.637C12.3441 21.148 13.0292 21.1205 13.6686 20.593C15.3243 19.2194 16.9856 17.8458 18.6356 16.4666C20.0343 15.2963 21.3931 14.0765 22.5064 12.6425C23.3571 11.5436 24.0079 10.3512 24.2249 8.98861C24.5674 6.82927 24.1335 4.84575 22.6377 3.15894V3.15345Z"
+                                            fill="#8DC63F" stroke="#8DC63F" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="details-row2">
+                                <div class="details-row2-column">
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/area_logo.svg' %}" alt="area">
+                                        <span>400 m2</span>                                        
+                                    </div>
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/house_logo.svg' %}" alt="house">                                        
+                                        <span>320 m2</span>
+                                    </div>
+                                </div>
+                                <div class="details-row2-column">
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/bed_logo.svg' %}" alt="bed">
+                                        <span>4</span>                                        
+                                    </div>
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/bathroom_logo.svg' %}" alt="bathroom">
+                                        <span>4.5</span>                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="details-row3">
+                                <span>Samborondon, Guayas</span>
+                                <span class="price">$320,000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="property-card">
+                        <div class="property-card-image-container">
+                            <img src="{% static 'core/Assets/images/property_image.png' %}" alt="Property Image">
+                        </div>
+                        <div class="property-card-details">
+                            <div class="details-row1">
+                                <div class="details-row1-column1">
+                                    <span>Casa</span>
+                                    <span>Samborondon</span>
+                                </div>
+                                <div class="details-row1-column2">
+                                    <svg width="14" height="13" viewBox="0 0 25 22" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M22.6377 3.15345C21.1419 1.47213 19.2008 0.801797 16.9286 1.08202C15.4613 1.26334 14.2681 1.97762 13.2747 3.01608C13.0635 3.23586 12.8751 3.46663 12.6695 3.6974C12.4583 3.45564 12.2699 3.21938 12.0586 3.00509C10.2488 1.16993 8.06794 0.560039 5.56733 1.31828C3.22086 2.03257 1.85066 3.67542 1.23408 5.92817C1.11989 6.35674 1.07422 6.8018 1 7.24136V8.25235C1.01142 8.3018 1.02855 8.35125 1.03425 8.4007C1.15415 9.73586 1.65655 10.9337 2.41016 12.0491C3.20374 13.2304 4.18 14.2688 5.26474 15.1974C7.39997 17.0326 9.56945 18.8293 11.7332 20.637C12.3441 21.148 13.0292 21.1205 13.6686 20.593C15.3243 19.2194 16.9856 17.8458 18.6356 16.4666C20.0343 15.2963 21.3931 14.0765 22.5064 12.6425C23.3571 11.5436 24.0079 10.3512 24.2249 8.98861C24.5674 6.82927 24.1335 4.84575 22.6377 3.15894V3.15345Z"
+                                            fill="none" stroke="#000000" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="details-row2">
+                                <div class="details-row2-column">
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/area_logo.svg' %}" alt="area">
+                                        <span>400 m2</span>                                        
+                                    </div>
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/house_logo.svg' %}" alt="house">                                        
+                                        <span>320 m2</span>
+                                    </div>
+                                </div>
+                                <div class="details-row2-column">
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/bed_logo.svg' %}" alt="bed">
+                                        <span>4</span>                                        
+                                    </div>
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/bathroom_logo.svg' %}" alt="bathroom">
+                                        <span>4.5</span>                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="details-row3">
+                                <span>Samborondon, Guayas</span>
+                                <span class="price">$320,000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="property-card">
+                        <div class="property-card-image-container">
+                            <img src="{% static 'core/Assets/images/property_image.png' %}" alt="Property Image">
+                        </div>
+                        <div class="property-card-details">
+                            <div class="details-row1">
+                                <div class="details-row1-column1">
+                                    <span>Casa</span>
+                                    <span>Samborondon</span>
+                                </div>
+                                <div class="details-row1-column2">
+                                    <svg width="14" height="13" viewBox="0 0 25 22" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M22.6377 3.15345C21.1419 1.47213 19.2008 0.801797 16.9286 1.08202C15.4613 1.26334 14.2681 1.97762 13.2747 3.01608C13.0635 3.23586 12.8751 3.46663 12.6695 3.6974C12.4583 3.45564 12.2699 3.21938 12.0586 3.00509C10.2488 1.16993 8.06794 0.560039 5.56733 1.31828C3.22086 2.03257 1.85066 3.67542 1.23408 5.92817C1.11989 6.35674 1.07422 6.8018 1 7.24136V8.25235C1.01142 8.3018 1.02855 8.35125 1.03425 8.4007C1.15415 9.73586 1.65655 10.9337 2.41016 12.0491C3.20374 13.2304 4.18 14.2688 5.26474 15.1974C7.39997 17.0326 9.56945 18.8293 11.7332 20.637C12.3441 21.148 13.0292 21.1205 13.6686 20.593C15.3243 19.2194 16.9856 17.8458 18.6356 16.4666C20.0343 15.2963 21.3931 14.0765 22.5064 12.6425C23.3571 11.5436 24.0079 10.3512 24.2249 8.98861C24.5674 6.82927 24.1335 4.84575 22.6377 3.15894V3.15345Z"
+                                            fill="none" stroke="#000000" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="details-row2">
+                                <div class="details-row2-column">
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/area_logo.svg' %}" alt="area">
+                                        <span>400 m2</span>                                        
+                                    </div>
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/house_logo.svg' %}" alt="house">                                        
+                                        <span>320 m2</span>
+                                    </div>
+                                </div>
+                                <div class="details-row2-column">
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/bed_logo.svg' %}" alt="bed">
+                                        <span>4</span>                                        
+                                    </div>
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/bathroom_logo.svg' %}" alt="bathroom">
+                                        <span>4.5</span>                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="details-row3">
+                                <span>Samborondon, Guayas</span>
+                                <span class="price">$320,000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="property-card">
+                        <div class="property-card-image-container">
+                            <div class="card-type">
+                                <span>Nuevo</span>
+                            </div>
+                            <img src="{% static 'core/Assets/images/property_image.png' %}" alt="Property Image">
+                        </div>
+                        <div class="property-card-details">
+                            <div class="details-row1">
+                                <div class="details-row1-column1">
+                                    <span>Casa</span>
+                                    <span>Samborondon</span>
+                                </div>
+                                <div class="details-row1-column2">
+                                    <svg width="14" height="13" viewBox="0 0 25 22" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M22.6377 3.15345C21.1419 1.47213 19.2008 0.801797 16.9286 1.08202C15.4613 1.26334 14.2681 1.97762 13.2747 3.01608C13.0635 3.23586 12.8751 3.46663 12.6695 3.6974C12.4583 3.45564 12.2699 3.21938 12.0586 3.00509C10.2488 1.16993 8.06794 0.560039 5.56733 1.31828C3.22086 2.03257 1.85066 3.67542 1.23408 5.92817C1.11989 6.35674 1.07422 6.8018 1 7.24136V8.25235C1.01142 8.3018 1.02855 8.35125 1.03425 8.4007C1.15415 9.73586 1.65655 10.9337 2.41016 12.0491C3.20374 13.2304 4.18 14.2688 5.26474 15.1974C7.39997 17.0326 9.56945 18.8293 11.7332 20.637C12.3441 21.148 13.0292 21.1205 13.6686 20.593C15.3243 19.2194 16.9856 17.8458 18.6356 16.4666C20.0343 15.2963 21.3931 14.0765 22.5064 12.6425C23.3571 11.5436 24.0079 10.3512 24.2249 8.98861C24.5674 6.82927 24.1335 4.84575 22.6377 3.15894V3.15345Z"
+                                            fill="none" stroke="#000000" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="details-row2">
+                                <div class="details-row2-column">
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/area_logo.svg' %}" alt="area">
+                                        <span>400 m2</span>                                        
+                                    </div>
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/house_logo.svg' %}" alt="house">                                        
+                                        <span>320 m2</span>
+                                    </div>
+                                </div>
+                                <div class="details-row2-column">
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/bed_logo.svg' %}" alt="bed">
+                                        <span>4</span>                                        
+                                    </div>
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/bathroom_logo.svg' %}" alt="bathroom">
+                                        <span>4.5</span>                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="details-row3">
+                                <span>Samborondon, Guayas</span>
+                                <span class="price">$320,000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="property-card">
+                        <div class="property-card-image-container">
+                            <img src="{% static 'core/Assets/images/property_image.png' %}" alt="Property Image">
+                        </div>
+                        <div class="property-card-details">
+                            <div class="details-row1">
+                                <div class="details-row1-column1">
+                                    <span>Casa</span>
+                                    <span>Samborondon</span>
+                                </div>
+                                <div class="details-row1-column2">
+                                    <svg width="14" height="13" viewBox="0 0 25 22" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M22.6377 3.15345C21.1419 1.47213 19.2008 0.801797 16.9286 1.08202C15.4613 1.26334 14.2681 1.97762 13.2747 3.01608C13.0635 3.23586 12.8751 3.46663 12.6695 3.6974C12.4583 3.45564 12.2699 3.21938 12.0586 3.00509C10.2488 1.16993 8.06794 0.560039 5.56733 1.31828C3.22086 2.03257 1.85066 3.67542 1.23408 5.92817C1.11989 6.35674 1.07422 6.8018 1 7.24136V8.25235C1.01142 8.3018 1.02855 8.35125 1.03425 8.4007C1.15415 9.73586 1.65655 10.9337 2.41016 12.0491C3.20374 13.2304 4.18 14.2688 5.26474 15.1974C7.39997 17.0326 9.56945 18.8293 11.7332 20.637C12.3441 21.148 13.0292 21.1205 13.6686 20.593C15.3243 19.2194 16.9856 17.8458 18.6356 16.4666C20.0343 15.2963 21.3931 14.0765 22.5064 12.6425C23.3571 11.5436 24.0079 10.3512 24.2249 8.98861C24.5674 6.82927 24.1335 4.84575 22.6377 3.15894V3.15345Z"
+                                            fill="none" stroke="#000000" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="details-row2">
+                                <div class="details-row2-column">
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/area_logo.svg' %}" alt="area">
+                                        <span>400 m2</span>                                        
+                                    </div>
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/house_logo.svg' %}" alt="house">                                        
+                                        <span>320 m2</span>
+                                    </div>
+                                </div>
+                                <div class="details-row2-column">
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/bed_logo.svg' %}" alt="bed">
+                                        <span>4</span>                                        
+                                    </div>
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/bathroom_logo.svg' %}" alt="bathroom">
+                                        <span>4.5</span>                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="details-row3">
+                                <span>Samborondon, Guayas</span>
+                                <span class="price">$320,000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="property-card">
+                        <div class="property-card-image-container">
+                            <img src="{% static 'core/Assets/images/property_image.png' %}" alt="Property Image">
+                        </div>
+                        <div class="property-card-details">
+                            <div class="details-row1">
+                                <div class="details-row1-column1">
+                                    <span>Casa</span>
+                                    <span>Samborondon</span>
+                                </div>
+                                <div class="details-row1-column2">
+                                    <svg width="14" height="13" viewBox="0 0 25 22" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M22.6377 3.15345C21.1419 1.47213 19.2008 0.801797 16.9286 1.08202C15.4613 1.26334 14.2681 1.97762 13.2747 3.01608C13.0635 3.23586 12.8751 3.46663 12.6695 3.6974C12.4583 3.45564 12.2699 3.21938 12.0586 3.00509C10.2488 1.16993 8.06794 0.560039 5.56733 1.31828C3.22086 2.03257 1.85066 3.67542 1.23408 5.92817C1.11989 6.35674 1.07422 6.8018 1 7.24136V8.25235C1.01142 8.3018 1.02855 8.35125 1.03425 8.4007C1.15415 9.73586 1.65655 10.9337 2.41016 12.0491C3.20374 13.2304 4.18 14.2688 5.26474 15.1974C7.39997 17.0326 9.56945 18.8293 11.7332 20.637C12.3441 21.148 13.0292 21.1205 13.6686 20.593C15.3243 19.2194 16.9856 17.8458 18.6356 16.4666C20.0343 15.2963 21.3931 14.0765 22.5064 12.6425C23.3571 11.5436 24.0079 10.3512 24.2249 8.98861C24.5674 6.82927 24.1335 4.84575 22.6377 3.15894V3.15345Z"
+                                            fill="#8DC63F" stroke="#8DC63F" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="details-row2">
+                                <div class="details-row2-column">
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/area_logo.svg' %}" alt="area">
+                                        <span>400 m2</span>                                        
+                                    </div>
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/house_logo.svg' %}" alt="house">                                        
+                                        <span>320 m2</span>
+                                    </div>
+                                </div>
+                                <div class="details-row2-column">
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/bed_logo.svg' %}" alt="bed">
+                                        <span>4</span>                                        
+                                    </div>
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/bathroom_logo.svg' %}" alt="bathroom">
+                                        <span>4.5</span>                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="details-row3">
+                                <span>Samborondon, Guayas</span>
+                                <span class="price">$320,000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="property-card">
+                        <div class="property-card-image-container">
+                            <img src="{% static 'core/Assets/images/property_image.png' %}" alt="Property Image">
+                        </div>
+                        <div class="property-card-details">
+                            <div class="details-row1">
+                                <div class="details-row1-column1">
+                                    <span>Casa</span>
+                                    <span>Samborondon</span>
+                                </div>
+                                <div class="details-row1-column2">
+                                    <svg width="14" height="13" viewBox="0 0 25 22" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M22.6377 3.15345C21.1419 1.47213 19.2008 0.801797 16.9286 1.08202C15.4613 1.26334 14.2681 1.97762 13.2747 3.01608C13.0635 3.23586 12.8751 3.46663 12.6695 3.6974C12.4583 3.45564 12.2699 3.21938 12.0586 3.00509C10.2488 1.16993 8.06794 0.560039 5.56733 1.31828C3.22086 2.03257 1.85066 3.67542 1.23408 5.92817C1.11989 6.35674 1.07422 6.8018 1 7.24136V8.25235C1.01142 8.3018 1.02855 8.35125 1.03425 8.4007C1.15415 9.73586 1.65655 10.9337 2.41016 12.0491C3.20374 13.2304 4.18 14.2688 5.26474 15.1974C7.39997 17.0326 9.56945 18.8293 11.7332 20.637C12.3441 21.148 13.0292 21.1205 13.6686 20.593C15.3243 19.2194 16.9856 17.8458 18.6356 16.4666C20.0343 15.2963 21.3931 14.0765 22.5064 12.6425C23.3571 11.5436 24.0079 10.3512 24.2249 8.98861C24.5674 6.82927 24.1335 4.84575 22.6377 3.15894V3.15345Z"
+                                            fill="none" stroke="#000000" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="details-row2">
+                                <div class="details-row2-column">
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/area_logo.svg' %}" alt="area">
+                                        <span>400 m2</span>                                        
+                                    </div>
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/house_logo.svg' %}" alt="house">                                        
+                                        <span>320 m2</span>
+                                    </div>
+                                </div>
+                                <div class="details-row2-column">
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/bed_logo.svg' %}" alt="bed">
+                                        <span>4</span>                                        
+                                    </div>
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/bathroom_logo.svg' %}" alt="bathroom">
+                                        <span>4.5</span>                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="details-row3">
+                                <span>Samborondon, Guayas</span>
+                                <span class="price">$320,000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="property-card">
+                        <div class="property-card-image-container">
+                            <img src="{% static 'core/Assets/images/property_image.png' %}" alt="Property Image">
+                        </div>
+                        <div class="property-card-details">
+                            <div class="details-row1">
+                                <div class="details-row1-column1">
+                                    <span>Casa</span>
+                                    <span>Samborondon</span>
+                                </div>
+                                <div class="details-row1-column2">
+                                    <svg width="14" height="13" viewBox="0 0 25 22" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M22.6377 3.15345C21.1419 1.47213 19.2008 0.801797 16.9286 1.08202C15.4613 1.26334 14.2681 1.97762 13.2747 3.01608C13.0635 3.23586 12.8751 3.46663 12.6695 3.6974C12.4583 3.45564 12.2699 3.21938 12.0586 3.00509C10.2488 1.16993 8.06794 0.560039 5.56733 1.31828C3.22086 2.03257 1.85066 3.67542 1.23408 5.92817C1.11989 6.35674 1.07422 6.8018 1 7.24136V8.25235C1.01142 8.3018 1.02855 8.35125 1.03425 8.4007C1.15415 9.73586 1.65655 10.9337 2.41016 12.0491C3.20374 13.2304 4.18 14.2688 5.26474 15.1974C7.39997 17.0326 9.56945 18.8293 11.7332 20.637C12.3441 21.148 13.0292 21.1205 13.6686 20.593C15.3243 19.2194 16.9856 17.8458 18.6356 16.4666C20.0343 15.2963 21.3931 14.0765 22.5064 12.6425C23.3571 11.5436 24.0079 10.3512 24.2249 8.98861C24.5674 6.82927 24.1335 4.84575 22.6377 3.15894V3.15345Z"
+                                            fill="none" stroke="#000000" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="details-row2">
+                                <div class="details-row2-column">
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/area_logo.svg' %}" alt="area">
+                                        <span>400 m2</span>                                        
+                                    </div>
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/house_logo.svg' %}" alt="house">                                        
+                                        <span>320 m2</span>
+                                    </div>
+                                </div>
+                                <div class="details-row2-column">
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/bed_logo.svg' %}" alt="bed">
+                                        <span>4</span>                                        
+                                    </div>
+                                    <div>
+                                        <img src="{% static 'core/Assets/images/bathroom_logo.svg' %}" alt="bathroom">
+                                        <span>4.5</span>                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="details-row3">
+                                <span>Samborondon, Guayas</span>
+                                <span class="price">$320,000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="property-search-pagination">
+                    <div>
+                        <div class="page-label current-page">
+                            <span>1</span>
+                        </div>
+                        <div class="page-label">
+                            <span>2</span>
+                        </div>
+                        <div class="page-label">
+                            <span>3</span>
+                        </div>
+                        <div class="page-label">
+                            <span>...</span>
+                        </div>
+                        <div class="page-label">
+                            <span>27</span>
+                        </div>
+                        <div class="page-label next-page-arrow">
+                            <svg width="29" height="29" viewBox="0 0 29 29" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M14.5 29C22.5081 29 29 22.5081 29 14.5C29 6.49187 22.5081 0 14.5 0C6.49187 0 0 6.49187 0 14.5C0 22.5081 6.49187 29 14.5 29ZM12.8307 8.36756C12.6779 8.23064 12.5296 8.09774 12.3218 8.05555H12.0318H11.9158C11.6258 8.17326 11.4518 8.34982 11.3358 8.64409C11.1618 9.05606 11.2778 9.35033 11.5678 9.6446L16.2658 14.4117L16.3818 14.5294L16.2658 14.6471L11.6258 19.3554C11.6064 19.375 11.5807 19.3946 11.5549 19.4143C11.5033 19.4535 11.4518 19.4927 11.4518 19.532C11.2778 19.7674 11.2198 20.1205 11.3938 20.4148C11.6258 21.0033 12.3798 21.121 12.8438 20.6502L18.2378 15.1768C18.3538 15.118 18.4698 14.9414 18.4698 14.8237C18.6438 14.4117 18.5278 14.1175 18.2378 13.8232L13.0178 8.52638C12.9521 8.47638 12.891 8.42165 12.8307 8.36756Z"
+                                    fill="#9A9A9A" />
+                            </svg>
+                        </div>
+                    </div>
+                    <p class="total-search-count">1-20 de 540 Propiedades</p>
+                </div>
+                <div class="bottom-page-ad">
+                    <div>
+                        Google Adsense
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% endblock %}
+</body>
+{% block scripts %}
+<script src="{% static 'core/Assets/js/propertySearch.js' %}"></script>
+{% endblock %}
+</html>

@@ -1,0 +1,29 @@
+* {
+    font-family: Calibri, 'Trebuchet MS', sans-serif;
+}
+
+body {
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow-x: hidden;
+}
+
+input::placeholder {
+    color: #000000;
+}
+
+.hide {
+    display: none!important;
+}
+
+.show {
+    display: block!important;
+}
+
+.show-flex {
+    display: flex!important;
+}
+
+button {
+    cursor: pointer;
+}
