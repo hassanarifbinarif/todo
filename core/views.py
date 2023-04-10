@@ -17,3 +17,13 @@ def settings(request):
     context = {}
     context['navbar'] = 'settings'
     return render(request, 'settings.html', context)
+
+def add_property(request):
+    context = {}
+    context['navbar'] = 'settings'
+    return render(request, 'add-property.html', context)
+
+def about_us(request):
+    context = {}
+    context['navbar'] = 'settings'
+    return render(request, 'about-us.html', context)

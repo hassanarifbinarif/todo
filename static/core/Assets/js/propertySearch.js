@@ -32,30 +32,6 @@ function toggleViewTypes() {
   }
 }
 
-// let filterDropdown = document.getElementById('filter-dropdown-menu');
-// let filterForm = document.getElementById('filter-form-wrapper');
-// let previousScreenWidth = window.innerWidth;
-
-// if(window.innerWidth <= 768 && previousScreenWidth <= 768) {
-//     filterDropdown.innerHTML = filterForm.innerHTML;
-// }
-
-// window.addEventListener('resize', toggleFilterContainer);
-
-// function toggleFilterContainer() {
-//     console.log(window.innerWidth);
-//     if(window.innerWidth <= 768 && previousScreenWidth <= 768) {
-//     }
-//     else if(window.innerWidth <= 768 && previousScreenWidth > 768) {
-//         filterDropdown.innerHTML = filterForm.innerHTML;
-//     }
-//     else if (window.innerWidth > 768 && previousScreenWidth <= 768) {
-//         filterForm.innerHTML = filterDropdown.innerHTML;
-//     }
-//     else {
-//     }
-//     previousScreenWidth = window.innerWidth;
-// }
 
 // Move sidebar contents into dropdown
 var sidebar = document.getElementById("filter-form-wrapper");
@@ -70,7 +46,6 @@ if (window.innerWidth <= 768 && previousScreenWidth <= 768) {
 window.addEventListener("resize", toggleFilterContainer);
 
 function toggleFilterContainer() {
-  // console.log(window.innerWidth);
   if (window.innerWidth <= 768 && previousScreenWidth <= 768) {
   } else if (window.innerWidth <= 768 && previousScreenWidth > 768) {
     dropdown.appendChild(sidebar.querySelector("form"));
@@ -81,7 +56,6 @@ function toggleFilterContainer() {
   previousScreenWidth = window.innerWidth;
 }
 
-// dropdown.appendChild(sidebar.querySelector("form"));
 
 // Check if mobile view
 function isMobileView() {
@@ -94,11 +68,9 @@ var dropdownVisible = false;
 button.addEventListener("click", function () {
   if (isMobileView()) {
     if (dropdownVisible) {
-      // Hide dropdown
       dropdown.style.display = "none";
       dropdownVisible = false;
     } else {
-      // Show dropdown
       dropdown.style.display = "block";
       dropdownVisible = true;
     }
