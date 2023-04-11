@@ -141,6 +141,7 @@ input[name="criteria_radio"]:checked + .radio-label{
     border: 0.5px solid #9A9A9A;
     border-radius: 2px;
     transition: all ease .2s;
+    cursor: pointer;
 }
 
 .property-type-filter {

@@ -96,6 +96,10 @@ nav {
         width: 100%;
     }
 
+    .nav-functions {
+        gap: 10px;
+    }
+
     .nav-functions > div > span {
         font-size: .75rem;
     }

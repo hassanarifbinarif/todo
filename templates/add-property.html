@@ -26,9 +26,9 @@
                 <div class="add-property-container-header">
                     <span>List your property</span>
                 </div>
-                <div class="add-property-main-content">
+                <form class="add-property-main-content">
                     <div class="image-input-container">
-                        <input type="file" name="property_image" id="image-input">
+                        <input type="file" multiple="multiple" name="property_image" id="image-input">
                         <label for="image-input" class="image-input-label">
                             <svg width="124" height="124" viewBox="0 0 124 124" fill="none"
                                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -43,13 +43,7 @@
                             </svg>
                             <span>Upload your images here</span>
                         </label>
-                        <div class="uploaded-image-container">
-                            <div class="uploaded-image">
-                                <img src="{% static 'core/Assets/images/property_image.png' %}" alt="property image" />
-                            </div>
-                            <div class="uploaded-image">
-                                <img src="{% static 'core/Assets/images/property_image.png' %}" alt="property image" />
-                            </div>
+                        <div class="uploaded-image-container" id="uploaded-image-container">
                         </div>
                     </div>
                     <div class="property-description-input">
@@ -209,9 +203,9 @@
                                 </div>
                             </div>
                         </div>
-                        <button class="publish-property-btn" id="publish-property-btn">Publish</button>
+                        <button type="button" class="publish-property-btn" id="publish-property-btn">Publish</button>
                     </div>
-                </div>
+                </form>
             </div>
             <div class="publish-property-confirmation hide">
                 <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">

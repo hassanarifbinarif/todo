@@ -97,6 +97,16 @@ input[id=image-input] {
     background-color: #F2F2F2;
     border: 1px dashed #9A9A9A;
     border-radius: 10px;
+    cursor: pointer;
+    transition: all ease-in-out .2s;
+}
+
+.image-input-label:hover {
+    background-color: #D8D8D8;
+}
+
+.image-input-label:hover > span {
+    color: #606060;
 }
 
 .image-input-label>span {
@@ -109,12 +119,15 @@ input[id=image-input] {
 .uploaded-image-container {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     gap: 10px;
 }
 
 .uploaded-image {
     width: 93px;
     aspect-ratio: 1 / .752688;
+    background-color: #F2F2F2;
+    border-radius: 5px;
 }
 
 .uploaded-image>img {
@@ -421,6 +434,11 @@ select {
     .add-property-container {
         padding: 56px 10px 0px;
     }
+
+    .uploaded-image {
+        width: 70px;
+        aspect-ratio: 1 / .752688;
+    }
 }
 
 
@@ -429,15 +447,40 @@ select {
         padding: 10px 10px;
     }
 
+    .add-property-card {
+       width: 100%;
+    }
+
+    .uploaded-image {
+        width: 50px;
+        aspect-ratio: 1 / .752688;
+    }
+
     .property-details-input-group {
         gap: 10px;
+    }
+
+    .property-details-input-group > div {
+        width: 100%;
     }
 
     .criteria-radio-container {
         gap: 10px;
     }
 
+    .criteria-radio-btn {
+        width: 100%;
+    }
+
+    .general-input, select {
+        width: 100%;
+    }
+
     .publish-property-confirmation {
         padding: 23px;
+    }
+
+    .neighbourhood-input>input, .city-input>input {
+        width: 100%;
     }
 }

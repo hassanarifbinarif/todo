@@ -135,6 +135,19 @@
     width: 29px;
 }
 
+.property-links > label {
+    cursor: pointer;
+}
+
+.property-links input[type=checkbox] {
+    display: none;
+}
+
+.property-links input[type=checkbox]:checked + svg > path {
+    fill: #8DC63F;
+    stroke: #8DC63F;
+}
+
 .property-info .property-price {
     display: flex;
     justify-content: space-between;

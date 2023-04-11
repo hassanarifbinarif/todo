@@ -27,3 +27,8 @@ def about_us(request):
     context = {}
     context['navbar'] = 'settings'
     return render(request, 'about-us.html', context)
+
+def news(request):
+    context = {}
+    context['navbar'] = 'setings'
+    return render(request, 'news.html', context)

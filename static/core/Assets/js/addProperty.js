@@ -56,3 +56,28 @@ publishBtn.addEventListener('click', function() {
         publishPropertyConfirmationContent.classList.remove('hide');
     }
 })
+
+
+// Upload and show images
+
+let imageInput = document.getElementById("image-input");
+let imageContainer = document.getElementById("uploaded-image-container");
+let imageArray = [];
+
+imageInput.addEventListener("change", () => {
+  const imageFiles = imageInput.files;
+  for (let i = 0; i < imageFiles.length; i++) {
+    imageArray.push(imageFiles[i]);
+  }
+  previewImages();
+});
+
+function previewImages() {
+  let images = "";
+  imageArray.forEach((image, index) => {
+    images += `<div class="uploaded-image">
+        <img src="${URL.createObjectURL(image)}" alt="property image" />
+    </div>`;
+  });
+  imageContainer.innerHTML = images;
+}
