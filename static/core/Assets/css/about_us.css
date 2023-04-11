@@ -229,7 +229,21 @@ header > p:last-of-type {
 
 @media (max-width: 768px) {
     header {
-        background-size: contain;
+        background-image: none;
+        background-color: #e7eaea;
+        padding: 0px 30px;
+    }
+
+    header > p:first-of-type {
+        margin-top: 60px;
+        width: 100%;
+        text-align: center;
+    }
+    
+    header > p:last-of-type {
+        margin-bottom: 80px;
+        width: 100%;
+        text-align: center;
     }
 
     .about-us-container {
@@ -283,7 +297,18 @@ header > p:last-of-type {
 }
 
 @media (max-width: 480px) {
+
+    header {
+        padding: 0px 10px;
+    }
+
+    .about-us-container,
+    .about-us-news-container {
+        padding: 100px 10px 50px;
+    }
+
     .about-us-card .about-us-description {
         padding: 15px;
     }
+
 }
