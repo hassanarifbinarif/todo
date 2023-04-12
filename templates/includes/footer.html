@@ -4,19 +4,19 @@
         <img src="{% static 'core/Assets/images/logo.svg' %}" alt="logo">
     </a>
     <div class="footer-links">
-        <div class="row">
+        <div class="row row-cols-xs-1 row-cols-sm-2 row-cols-md-4">
             <div class="col column-1">
                 <div class="row">
                     <span class="footer-link-heading">Company</span>
                 </div>
                 <div class="row">
-                    <a href="javascript:void(0)">About Todo.com.ec</a>
+                    <a href="{% url 'about_us' %}">About Todo.com.ec</a>
                 </div>
                 <div class="row">
                     <a href="javascript:void(0)">Advertise</a>
                 </div>
                 <div class="row">
-                    <a href="javascript:void(0)">News</a>
+                    <a href="{% url 'about_us' %}#news">News</a>
                 </div>
             </div>
             <div class="col column-2">

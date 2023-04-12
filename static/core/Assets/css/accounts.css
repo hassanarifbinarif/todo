@@ -18,8 +18,8 @@ input[name="authentication_radio"] {
 }
 
 input[name="authentication_radio"]:checked + .radio-label{
-    color: #9A9A9A;
-    background-color: #FFFFFF;
+    color: #FFFFFF;
+    background-color: #8DC63F;
 }
 
 .authentication-radio-group {
@@ -43,8 +43,8 @@ input[name="authentication_radio"]:checked + .radio-label{
     font-weight: 700;
     font-size: 1rem;
     line-height: 1.25rem;
-    color: #FFFFFF;
-    background-color: #8DC63F;
+    color: #9A9A9A;
+    background-color: #FFFFFF;
     border-radius: 5px 5px 0px 0px;
     transition: all ease .2s;
     cursor: pointer;
@@ -246,14 +246,10 @@ input[name="authentication_radio"]:checked + .radio-label{
 
 
 @media (max-width: 480px) {
-    /* .authentication-container {
-        width: calc(100vw - 20px);
-    } */
-
     .login-auth-content,
     .register-auth-content,
     .post-registration-content {
-        padding: 36px 49px;
+        padding: 36px 30px;
     }
 }
 

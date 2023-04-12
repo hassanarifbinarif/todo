@@ -109,10 +109,15 @@ footer a:hover {
 
     .footer-links .col:last-of-type {
         margin-bottom: 20px;
-        margin-left: 13px;
+        padding-left: 24px;
+        min-width: 145px;
     }
 
     .footer-links .col:last-of-type > div {
+        width: 100%;
+    }
+
+    .subscribe-btn {
         width: 100%;
     }
 }

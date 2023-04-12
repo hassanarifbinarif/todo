@@ -158,8 +158,12 @@ header > p:last-of-type {
 
     .about-us-container,
     .about-us-news-container {
-        padding: 100px 80px 50px;
+        padding: 100px 80px 100px;
         gap: 120px;
+    }
+
+    .about-us-news-container {
+        padding: 50px 80px 100px;
     }
 
     .about-us-card {
