@@ -27,3 +27,29 @@ input::placeholder {
 button {
     cursor: pointer;
 }
+
+.input-error-msg {
+    color: #dc3545;
+    opacity: 0;
+}
+
+.input-error-msg.active {
+    opacity: 1;
+    margin-bottom: 5px;
+    transition: ease .3s;
+}
+
+.input-error {
+    border-width: 3px!important;
+    border-color: #dc3545!important;
+}
+
+.input-error:focus-visible {
+    border-color: #dc3545!important;
+    outline: none;
+}
+
+/* .visible {
+    visibility: visible!important;
+    transition: all ease-in-out .2s;
+} */
