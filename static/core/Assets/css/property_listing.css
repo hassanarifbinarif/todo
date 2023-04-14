@@ -610,6 +610,20 @@
     object-fit: cover;
 }
 
+.swiper-button-next {
+    background-color: #414042;
+    width: 40px!important;
+    height: 40px!important;
+    right: 0px!important;
+}
+
+.swiper-button-prev {
+    background-color: #414042;
+    width: 40px!important;
+    height: 40px!important;
+    left: 0px!important;
+}
+
 
 @media (max-width: 1024px) {
 

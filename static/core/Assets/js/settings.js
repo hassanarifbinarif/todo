@@ -248,6 +248,7 @@ city.addEventListener('input', function() {
 function profileForm(event) {
     event.preventDefault();
     let form = event.currentTarget;
+    let profileImage = form.querySelector('input[name="profile_image"]');
     let firstName = form.querySelector('input[name="first_name"]');
     let lastName = form.querySelector('input[name="last_name"]');
     let emailField = form.querySelector('input[name="email"]');
@@ -298,7 +299,7 @@ function profileForm(event) {
         cityMsg.classList.add('active');
         return false;
     }
-    else {
-        location.href = location.origin + '/settings/';
-    }
+    // else {
+    //     location.href = location.origin + '/settings/';
+    // }
 }
