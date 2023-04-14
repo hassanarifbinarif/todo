@@ -39,19 +39,19 @@ for (let i = 0; i < authRadioBtn.length; i++) {
 let postRegistrationContent = document.getElementById('post-registration-content');
 let registerBtn = document.getElementById('register-btn');
 
-function showPostRegistrationContent() {
-    try {
-        if(registerContent.classList.contains('hide')) {
-        }
-        else {
-            registerContent.classList.add('hide');
-            postRegistrationContent.classList.remove('hide');
-        }
-    }
-    catch(err) {
-        console.log(err);
-    }
-}
+// function showPostRegistrationContent() {
+//     try {
+//         if(registerContent.classList.contains('hide')) {
+//         }
+//         else {
+//             registerContent.classList.add('hide');
+//             postRegistrationContent.classList.remove('hide');
+//         }
+//     }
+//     catch(err) {
+//         console.log(err);
+//     }
+// }
 
 
 // Show/hide password functionality
@@ -92,7 +92,10 @@ function isValidEmail(email) {
     else {
         email.classList.remove('input-error');
         emailMsg.innerText = '';
-        emailMsg.classList.remove('active')
+        emailMsg.classList.remove('active');
+        if(timeOut) {
+            clearTimeout(timeOut);
+        }
         return true;
     }
 }
@@ -111,6 +114,9 @@ function isValidPassword(password) {
         password.classList.remove('input-error');
         passwordMsg.innerText = '';
         passwordMsg.classList.remove('active');
+        if(timeOut) {
+            clearTimeout(timeOut);
+        }
         return true;
     }
 }
@@ -126,6 +132,9 @@ function isValidName(name) {
         name.classList.remove('input-error');
         nameMsg.innerText = '';
         nameMsg.classList.remove('active');
+        if(timeOut) {
+            clearTimeout(timeOut);
+        }
         return true;
     }
 }
@@ -141,6 +150,9 @@ function matchingPassword(password, confirmPassword) {
         confirmPasswordMsg.innerText = '';
         confirmPasswordMsg.classList.remove('active');
         confirmPassword.classList.remove('input-error');
+        if(timeOut) {
+            clearTimeout(timeOut);
+        }
         return true;
     }
 }
@@ -148,19 +160,39 @@ function matchingPassword(password, confirmPassword) {
 
 const emailRegex = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}/i
 
-// let loginEmail = document.getElementById('login-email');
-// loginEmail.addEventListener('input', function() {
-//     if(isValidEmail(this)) {
-//         this.classList.remove('input-error');
-//     }
-// })
+let loginEmail = document.getElementById('login-email');
+loginEmail.addEventListener('input', function() {
+    if(isValidEmail(this)) {
+        this.classList.remove('input-error');
+    }
+    else {
+        let inputField = this;
+        if(timeOut) {
+            clearTimeout(timeOut);
+        }
+        timeOut = setTimeout(function() {
+            inputField.classList.add('input-error');
+            inputField.nextElementSibling.classList.add('active');
+        }, 1500);
+    }
+})
 
-// let loginPassword = document.getElementById('login-password');
-// loginPassword.addEventListener('input', function() {
-//     if(isValidPassword(this)) {
-//         this.classList.remove('input-error');
-//     }
-// })
+let loginPassword = document.getElementById('login-password');
+loginPassword.addEventListener('input', function() {
+    if(isValidPassword(this)) {
+        this.classList.remove('input-error');
+    }
+    else {
+        let inputField = this;
+        if(timeOut) {
+            clearTimeout(timeOut);
+        }
+        timeOut = setTimeout(function() {
+            inputField.classList.add('input-error');
+            inputField.closest('.password-input').querySelector('.password-msg').classList.add('active');
+        }, 1500);
+    }
+})
 
 
 function loginForm(event) {
@@ -190,40 +222,92 @@ function loginForm(event) {
 
 // Register Form Handling
 
-// let firstName = document.querySelector('input[name="first_name"]');
-// firstName.addEventListener('input', function() {
-//     if(isValidName(this)) {
-//         this.classList.remove('input-error');
-//     }
-// });
+let firstName = document.querySelector('input[name="first_name"]');
+firstName.addEventListener('input', function() {
+    if(isValidName(this)) {
+        this.classList.remove('input-error');
+    }
+    else {
+        let inputField = this;
+        if(timeOut) {
+            clearTimeout(timeOut);
+        }
+        timeOut = setTimeout(function() {
+            inputField.classList.add('input-error');
+            inputField.nextElementSibling.classList.add('active');
+        }, 1500);
+    }
+});
 
-// let lastName = document.querySelector('input[name="last_name"]');
-// lastName.addEventListener('input', function() {
-//     if(isValidName(this)) {
-//         this.classList.remove('input-error');
-//     }
-// })
+let lastName = document.querySelector('input[name="last_name"]');
+lastName.addEventListener('input', function() {
+    if(isValidName(this)) {
+        this.classList.remove('input-error');
+    }
+    else {
+        let inputField = this;
+        if(timeOut) {
+            clearTimeout(timeOut);
+        }
+        timeOut = setTimeout(function() {
+            inputField.classList.add('input-error');
+            inputField.nextElementSibling.classList.add('active');
+        }, 1500);
+    }
+})
 
-// let registerEmail = document.getElementById('register-email');
-// registerEmail.addEventListener('input', function() {
-//     if(isValidEmail(this)) {
-//         this.classList.remove('input-error');
-//     }
-// })
+let timeOut;
 
-// let registerPassword = document.getElementById('register-password');
-// registerPassword.addEventListener('input', function() {
-//     if(isValidPassword(this)) {
-//         this.classList.remove('input-error');
-//     }
-// })
+let registerEmail = document.getElementById('register-email');
+registerEmail.addEventListener('input', function() {
+    if(isValidEmail(this)) {
+        this.classList.remove('input-error');
+    }
+    else {
+        let inputField = this;
+        if(timeOut) {
+            clearTimeout(timeOut);
+        }
+        timeOut = setTimeout(function() {
+            inputField.classList.add('input-error');
+            inputField.nextElementSibling.classList.add('active');
+        }, 1500);
+    }
+})
 
-// let registerConfirmPassword = document.querySelector('input[name="confirm_password"]');
-// registerConfirmPassword.addEventListener('input', function() {
-//     if(isValidPassword(this)) {
-//         this.classList.remove('input-error');
-//     }
-// })
+let registerPassword = document.getElementById('register-password');
+registerPassword.addEventListener('input', function() {
+    if(isValidPassword(this)) {
+        this.classList.remove('input-error');
+    }
+    else {
+        let inputField = this;
+        if(timeOut) {
+            clearTimeout(timeOut);
+        }
+        timeOut = setTimeout(function() {
+            inputField.classList.add('input-error');
+            inputField.closest('.password-input').querySelector('.password-msg').classList.add('active');
+        }, 1500);
+    }
+})
+
+let registerConfirmPassword = document.querySelector('input[name="confirm_password"]');
+registerConfirmPassword.addEventListener('input', function() {
+    if(isValidPassword(this)) {
+        this.classList.remove('input-error');
+    }
+    else {
+        let inputField = this;
+        if(timeOut) {
+            clearTimeout(timeOut);
+        }
+        timeOut = setTimeout(function() {
+            inputField.classList.add('input-error');
+            inputField.closest('.password-input').querySelector('.password-msg').classList.add('active');
+        }, 1000);
+    }
+})
 
 function registerForm(event) {
     event.preventDefault();

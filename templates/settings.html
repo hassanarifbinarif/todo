@@ -557,11 +557,11 @@
                 </div>
                 <div class="profile-content-container hide" id="profile-content">
                     <div>
-                        <form class="profile-details-container">
+                        <form class="profile-details-container" onsubmit="profileForm(event);">
                             <div class="profile-photo-container">
                                 <span>Logo/Photo</span>
                                 <div class="image-input-container">
-                                    <img src="{% static 'core/Assets/images/property_manager.png' %}" id="profile-image" alt="Profile Image">
+                                    <img src="" style="display: none;" id="profile-image" alt="Profile Image">
                                     <input type="file" name="profile_image" id="image-input"
                                         onchange="previewImage(event);">
                                     <label for="image-input">
@@ -584,38 +584,45 @@
                             <div class="profile-details">
                                 <div class="column">
                                     <div class="input">
-                                        <span>First Name</span>
-                                        <input type="text" value="Jane" name="first_name" id="">
+                                        <label for="first-name">First Name</label>
+                                        <input type="text" value="Jane" name="first_name" id="first-name">
+                                        <small class="first-name-msg input-error-msg"></small>
                                     </div>
                                     <div class="input">
-                                        <span>Last Name</span>
-                                        <input type="text" value="Smith" name="last_name" id="">
+                                        <label for="last-name">Last Name</label>
+                                        <input type="text" value="Smith" name="last_name" id="last-name">
+                                        <small class="last-name-msg input-error-msg"></small>
                                     </div>
                                     <div class="input">
-                                        <span>Email</span>
-                                        <input type="email" value="Jane.Smith@JSrealestate.com" name="email" id="">
+                                        <label for="email">Email</label>
+                                        <input type="email" value="Jane.Smith@JSrealestate.com" name="email" id="email">
+                                        <small class="email-msg input-error-msg"></small>
                                     </div>
                                     <div class="input mobile-input">
-                                        <span>Mobile Number</span>
+                                        <label for="mobile-number">Mobile Number</label>
                                         <div>
-                                            <input type="text" value="+593945498546" name="mobile_number" id="" />
+                                            <input type="tel" value="+59394549854" name="mobile_number" id="mobile-number" />
                                             <img src="{% static 'core/Assets/images/whatsapp_logo.svg' %}" alt="whatsapp logo" />
                                         </div>
+                                        <small class="mobile-msg input-error-msg"></small>
                                     </div>
                                 </div>
                                 <div class="column">
                                     <div class="input">
-                                        <span>Business Name</span>
-                                        <input type="text" value="Real State" name="business_name" id="">
+                                        <label for="business-name">Business Name</label>
+                                        <input type="text" value="Real State" name="business_name" id="business-name" />
+                                        <small class="business-name-msg input-error-msg"></small>
                                     </div>
                                     <div class="input">
-                                        <span>Address</span>
+                                        <label for="address">Address</label>
                                         <input type="text" value="Edificio The Point, Puerto Santa Ana" name="address"
-                                            id="">
+                                            id="address" />
+                                        <small class="address-msg input-error-msg"></small>
                                     </div>
                                     <div class="input">
-                                        <span>City</span>
-                                        <input type="text" value="Guayaquil" name="city" id="">
+                                        <label for="city">City</label>
+                                        <input type="text" value="Guayaquil" name="city" id="city" />
+                                        <small class="city-msg input-error-msg"></small>
                                     </div>
                                 </div>
                             </div>

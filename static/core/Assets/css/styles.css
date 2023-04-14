@@ -31,12 +31,15 @@ button {
 .input-error-msg {
     color: #dc3545;
     opacity: 0;
+    position: absolute;
+    left: 110vw;
 }
 
 .input-error-msg.active {
     opacity: 1;
     margin-bottom: 5px;
     transition: ease .3s;
+    position: static;
 }
 
 .input-error {
