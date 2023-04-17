@@ -133,13 +133,17 @@ input[id=image-input] {
 .uploaded-image>img {
     width: 100%;
     height: 100%;
+    border-radius: 5px;
 }
 
 .property-details-input-group {
     display: flex;
     gap: 20px;
-    align-items: center;
     flex-wrap: wrap;
+}
+
+.property-details-input-group small {
+    display: block;
 }
 
 .criteria-radio-container {
@@ -148,11 +152,15 @@ input[id=image-input] {
     align-items: center;
 }
 
-input[name="criteria_radio"] {
+input::placeholder {
+    color: #9A9A9A;
+}
+
+input[name="criteria"] {
     display: none;
 }
 
-input[name="criteria_radio"]:checked+.radio-label {
+input[name="criteria"]:checked+.radio-label {
     color: #FFFFFF;
     font-weight: 700;
     background-color: #8DC63F;

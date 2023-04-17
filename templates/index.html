@@ -38,7 +38,7 @@
                     <div class="option-row1-col">
                         <div class="option">
                             <span>Buy or Rent</span>
-                            <select name="ownership-type" id="">
+                            <select name="ownership_type" id="">
                                 <option value="" disabled selected hidden>Choose</option>
                                 <option value="Buy">Buy</option>
                                 <option value="Rent">Rent</option>
@@ -46,10 +46,16 @@
                         </div>
                         <div class="option">
                             <span>Type of Property</span>
-                            <select name="property-type" id="">
-                                <option value="" disabled selected hidden>Choose Type</option>
-                                <option value="type1">Type 1</option>
-                                <option value="type2">Type 2</option>
+                            <select name="property_type" id="">
+                                <option value disabled selected hidden>Choose</option>
+                                <option value="house">House</option>
+                                <option value="apartment">Apartment</option>
+                                <option value="land">Land</option>
+                                <option value="retail">Retail Space</option>
+                                <option value="office">Office</option>
+                                <option value="practice">Practice</option>
+                                <option value="warehouse">Warehouse</option>
+                                <option value="suite">Suite</option>
                             </select>
                         </div>
                     </div>
@@ -57,8 +63,8 @@
                         <div class="option">
                             <span>Price</span>
                             <div class="min-max-inputs">
-                                <input type="number" placeholder="Min" name="min-price" />
-                                <input type="number" placeholder="Max" name="max-price" />
+                                <input type="number" placeholder="Min" name="min_price" />
+                                <input type="number" placeholder="Max" name="max_price" />
                             </div>
                         </div>
                     </div>

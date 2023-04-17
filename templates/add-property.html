@@ -26,9 +26,9 @@
                 <div class="add-property-container-header">
                     <span>List your property</span>
                 </div>
-                <form class="add-property-main-content">
+                <form class="add-property-main-content" onsubmit="addPropertyForm(event);">
                     <div class="image-input-container">
-                        <input type="file" multiple="multiple" name="property_image" id="image-input">
+                        <input type="file" multiple accept="image/jpeg, image/jpg, image/png, image/gif" name="property_image" id="image-input" />
                         <label for="image-input" class="image-input-label">
                             <svg width="124" height="124" viewBox="0 0 124 124" fill="none"
                                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -43,6 +43,7 @@
                             </svg>
                             <span>Upload your images here</span>
                         </label>
+                        <small class="image-msg input-error-msg"></small>
                         <div class="uploaded-image-container" id="uploaded-image-container">
                         </div>
                     </div>
@@ -50,6 +51,7 @@
                         <span>Description</span>
                         <textarea name="property_description" placeholder="Samborondon, Ceibos etc"
                             id="property-description" cols="30" rows="10"></textarea>
+                        <small class="description-msg input-error-msg"></small>
                     </div>
                     <div class="property-details-input-container">
                         <!-- row-cols-xxl-5 row-cols-xl-3 row-cols-lg-2 row-cols-md-2 row-cols-sm-1 -->
@@ -58,23 +60,24 @@
                                 <p>Criteria</p>
                                 <div class="criteria-radio-container">
                                     <div class="criteria-radio-btn">
-                                        <input id="sell" type="radio" checked name="criteria_radio">
+                                        <input id="sell" type="radio" name="criteria" value="sell" checked required />
                                         <label for="sell" class="radio-label">Sell</label>
                                     </div>
                                     <div class="criteria-radio-btn">
-                                        <input id="rent" type="radio" name="criteria_radio">
+                                        <input id="rent" type="radio" name="criteria" value="rent" required />
                                         <label for="rent" class="radio-label">Rent</label>
                                     </div>
                                 </div>
+                                <small class="criteria-msg input-error-msg"></small>
                             </div>
                             <div class="">
                                 <p>Price</p>
-                                <input class="general-input" type="number" placeholder="$450,000" name="price"
-                                    id="price">
+                                <input class="general-input" type="number" min="0" placeholder="$450,000" name="price"
+                                    id="price" required />
                             </div>
                             <div class="">
                                 <p>Property Type</p>
-                                <select class="" name="property_type" id="">
+                                <select class="" name="property_type" id="property-type" required>
                                     <option value disabled selected hidden>Choose</option>
                                     <option value="house">House</option>
                                     <option value="apartment">Apartment</option>
@@ -88,40 +91,40 @@
                             </div>
                             <div class="">
                                 <p>Land</p>
-                                <input class="general-input" type="text" placeholder="450m2" name="land" id="land">
+                                <input class="general-input" type="text" placeholder="450m2" min="0" name="land" id="land" required />
                             </div>
                             <div class="">
                                 <p>Construction</p>
-                                <input class="general-input" type="text" placeholder="450m2" name="construction"
-                                    id="construction">
+                                <input class="general-input" type="text" placeholder="450m2" min="0" name="construction"
+                                    id="construction" required />
                             </div>
                             <div class="neighbourhood-input">
                                 <p>Neighbourhood</p>
                                 <input class="general-input" type="text" placeholder="Samborondon, Ceibos etc"
-                                    name="neighbourhood" id="neighbourhood">
+                                    name="neighbourhood" id="neighbourhood" required />
                             </div>
                             <div class="bedroom-input">
                                 <p>Bedrooms</p>
                                 <div class="btn-group bedroom-count-radio-group" role="group"
                                     aria-label="Basic radio toggle button group">
-                                    <input type="radio" class="btn-check" name="bedroombtnradio" id="bedroombtnradio1"
-                                        checked>
+                                    <input type="radio" class="btn-check" name="bedroom" id="bedroombtnradio1"
+                                        checked required value="1">
                                     <label class="btn btn-outline-primary bedroom-count-radio-btn"
                                         for="bedroombtnradio1">1</label>
 
-                                    <input type="radio" class="btn-check" name="bedroombtnradio" id="bedroombtnradio2">
+                                    <input type="radio" class="btn-check" name="bedroom" id="bedroombtnradio2" value="2" required>
                                     <label class="btn btn-outline-primary bedroom-count-radio-btn"
                                         for="bedroombtnradio2">2</label>
 
-                                    <input type="radio" class="btn-check" name="bedroombtnradio" id="bedroombtnradio3">
+                                    <input type="radio" class="btn-check" name="bedroom" id="bedroombtnradio3" value="3" required>
                                     <label class="btn btn-outline-primary bedroom-count-radio-btn"
                                         for="bedroombtnradio3">3</label>
 
-                                    <input type="radio" class="btn-check" name="bedroombtnradio" id="bedroombtnradio4">
+                                    <input type="radio" class="btn-check" name="bedroom" id="bedroombtnradio4" value="4" required>
                                     <label class="btn btn-outline-primary bedroom-count-radio-btn"
                                         for="bedroombtnradio4">4</label>
 
-                                    <input type="radio" class="btn-check" name="bedroombtnradio" id="bedroombtnradio5">
+                                    <input type="radio" class="btn-check" name="bedroom" id="bedroombtnradio5" value="5" required>
                                     <label class="btn btn-outline-primary bedroom-count-radio-btn"
                                         for="bedroombtnradio5">5+</label>
                                 </div>
@@ -130,28 +133,28 @@
                                 <p>Bathrooms</p>
                                 <div class="btn-group bedroom-count-radio-group" role="group"
                                     aria-label="Basic radio toggle button group">
-                                    <input type="radio" class="btn-check" name="bathroombtnradio" id="bathroombtnradio1"
-                                        checked>
+                                    <input type="radio" class="btn-check" name="bathroom" id="bathroombtnradio1"
+                                        checked required value="1">
                                     <label class="btn btn-outline-primary bedroom-count-radio-btn"
                                         for="bathroombtnradio1">1</label>
 
-                                    <input type="radio" class="btn-check" name="bathroombtnradio"
-                                        id="bathroombtnradio2">
+                                    <input type="radio" class="btn-check" name="bathroom"
+                                        id="bathroombtnradio2" required value="2">
                                     <label class="btn btn-outline-primary bedroom-count-radio-btn"
                                         for="bathroombtnradio2">2</label>
 
-                                    <input type="radio" class="btn-check" name="bathroombtnradio"
-                                        id="bathroombtnradio3">
+                                    <input type="radio" class="btn-check" name="bathroom"
+                                        id="bathroombtnradio3" required value="3">
                                     <label class="btn btn-outline-primary bedroom-count-radio-btn"
                                         for="bathroombtnradio3">3</label>
 
-                                    <input type="radio" class="btn-check" name="bathroombtnradio"
-                                        id="bathroombtnradio4">
+                                    <input type="radio" class="btn-check" name="bathroom"
+                                        id="bathroombtnradio4" required value="4">
                                     <label class="btn btn-outline-primary bedroom-count-radio-btn"
                                         for="bathroombtnradio4">4</label>
 
-                                    <input type="radio" class="btn-check" name="bathroombtnradio"
-                                        id="bathroombtnradio5">
+                                    <input type="radio" class="btn-check" name="bathroom"
+                                        id="bathroombtnradio5" required value="5">
                                     <label class="btn btn-outline-primary bedroom-count-radio-btn"
                                         for="bathroombtnradio5">5+</label>
                                 </div>
@@ -159,16 +162,16 @@
                             <div class="city-input">
                                 <p>City</p>
                                 <input class="general-input" type="text" placeholder="Guayaquil, Quito etc" name="city"
-                                    id="city">
+                                    id="city" required />
                             </div>
                             <div class="">
                                 <p>Parking</p>
-                                <input class="general-input" type="text" placeholder="2" name="parking" id="parking">
+                                <input class="general-input" type="number" min="0" placeholder="2" name="parking" id="parking" required />
                             </div>
                             <div class="">
                                 <p>Antiquity</p>
-                                <input class="general-input" type="text" placeholder="10" name="antiquity"
-                                    id="antiquity">
+                                <input class="general-input" type="number" min="0" placeholder="10" name="antiquity"
+                                    id="antiquity" required />
                             </div>
                         </div>
                         <div class="other-inputs">
@@ -176,7 +179,7 @@
                                 <p>Location</p>
                                 <div class="search-location">
                                     <input class="general-input" type="text" placeholder="Aires del batan"
-                                        name="location" />
+                                        name="location" required />
                                     <svg width="21" height="21" viewBox="0 0 21 21" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -198,12 +201,12 @@
                                 <div class="tags-container">
                                     <div class="tags-input">
                                         <div class="tags"></div>
-                                        <input type="text" class="tags-textbox" />
+                                        <input type="text" class="tags-textbox" name="ameneties" />
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <button type="button" class="publish-property-btn" id="publish-property-btn">Publish</button>
+                        <button type="submit" class="publish-property-btn" id="publish-property-btn">Publish</button>
                     </div>
                 </form>
             </div>
