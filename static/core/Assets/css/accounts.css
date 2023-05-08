@@ -225,6 +225,15 @@ input[name="authentication_radio"]:checked + .radio-label{
     text-decoration: none;
 }
 
+.post-registration-content button {
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1.25rem;
+    color: #8DC63F;
+    border: none;
+    background-color: white;
+}
+
 .bottom-page-ad {
     width: 100%;
     height: 90px;

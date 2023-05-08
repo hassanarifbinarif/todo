@@ -42,6 +42,14 @@ button {
     position: static;
 }
 
+.input-success-msg {
+    color: #8DC63F!important;
+}
+
+.input-failure-msg {
+    color: #dc3545!important;
+}
+
 .input-error {
     border-width: 3px!important;
     border-color: #dc3545!important;

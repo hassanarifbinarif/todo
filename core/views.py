@@ -13,6 +13,11 @@ def property_listing(request):
 def accounts(request):
     return render(request, 'accounts.html')
 
+def verify_email(request):
+    msg = None
+    success = False
+    return render(request, 'verify-email.html')
+
 def settings(request):
     context = {}
     context['navbar'] = 'settings'
