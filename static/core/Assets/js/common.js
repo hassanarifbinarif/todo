@@ -37,6 +37,37 @@ function afterLoad(button, text) {
 }
 
 
+function parseJwt (token) {
+    var base64Url = token.split('.')[1];
+    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+    return JSON.parse(jsonPayload);
+};
+
+
+function setCookie(name, value, expiry) {
+    if(name === 'access'){
+        name = 'user_access_token'
+    }else if(name === 'refresh'){
+        name = 'user_refresh_token'
+    }else{
+        name=name
+    }
+    var date = new Date();
+    date.setTime(date.getTime() + expiry);
+    expires = "; expires=" + date.toUTCString();
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+}
+
+
+function clearTokens(){
+    setCookie('access', '', 0);
+    setCookie('refresh', '', 0);
+}
+
+
 const emailRegex = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}/i
 let timeOut;
 

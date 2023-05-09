@@ -561,7 +561,7 @@
                             <div class="profile-photo-container">
                                 <span>Logo/Photo</span>
                                 <div class="image-input-container">
-                                    <img src="" style="display: none;" id="profile-image" alt="Profile Image">
+                                    <img src="{{profile_info.profile_picture}}" id="profile-image" alt="Profile Image">
                                     <input type="file" name="profile_image" id="image-input"
                                         onchange="previewImage(event);">
                                     <label for="image-input">
@@ -585,23 +585,23 @@
                                 <div class="column">
                                     <div class="input">
                                         <label for="first-name">First Name</label>
-                                        <input type="text" value="Jane" name="first_name" id="first-name">
+                                        <input type="text" value="{{profile_info.first_name}}" name="first_name" id="first-name">
                                         <small class="first-name-msg input-error-msg"></small>
                                     </div>
                                     <div class="input">
                                         <label for="last-name">Last Name</label>
-                                        <input type="text" value="Smith" name="last_name" id="last-name">
+                                        <input type="text" value="{{profile_info.last_name}}" name="last_name" id="last-name">
                                         <small class="last-name-msg input-error-msg"></small>
                                     </div>
                                     <div class="input">
                                         <label for="email">Email</label>
-                                        <input type="email" value="Jane.Smith@JSrealestate.com" name="email" id="email">
+                                        <input type="email" value="{{profile_info.email}}" name="email" id="email">
                                         <small class="email-msg input-error-msg"></small>
                                     </div>
                                     <div class="input mobile-input">
                                         <label for="mobile-number">Mobile Number</label>
                                         <div>
-                                            <input type="tel" value="+59394549854" name="mobile_number" id="mobile-number" />
+                                            <input type="tel" value="{{profile_info.phone}}" name="mobile_number" id="mobile-number" />
                                             <img src="{% static 'core/Assets/images/whatsapp_logo.svg' %}" alt="whatsapp logo" />
                                         </div>
                                         <small class="mobile-msg input-error-msg"></small>
@@ -610,18 +610,18 @@
                                 <div class="column">
                                     <div class="input">
                                         <label for="business-name">Business Name</label>
-                                        <input type="text" value="Real State" name="business_name" id="business-name" />
+                                        <input type="text" value="{{profile_info.business_name}}" name="business_name" id="business-name" />
                                         <small class="business-name-msg input-error-msg"></small>
                                     </div>
                                     <div class="input">
                                         <label for="address">Address</label>
-                                        <input type="text" value="Edificio The Point, Puerto Santa Ana" name="address"
+                                        <input type="text" value="{{profile_info.address}}" name="address"
                                             id="address" />
                                         <small class="address-msg input-error-msg"></small>
                                     </div>
                                     <div class="input">
                                         <label for="city">City</label>
-                                        <input type="text" value="Guayaquil" name="city" id="city" />
+                                        <input type="text" value="{{profile_info.city}}" name="city" id="city" />
                                         <small class="city-msg input-error-msg"></small>
                                     </div>
                                 </div>

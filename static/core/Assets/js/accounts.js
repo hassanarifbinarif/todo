@@ -73,7 +73,6 @@ for (let i = 0; i < passwordIcons.length; i++) {
 
 // Login Form Handling
 
-
 async function loginForm(event) {
   event.preventDefault();
   let form = event.currentTarget;
@@ -120,6 +119,9 @@ async function loginForm(event) {
     return false;
   } else {
     try {
+      let button = form.querySelector('button[type="submit"]');
+      let buttonText = button.innerText;
+      beforeLoad(button);
       let formData = new FormData(form);
       let data = formDataToObject(formData);
       let headers = {
@@ -132,8 +134,31 @@ async function loginForm(event) {
         headers,
         "POST"
       );
+      console.log(response);
       response.json().then(function (res) {
-        console.log(res);
+        if (response.status == 400) {
+          emailMsg.innerText = res.messages.password;
+          passwordMsg.innerText = res.messages.password;
+          emailMsg.classList.add("active");
+          passwordMsg.classList.add("active");
+          afterLoad(button, buttonText);
+        } else if (response.status == 200) {
+          console.log(res);
+          emailMsg.innerText = "";
+          passwordMsg.innerText = "";
+          emailMsg.classList.remove("active");
+          passwordMsg.classList.remove("active");
+          afterLoad(button, buttonText);
+          const accessToken = parseJwt(res.access);
+          const refreshToken = parseJwt(res.refresh);
+          setCookie("access", res.access, accessToken.exp);
+          setCookie("refresh", res.refresh, refreshToken.exp);
+          location.href = location.origin + "/";
+        } else {
+          passwordMsg.innerText = "An error occured. Please try again";
+          passwordMsg.classList.add("active");
+          afterLoad(button, buttonText);
+        }
       });
     } catch (err) {
       console.log(err);
@@ -272,12 +297,15 @@ async function registerForm(event) {
     return false;
   } else {
     try {
+      let button = form.querySelector('button[type="submit"]');
+      let buttonText = button.innerText;
       let formData = new FormData(form);
       let data = formDataToObject(formData);
       let headers = {
         "Content-Type": "application/json",
         "X-CSRFToken": data.csrfmiddlewaretoken,
       };
+      beforeLoad(button);
       let response = await requestAPI(
         "http://3.140.78.251:8000/api/register",
         JSON.stringify(data),
@@ -301,16 +329,19 @@ async function registerForm(event) {
             });
           }
         });
+        afterLoad(button, buttonText);
         return false;
       }
       if (response.status == 200) {
-        if(registerContent.classList.contains('hide')) {
+        afterLoad(button, buttonText);
+        if (registerContent.classList.contains("hide")) {
+        } else {
+          registerContent.classList.add("hide");
+          postRegistrationContent.classList.remove("hide");
         }
-        else {
-            registerContent.classList.add('hide');
-            postRegistrationContent.classList.remove('hide');
-        }
-        postRegistrationContent.querySelector('#post-registration-email').value = emailField.value;
+        postRegistrationContent.querySelector(
+          "#post-registration-email"
+        ).value = emailField.value;
       }
     } catch (err) {
       console.log(err);
@@ -318,48 +349,49 @@ async function registerForm(event) {
   }
 }
 
-
 async function resendConfirmationEmail(event) {
-    event.preventDefault();
-    let form = event.currentTarget;
-    let formData = new FormData(form);
-    let data = formDataToObject(formData);
-    let headers = {
-        "Content-Type": "application/json",
-        "X-CSRFToken": data.csrfmiddlewaretoken,
-    };
-    try {
-        let button = form.querySelector('button[type="submit"]');
-        let buttonText = button.innerText;
-        beforeLoad(button);
-        let response = await requestAPI('http://3.140.78.251:8000/api/users/resend-confirm', JSON.stringify(data), headers, 'PATCH');
-        let msgField = form.querySelector('.resend-email-msg');
-        if(response.status == 400) {
-            response.json().then(function(res) {
-                console.log(res);
-                msgField.innerText = 'Error occured. Email could not be resent.';
-                msgField.classList.add('active');
-                if(msgField.classList.contains('input-success-msg')) {
-                    msgField.classList.remove('input-success-msg');
-                }
-                msgField.classList.add('input-failure-msg');
-                afterLoad(button, buttonText);
-            })
+  event.preventDefault();
+  let form = event.currentTarget;
+  let formData = new FormData(form);
+  let data = formDataToObject(formData);
+  let headers = {
+    "Content-Type": "application/json",
+    "X-CSRFToken": data.csrfmiddlewaretoken,
+  };
+  try {
+    let button = form.querySelector('button[type="submit"]');
+    let buttonText = button.innerText;
+    beforeLoad(button);
+    let response = await requestAPI(
+      "http://3.140.78.251:8000/api/users/resend-confirm",
+      JSON.stringify(data),
+      headers,
+      "PATCH"
+    );
+    let msgField = form.querySelector(".resend-email-msg");
+    if (response.status == 400) {
+      response.json().then(function (res) {
+        console.log(res);
+        msgField.innerText = "Error occured. Email could not be resent.";
+        msgField.classList.add("active");
+        if (msgField.classList.contains("input-success-msg")) {
+          msgField.classList.remove("input-success-msg");
         }
-        else if(response.status == 200) {
-            response.json().then(function(res) {
-                msgField.innerText = "Successfully resent confirmation.";
-                msgField.classList.add('active');
-                if(msgField.classList.contains('input-failure-msg')) {
-                    msgField.classList.remove('input-failure-msg');
-                }
-                msgField.classList.add('input-success-msg');
-                afterLoad(button, buttonText);
-            })
+        msgField.classList.add("input-failure-msg");
+        afterLoad(button, buttonText);
+      });
+    } else if (response.status == 200) {
+      response.json().then(function (res) {
+        msgField.innerText = "Successfully resent confirmation.";
+        msgField.classList.add("active");
+        if (msgField.classList.contains("input-failure-msg")) {
+          msgField.classList.remove("input-failure-msg");
         }
-        
+        msgField.classList.add("input-success-msg");
+        afterLoad(button, buttonText);
+      });
     }
-    catch (err) {
-        console.log(err);
-    }
+  } catch (err) {
+    console.log(err);
+  }
 }

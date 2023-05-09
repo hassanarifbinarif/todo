@@ -20,7 +20,7 @@
             </svg>
             <span>Ad Listing</span>
         </a>
-        <a class="{% if navbar == 'settings' %}hide{% endif %}" href="{% url 'accounts' %}">
+        <a class="{% if login == True %}hide{% endif %}" href="{% url 'accounts' %}">
             <svg width="18" height="22" viewBox="0 0 18 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_1_293)">
                     <path
@@ -38,7 +38,7 @@
             </svg>
             <span>Login/Register</span>
         </a>
-        <a class="{% if navbar == 'settings' %}{% else %}hide{% endif %}" href="{% url 'settings' %}" class="hide">
+        <a class="{% if login == True %}{% else %}hide{% endif %}" href="{% url 'settings' %}" class="hide">
             <svg width="18" height="22" viewBox="0 0 18 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_1_293)">
                     <path
@@ -56,7 +56,7 @@
             </svg>
             <span>Profile</span>
         </a>
-        <a class="{% if navbar == 'settings' %}{% else %}hide{% endif %}" href="javascript:void(0)" class="nav-menu hide">
+        <a class="{% if login == True %}{% else %}hide{% endif %}" href="javascript:void(0)" class="nav-menu hide">
             <svg width="20" height="15" viewBox="0 0 20 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <line y1="1" x2="20" y2="1" stroke="white" stroke-width="2"/>
                 <line x1="4" y1="7" x2="20" y2="7" stroke="white" stroke-width="2"/>

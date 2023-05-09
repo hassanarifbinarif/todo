@@ -58,9 +58,7 @@ function previewImage(event) {
 
 // Handling Profile Form
 
-const emailRegex = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}/i
 const phoneRegex = /^(\+593|593|09)([2-9]\d{7})$/;
-let timeOut;
 
 
 function isValidEmail(email) {
