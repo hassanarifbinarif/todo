@@ -132,7 +132,6 @@ async function loginForm(event) {
         headers,
         "POST"
       );
-      console.log(response);
       response.json().then(function (res) {
         console.log(res);
       });
@@ -285,10 +284,8 @@ async function registerForm(event) {
         headers,
         "POST"
       );
-      console.log(response);
       if (response.status == 400) {
         response.json().then(function (res) {
-          console.log(res);
           if (res.messages.email) {
             emailField.classList.add("input-error");
             emailMsg.classList.add("active");
@@ -336,7 +333,6 @@ async function resendConfirmationEmail(event) {
         let buttonText = button.innerText;
         beforeLoad(button);
         let response = await requestAPI('http://3.140.78.251:8000/api/users/resend-confirm', JSON.stringify(data), headers, 'PATCH');
-        console.log(response);
         let msgField = form.querySelector('.resend-email-msg');
         if(response.status == 400) {
             response.json().then(function(res) {
@@ -352,7 +348,6 @@ async function resendConfirmationEmail(event) {
         }
         else if(response.status == 200) {
             response.json().then(function(res) {
-                console.log(res);
                 msgField.innerText = "Successfully resent confirmation.";
                 msgField.classList.add('active');
                 if(msgField.classList.contains('input-failure-msg')) {
