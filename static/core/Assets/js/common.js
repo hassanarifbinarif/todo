@@ -62,13 +62,71 @@ function setCookie(name, value, expiry) {
 }
 
 
+function getCookie(name) {
+    if(name === 'access'){
+        name = 'user_access_token'
+    }else if(name === 'refresh'){
+        name = 'user_refresh_token'
+    }else{
+        name=name
+    }
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+}
+
+
+function getAccessTokenFromCookie() {
+    return getCookie('access');
+}
+
+
+function getRefreshTokenFromCookie() {
+    return getCookie('refresh');
+}
+
+
+function getCookieExpirationTime(name) {
+    if(name === 'access'){
+        name = 'buyer_access_token'
+    }else if(name === 'refresh'){
+        name = 'buyer_refresh_token'
+    }else{
+        name=name
+    }
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    return ca
+}
+
+
+async function onRefreshToken() {
+    let refreshToken = getRefreshTokenFromCookie();
+    let myData = {"refresh": `${refreshToken}`};
+    let refreshResponse = await requestAPI('http://3.140.78.251:8000/api/refresh', myData, {}, 'POST');
+    return refreshResponse;
+}
+
+
 function clearTokens(){
     setCookie('access', '', 0);
     setCookie('refresh', '', 0);
 }
 
 
+function logout() {
+    clearTokens();
+    location.pathname = '/accounts/';
+}
+
+
 const emailRegex = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}/i
+const phoneRegex = /^(\+593|593|09)([2-9]\d{7})$/;
 let timeOut;
 
 function isValidEmail(email) {
@@ -142,6 +200,31 @@ function matchingPassword(password, confirmPassword) {
         confirmPasswordMsg.innerText = '';
         confirmPasswordMsg.classList.remove('active');
         confirmPassword.classList.remove('input-error');
+        if(timeOut) {
+            clearTimeout(timeOut);
+        }
+        return true;
+    }
+}
+
+
+function isValidNumber(number) {
+    let numberMsg = number.closest('.mobile-input').querySelector('.mobile-msg');
+    if(number.value.trim().length < 11) {
+        numberMsg.innerText = 'Number must be 11 digits long!';
+        return false;
+    }
+    else if(!(!isNaN(number.value) && /^\d+$/.test(number.value))) {
+        numberMsg.innerText = 'Number must contain only digits';
+    }
+    // else if(!phoneRegex.test(number.value)) {
+    //     numberMsg.innerText = 'Number is invalid!';
+    //     return false;
+    // }
+    else {
+        number.classList.remove('input-error');
+        numberMsg.innerText = '';
+        numberMsg.classList.remove('active');
         if(timeOut) {
             clearTimeout(timeOut);
         }

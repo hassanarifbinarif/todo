@@ -558,11 +558,12 @@
                 <div class="profile-content-container hide" id="profile-content">
                     <div>
                         <form class="profile-details-container" onsubmit="profileForm(event);">
+                            {% csrf_token %}
                             <div class="profile-photo-container">
                                 <span>Logo/Photo</span>
                                 <div class="image-input-container">
-                                    <img src="{{profile_info.profile_picture}}" id="profile-image" alt="Profile Image">
-                                    <input type="file" name="profile_image" id="image-input"
+                                    <img src="{{profile_info.profile_picture}}" id="profile-image" alt="Profile Image" />
+                                    <input type="file" name="profile_picture" id="image-input"
                                         onchange="previewImage(event);">
                                     <label for="image-input">
                                         <span>Upload</span>
@@ -601,7 +602,7 @@
                                     <div class="input mobile-input">
                                         <label for="mobile-number">Mobile Number</label>
                                         <div>
-                                            <input type="tel" value="{{profile_info.phone}}" name="mobile_number" id="mobile-number" />
+                                            <input type="tel" value="{{profile_info.phone}}" name="phone" id="mobile-number" />
                                             <img src="{% static 'core/Assets/images/whatsapp_logo.svg' %}" alt="whatsapp logo" />
                                         </div>
                                         <small class="mobile-msg input-error-msg"></small>
@@ -626,12 +627,40 @@
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" class="save-profile-details-btn">Save Changes</button>
+                            <button type="submit" class="save-profile-details-btn">
+                                <span class="spinner-border spinner-border-sm hide" role="status" aria-hidden="true"></span>
+                                <span class="btn-text">Save Changes</span>
+                            </button>
                         </form>
                         <form class="plan-container">
                             <span>Plan</span>
                             <div class="plan-card-container">
+                                {% if plan_list %}
+                                {% for obj in plan_list.data %}
                                 <div class="plan-radio-btn">
+                                    <input id="{{obj.id}}" type="radio" name="plan_radio">
+                                    <label for="{{obj.id}}" class="plan-card">
+                                        <div class="plan-duration">
+                                            <div class="plan-price">
+                                                <p><span>${{obj.price|floatformat:"0"}}.</span><span>{{obj.price|slice:"-2:"}}</span></p>
+                                            </div>
+                                            <div class="plan-period">
+                                                <span>Monthly</span>
+                                            </div>
+                                        </div>
+                                        <div class="plan-features">
+                                            <span>{{obj.name}}</span>
+                                            <ul>
+                                                <li>Upload up to {{obj.num_of_listings}} properties</li>
+                                                <li>Maximum {{obj.num_of_images}} images per listing</li>
+                                                <li>Contact via Whatsapp</li>
+                                            </ul>
+                                        </div>
+                                    </label>
+                                </div>
+                                {% endfor %}
+                                {% endif %}
+                                <!-- <div class="plan-radio-btn">
                                     <input id="basic" type="radio" name="plan_radio">
                                     <label for="basic" class="plan-card">
                                         <div class="plan-duration">
@@ -693,7 +722,7 @@
                                             </ul>
                                         </div>
                                     </label>
-                                </div>
+                                </div> -->
                             </div>
                             <button class="change-plan-btn">Change Plan</button>
                         </form>

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from core.helpers import check_user_login, confirm_user_email, get_dict_from_token
+from core.helpers import check_user_login, confirm_user_email, get_dict_from_token, requestAPI
 
 
 def index(request):
@@ -54,6 +54,12 @@ def settings(request):
     if status == 200:
         context['login'] = True
         context['profile_info'] = response
+        print(response)
+        headers = {"Authorization": f"Bearer {request.COOKIES.get('user_access_token')}"}
+        plan_status, plan_response = requestAPI('GET', 'http://3.140.78.251:8000/api/plans/list', headers, {})
+        if plan_status == 200:
+            context['plan_list'] = plan_response
+        # print(plan_status, plan_response)
     else:
         return redirect('/accounts/')
     return render(request, 'settings.html', context)

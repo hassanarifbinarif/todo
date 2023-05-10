@@ -52,205 +52,20 @@ function previewImage(event) {
     let imageInputContainer = document.querySelector('.image-input-container');
     imageTag.src = window.URL.createObjectURL(image[0]);
     imageTag.style.display = 'block';
-    imageInputContainer.style.backgroundImage = 'none';
 }
 
 
 // Handling Profile Form
 
-const phoneRegex = /^(\+593|593|09)([2-9]\d{7})$/;
 
-
-function isValidEmail(email) {
-    let emailMsg = email.closest('form').querySelector('.email-msg');
-    if(email.value.trim() == '') {
-        emailMsg.innerText = 'Email is required!';
-        return false;
-    }
-    else if(!emailRegex.test(email.value)) {
-        emailMsg.innerText = 'Email is invalid!';
-        return false;
-    }
-    else {
-        email.classList.remove('input-error');
-        emailMsg.innerText = '';
-        emailMsg.classList.remove('active');
-        if(timeOut) {
-            clearTimeout(timeOut);
-        }
-        return true;
-    }
-}
-
-
-function isValidName(name) {
-    let nameMsg = name.nextElementSibling;
-    if(name.value.trim().length == 0) {
-        nameMsg.innerText = "Name is Required!";
-        return false;
-    }
-    else {
-        name.classList.remove('input-error');
-        nameMsg.innerText = '';
-        nameMsg.classList.remove('active');
-        if(timeOut) {
-            clearTimeout(timeOut);
-        }
-        return true;
-    }
-}
-
-
-function isValidNumber(number) {
-    let numberMsg = number.closest('.mobile-input').querySelector('.mobile-msg');
-    if(number.value.trim().length == 0) {
-        numberMsg.innerText = 'Number is required!';
-        return false;
-    }
-    else if(!phoneRegex.test(number.value)) {
-        numberMsg.innerText = 'Number is invalid!';
-        return false;
-    }
-    else {
-        number.classList.remove('input-error');
-        numberMsg.innerText = '';
-        numberMsg.classList.remove('active');
-        if(timeOut) {
-            clearTimeout(timeOut);
-        }
-        return true;
-    }
-}
-
-
-let firstName = document.querySelector('input[name="first_name"]');
-firstName.addEventListener('input', function() {
-    if(isValidName(this)) {
-        this.classList.remove('input-error');
-    }
-    else {
-        let inputField = this;
-        if(timeOut) {
-            clearTimeout(timeOut);
-        }
-        timeOut = setTimeout(function() {
-            inputField.classList.add('input-error');
-            inputField.nextElementSibling.classList.add('active');
-        }, 1500);
-    }
-});
-
-let lastName = document.querySelector('input[name="last_name"]');
-lastName.addEventListener('input', function() {
-    if(isValidName(this)) {
-        this.classList.remove('input-error');
-    }
-    else {
-        let inputField = this;
-        if(timeOut) {
-            clearTimeout(timeOut);
-        }
-        timeOut = setTimeout(function() {
-            inputField.classList.add('input-error');
-            inputField.nextElementSibling.classList.add('active');
-        }, 1500);
-    }
-})
-
-let email = document.querySelector('input[name="email"]');
-email.addEventListener('input', function() {
-    if(isValidEmail(this)) {
-        this.classList.remove('input-error');
-    }
-    else {
-        let inputField = this;
-        if(timeOut) {
-            clearTimeout(timeOut);
-        }
-        timeOut = setTimeout(function() {
-            inputField.classList.add('input-error');
-            inputField.nextElementSibling.classList.add('active');
-        }, 1500);
-    }
-});
-
-let mobileNumber = document.querySelector('input[name="mobile_number"]');
-mobileNumber.addEventListener('input', function() {
-    if(isValidNumber(this)) {
-        this.classList.remove('input-error');
-    }
-    else {
-        let inputField = this;
-        if(timeOut) {
-            clearTimeout(timeOut);
-        }
-        timeOut = setTimeout(function() {
-            inputField.classList.add('input-error');
-            inputField.closest('.mobile-input').querySelector('.mobile-msg').classList.add('active');
-        }, 1500);
-    }
-})
-
-let businessName = document.querySelector('input[name="business_name"]');
-businessName.addEventListener('input', function() {
-    if(isValidName(this)) {
-        this.classList.remove('input-error');
-    }
-    else {
-        let inputField = this;
-        if(timeOut) {
-            clearTimeout(timeOut);
-        }
-        timeOut = setTimeout(function() {
-            inputField.classList.add('input-error');
-            inputField.nextElementSibling.classList.add('active');
-        }, 1500);
-    }
-});
-
-let address = document.querySelector('input[name="address"]');
-address.addEventListener('input', function() {
-    if(isValidName(this)) {
-        this.classList.remove('input-error');
-    }
-    else {
-        let inputField = this;
-        if(timeOut) {
-            clearTimeout(timeOut);
-        }
-        timeOut = setTimeout(function() {
-            inputField.classList.add('input-error');
-            inputField.nextElementSibling.classList.add('active');
-        }, 1500);
-    }
-})
-
-let city = document.querySelector('input[name="city"]');
-city.addEventListener('input', function() {
-    if(isValidName(this)) {
-        this.classList.remove('input-error');
-    }
-    else {
-        let inputField = this;
-        if(timeOut) {
-            clearTimeout(timeOut);
-        }
-        timeOut = setTimeout(function() {
-            inputField.classList.add('input-error');
-            inputField.nextElementSibling.classList.add('active');
-        }, 1500);
-    }
-});
-
-
-function profileForm(event) {
+async function profileForm(event) {
     event.preventDefault();
     let form = event.currentTarget;
-    let profileImage = form.querySelector('input[name="profile_image"]');
+    let profilePicture = form.querySelector('input[name="profile_picture"]');
     let firstName = form.querySelector('input[name="first_name"]');
     let lastName = form.querySelector('input[name="last_name"]');
     let emailField = form.querySelector('input[name="email"]');
-    let mobileField = form.querySelector('input[name="mobile_number"]');
+    let mobileField = form.querySelector('input[name="phone"]');
     let businessField = form.querySelector('input[name="business_name"]');
     let addressField = form.querySelector('input[name="address"]');
     let cityField = form.querySelector('input[name="city"]');
@@ -265,39 +80,186 @@ function profileForm(event) {
     if(!isValidName(firstName)) {
         firstName.classList.add('input-error');
         firstNameMsg.classList.add('active');
+        firstName.addEventListener('input', function() {
+            if(isValidName(this)) {
+                this.classList.remove('input-error');
+            }
+            else {
+                let inputField = this;
+                if(timeOut) {
+                    clearTimeout(timeOut);
+                }
+                timeOut = setTimeout(function() {
+                    inputField.classList.add('input-error');
+                    firstNameMsg.classList.add('active');
+                }, 1500);
+            }
+        });
         return false;
     }
     else if(!isValidName(lastName)) {
         lastName.classList.add('input-error');
         lastNameMsg.classList.add('active');
+        lastName.addEventListener('input', function() {
+            if(isValidName(this)) {
+                this.classList.remove('input-error');
+            }
+            else {
+                let inputField = this;
+                if(timeOut) {
+                    clearTimeout(timeOut);
+                }
+                timeOut = setTimeout(function() {
+                    inputField.classList.add('input-error');
+                    lastNameMsg.classList.add('active');
+                }, 1500);
+            }
+        });
         return false;
     }
     else if(!isValidEmail(emailField)){
         emailField.classList.add('input-error');
         emailMsg.classList.add('active');
+        email.addEventListener('input', function() {
+            if(isValidEmail(this)) {
+                this.classList.remove('input-error');
+            }
+            else {
+                let inputField = this;
+                if(timeOut) {
+                    clearTimeout(timeOut);
+                }
+                timeOut = setTimeout(function() {
+                    inputField.classList.add('input-error');
+                    emailMsg.classList.add('active');
+                }, 1500);
+            }
+        });
         return false;
     }
     else if(!isValidNumber(mobileField)) {
         mobileField.classList.add('input-error');
         mobileMsg.classList.add('active');
+        mobileField.addEventListener('input', function() {
+            if(isValidNumber(this)) {
+                this.classList.remove('input-error');
+            }
+            else {
+                let inputField = this;
+                if(timeOut) {
+                    clearTimeout(timeOut);
+                }
+                timeOut = setTimeout(function() {
+                    inputField.classList.add('input-error');
+                    mobileMsg.classList.add('active');
+                }, 1500);
+            }
+        });
         return false;        
     }
     else if(!isValidName(businessField)) {
         businessField.classList.add('input-error');
         businessNameMsg.classList.add('active');
+        businessField.addEventListener('input', function() {
+            if(isValidName(this)) {
+                this.classList.remove('input-error');
+            }
+            else {
+                let inputField = this;
+                if(timeOut) {
+                    clearTimeout(timeOut);
+                }
+                timeOut = setTimeout(function() {
+                    inputField.classList.add('input-error');
+                    businessNameMsg.classList.add('active');
+                }, 1500);
+            }
+        });
         return false;
     }
     else if(!isValidName(addressField)) {
         addressField.classList.add('input-error');
         addressMsg.classList.add('active');
+        addressField.addEventListener('input', function() {
+            if(isValidName(this)) {
+                this.classList.remove('input-error');
+            }
+            else {
+                let inputField = this;
+                if(timeOut) {
+                    clearTimeout(timeOut);
+                }
+                timeOut = setTimeout(function() {
+                    inputField.classList.add('input-error');
+                    addressMsg.classList.add('active');
+                }, 1500);
+            }
+        });
         return false;
     }
     else if(!isValidName(cityField)) {
         cityField.classList.add('input-error');
         cityMsg.classList.add('active');
+        cityField.addEventListener('input', function() {
+            if(isValidName(this)) {
+                this.classList.remove('input-error');
+            }
+            else {
+                let inputField = this;
+                if(timeOut) {
+                    clearTimeout(timeOut);
+                }
+                timeOut = setTimeout(function() {
+                    inputField.classList.add('input-error');
+                    cityMsg.classList.add('active');
+                }, 1500);
+            }
+        });
         return false;
     }
-    // else {
-    //     location.href = location.origin + '/settings/';
-    // }
+    else {
+        let formData = new FormData(form);
+        formData.append('step','personal_information');
+        let button = form.querySelector('button[type="submit"]');
+        let buttonText = button.innerText;
+        beforeLoad(button);
+        let response = await profileAPI(formData);
+        console.log(response);
+        response.json().then(function(res) {
+            console.log(res);
+            if(response.status == 200);
+            afterLoad(button, 'Profile updated successfully');
+            setTimeout(() => {
+                afterLoad(button, buttonText);
+            }, 2000);
+        });
+        // location.href = location.origin + '/settings/';
+    }
+}
+
+
+async function profileAPI(data) {
+    let token = getAccessTokenFromCookie();
+    let objectData = formDataToObject(data);
+    let headers = {
+        "Authorization": `Bearer ${token}`,
+        "X-CSRFToken": objectData.csrfmiddlewaretoken,
+    }
+    let response = await requestAPI('http://3.140.78.251:8000/api/me', data, headers, 'PATCH');
+    if(response.status == 200) {
+        return response;
+    }
+    else {
+        let myRes = await onRefreshToken();
+        if(myRes.status == 200) {
+            const accessToken = parseJwt(myRes.access);
+            const refreshToken = parseJwt(myRes.refresh);
+            setCookie("access", myRes.access, accessToken.exp);
+            setCookie("refresh", myRes.refresh, refreshToken.exp);
+            return profileAPI(data);
+        }
+        else {
+            logout();
+        }
+    }
 }
