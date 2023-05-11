@@ -157,7 +157,7 @@ function isValidPassword(password) {
         return false;
     }
     else if(password.value.length < 8) {
-        passwordMsg.innerText = 'Password cannot be less than 8 characters!';
+        passwordMsg.innerText = 'Password must be atleast 8 characters!';
         return false;
     }
     else {

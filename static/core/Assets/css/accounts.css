@@ -18,8 +18,8 @@ input[name="authentication_radio"] {
 }
 
 input[name="authentication_radio"]:checked + .radio-label{
-    color: #FFFFFF;
-    background-color: #8DC63F;
+    color: #9A9A9A;
+    background-color: #FFFFFF;
 }
 
 .authentication-radio-group {
@@ -43,8 +43,8 @@ input[name="authentication_radio"]:checked + .radio-label{
     font-weight: 700;
     font-size: 1rem;
     line-height: 1.25rem;
-    color: #9A9A9A;
-    background-color: #FFFFFF;
+    color: #FFFFFF;
+    background-color: #8DC63F;
     border-radius: 5px 5px 0px 0px;
     transition: all ease .2s;
     cursor: pointer;

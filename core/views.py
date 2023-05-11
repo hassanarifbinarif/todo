@@ -51,6 +51,13 @@ def verify_registeration(request):
     return render(request, 'verify-email.html', context)
 
 
+def verify_email(request):
+    context = {}
+    if request.method == 'GET':
+        context['token'] = request.GET.get('token')
+    return render(request, 'reset-password.html', context)
+
+
 def settings(request):
     context = {}
     status, response = check_user_login(request)
@@ -87,3 +94,7 @@ def news(request):
     if status == 200:
         context['login'] = True
     return render(request, 'news.html', context)
+
+
+def forgot_password(request):
+    return render(request, 'forgot-password.html')

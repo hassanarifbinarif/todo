@@ -10,5 +10,7 @@ urlpatterns = [
     path('settings/', views.settings, name='settings'),
     path('add-property/', views.add_property, name='add_property'),
     path('about-us/', views.about_us, name='about_us'),
-    path('news/', views.news, name='news')
+    path('news/', views.news, name='news'),
+    path('forgot-password/', views.forgot_password, name='forgot_password'),
+    path('verify-email/', views.verify_email, name='verify_email')
 ]
