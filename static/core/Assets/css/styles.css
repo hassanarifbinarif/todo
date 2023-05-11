@@ -51,7 +51,7 @@ button {
 }
 
 .input-error {
-    border-width: 3px!important;
+    border-width: 2px!important;
     border-color: #dc3545!important;
 }
 

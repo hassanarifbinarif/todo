@@ -224,14 +224,21 @@ async function profileForm(event) {
         let buttonText = button.innerText;
         beforeLoad(button);
         let response = await profileAPI(formData);
-        console.log(response);
         response.json().then(function(res) {
             console.log(res);
-            if(response.status == 200);
-            afterLoad(button, 'Profile updated successfully');
-            setTimeout(() => {
+            if(response.status == 200) {
+                afterLoad(button, 'Profile updated successfully');
+                setTimeout(() => {
+                    afterLoad(button, buttonText);
+                }, 2000);
+            }
+            else if(response.status == 400) {
+                emailField.classList.add('input-error');
+                emailMsg.classList.add('active');
+                emailMsg.innerText = res.messages.non_field;
                 afterLoad(button, buttonText);
-            }, 2000);
+                return false;
+            }
         });
         // location.href = location.origin + '/settings/';
     }
@@ -247,6 +254,9 @@ async function profileAPI(data) {
     }
     let response = await requestAPI('http://3.140.78.251:8000/api/me', data, headers, 'PATCH');
     if(response.status == 200) {
+        return response;
+    }
+    else if(response.status == 400) {
         return response;
     }
     else {

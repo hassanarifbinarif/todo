@@ -369,8 +369,13 @@ async function resendConfirmationEmail(event) {
     let msgField = form.querySelector(".resend-email-msg");
     if (response.status == 400) {
       response.json().then(function (res) {
-        console.log(res);
-        msgField.innerText = "Error occured. Email could not be resent.";
+        if(res.messages) {
+            let key = Object.keys(res.messages);
+            msgField.innerText = `Email could not be resent. ${res.messages[key[0]]}`;
+        }
+        else {
+            msgField.innerText = "Email could not be resent.";
+        }
         msgField.classList.add("active");
         if (msgField.classList.contains("input-success-msg")) {
           msgField.classList.remove("input-success-msg");

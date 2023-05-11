@@ -27,6 +27,9 @@ def property_listing(request):
 
 
 def accounts(request):
+    status, response = check_user_login(request)
+    if status == 200:
+        return redirect('/')
     return render(request, 'accounts.html')
 
 
@@ -54,7 +57,6 @@ def settings(request):
     if status == 200:
         context['login'] = True
         context['profile_info'] = response
-        print(response)
         headers = {"Authorization": f"Bearer {request.COOKIES.get('user_access_token')}"}
         plan_status, plan_response = requestAPI('GET', 'http://3.140.78.251:8000/api/plans/list', headers, {})
         if plan_status == 200:
