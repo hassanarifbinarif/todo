@@ -1,5 +1,6 @@
 let forgotPasswordContent = document.getElementById("forgot-password-content");
 let postContent = document.getElementById("post-content");
+clearTokens();
 
 async function forgotPasswordForm(event) {
   event.preventDefault();
