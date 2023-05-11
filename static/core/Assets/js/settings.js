@@ -137,86 +137,86 @@ async function profileForm(event) {
         });
         return false;
     }
-    else if(!isValidNumber(mobileField)) {
-        mobileField.classList.add('input-error');
-        mobileMsg.classList.add('active');
-        mobileField.addEventListener('input', function() {
-            if(isValidNumber(this)) {
-                this.classList.remove('input-error');
-            }
-            else {
-                let inputField = this;
-                if(timeOut) {
-                    clearTimeout(timeOut);
-                }
-                timeOut = setTimeout(function() {
-                    inputField.classList.add('input-error');
-                    mobileMsg.classList.add('active');
-                }, 1500);
-            }
-        });
-        return false;        
-    }
-    else if(!isValidName(businessField)) {
-        businessField.classList.add('input-error');
-        businessNameMsg.classList.add('active');
-        businessField.addEventListener('input', function() {
-            if(isValidName(this)) {
-                this.classList.remove('input-error');
-            }
-            else {
-                let inputField = this;
-                if(timeOut) {
-                    clearTimeout(timeOut);
-                }
-                timeOut = setTimeout(function() {
-                    inputField.classList.add('input-error');
-                    businessNameMsg.classList.add('active');
-                }, 1500);
-            }
-        });
-        return false;
-    }
-    else if(!isValidName(addressField)) {
-        addressField.classList.add('input-error');
-        addressMsg.classList.add('active');
-        addressField.addEventListener('input', function() {
-            if(isValidName(this)) {
-                this.classList.remove('input-error');
-            }
-            else {
-                let inputField = this;
-                if(timeOut) {
-                    clearTimeout(timeOut);
-                }
-                timeOut = setTimeout(function() {
-                    inputField.classList.add('input-error');
-                    addressMsg.classList.add('active');
-                }, 1500);
-            }
-        });
-        return false;
-    }
-    else if(!isValidName(cityField)) {
-        cityField.classList.add('input-error');
-        cityMsg.classList.add('active');
-        cityField.addEventListener('input', function() {
-            if(isValidName(this)) {
-                this.classList.remove('input-error');
-            }
-            else {
-                let inputField = this;
-                if(timeOut) {
-                    clearTimeout(timeOut);
-                }
-                timeOut = setTimeout(function() {
-                    inputField.classList.add('input-error');
-                    cityMsg.classList.add('active');
-                }, 1500);
-            }
-        });
-        return false;
-    }
+    // else if(!isValidNumber(mobileField)) {
+    //     mobileField.classList.add('input-error');
+    //     mobileMsg.classList.add('active');
+    //     mobileField.addEventListener('input', function() {
+    //         if(isValidNumber(this)) {
+    //             this.classList.remove('input-error');
+    //         }
+    //         else {
+    //             let inputField = this;
+    //             if(timeOut) {
+    //                 clearTimeout(timeOut);
+    //             }
+    //             timeOut = setTimeout(function() {
+    //                 inputField.classList.add('input-error');
+    //                 mobileMsg.classList.add('active');
+    //             }, 1500);
+    //         }
+    //     });
+    //     return false;        
+    // }
+    // else if(!isValidName(businessField)) {
+    //     businessField.classList.add('input-error');
+    //     businessNameMsg.classList.add('active');
+    //     businessField.addEventListener('input', function() {
+    //         if(isValidName(this)) {
+    //             this.classList.remove('input-error');
+    //         }
+    //         else {
+    //             let inputField = this;
+    //             if(timeOut) {
+    //                 clearTimeout(timeOut);
+    //             }
+    //             timeOut = setTimeout(function() {
+    //                 inputField.classList.add('input-error');
+    //                 businessNameMsg.classList.add('active');
+    //             }, 1500);
+    //         }
+    //     });
+    //     return false;
+    // }
+    // else if(!isValidName(addressField)) {
+    //     addressField.classList.add('input-error');
+    //     addressMsg.classList.add('active');
+    //     addressField.addEventListener('input', function() {
+    //         if(isValidName(this)) {
+    //             this.classList.remove('input-error');
+    //         }
+    //         else {
+    //             let inputField = this;
+    //             if(timeOut) {
+    //                 clearTimeout(timeOut);
+    //             }
+    //             timeOut = setTimeout(function() {
+    //                 inputField.classList.add('input-error');
+    //                 addressMsg.classList.add('active');
+    //             }, 1500);
+    //         }
+    //     });
+    //     return false;
+    // }
+    // else if(!isValidName(cityField)) {
+    //     cityField.classList.add('input-error');
+    //     cityMsg.classList.add('active');
+    //     cityField.addEventListener('input', function() {
+    //         if(isValidName(this)) {
+    //             this.classList.remove('input-error');
+    //         }
+    //         else {
+    //             let inputField = this;
+    //             if(timeOut) {
+    //                 clearTimeout(timeOut);
+    //             }
+    //             timeOut = setTimeout(function() {
+    //                 inputField.classList.add('input-error');
+    //                 cityMsg.classList.add('active');
+    //             }, 1500);
+    //         }
+    //     });
+    //     return false;
+    // }
     else {
         let formData = new FormData(form);
         formData.append('step','personal_information');
