@@ -63,7 +63,7 @@ async function resetPasswordForm(event) {
                 "X-CSRFToken": data.csrfmiddlewaretoken,
             };
             let response = await requestAPI(
-                "http://3.140.78.251:8000/api/forgot/confirm",
+                `${apiURL}/forgot/confirm`,
                 JSON.stringify(data),
                 headers,
                 "POST"

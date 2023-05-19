@@ -38,7 +38,7 @@ async function forgotPasswordForm(event) {
                 "X-CSRFToken": data.csrfmiddlewaretoken,
             };
             let response = await requestAPI(
-                "http://3.140.78.251:8000/api/forgot",
+                `${apiURL}/forgot`,
                 JSON.stringify(data),
                 headers,
                 "POST"
@@ -89,7 +89,7 @@ async function resendVerificationEmailForm(event) {
             "X-CSRFToken": data.csrfmiddlewaretoken,
         };
         let response = await requestAPI(
-            "http://3.140.78.251:8000/api/forgot",
+            `${apiURL}/forgot`,
             JSON.stringify(data),
             headers,
             "POST"

@@ -45,22 +45,22 @@
                         <div class="input-group">
                             <div class="input">
                                 <span class="input-label">Email</span>
-                                <input class="input-field" type="email" name="email" id="login-email" />
+                                <input class="input-field" type="email" name="email" id="login-email" tabindex="1" />
                                 <small class="email-msg input-error-msg"></small>
                             </div>
                             <div class="password-input">
                                 <div>
                                     <span class="input-label">Password</span>
-                                    <a href="{% url 'forgot_password' %}">Forgot Password?</a>
+                                    <a href="{% url 'forgot_password' %}" tabindex="4" >Forgot Password?</a>
                                 </div>
                                 <div>
                                     <i class="fa fa-eye-slash hide-password-field"></i>
-                                    <input class="input-field login-password-field" type="password" name="password" id="login-password" />
+                                    <input class="input-field login-password-field" type="password" name="password" id="login-password" tabindex="2" />
                                 </div>
                                 <small class="password-msg input-error-msg"></small>
                             </div>
                         </div>
-                        <button type="submit" class="login-btn">
+                        <button type="submit" class="login-btn" tabindex="3">
                             <span class="spinner-border spinner-border-sm hide" role="status" aria-hidden="true"></span>
                             <span class="btn-text">Login</span>
                         </button>
