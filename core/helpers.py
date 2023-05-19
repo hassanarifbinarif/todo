@@ -1,6 +1,7 @@
 import json
 import requests
 import base64
+from django.conf import settings as django_settings
 
 
 # Helper methods for project
@@ -8,7 +9,7 @@ import base64
 def requestAPI(method:str, url:str, headers:dict, data:dict):
     status = 400
     try:
-        response = requests.request(method, url, headers=headers, data=data)
+        response = requests.request(method, url, headers=headers, data=data, verify=False)
         return response.status_code, response.json()
     except Exception as e:
         return status, str(e)
@@ -17,12 +18,12 @@ def requestAPI(method:str, url:str, headers:dict, data:dict):
 def check_user_login(request):
     user_access_token = request.COOKIES.get('user_access_token')
     headers = {"Authorization": f"Bearer {user_access_token}"}
-    status, response = requestAPI('GET', 'http://3.140.78.251:8000/api/me', headers, {})
+    status, response = requestAPI('GET', f'{django_settings.API_URL}/me', headers, {})
     return status, response
 
 
 def confirm_user_email(data_dict):
-    status, response = requestAPI('PATCH', 'http://3.140.78.251:8000/api/users/confirm', {}, data_dict)
+    status, response = requestAPI('PATCH', f'{django_settings.API_URL}/users/confirm', {}, data_dict)
     return status, response
 
 

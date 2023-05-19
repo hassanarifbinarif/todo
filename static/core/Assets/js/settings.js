@@ -225,7 +225,6 @@ async function profileForm(event) {
         beforeLoad(button);
         let response = await profileAPI(formData);
         response.json().then(function(res) {
-            console.log(res);
             if(response.status == 200) {
                 afterLoad(button, 'Profile updated successfully');
                 setTimeout(() => {
@@ -252,7 +251,7 @@ async function profileAPI(data) {
         "Authorization": `Bearer ${token}`,
         "X-CSRFToken": objectData.csrfmiddlewaretoken,
     }
-    let response = await requestAPI('http://3.140.78.251:8000/api/me', data, headers, 'PATCH');
+    let response = await requestAPI(`${apiURL}/me`, data, headers, 'PATCH');
     if(response.status == 200) {
         return response;
     }

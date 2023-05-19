@@ -104,11 +104,12 @@ function getCookieExpirationTime(name) {
     return ca
 }
 
+const apiURL = 'https://api-dev.todo.com.ec/api';
 
 async function onRefreshToken() {
     let refreshToken = getRefreshTokenFromCookie();
     let myData = {"refresh": `${refreshToken}`};
-    let refreshResponse = await requestAPI('http://3.140.78.251:8000/api/refresh', myData, {}, 'POST');
+    let refreshResponse = await requestAPI(`${apiURL}/refresh`, myData, {}, 'POST');
     return refreshResponse;
 }
 

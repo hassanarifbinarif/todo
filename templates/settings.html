@@ -70,6 +70,47 @@
                             </tr>
                         </thead>
                         <tbody>
+                            {% if listings %}
+                            {% for obj in listings.data %}
+                            <tr>
+                                <td scope="row">
+                                    <div class="form-check listing-checkbox">
+                                        <input class="form-check-input listing-checkbox-input" type="checkbox" value=""
+                                            id="flexCheckDefault">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="property-image">
+                                        <img src="{{obj.images.0.image}}" alt="Property Image">
+                                    </div>
+                                </td>
+                                <td>
+                                    <script>
+                                        var date = new Date("{{obj.created_at}}");
+                                        var month = ["January", "February", "March", "April", "May", "June",
+                                        "July", "August", "September", "October", "November", "December"][date.getMonth()];
+                                        var review_date = ('0' + date.getUTCDate()).slice(-2) + ', ' + month + ', ' + date.getFullYear();
+                                        document.write(review_date)
+                                    </script>    
+                                </td>
+                                <td>{{obj.property_type|title}}</td>
+                                <td>{{obj.neighbourhood|title}}</td>
+                                <td>{{obj.construction}}m2</td>
+                                <td>{{obj.land}}m2</td>
+                                <td>{{obj.bedrooms}}</td>
+                                <td>{{obj.bathrooms}}</td>
+                                <td>${{obj.price}}</td>
+                                <td>
+                                    <div class="property-actions">
+                                        <img src="{% static 'core/Assets/images/promotion_logo.svg' %}" alt="Promotion Button">
+                                        <img src="{% static 'core/Assets/images/reserved_logo.svg' %}" alt="Reserved Button">
+                                        <img src="{% static 'core/Assets/images/editing_logo.svg' %}" alt="Editing Button">
+                                        <img src="{% static 'core/Assets/images/delete_logo.svg' %}" alt="Delete Button">
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            {% endif %}
                             <tr>
                                 <td scope="row">
                                     <div class="form-check listing-checkbox">
@@ -563,7 +604,7 @@
                                 <span>Logo/Photo</span>
                                 <div class="image-input-container">
                                     <img src="{{profile_info.profile_picture}}" id="profile-image" alt="Profile Image" />
-                                    <input type="file" name="profile_picture" id="image-input"
+                                    <input type="file" accept="image/jpeg, image/jpg, image/png" name="profile_picture" id="image-input"
                                         onchange="previewImage(event);">
                                     <label for="image-input">
                                         <span>Upload</span>
@@ -660,69 +701,6 @@
                                 </div>
                                 {% endfor %}
                                 {% endif %}
-                                <!-- <div class="plan-radio-btn">
-                                    <input id="basic" type="radio" name="plan_radio">
-                                    <label for="basic" class="plan-card">
-                                        <div class="plan-duration">
-                                            <div class="plan-price">
-                                                <p><span>$0.</span><span>00</span></p>
-                                            </div>
-                                            <div class="plan-period">
-                                                <span>Monthly</span>
-                                            </div>
-                                        </div>
-                                        <div class="plan-features">
-                                            <span>Basic Plan</span>
-                                            <ul>
-                                                <li>Upload up to 5 properties</li>
-                                                <li>Maximum 5 images per listing</li>
-                                                <li>Contact via Whatsapp</li>
-                                            </ul>
-                                        </div>
-                                    </label>
-                                </div>
-                                <div class="plan-radio-btn">
-                                    <input id="corredor" type="radio" checked name="plan_radio">
-                                    <label for="corredor" class="plan-card">
-                                        <div class="plan-duration">
-                                            <div class="plan-price">
-                                                <p><span>$20.</span><span>00</span></p>
-                                            </div>
-                                            <div class="plan-period">
-                                                <span>Monthly</span>
-                                            </div>
-                                        </div>
-                                        <div class="plan-features">
-                                            <span>Plan Corredor</span>
-                                            <ul>
-                                                <li>Upload up to 25 properties</li>
-                                                <li>Maximum 15 images per listing</li>
-                                                <li>Contact via Whatsapp</li>
-                                            </ul>
-                                        </div>
-                                    </label>
-                                </div>
-                                <div class="plan-radio-btn">
-                                    <input id="inmobilaria" type="radio" name="plan_radio">
-                                    <label for="inmobilaria" class="plan-card">
-                                        <div class="plan-duration">
-                                            <div class="plan-price">
-                                                <p><span>$40.</span><span>00</span></p>
-                                            </div>
-                                            <div class="plan-period">
-                                                <span>Monthly</span>
-                                            </div>
-                                        </div>
-                                        <div class="plan-features">
-                                            <span>Plan Inmobilaria</span>
-                                            <ul>
-                                                <li>Upload up to 50 properties</li>
-                                                <li>Maximum 30 images per listing</li>
-                                                <li>Contact via Whatsapp</li>
-                                            </ul>
-                                        </div>
-                                    </label>
-                                </div> -->
                             </div>
                             <button class="change-plan-btn">Change Plan</button>
                         </form>

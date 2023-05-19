@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from core.helpers import check_user_login, confirm_user_email, get_dict_from_token, requestAPI
+from todo.decorators import signin_required, signout_required
+from django.conf import settings as django_settings
 
 
 def index(request):
@@ -26,10 +28,8 @@ def property_listing(request):
     return render(request, 'property-listing.html', context)
 
 
+@signout_required
 def accounts(request):
-    status, response = check_user_login(request)
-    if status == 200:
-        return redirect('/')
     return render(request, 'accounts.html')
 
 
@@ -51,36 +51,38 @@ def verify_registeration(request):
     return render(request, 'verify-email.html', context)
 
 
+@signout_required
 def verify_email(request):
     context = {}
-    status, response = check_user_login(request)
-    if status == 200:
-        return redirect('/')
     if request.method == 'GET':
         context['token'] = request.GET.get('token')
     return render(request, 'reset-password.html', context)
 
 
+@signout_required
 def forgot_password(request):
-    status, response = check_user_login(request)
-    if status == 200:
-        return redirect('/')
     return render(request, 'forgot-password.html')
 
 
+@signin_required
 def settings(request):
     context = {}
-    status, response = check_user_login(request)
-    if status == 200:
-        context['login'] = True
-        context['profile_info'] = response
-        headers = {"Authorization": f"Bearer {request.COOKIES.get('user_access_token')}"}
-        plan_status, plan_response = requestAPI('GET', 'http://3.140.78.251:8000/api/plans/list', headers, {})
-        if plan_status == 200:
-            context['plan_list'] = plan_response
-        # print(plan_status, plan_response)
-    else:
-        return redirect('/accounts/')
+    try:
+        access_token = request.COOKIES.get('user_access_token')
+        headers = {"Authorization": f"Bearer {access_token}"}
+        status, response = requestAPI('GET', f'{django_settings.API_URL}/me', headers, {})
+        if status == 200:
+            context['profile_info'] = response
+            plan_status, plan_response = requestAPI('GET', f'{django_settings.API_URL}/plans/list', headers, {})
+            if plan_status == 200:
+                context['plan_list'] = plan_response
+            listing_status, listing_response = requestAPI('GET', f'{django_settings.API_URL}/listings', headers, {})
+            if listing_status == 200:
+                context['listings'] = listing_response
+                # print(listing_response)
+    except Exception as e:
+        print(e)
+    context['login'] = True
     return render(request, 'settings.html', context)
 
 
@@ -91,12 +93,14 @@ def add_property(request):
         context['login'] = True
     return render(request, 'add-property.html', context)
 
+
 def about_us(request):
     context = {}
     status, response = check_user_login(request)
     if status == 200:
         context['login'] = True
     return render(request, 'about-us.html', context)
+
 
 def news(request):
     context = {}
