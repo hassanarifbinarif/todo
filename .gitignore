@@ -1,6 +1,14 @@
 media/*
 !media/.gitkeep
 
+# ignore statics except the manually added ones
+!static/core
+static
+
+# ignore ssl related files
+nginx/.well-known
+nginx/ssl
+
 migrations/
 db.sqlite3
 *.sqlite3
