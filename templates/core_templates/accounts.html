@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% extends '../layouts/base.html' %}
+    {% load static %}
+
+    {% block links %}
+
+    <link rel="stylesheet" href="{% static 'Assets/core/css/accounts.css' %}">
+    <script src="https://kit.fontawesome.com/0d5a0a2089.js" crossorigin="anonymous"></script>
+    
+    {% endblock %}
+
+    <title>{% block title %}Todo Accounts{% endblock %}</title>
+</head>
+
+<body>
+    {% block body %}
+    <section class="authentication-section">
+        <div class="authentication-container">
+            <div class="authentication-card">
+                <div class="authentication-radio-group">
+                    <div class="authentication-radio-btn">
+                        <input id="login" type="radio" checked name="authentication_radio">
+                        <label for="login" class="radio-label">Login</label>
+                    </div>
+                    <div class="authentication-radio-btn">
+                        <input id="register" type="radio" name="authentication_radio">
+                        <label for="register" class="radio-label">Register</label>
+                    </div>
+                </div>
+                <div class="login-auth-content" id="login-content">
+                    <div class="third-party-auth-btn">
+                        <button>Sign in with Google</button>
+                        <button>Sign in with Facebook</button>
+                    </div>
+                    <hr />
+                    <form class="input-container" onsubmit="loginForm(event);" novalidate>
+                        {% csrf_token %}
+                        <div class="input-group">
+                            <div class="input">
+                                <span class="input-label">Email</span>
+                                <input class="input-field" type="email" name="email" id="login-email" tabindex="1" />
+                                <small class="email-msg input-error-msg"></small>
+                            </div>
+                            <div class="password-input">
+                                <div>
+                                    <span class="input-label">Password</span>
+                                    <a href="{% url 'forgot_password' %}" tabindex="4" >Forgot Password?</a>
+                                </div>
+                                <div>
+                                    <i class="fa fa-eye-slash hide-password-field"></i>
+                                    <input class="input-field login-password-field" type="password" name="password" id="login-password" tabindex="2" />
+                                </div>
+                                <small class="password-msg input-error-msg"></small>
+                            </div>
+                        </div>
+                        <button type="submit" class="login-btn" tabindex="3">
+                            <span class="spinner-border spinner-border-sm hide" role="status" aria-hidden="true"></span>
+                            <span class="btn-text">Login</span>
+                        </button>
+                    </form>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+                </div>
+                <div class="register-auth-content hide" id="register-content">
+                    <div class="third-party-auth-btn">
+                        <button>Sign in with Google</button>
+                        <button>Sign in with Facebook</button>
+                    </div>
+                    <hr />
+                    <form class="input-container" onsubmit="registerForm(event);" novalidate>
+                        {% csrf_token %}
+                        <div class="input-group">
+                            <div class="input">
+                                <span class="input-label">First Name</span>
+                                <input class="input-field" type="text" name="first_name" />
+                                <small class="first-name-msg input-error-msg"></small>
+                            </div>
+                            <div class="input">
+                                <span class="input-label">Last Name</span>
+                                <input class="input-field" type="text" name="last_name" />
+                                <small class="last-name-msg input-error-msg"></small>
+                            </div>
+                            <div class="input">
+                                <span class="input-label">Email</span>
+                                <input class="input-field" type="email" name="email" id="register-email" />
+                                <small class="email-msg input-error-msg"></small>
+                            </div>
+                            <div class="password-input">
+                                <span class="input-label">Password</span>
+                                <div>
+                                    <i class="fa fa-eye-slash hide-password-field"></i>
+                                    <input class="input-field register-password-field" type="password"
+                                        name="password" id="register-password" />
+                                </div>
+                                <small class="password-msg input-error-msg"></small>
+                            </div>
+                            <div class="password-input">
+                                <span class="input-label">Confirm Password</span>
+                                <div>
+                                    <i class="fa fa-eye-slash hide-password-field"></i>
+                                    <input class="input-field register-confirm-password-field" type="password"
+                                        name="confirm_password" />
+                                </div>
+                                <small class="confirm-password-msg password-msg input-error-msg"></small>
+                            </div>
+                        </div>
+                        <button type="submit" class="register-btn" id="register-btn">
+                            <span class="spinner-border spinner-border-sm hide" role="status" aria-hidden="true"></span>
+                            <span class="btn-text">Register</span>
+                        </button>
+                    </form>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
+                <div class="post-registration-content hide" id="post-registration-content">
+                    <div class="post-registration-message">
+                        <h2>We are almost ready!</h2>
+                        <p>
+                            Please activate your account by clicking on the link that you just received by email.</p>
+                        <p>Did not receive the mail? Please check your spam mailbox, if it is not there, we can try again.</p>
+                    </div>
+                    <form action="" class="d-flex flex-column" onsubmit="resendConfirmationEmail(event);">
+                        {% csrf_token %}
+                        <input type="hidden" name="email" id="post-registration-email" />
+                        <button type="submit">
+                            <span class="spinner-border spinner-border-sm hide" role="status" aria-hidden="true"></span>
+                            <span class="btn-text">Resend Email</span>
+                        </button>
+                        <small class="resend-email-msg input-error-msg"></small>
+                    </form>
+                    <!-- <a href="javascript:void(0)">Resend email</a> -->
+                </div>
+            </div>
+        </div>
+        <div class="bottom-page-ad">
+            <div>
+                <span>Google Adsense</span>
+            </div>
+        </div>
+    </section>
+
+    {% endblock %}
+</body>
+{% block scripts %}
+<script src="{% static 'Assets/core/js/accounts.js' %}"></script>
+{% endblock %}
+</html>

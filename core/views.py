@@ -9,7 +9,7 @@ def index(request):
     status, response = check_user_login(request)
     if status == 200:
         context['login'] = True
-    return render(request, 'index.html', context)
+    return render(request, 'core_templates/index.html', context)
 
 
 def property_search(request):
@@ -17,7 +17,7 @@ def property_search(request):
     status, response = check_user_login(request)
     if status == 200:
         context['login'] = True
-    return render(request, 'property-search.html', context)
+    return render(request, 'core_templates/property-search.html', context)
 
 
 def property_listing(request):
@@ -25,12 +25,12 @@ def property_listing(request):
     status, response = check_user_login(request)
     if status == 200:
         context['login'] = True
-    return render(request, 'property-listing.html', context)
+    return render(request, 'core_templates/property-listing.html', context)
 
 
 @signout_required
 def accounts(request):
-    return render(request, 'accounts.html')
+    return render(request, 'core_templates/accounts.html')
 
 
 def verify_registeration(request):
@@ -48,7 +48,7 @@ def verify_registeration(request):
             msg = 'failed'
         context['msg'] = msg
         context['success'] = success
-    return render(request, 'verify-email.html', context)
+    return render(request, 'core_templates/verify-email.html', context)
 
 
 @signout_required
@@ -56,12 +56,12 @@ def verify_email(request):
     context = {}
     if request.method == 'GET':
         context['token'] = request.GET.get('token')
-    return render(request, 'reset-password.html', context)
+    return render(request, 'core_templates/reset-password.html', context)
 
 
 @signout_required
 def forgot_password(request):
-    return render(request, 'forgot-password.html')
+    return render(request, 'core_templates/forgot-password.html')
 
 
 @signin_required
@@ -83,7 +83,7 @@ def settings(request):
     except Exception as e:
         print(e)
     context['login'] = True
-    return render(request, 'settings.html', context)
+    return render(request, 'core_templates/settings.html', context)
 
 
 def add_property(request):
@@ -91,7 +91,7 @@ def add_property(request):
     status, response = check_user_login(request)
     if status == 200:
         context['login'] = True
-    return render(request, 'add-property.html', context)
+    return render(request, 'core_templates/add-property.html', context)
 
 
 def about_us(request):
@@ -99,7 +99,7 @@ def about_us(request):
     status, response = check_user_login(request)
     if status == 200:
         context['login'] = True
-    return render(request, 'about-us.html', context)
+    return render(request, 'core_templates/about-us.html', context)
 
 
 def news(request):
@@ -107,4 +107,4 @@ def news(request):
     status, response = check_user_login(request)
     if status == 200:
         context['login'] = True
-    return render(request, 'news.html', context)
+    return render(request, 'core_templates/news.html', context)

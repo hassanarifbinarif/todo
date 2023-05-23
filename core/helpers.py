@@ -5,7 +5,6 @@ from django.conf import settings as django_settings
 
 
 # Helper methods for project
-
 def requestAPI(method:str, url:str, headers:dict, data:dict):
     status = 400
     try:
@@ -19,6 +18,7 @@ def check_user_login(request):
     user_access_token = request.COOKIES.get('user_access_token')
     headers = {"Authorization": f"Bearer {user_access_token}"}
     status, response = requestAPI('GET', f'{django_settings.API_URL}/me', headers, {})
+    print(status, response)
     return status, response
 
 

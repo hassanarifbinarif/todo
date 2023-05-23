@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% extends '../layouts/admin-base.html' %}
+    {% load static %}
+
+    {% block links %}
+
+    <link rel="stylesheet" href="{% static 'Assets/administration/css/plans.css' %}" />
+
+    {% endblock %}
+
+    <title>{% block title %}Admin Plans{% endblock %}</title>
+</head>
+
+<body>
+    {% block body %}
+    <div class="main-page">
+        <div class="page-content">
+            <h1>Plans</h1>
+            <div class="plan-container">
+                <div class="plan-card">
+                    <div class="plan-number">
+                        <span>Plan 1</span>
+                    </div>
+                    <div class="plan-inputs">
+                        <div class="input">
+                            <span>Name</span>
+                            <input type="text" name="name" value="Plan Basico" id="" />
+                        </div>
+                        <div class="input">
+                            <span>Number of Listings</span>
+                            <input type="number" name="listings" value="5" id="" />
+                        </div>
+                        <div class="input">
+                            <span>Number of Images</span>
+                            <input type="number" name="images" value="5" id="" />
+                        </div>
+                        <div class="input">
+                            <span>Price</span>
+                            <input type="text" name="name" value="$0.00" id="" />
+                        </div>
+                    </div>
+                </div>
+                <div class="plan-card">
+                    <div class="plan-number">
+                        <span>Plan 2</span>
+                    </div>
+                    <div class="plan-inputs">
+                        <div class="input">
+                            <span>Name</span>
+                            <input type="text" name="name" value="Plan Corredor" id="" />
+                        </div>
+                        <div class="input">
+                            <span>Number of Listings</span>
+                            <input type="number" name="listings" value="25" id="" />
+                        </div>
+                        <div class="input">
+                            <span>Number of Images</span>
+                            <input type="number" name="images" value="15" id="" />
+                        </div>
+                        <div class="input">
+                            <span>Price</span>
+                            <input type="text" name="name" value="$20.00" id="" />
+                        </div>
+                    </div>
+                </div>
+                <div class="plan-card">
+                    <div class="plan-number">
+                        <span>Plan 3</span>
+                    </div>
+                    <div class="plan-inputs">
+                        <div class="input">
+                            <span>Name</span>
+                            <input type="text" name="name" value="Plan Inmobiliario" id="" />
+                        </div>
+                        <div class="input">
+                            <span>Number of Listings</span>
+                            <input type="number" name="listings" value="50" id="" />
+                        </div>
+                        <div class="input">
+                            <span>Number of Images</span>
+                            <input type="number" name="images" value="30" id="" />
+                        </div>
+                        <div class="input">
+                            <span>Price</span>
+                            <input type="text" name="name" value="$40.00" id="" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="save-plan-btn">
+                <span class="spinner-border spinner-border-sm hide" role="status" aria-hidden="true"></span>
+                <span class="btn-text">Save Changes</span>
+            </button>
+        </div>
+    </div>
+    {% endblock %}
+</body>
+
+</html>

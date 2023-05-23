@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% extends '../layouts/admin-base.html' %}
+    {% load static %}
+
+    {% block links %}
+
+    <link rel="stylesheet" href="{% static 'Assets/administration/css/listings.css' %}" />
+
+    {% endblock %}
+
+    <title>{% block title %}Admin Listings{% endblock %}</title>
+</head>
+
+<body>
+    {% block body %}
+    <div class="main-page">
+        <div class="page-content">
+            <h1>Listings</h1>
+            <div class="search-container">
+                <input type="text" name="search" id="" />
+                <button type="button">
+                    <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_28_6274)">
+                            <path
+                                d="M21 19.564C20.8892 19.8108 20.8228 20.08 20.6677 20.282C19.981 21.2018 18.8291 21.2467 18.0095 20.4166C16.5032 18.8909 15.019 17.3877 13.5127 15.8621C13.3576 15.705 13.269 15.705 13.0918 15.8172C11.3639 16.9614 9.45885 17.4102 7.42088 17.1409C5.05063 16.8493 3.12341 15.705 1.68354 13.7755C0.465184 12.0929 -0.110766 10.2082 -6.08061e-06 8.1217C0.132905 5.8108 1.06328 3.83644 2.74683 2.26593C4.05379 1.07683 5.56012 0.336442 7.28797 0.0896467C8.92721 -0.134712 10.5221 0.0896467 12.0285 0.78516C13.712 1.57042 15.019 2.80439 15.9272 4.44221C16.5253 5.51913 16.8576 6.66336 16.9462 7.8749C17.0791 9.71465 16.7025 11.3973 15.7721 12.9679C15.6835 13.1025 15.7278 13.1922 15.8386 13.282C17.2785 14.7403 18.7183 16.2211 20.1804 17.6794C20.557 18.0608 20.9114 18.4422 21.0221 19.0031V19.5416L21 19.564ZM14.2215 8.61529C14.2215 5.42939 11.674 2.82683 8.50632 2.80439C5.36075 2.78195 2.74683 5.36208 2.74683 8.59285C2.74683 11.8461 5.2943 14.4037 8.46202 14.4037C11.6297 14.4037 14.1994 11.8012 14.1994 8.59285L14.2215 8.61529Z"
+                                fill="white" />
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_28_6274">
+                                <rect width="21" height="21" rx="5" fill="white" />
+                            </clipPath>
+                        </defs>
+                    </svg>
+                </button>
+            </div>
+            <div class="sortby-container">
+                <div class="sortby-component">
+                    <div>
+                        <select name="time-period" id="time-period">
+                            <option value="Today">Today</option>
+                        </select>
+                    </div>
+                    <span>Or</span>
+                    <div>
+                        <select name="start-period" id="start-period">
+                            <option value="start">Start Period</option>
+                        </select>
+                        <span>To</span>
+                        <select name="end-period" id="end-period">
+                            <option value="end">End Period</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="sortby-component">
+                    <select name="order" id="order">
+                        <option value="order">Order</option>
+                    </select>
+                </div>
+            </div>
+            <div class="listings-table-container">
+                <table class="listings-table">
+                    <thead>
+                        <tr>
+                            <th>Ref</th>
+                            <th>Date</th>
+                            <th>User</th>
+                            <th>Plan</th>
+                            <th>Property Type</th>
+                            <th>Price</th>
+                            <th>City</th>
+                            <th>Neighbourhood</th>
+                            <th>Boosted</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>01-1-001</td>
+                            <td>24/06/2023</td>
+                            <td>John Smith</td>
+                            <td>Corredor</td>
+                            <td>Departamento</td>
+                            <td>$275,000</td>
+                            <td>Guayaquil</td>
+                            <td>Samborondon</td>
+                            <td>NO</td>
+                            <td>
+                                <div>
+                                    <img src="{% static 'Assets/core/images/promotion_logo.svg' %}" alt="promotion" />
+                                    <img src="{% static 'Assets/core/images/reserved_logo.svg' %}" alt="reserved" />
+                                    <img src="{% static 'Assets/core/images/editing_logo.svg' %}" alt="edit" />
+                                    <img src="{% static 'Assets/core/images/delete_logo.svg' %}" alt="delete" />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>01-1-001</td>
+                            <td>24/06/2023</td>
+                            <td>John Smith</td>
+                            <td>Basico</td>
+                            <td>Departamento</td>
+                            <td>$275,000</td>
+                            <td>Guayaquil</td>
+                            <td>Samborondon</td>
+                            <td>NO</td>
+                            <td>
+                                <div>
+                                    <img src="{% static 'Assets/core/images/promotion_logo.svg' %}" alt="promotion" />
+                                    <img src="{% static 'Assets/core/images/reserved_logo.svg' %}" alt="reserved" />
+                                    <img src="{% static 'Assets/core/images/editing_logo.svg' %}" alt="edit" />
+                                    <img src="{% static 'Assets/core/images/delete_logo.svg' %}" alt="delete" />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>01-1-001</td>
+                            <td>24/06/2023</td>
+                            <td>John Smith</td>
+                            <td>Corredor</td>
+                            <td>Departamento</td>
+                            <td>$275,000</td>
+                            <td>Guayaquil</td>
+                            <td>Samborondon</td>
+                            <td>YES</td>
+                            <td>
+                                <div>
+                                    <img src="{% static 'Assets/core/images/promotion_logo_on.svg' %}" alt="promotion" />
+                                    <img src="{% static 'Assets/core/images/reserved_logo.svg' %}" alt="reserved" />
+                                    <img src="{% static 'Assets/core/images/editing_logo.svg' %}" alt="edit" />
+                                    <img src="{% static 'Assets/core/images/delete_logo.svg' %}" alt="delete" />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>01-1-001</td>
+                            <td>24/06/2023</td>
+                            <td>John Smith</td>
+                            <td>Inmobiliaria</td>
+                            <td>Departamento</td>
+                            <td>$275,000</td>
+                            <td>Guayaquil</td>
+                            <td>Samborondon</td>
+                            <td>NO</td>
+                            <td>
+                                <div>
+                                    <img src="{% static 'Assets/core/images/promotion_logo.svg' %}" alt="promotion" />
+                                    <img src="{% static 'Assets/core/images/reserved_logo_on.svg' %}" alt="reserved" />
+                                    <img src="{% static 'Assets/core/images/editing_logo.svg' %}" alt="edit" />
+                                    <img src="{% static 'Assets/core/images/delete_logo.svg' %}" alt="delete" />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>01-1-001</td>
+                            <td>24/06/2023</td>
+                            <td>John Smith</td>
+                            <td>Corredor</td>
+                            <td>Departamento</td>
+                            <td>$275,000</td>
+                            <td>Guayaquil</td>
+                            <td>Samborondon</td>
+                            <td>YES</td>
+                            <td>
+                                <div>
+                                    <img src="{% static 'Assets/core/images/promotion_logo_on.svg' %}" alt="promotion" />
+                                    <img src="{% static 'Assets/core/images/reserved_logo.svg' %}" alt="reserved" />
+                                    <img src="{% static 'Assets/core/images/editing_logo.svg' %}" alt="edit" />
+                                    <img src="{% static 'Assets/core/images/delete_logo.svg' %}" alt="delete" />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>01-1-001</td>
+                            <td>24/06/2023</td>
+                            <td>John Smith</td>
+                            <td>Corredor</td>
+                            <td>Departamento</td>
+                            <td>$275,000</td>
+                            <td>Guayaquil</td>
+                            <td>Samborondon</td>
+                            <td>NO</td>
+                            <td>
+                                <div>
+                                    <img src="{% static 'Assets/core/images/promotion_logo.svg' %}" alt="promotion" />
+                                    <img src="{% static 'Assets/core/images/reserved_logo.svg' %}" alt="reserved" />
+                                    <img src="{% static 'Assets/core/images/editing_logo.svg' %}" alt="edit" />
+                                    <img src="{% static 'Assets/core/images/delete_logo.svg' %}" alt="delete" />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>01-1-001</td>
+                            <td>24/06/2023</td>
+                            <td>John Smith</td>
+                            <td>Basico</td>
+                            <td>Departamento</td>
+                            <td>$275,000</td>
+                            <td>Guayaquil</td>
+                            <td>Samborondon</td>
+                            <td>NO</td>
+                            <td>
+                                <div>
+                                    <img src="{% static 'Assets/core/images/promotion_logo.svg' %}" alt="promotion" />
+                                    <img src="{% static 'Assets/core/images/reserved_logo.svg' %}" alt="reserved" />
+                                    <img src="{% static 'Assets/core/images/editing_logo.svg' %}" alt="edit" />
+                                    <img src="{% static 'Assets/core/images/delete_logo.svg' %}" alt="delete" />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>01-1-001</td>
+                            <td>24/06/2023</td>
+                            <td>John Smith</td>
+                            <td>Corredor</td>
+                            <td>Departamento</td>
+                            <td>$275,000</td>
+                            <td>Guayaquil</td>
+                            <td>Samborondon</td>
+                            <td>YES</td>
+                            <td>
+                                <div>
+                                    <img src="{% static 'Assets/core/images/promotion_logo_on.svg' %}" alt="promotion" />
+                                    <img src="{% static 'Assets/core/images/reserved_logo.svg' %}" alt="reserved" />
+                                    <img src="{% static 'Assets/core/images/editing_logo.svg' %}" alt="edit" />
+                                    <img src="{% static 'Assets/core/images/delete_logo.svg' %}" alt="delete" />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>01-1-001</td>
+                            <td>24/06/2023</td>
+                            <td>John Smith</td>
+                            <td>Inmobiliaria</td>
+                            <td>Departamento</td>
+                            <td>$275,000</td>
+                            <td>Guayaquil</td>
+                            <td>Samborondon</td>
+                            <td>NO</td>
+                            <td>
+                                <div>
+                                    <img src="{% static 'Assets/core/images/promotion_logo.svg' %}" alt="promotion" />
+                                    <img src="{% static 'Assets/core/images/reserved_logo_on.svg' %}" alt="reserved" />
+                                    <img src="{% static 'Assets/core/images/editing_logo.svg' %}" alt="edit" />
+                                    <img src="{% static 'Assets/core/images/delete_logo.svg' %}" alt="delete" />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>01-1-001</td>
+                            <td>24/06/2023</td>
+                            <td>John Smith</td>
+                            <td>Corredor</td>
+                            <td>Departamento</td>
+                            <td>$275,000</td>
+                            <td>Guayaquil</td>
+                            <td>Samborondon</td>
+                            <td>YES</td>
+                            <td>
+                                <div>
+                                    <img src="{% static 'Assets/core/images/promotion_logo_on.svg' %}" alt="promotion" />
+                                    <img src="{% static 'Assets/core/images/reserved_logo.svg' %}" alt="reserved" />
+                                    <img src="{% static 'Assets/core/images/editing_logo.svg' %}" alt="edit" />
+                                    <img src="{% static 'Assets/core/images/delete_logo.svg' %}" alt="delete" />
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="pagination-container">
+                    <span>
+                        <span>1</span>-<span>11</span> of <span>117</span>
+                    </span>
+                    <div>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 18L9.07071 12.0707C9.03166 12.0317 9.03166 11.9683 9.07071 11.9293L15 6" stroke="#9A9A9A" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 18L14.9293 12.0707C14.9683 12.0317 14.9683 11.9683 14.9293 11.9293L9 6" stroke="#9A9A9A" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+</body>
+
+</html>
