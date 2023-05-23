@@ -1,0 +1,135 @@
+.main-page {
+    position: relative;
+    left: 200px;
+    min-height: 100vh;
+    background-image: url('../../core/images/authentication_bg.svg');
+    padding: 0px 20px;
+    width: calc(100vw - 200px);
+}
+
+.page-content {
+    position: relative;
+    padding-top: 60px;
+    padding-bottom: 16px;
+}
+
+.page-content > h1 {
+    font-weight: 700;
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    letter-spacing: 0.2px;
+    color: #9A9A9A;
+    margin-bottom: 30px;
+}
+
+.sortby-container {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    font-size: 1rem;
+    line-height: 1rem;
+    color: #9A9A9A;
+    margin-bottom: 30px;
+}
+
+.sortby-container select {
+    width: 150px;
+    height: 42px;
+    color: #9A9A9A;
+    background: #FFFFFF;
+    border: 0.5px solid #A3A3A3;
+    border-radius: 5px;
+    padding: 0px 5px;
+}
+
+.web-stats-container {
+    display: flex;
+    flex-direction: column;
+    gap: 27px;
+}
+
+.web-stats-numbers {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.stat-number-container {
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    width: 207px;
+    height: 99px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 26px;
+}
+
+.stat-number-container .stat-number {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.stat-number > span:first-of-type {
+    font-weight: 300;
+    font-size: 1rem;
+    line-height: 1rem;
+    letter-spacing: 0.2px;
+    color: #042A44;
+}
+
+.stat-number > span:last-of-type {
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1.125rem;
+    letter-spacing: 0.2px;
+    color: #042A44;
+}
+
+.web-stat-detail {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.stat-detail-container {
+    width: 207px;
+    height: 238px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    padding: 16px 12px 20px;
+}
+
+.stat-detail-container > span:first-of-type {
+    font-weight: 300;
+    font-size: 1rem;
+    line-height: 1rem;
+    letter-spacing: 0.2px;
+    color: #000000;
+}
+
+.stat-type {
+    font-weight: 400;
+    font-size: 1.125rem;
+    line-height: 1rem;
+    letter-spacing: 0.2px;
+    color: #000000;
+}
+
+.stat-list-item {
+    border-top: 1px solid #D9D9D9;
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 300;
+    font-size: 1rem;
+    line-height: 1rem;
+    letter-spacing: 0.2px;
+    color: #000000;
+}

@@ -3,7 +3,6 @@ media/*
 
 # ignore statics except the manually added ones
 !static/core
-static
 
 # ignore ssl related files
 nginx/.well-known

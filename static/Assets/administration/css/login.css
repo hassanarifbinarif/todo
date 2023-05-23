@@ -1,0 +1,123 @@
+.authentication-section {
+    background-image: url('../../core/images/authentication_bg.svg');
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.login-auth-content {
+    padding: 45px 57px;
+    background-color: #FFFFFF;
+    border-radius: 0px 0px 5px 5px;
+    max-width: 434px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.logo {
+    margin-bottom: 30px;
+}
+
+.login-auth-content .input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.login-auth-content .input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.login-auth-content .input {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.input-label {
+    font-weight: 300;
+    font-size: 1rem;
+    line-height: 1.25rem;
+    color: #000000;
+}
+
+.input-field {
+    width: 100%;
+    height: 40px;
+    background-color: #FFFFFF;
+    border: 0.5px solid #A3A3A3;
+    border-radius: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.login-auth-content .password-input {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.login-auth-content .password-input > div:first-of-type {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.login-auth-content .password-input > div:first-of-type > a {
+    font-size: .875rem;
+    line-height: 1rem;
+    color: #8DC63F;
+    text-decoration: none;
+}
+
+.login-auth-content .password-input > div:first-of-type > a:hover {
+    text-decoration: underline;
+}
+
+.login-auth-content .password-input > div:last-of-type {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.login-auth-content .password-input > div:last-of-type > i {
+    position: absolute;
+    right: 10px;
+    pointer-events: all;
+    cursor: pointer;
+    color: #9A9A9A;
+}
+
+.login-auth-content .password-input > div:last-of-type > input {
+    padding-right: 30px;
+}
+
+.login-btn {
+    background-color: #8DC63F;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    font-weight: 700;
+    font-size: 1.25rem;
+    line-height: 1.5rem;
+    color: #FFFFFF;
+    width: 100%;
+    height: 40px;
+}
+
+.login-auth-content > p {
+    font-weight: 300;
+    font-size: .75rem;
+    line-height: 1rem;
+    color: #000000;
+    margin: 20px 0 0;
+}
+
+@media (max-width: 480px) {
+    .login-auth-content {
+        padding: 36px 30px;
+        margin: 0 10px;
+    }
+}

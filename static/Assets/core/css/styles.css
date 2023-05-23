@@ -1,0 +1,66 @@
+* {
+    font-family: Calibri, 'Trebuchet MS', sans-serif;
+}
+
+body {
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow-x: hidden;
+}
+
+input::placeholder {
+    color: #000000;
+}
+
+.hide {
+    display: none!important;
+}
+
+.show {
+    display: block!important;
+}
+
+.show-flex {
+    display: flex!important;
+}
+
+button {
+    cursor: pointer;
+}
+
+.input-error-msg {
+    color: #dc3545;
+    opacity: 0;
+    position: absolute;
+    left: 110vw;
+}
+
+.input-error-msg.active {
+    opacity: 1;
+    margin-bottom: 5px;
+    transition: ease .3s;
+    position: static;
+}
+
+.input-success-msg {
+    color: #8DC63F!important;
+}
+
+.input-failure-msg {
+    color: #dc3545!important;
+}
+
+.input-error {
+    border-width: 2px!important;
+    border-color: #dc3545!important;
+}
+
+.input-error:focus-visible {
+    border-color: #dc3545!important;
+    outline: none;
+}
+
+/* .visible {
+    visibility: visible!important;
+    transition: all ease-in-out .2s;
+} */

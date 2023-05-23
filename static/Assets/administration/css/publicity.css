@@ -1,0 +1,136 @@
+.main-page {
+    position: relative;
+    left: 200px;
+    min-height: 100vh;
+    background-image: url('../../core/images/authentication_bg.svg');
+    padding: 0px 20px;
+    width: calc(100vw - 200px);
+}
+
+.page-content {
+    position: relative;
+    padding-top: 60px;
+    padding-bottom: 16px;
+}
+
+.page-content > h1 {
+    font-weight: 700;
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    letter-spacing: 0.2px;
+    color: #9A9A9A;
+    margin-bottom: 30px;
+}
+
+.publicity-card-container {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+.publicity-card {
+    width: 265px;
+    height: 274px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    padding: 13px 14px 23px;
+}
+
+.publicity-card-header {
+    font-size: 1rem;
+    line-height: 1rem;
+    letter-spacing: 0.2px;
+    color: #000000;
+    margin-bottom: 10px;
+}
+
+.publicity-card-header > span:last-of-type {
+    color: #9A9A9A;
+}
+
+.publicity-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+input[type=file] {
+    display: none;
+}
+
+.image-input-label {
+    width: 100%;
+    height: 96px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    background-color: #F2F2F2;
+    border: 1px dashed #9A9A9A;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all ease-in-out .2s;
+}
+
+.image-input-label > .uploader-logo {
+    width: 42px;
+    height: 42px;
+}
+
+.image-input-label:hover {
+    background-color: #D8D8D8;
+}
+
+.image-input-label:hover > span {
+    color: #606060;
+}
+
+.image-input-label > span {
+    font-weight: 300;
+    font-size: 1rem;
+    line-height: 1.125rem;
+    color: #9A9A9A;
+}
+
+.publicity-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    display: none;
+}
+
+.publicity-input {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.publicity-input > span {
+    font-weight: 300;
+    font-size: 1rem;
+    line-height: 1rem;
+    color: #9A9A9A;
+}
+
+.publicity-input > input {
+    padding: 0px 10px;
+    width: 100%;
+    height: 33px;
+    background-color: #FFFFFF;
+    border: 0.5px solid #A3A3A3;
+    border-radius: 5px;
+}
+
+.save-publicity-btn {
+    width: 100%;
+    height: 33px;
+    background-color: #8DC63F;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1.125rem;
+    color: #FFFFFF;
+}
