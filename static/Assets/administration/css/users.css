@@ -65,7 +65,15 @@
 .sortby-component {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     gap: 30px;
+}
+
+.sortby-component:first-of-type > div:last-child {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 3px;
 }
 
 .sortby-container select {
@@ -86,10 +94,12 @@
     flex-direction: column;
     gap: 25px;
     padding: 0px 0px 25px;
+    overflow-x: auto;
 }
 
 .users-table {
     width: 100%;
+    min-width: 1000px;
 }
 
 .users-table tr {

@@ -26,10 +26,18 @@
     display: flex;
     align-items: center;
     gap: 30px;
+    flex-wrap: wrap;
     font-size: 1rem;
     line-height: 1rem;
     color: #9A9A9A;
     margin-bottom: 30px;
+}
+
+.sortby-container > div:last-of-type {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 3px;
 }
 
 .sortby-container select {
@@ -62,9 +70,9 @@
     width: 207px;
     height: 99px;
     display: flex;
-    justify-content: center;
     align-items: center;
-    gap: 26px;
+    gap: 21px;
+    padding-left: 44px;
 }
 
 .stat-number-container .stat-number {
