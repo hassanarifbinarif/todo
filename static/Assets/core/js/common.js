@@ -4,7 +4,7 @@ async function requestAPI(url, data, headers, method) {
     // Default options are marked with *
     const response = await fetch(url, {
         method: method,
-        // mode: 'no-cors',
+        mode: 'cors',
         // cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
         headers: headers,
         body: data,
@@ -120,9 +120,44 @@ function clearTokens(){
 }
 
 
+function clearAdminTokens() {
+    setCookie('admin_access', '', 0);
+    setCookie('admin_refresh', '', 0);
+}
+
+
 function logout() {
     clearTokens();
     location.pathname = '/accounts/';
+}
+
+
+function adminLogout() {
+    clearAdminTokens();
+    location.pathname = '/administration/login/';
+}
+
+
+function getSearchURL(searchURL, baseURL) {
+    try {
+        let sourceParams = new URLSearchParams(searchURL.split('?')[1]);
+        let destination = new URL(baseURL);
+        if(sourceParams.get('page') == undefined) {
+            sourceParams.append('page', '1');
+        }
+        sourceParams.forEach((value, key) => {
+            if(destination.searchParams.has(key)) {
+                destination.searchParams.set(key, value);
+            }
+            else {
+                destination.searchParams.append(key, value);
+            }
+        })
+        return destination.toString();
+    }
+    catch (err) {
+        return null;
+    }
 }
 
 
@@ -176,7 +211,7 @@ function isValidPassword(password) {
 function isValidName(name) {
     let nameMsg = name.nextElementSibling;
     if(name.value.trim().length == 0) {
-        nameMsg.innerText = "Name is Required!";
+        nameMsg.innerText = "Required Field!";
         return false;
     }
     else {
@@ -229,6 +264,21 @@ function isValidNumber(number) {
         if(timeOut) {
             clearTimeout(timeOut);
         }
+        return true;
+    }
+}
+
+
+function isValidImage(image) {
+    let pictureMsg = image.closest('.image-input-container').querySelector('.picture-msg');
+    if(image.files.length == 0) {
+        pictureMsg.innerText = 'Image required!';
+        return false;
+    }
+    else {
+        image.classList.remove('input-error');
+        pictureMsg.innerText = '';
+        pictureMsg.classList.remove('active');
         return true;
     }
 }

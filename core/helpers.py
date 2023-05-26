@@ -1,4 +1,5 @@
 import json
+import os
 import requests
 import base64
 from django.conf import settings as django_settings
@@ -18,7 +19,7 @@ def check_user_login(request):
     user_access_token = request.COOKIES.get('user_access_token')
     headers = {"Authorization": f"Bearer {user_access_token}"}
     status, response = requestAPI('GET', f'{django_settings.API_URL}/me', headers, {})
-    print(status, response)
+    # print(status, response)
     return status, response
 
 

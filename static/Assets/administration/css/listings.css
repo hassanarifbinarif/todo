@@ -128,6 +128,13 @@
     background-color: #F1F1F1;
 }
 
+.no-record-row {
+    text-align: center;
+    font-size: 1.5rem!important;
+    color: black!important;
+    font-weight: 700;
+}
+
 .pagination-container {
     align-self: flex-end;
     display: flex;

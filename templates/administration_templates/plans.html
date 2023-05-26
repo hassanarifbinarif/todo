@@ -24,75 +24,33 @@
         <div class="page-content">
             <h1>Plans</h1>
             <div class="plan-container">
+                {% if plans %}
+                {% for obj in plans.data %}
                 <div class="plan-card">
                     <div class="plan-number">
-                        <span>Plan 1</span>
+                        <span>Plan {{forloop.counter}}</span>
                     </div>
                     <div class="plan-inputs">
                         <div class="input">
                             <span>Name</span>
-                            <input type="text" name="name" value="Plan Basico" id="" />
+                            <input type="text" name="name" value="{{obj.name}}" id="" />
                         </div>
                         <div class="input">
                             <span>Number of Listings</span>
-                            <input type="number" name="listings" value="5" id="" />
+                            <input type="number" name="num_of_listings" value="{{obj.num_of_listings}}" id="" />
                         </div>
                         <div class="input">
                             <span>Number of Images</span>
-                            <input type="number" name="images" value="5" id="" />
+                            <input type="number" name="num_of_images" value="{{obj.num_of_images}}" id="" />
                         </div>
                         <div class="input">
                             <span>Price</span>
-                            <input type="text" name="name" value="$0.00" id="" />
+                            <input type="number" name="price" value="{{obj.price}}" id="" />
                         </div>
                     </div>
                 </div>
-                <div class="plan-card">
-                    <div class="plan-number">
-                        <span>Plan 2</span>
-                    </div>
-                    <div class="plan-inputs">
-                        <div class="input">
-                            <span>Name</span>
-                            <input type="text" name="name" value="Plan Corredor" id="" />
-                        </div>
-                        <div class="input">
-                            <span>Number of Listings</span>
-                            <input type="number" name="listings" value="25" id="" />
-                        </div>
-                        <div class="input">
-                            <span>Number of Images</span>
-                            <input type="number" name="images" value="15" id="" />
-                        </div>
-                        <div class="input">
-                            <span>Price</span>
-                            <input type="text" name="name" value="$20.00" id="" />
-                        </div>
-                    </div>
-                </div>
-                <div class="plan-card">
-                    <div class="plan-number">
-                        <span>Plan 3</span>
-                    </div>
-                    <div class="plan-inputs">
-                        <div class="input">
-                            <span>Name</span>
-                            <input type="text" name="name" value="Plan Inmobiliario" id="" />
-                        </div>
-                        <div class="input">
-                            <span>Number of Listings</span>
-                            <input type="number" name="listings" value="50" id="" />
-                        </div>
-                        <div class="input">
-                            <span>Number of Images</span>
-                            <input type="number" name="images" value="30" id="" />
-                        </div>
-                        <div class="input">
-                            <span>Price</span>
-                            <input type="text" name="name" value="$40.00" id="" />
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
+                {% endif %}
             </div>
             <button type="submit" class="save-plan-btn">
                 <span class="spinner-border spinner-border-sm hide" role="status" aria-hidden="true"></span>

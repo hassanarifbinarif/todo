@@ -80,7 +80,13 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {% if listings.data %}
+                        {% else %}
                         <tr>
+                            <td colspan="10" class="no-record-row">No record available</td>
+                        </tr>
+                        {% endif %}
+                        <!-- <tr>
                             <td>01-1-001</td>
                             <td>24/06/2023</td>
                             <td>John Smith</td>
@@ -269,9 +275,10 @@
                                     <img src="{% static 'Assets/core/images/delete_logo.svg' %}" alt="delete" />
                                 </div>
                             </td>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
+                {% if listings.data %}
                 <div class="pagination-container">
                     <span>
                         <span>1</span>-<span>11</span> of <span>117</span>
@@ -285,6 +292,7 @@
                         </svg>
                     </div>
                 </div>
+                {% endif %}
             </div>
         </div>
     </div>

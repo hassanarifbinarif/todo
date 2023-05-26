@@ -60,7 +60,12 @@ button {
     outline: none;
 }
 
-/* .visible {
-    visibility: visible!important;
-    transition: all ease-in-out .2s;
-} */
+.cursor-pointer{
+    cursor: pointer;
+}
+
+.cursor-not-allowed{
+    cursor: not-allowed!important;
+    background-color: #FFFFFF!important;
+    filter: opacity(40%);
+}

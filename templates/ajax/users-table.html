@@ -1,0 +1,79 @@
+{% load static %}
+{% load custom_tags %}
+<table class="users-table">
+    <thead>
+        <tr>
+            <th>User ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Mobile Number</th>
+            <th>City</th>
+            <th>Plan</th>
+            <th>Listings</th>
+            <th>Member Since</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if users.data %}
+        {% for obj in users.data %}
+        <tr>
+            <td>{{obj.id}}</td>
+            <td>{{obj.first_name}}</td>
+            <td>{{obj.last_name}}</td>
+            <td>{{obj.email}}</td>
+            <td>{{obj.phone}}</td>
+            <td>{{obj.city}}</td>
+            <td>Basico</td>
+            <td>4/5</td>
+            <td>{{obj.created_at|custom_date}}</td>
+            <td>
+                <div>
+                    <svg class="block_logo {% if obj.is_blocked %}active{% endif %}" width="15" height="15"
+                        viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_28_6705)">
+                            <path
+                                d="M3.22888 5.82396C1.56853 4.3615 1.9006 1.99538 3.16771 0.869072C4.48726 -0.300893 6.43162 -0.283431 7.69436 0.908362C9.0008 2.14381 9.15373 4.43572 7.58513 5.82833C7.71184 5.88071 7.83855 5.92437 7.9609 5.98112C8.2449 6.10772 8.36725 6.39585 8.25801 6.66651C8.14441 6.93717 7.85166 7.06377 7.56328 6.94154C7.02148 6.71017 6.45784 6.62722 5.87234 6.63595C5.36987 6.64468 4.86739 6.63159 4.36928 6.66215C2.75262 6.76255 1.29326 8.1377 1.09664 9.74422C1.03983 10.207 1.05294 10.6784 1.0311 11.1717C1.11848 11.1717 1.18402 11.1717 1.24519 11.1717C2.63028 11.1717 4.01537 11.1717 5.39608 11.1717C5.71942 11.1717 5.95099 11.3726 5.9641 11.6563C5.98158 11.9706 5.75874 12.2107 5.43541 12.2151C4.98973 12.2195 4.53969 12.2151 4.09401 12.2151C2.93177 12.2151 1.77389 12.2151 0.611638 12.2151C0.196549 12.2151 -0.00444148 12.0187 -7.21216e-05 11.6083C0.00866659 10.984 -0.0393963 10.3467 0.0436214 9.73112C0.297044 7.85394 1.34569 6.57483 3.10654 5.87198C3.13713 5.85889 3.16771 5.85015 3.1983 5.83706C3.20704 5.83706 3.2114 5.82396 3.22014 5.8196L3.22888 5.82396ZM7.67252 3.3356C7.67689 2.08269 6.6763 1.07425 5.41356 1.06989C4.17266 1.06116 3.15023 2.0696 3.14586 3.30941C3.1415 4.57105 4.13771 5.58822 5.38734 5.59259C6.65883 5.59695 7.66815 4.60161 7.67252 3.3356Z"
+                                fill="#8DC63F" />
+                            <path
+                                d="M15 11.04C15 13.2358 13.2173 15.0082 11.0238 14.9995C8.78236 14.9908 6.97782 13.1747 6.98219 10.9352C6.98219 8.75243 8.77362 6.98002 10.9758 6.98438C13.1736 6.98875 15.0087 8.83974 15.0043 11.04H15ZM9.32853 13.4279C10.517 14.3054 12.3084 14.0566 13.2741 12.8866C14.2877 11.6642 14.0256 10.0534 13.4182 9.34178C12.055 10.6995 10.6961 12.0615 9.32416 13.4279H9.32853ZM8.54642 12.6378C9.90965 11.2757 11.2773 9.9093 12.6449 8.54725C11.5919 7.78328 9.9315 7.82693 8.86101 8.93578C7.79489 10.0403 7.8211 11.6642 8.54642 12.6378Z"
+                                fill="#8DC63F" />
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_28_6705">
+                                <rect width="15" height="15" fill="white" />
+                            </clipPath>
+                        </defs>
+                    </svg>
+                    <img src="{% static 'Assets/core/images/editing_logo.svg' %}" alt="edit" />
+                    <img src="{% static 'Assets/core/images/delete_logo.svg' %}" alt="delete" />
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td colspan="10" class="no-record-row">No record available</td>
+        </tr>
+        {% endif %}
+    </tbody>
+</table>
+{% if users.data %}
+<div class="pagination-container">
+    <span>{{users.pagination|page_number}}</span>
+    <div>
+        <svg class="{% if users.pagination.links.previous is None %}cursor-not-allowed{% endif %}"
+            onclick="getUsers(event, '{% if users.pagination.links.previous is not None %}{{users.pagination.links.previous}}{% else %}null{% endif %}');"
+            width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 18L9.07071 12.0707C9.03166 12.0317 9.03166 11.9683 9.07071 11.9293L15 6" stroke="#9A9A9A"
+                stroke-width="2" stroke-linecap="round" />
+        </svg>
+        <svg class="{% if users.pagination.links.next is None %}cursor-not-allowed{% endif %}"
+            onclick="getUsers(event, '{% if users.pagination.links.next is not None %}{{users.pagination.links.next}}{% else %}null{% endif %}');"
+            width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 18L14.9293 12.0707C14.9683 12.0317 14.9683 11.9683 14.9293 11.9293L9 6" stroke="#9A9A9A"
+                stroke-width="2" stroke-linecap="round" />
+        </svg>
+    </div>
+</div>
+{% endif %}
