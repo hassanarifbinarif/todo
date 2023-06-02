@@ -7,8 +7,11 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.template import loader
 
+
+
 def login(request):
     return render(request, 'administration_templates/login.html')
+
 
 @admin_signin_required
 def dashboard(request):
@@ -23,14 +26,34 @@ def listings(request):
     try:
         admin_access_token = request.COOKIES.get('admin_access')
         headers = {"Authorization": f'Bearer {admin_access_token}'}
-        status, response = requestAPI('GET', f'{django_settings.API_URL}/listings', headers, {})
+        status, response = requestAPI('GET', f'{django_settings.API_URL}/admin/listings', headers, {})
         if status == 200:
-            print(response)
             context['listings'] = response
     except Exception as e:
         print(e)
     context['active_page'] = 'listings'
     return render(request, 'administration_templates/listings.html', context)
+
+
+@csrf_exempt
+def get_listings(request):
+    context = {}
+    context['msg'] = None
+    context['success'] = False
+    request_data = json.loads(request.body.decode('utf-8'))
+    try:
+        admin_access_token = request.COOKIES.get('admin_access')
+        headers = {"Authorization": f'Bearer {admin_access_token}'}
+        status, response = requestAPI('GET', f'{request_data}', headers, {})
+        if status == 200:
+            text_template = loader.get_template('ajax/listings-table.html')
+            html = text_template.render({'listings':response})
+            context['listing_data'] = html
+            context['msg'] = 'Listings retrieved'
+            context['success'] = True
+    except Exception as e:
+        print(e)
+    return JsonResponse(context)
 
 
 @admin_signin_required
@@ -94,5 +117,13 @@ def add_news(request):
 @admin_signin_required
 def publicity(request):
     context = {}
+    try:
+        admin_access_token = request.COOKIES.get('admin_access')
+        headers = {"Authorization": f'Bearer {admin_access_token}'}
+        status, response = requestAPI('GET', f'{django_settings.API_URL}/admin/publicity', headers, {})
+        if status == 200:
+            context['publicity'] = response
+    except Exception as e:
+        print(e)
     context['active_page'] = 'publicity'
     return render(request, 'administration_templates/publicity.html', context)

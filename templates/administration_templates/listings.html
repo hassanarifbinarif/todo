@@ -8,10 +8,12 @@
 
     {% extends '../layouts/admin-base.html' %}
     {% load static %}
+    {% load custom_tags %}
 
     {% block links %}
 
     <link rel="stylesheet" href="{% static 'Assets/administration/css/listings.css' %}" />
+    <link rel="stylesheet" href="{% static 'Assets/administration/css/del_listing_modal.css' %}" />
 
     {% endblock %}
 
@@ -22,281 +24,280 @@
     {% block body %}
     <div class="main-page">
         <div class="page-content">
-            <h1>Listings</h1>
-            <div class="search-container">
-                <input type="text" name="search" id="" />
-                <button type="button">
-                    <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0_28_6274)">
-                            <path
-                                d="M21 19.564C20.8892 19.8108 20.8228 20.08 20.6677 20.282C19.981 21.2018 18.8291 21.2467 18.0095 20.4166C16.5032 18.8909 15.019 17.3877 13.5127 15.8621C13.3576 15.705 13.269 15.705 13.0918 15.8172C11.3639 16.9614 9.45885 17.4102 7.42088 17.1409C5.05063 16.8493 3.12341 15.705 1.68354 13.7755C0.465184 12.0929 -0.110766 10.2082 -6.08061e-06 8.1217C0.132905 5.8108 1.06328 3.83644 2.74683 2.26593C4.05379 1.07683 5.56012 0.336442 7.28797 0.0896467C8.92721 -0.134712 10.5221 0.0896467 12.0285 0.78516C13.712 1.57042 15.019 2.80439 15.9272 4.44221C16.5253 5.51913 16.8576 6.66336 16.9462 7.8749C17.0791 9.71465 16.7025 11.3973 15.7721 12.9679C15.6835 13.1025 15.7278 13.1922 15.8386 13.282C17.2785 14.7403 18.7183 16.2211 20.1804 17.6794C20.557 18.0608 20.9114 18.4422 21.0221 19.0031V19.5416L21 19.564ZM14.2215 8.61529C14.2215 5.42939 11.674 2.82683 8.50632 2.80439C5.36075 2.78195 2.74683 5.36208 2.74683 8.59285C2.74683 11.8461 5.2943 14.4037 8.46202 14.4037C11.6297 14.4037 14.1994 11.8012 14.1994 8.59285L14.2215 8.61529Z"
-                                fill="white" />
-                        </g>
-                        <defs>
-                            <clipPath id="clip0_28_6274">
-                                <rect width="21" height="21" rx="5" fill="white" />
-                            </clipPath>
-                        </defs>
-                    </svg>
-                </button>
-            </div>
-            <div class="sortby-container">
-                <div class="sortby-component">
-                    <div>
-                        <select name="time-period" id="time-period">
-                            <option value="Today">Today</option>
-                        </select>
-                    </div>
-                    <span>Or</span>
-                    <div>
-                        <select name="start-period" id="start-period">
-                            <option value="start">Start Period</option>
-                        </select>
-                        <span>To</span>
-                        <select name="end-period" id="end-period">
-                            <option value="end">End Period</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="sortby-component">
-                    <select name="order" id="order">
-                        <option value="order">Order</option>
-                    </select>
-                </div>
-            </div>
-            <div class="listings-table-container">
-                <table class="listings-table">
-                    <thead>
-                        <tr>
-                            <th>Ref</th>
-                            <th>Date</th>
-                            <th>User</th>
-                            <th>Plan</th>
-                            <th>Property Type</th>
-                            <th>Price</th>
-                            <th>City</th>
-                            <th>Neighbourhood</th>
-                            <th>Boosted</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% if listings.data %}
-                        {% else %}
-                        <tr>
-                            <td colspan="10" class="no-record-row">No record available</td>
-                        </tr>
-                        {% endif %}
-                        <!-- <tr>
-                            <td>01-1-001</td>
-                            <td>24/06/2023</td>
-                            <td>John Smith</td>
-                            <td>Corredor</td>
-                            <td>Departamento</td>
-                            <td>$275,000</td>
-                            <td>Guayaquil</td>
-                            <td>Samborondon</td>
-                            <td>NO</td>
-                            <td>
-                                <div>
-                                    <img src="{% static 'Assets/core/images/promotion_logo.svg' %}" alt="promotion" />
-                                    <img src="{% static 'Assets/core/images/reserved_logo.svg' %}" alt="reserved" />
-                                    <img src="{% static 'Assets/core/images/editing_logo.svg' %}" alt="edit" />
-                                    <img src="{% static 'Assets/core/images/delete_logo.svg' %}" alt="delete" />
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>01-1-001</td>
-                            <td>24/06/2023</td>
-                            <td>John Smith</td>
-                            <td>Basico</td>
-                            <td>Departamento</td>
-                            <td>$275,000</td>
-                            <td>Guayaquil</td>
-                            <td>Samborondon</td>
-                            <td>NO</td>
-                            <td>
-                                <div>
-                                    <img src="{% static 'Assets/core/images/promotion_logo.svg' %}" alt="promotion" />
-                                    <img src="{% static 'Assets/core/images/reserved_logo.svg' %}" alt="reserved" />
-                                    <img src="{% static 'Assets/core/images/editing_logo.svg' %}" alt="edit" />
-                                    <img src="{% static 'Assets/core/images/delete_logo.svg' %}" alt="delete" />
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>01-1-001</td>
-                            <td>24/06/2023</td>
-                            <td>John Smith</td>
-                            <td>Corredor</td>
-                            <td>Departamento</td>
-                            <td>$275,000</td>
-                            <td>Guayaquil</td>
-                            <td>Samborondon</td>
-                            <td>YES</td>
-                            <td>
-                                <div>
-                                    <img src="{% static 'Assets/core/images/promotion_logo_on.svg' %}" alt="promotion" />
-                                    <img src="{% static 'Assets/core/images/reserved_logo.svg' %}" alt="reserved" />
-                                    <img src="{% static 'Assets/core/images/editing_logo.svg' %}" alt="edit" />
-                                    <img src="{% static 'Assets/core/images/delete_logo.svg' %}" alt="delete" />
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>01-1-001</td>
-                            <td>24/06/2023</td>
-                            <td>John Smith</td>
-                            <td>Inmobiliaria</td>
-                            <td>Departamento</td>
-                            <td>$275,000</td>
-                            <td>Guayaquil</td>
-                            <td>Samborondon</td>
-                            <td>NO</td>
-                            <td>
-                                <div>
-                                    <img src="{% static 'Assets/core/images/promotion_logo.svg' %}" alt="promotion" />
-                                    <img src="{% static 'Assets/core/images/reserved_logo_on.svg' %}" alt="reserved" />
-                                    <img src="{% static 'Assets/core/images/editing_logo.svg' %}" alt="edit" />
-                                    <img src="{% static 'Assets/core/images/delete_logo.svg' %}" alt="delete" />
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>01-1-001</td>
-                            <td>24/06/2023</td>
-                            <td>John Smith</td>
-                            <td>Corredor</td>
-                            <td>Departamento</td>
-                            <td>$275,000</td>
-                            <td>Guayaquil</td>
-                            <td>Samborondon</td>
-                            <td>YES</td>
-                            <td>
-                                <div>
-                                    <img src="{% static 'Assets/core/images/promotion_logo_on.svg' %}" alt="promotion" />
-                                    <img src="{% static 'Assets/core/images/reserved_logo.svg' %}" alt="reserved" />
-                                    <img src="{% static 'Assets/core/images/editing_logo.svg' %}" alt="edit" />
-                                    <img src="{% static 'Assets/core/images/delete_logo.svg' %}" alt="delete" />
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>01-1-001</td>
-                            <td>24/06/2023</td>
-                            <td>John Smith</td>
-                            <td>Corredor</td>
-                            <td>Departamento</td>
-                            <td>$275,000</td>
-                            <td>Guayaquil</td>
-                            <td>Samborondon</td>
-                            <td>NO</td>
-                            <td>
-                                <div>
-                                    <img src="{% static 'Assets/core/images/promotion_logo.svg' %}" alt="promotion" />
-                                    <img src="{% static 'Assets/core/images/reserved_logo.svg' %}" alt="reserved" />
-                                    <img src="{% static 'Assets/core/images/editing_logo.svg' %}" alt="edit" />
-                                    <img src="{% static 'Assets/core/images/delete_logo.svg' %}" alt="delete" />
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>01-1-001</td>
-                            <td>24/06/2023</td>
-                            <td>John Smith</td>
-                            <td>Basico</td>
-                            <td>Departamento</td>
-                            <td>$275,000</td>
-                            <td>Guayaquil</td>
-                            <td>Samborondon</td>
-                            <td>NO</td>
-                            <td>
-                                <div>
-                                    <img src="{% static 'Assets/core/images/promotion_logo.svg' %}" alt="promotion" />
-                                    <img src="{% static 'Assets/core/images/reserved_logo.svg' %}" alt="reserved" />
-                                    <img src="{% static 'Assets/core/images/editing_logo.svg' %}" alt="edit" />
-                                    <img src="{% static 'Assets/core/images/delete_logo.svg' %}" alt="delete" />
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>01-1-001</td>
-                            <td>24/06/2023</td>
-                            <td>John Smith</td>
-                            <td>Corredor</td>
-                            <td>Departamento</td>
-                            <td>$275,000</td>
-                            <td>Guayaquil</td>
-                            <td>Samborondon</td>
-                            <td>YES</td>
-                            <td>
-                                <div>
-                                    <img src="{% static 'Assets/core/images/promotion_logo_on.svg' %}" alt="promotion" />
-                                    <img src="{% static 'Assets/core/images/reserved_logo.svg' %}" alt="reserved" />
-                                    <img src="{% static 'Assets/core/images/editing_logo.svg' %}" alt="edit" />
-                                    <img src="{% static 'Assets/core/images/delete_logo.svg' %}" alt="delete" />
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>01-1-001</td>
-                            <td>24/06/2023</td>
-                            <td>John Smith</td>
-                            <td>Inmobiliaria</td>
-                            <td>Departamento</td>
-                            <td>$275,000</td>
-                            <td>Guayaquil</td>
-                            <td>Samborondon</td>
-                            <td>NO</td>
-                            <td>
-                                <div>
-                                    <img src="{% static 'Assets/core/images/promotion_logo.svg' %}" alt="promotion" />
-                                    <img src="{% static 'Assets/core/images/reserved_logo_on.svg' %}" alt="reserved" />
-                                    <img src="{% static 'Assets/core/images/editing_logo.svg' %}" alt="edit" />
-                                    <img src="{% static 'Assets/core/images/delete_logo.svg' %}" alt="delete" />
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>01-1-001</td>
-                            <td>24/06/2023</td>
-                            <td>John Smith</td>
-                            <td>Corredor</td>
-                            <td>Departamento</td>
-                            <td>$275,000</td>
-                            <td>Guayaquil</td>
-                            <td>Samborondon</td>
-                            <td>YES</td>
-                            <td>
-                                <div>
-                                    <img src="{% static 'Assets/core/images/promotion_logo_on.svg' %}" alt="promotion" />
-                                    <img src="{% static 'Assets/core/images/reserved_logo.svg' %}" alt="reserved" />
-                                    <img src="{% static 'Assets/core/images/editing_logo.svg' %}" alt="edit" />
-                                    <img src="{% static 'Assets/core/images/delete_logo.svg' %}" alt="delete" />
-                                </div>
-                            </td>
-                        </tr> -->
-                    </tbody>
-                </table>
-                {% if listings.data %}
-                <div class="pagination-container">
-                    <span>
-                        <span>1</span>-<span>11</span> of <span>117</span>
-                    </span>
-                    <div>
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M15 18L9.07071 12.0707C9.03166 12.0317 9.03166 11.9683 9.07071 11.9293L15 6" stroke="#9A9A9A" stroke-width="2" stroke-linecap="round"/>
+            <div class="listing-main-view" id="listing-main-view">
+                <h1>Listings</h1>
+                <form class="search-container" onsubmit="searchForm(event);">
+                    <input type="text" name="search" id="" />
+                    <button type="submit">
+                        <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_28_6274)">
+                                <path
+                                    d="M21 19.564C20.8892 19.8108 20.8228 20.08 20.6677 20.282C19.981 21.2018 18.8291 21.2467 18.0095 20.4166C16.5032 18.8909 15.019 17.3877 13.5127 15.8621C13.3576 15.705 13.269 15.705 13.0918 15.8172C11.3639 16.9614 9.45885 17.4102 7.42088 17.1409C5.05063 16.8493 3.12341 15.705 1.68354 13.7755C0.465184 12.0929 -0.110766 10.2082 -6.08061e-06 8.1217C0.132905 5.8108 1.06328 3.83644 2.74683 2.26593C4.05379 1.07683 5.56012 0.336442 7.28797 0.0896467C8.92721 -0.134712 10.5221 0.0896467 12.0285 0.78516C13.712 1.57042 15.019 2.80439 15.9272 4.44221C16.5253 5.51913 16.8576 6.66336 16.9462 7.8749C17.0791 9.71465 16.7025 11.3973 15.7721 12.9679C15.6835 13.1025 15.7278 13.1922 15.8386 13.282C17.2785 14.7403 18.7183 16.2211 20.1804 17.6794C20.557 18.0608 20.9114 18.4422 21.0221 19.0031V19.5416L21 19.564ZM14.2215 8.61529C14.2215 5.42939 11.674 2.82683 8.50632 2.80439C5.36075 2.78195 2.74683 5.36208 2.74683 8.59285C2.74683 11.8461 5.2943 14.4037 8.46202 14.4037C11.6297 14.4037 14.1994 11.8012 14.1994 8.59285L14.2215 8.61529Z"
+                                    fill="white" />
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_28_6274">
+                                    <rect width="21" height="21" rx="5" fill="white" />
+                                </clipPath>
+                            </defs>
                         </svg>
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M9 18L14.9293 12.0707C14.9683 12.0317 14.9683 11.9683 14.9293 11.9293L9 6" stroke="#9A9A9A" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
+                    </button>
+                </form>
+                <div class="sortby-container">
+                    <div class="sortby-component">
+                        <div>
+                            <select name="time-period" id="time-period">
+                                <option value="Today">Today</option>
+                            </select>
+                        </div>
+                        <span>Or</span>
+                        <div>
+                            <select name="start-period" id="start-period">
+                                <option value="start">Start Period</option>
+                            </select>
+                            <span>To</span>
+                            <select name="end-period" id="end-period">
+                                <option value="end">End Period</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="sortby-component">
+                        <select name="order" id="order">
+                            <option value="order">Order</option>
+                        </select>
                     </div>
                 </div>
-                {% endif %}
+                <div class="listings-table-container" id="listings-table-container">
+                    {% include '../ajax/listings-table.html' %}
+                </div>
+            </div>
+            <div class="listing-edit-view hide">
+                <svg onclick="toggleListingView(event);" class="back-btn" id="back-btn" width="24" height="24"
+                    viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15 18L9.07071 12.0707C9.03166 12.0317 9.03166 11.9683 9.07071 11.9293L15 6"
+                        stroke="#9A9A9A" stroke-width="2" stroke-linecap="round" />
+                </svg>
+                <div class="add-property-card">
+                    <div class="add-property-container-header">
+                        <span>Edit Property</span>
+                    </div>
+                    <form class="add-property-main-content" onsubmit="updateListing(event);">
+                        {% csrf_token %}
+                        <p>Listing Ref: <span id="listing-id"></span></p>
+                        <p>Listing Date: <span id="listing-date"></span></p>
+                        <div class="image-input-container">
+                            <div class="uploaded-image-container" id="uploaded-image-container">
+                                <input type="file" multiple accept="image/jpeg, image/jpg, image/png, image/gif"
+                                    name="property_image" id="image-input" />
+                                <label for="image-input" class="image-input-label">
+                                    <svg width="29" height="29" viewBox="0 0 29 29" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                        <rect opacity="0.25" width="29" height="29" fill="url(#pattern0)" />
+                                        <defs>
+                                            <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1"
+                                                height="1">
+                                                <use xlink:href="#image0_872_5580" transform="scale(0.00195312)" />
+                                            </pattern>
+                                            <image id="image0_872_5580" width="512" height="512"
+                                                xlink:href="data:image/png;base64,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" />
+                                        </defs>
+                                    </svg>
+                                    <span>Load More</span>
+                                </label>
+                            </div>
+                            <small class="image-msg input-error-msg"></small>
+                        </div>
+                        <div class="property-description-input">
+                            <span>Description</span>
+                            <textarea name="property_description" placeholder="Samborondon, Ceibos etc"
+                                id="property-description" cols="30" rows="10"></textarea>
+                            <small class="description-msg input-error-msg"></small>
+                        </div>
+                        <div class="property-details-input-container">
+                            <div class="property-details-input-group">
+                                <div class="">
+                                    <p>Criteria</p>
+                                    <div class="criteria-radio-container">
+                                        <div class="criteria-radio-btn">
+                                            <input id="sell" type="radio" name="criteria" value="sell" required />
+                                            <label for="sell" class="radio-label">Sell</label>
+                                        </div>
+                                        <div class="criteria-radio-btn">
+                                            <input id="rent" type="radio" name="criteria" value="rent" required />
+                                            <label for="rent" class="radio-label">Rent</label>
+                                        </div>
+                                    </div>
+                                    <small class="criteria-msg input-error-msg"></small>
+                                </div>
+                                <div class="">
+                                    <p>Price</p>
+                                    <input class="general-input" type="number" min="0" placeholder="$450,000"
+                                        name="price" id="price" required />
+                                </div>
+                                <div class="">
+                                    <p>Property Type</p>
+                                    <select class="" name="property_type" id="property-type" required>
+                                        <option value disabled selected hidden>Choose</option>
+                                        <option value="house">House</option>
+                                        <option value="apartment">Apartment</option>
+                                        <option value="land">Land</option>
+                                        <option value="retail">Retail Space</option>
+                                        <option value="office">Office</option>
+                                        <option value="practice">Practice</option>
+                                        <option value="warehouse">Warehouse</option>
+                                        <option value="suite">Suite</option>
+                                    </select>
+                                </div>
+                                <div class="">
+                                    <p>Land</p>
+                                    <input class="general-input" type="number" placeholder="450m2" min="0" name="land"
+                                        id="land" required />
+                                </div>
+                                <div class="">
+                                    <p>Construction</p>
+                                    <input class="general-input" type="number" placeholder="450m2" min="0"
+                                        name="construction" id="construction" required />
+                                </div>
+                                <div class="neighbourhood-input">
+                                    <p>Neighbourhood</p>
+                                    <input class="general-input" type="text" placeholder="Samborondon, Ceibos etc"
+                                        name="neighbourhood" id="neighbourhood" required />
+                                </div>
+                                <div class="bedroom-input">
+                                    <p>Bedrooms</p>
+                                    <div class="btn-group bedroom-count-radio-group" role="group"
+                                        aria-label="Basic radio toggle button group">
+                                        <input type="radio" class="btn-check" name="bedrooms" id="bedroombtnradio1"
+                                            required value="1">
+                                        <label class="btn btn-outline-primary bedroom-count-radio-btn"
+                                            for="bedroombtnradio1">1</label>
+
+                                        <input type="radio" class="btn-check" name="bedrooms" id="bedroombtnradio2"
+                                            value="2" required>
+                                        <label class="btn btn-outline-primary bedroom-count-radio-btn"
+                                            for="bedroombtnradio2">2</label>
+
+                                        <input type="radio" class="btn-check" name="bedrooms" id="bedroombtnradio3"
+                                            value="3" required>
+                                        <label class="btn btn-outline-primary bedroom-count-radio-btn"
+                                            for="bedroombtnradio3">3</label>
+
+                                        <input type="radio" class="btn-check" name="bedrooms" id="bedroombtnradio4"
+                                            value="4" required>
+                                        <label class="btn btn-outline-primary bedroom-count-radio-btn"
+                                            for="bedroombtnradio4">4</label>
+
+                                        <input type="radio" class="btn-check" name="bedrooms" id="bedroombtnradio5"
+                                            value="5" required>
+                                        <label class="btn btn-outline-primary bedroom-count-radio-btn"
+                                            for="bedroombtnradio5">5+</label>
+                                    </div>
+                                </div>
+                                <div class="bathroom-input">
+                                    <p>Bathrooms</p>
+                                    <div class="btn-group bedroom-count-radio-group" role="group"
+                                        aria-label="Basic radio toggle button group">
+                                        <input type="radio" class="btn-check" name="bathrooms" id="bathroombtnradio1"
+                                            required value="1">
+                                        <label class="btn btn-outline-primary bedroom-count-radio-btn"
+                                            for="bathroombtnradio1">1</label>
+
+                                        <input type="radio" class="btn-check" name="bathrooms" id="bathroombtnradio2"
+                                            required value="2">
+                                        <label class="btn btn-outline-primary bedroom-count-radio-btn"
+                                            for="bathroombtnradio2">2</label>
+
+                                        <input type="radio" class="btn-check" name="bathrooms" id="bathroombtnradio3"
+                                            required value="3">
+                                        <label class="btn btn-outline-primary bedroom-count-radio-btn"
+                                            for="bathroombtnradio3">3</label>
+
+                                        <input type="radio" class="btn-check" name="bathrooms" id="bathroombtnradio4"
+                                            required value="4">
+                                        <label class="btn btn-outline-primary bedroom-count-radio-btn"
+                                            for="bathroombtnradio4">4</label>
+
+                                        <input type="radio" class="btn-check" name="bathrooms" id="bathroombtnradio5"
+                                            required value="5">
+                                        <label class="btn btn-outline-primary bedroom-count-radio-btn"
+                                            for="bathroombtnradio5">5+</label>
+                                    </div>
+                                </div>
+                                <div class="city-input">
+                                    <p>City</p>
+                                    <input class="general-input" type="text" placeholder="Guayaquil, Quito etc"
+                                        name="city" id="city" required />
+                                </div>
+                                <div class="">
+                                    <p>Parking</p>
+                                    <input class="general-input" type="number" min="0" placeholder="2" name="parking"
+                                        id="parking" required />
+                                </div>
+                                <div class="">
+                                    <p>Antiquity</p>
+                                    <input class="general-input" type="number" min="0" placeholder="10" name="antiquity"
+                                        id="antiquity" required />
+                                </div>
+                            </div>
+                            <div class="other-inputs">
+                                <div class="location-input">
+                                    <p>Location</p>
+                                    <div class="search-location">
+                                        <input class="general-input" type="text" placeholder="Aires del batan"
+                                            name="location" required />
+                                        <svg width="21" height="21" viewBox="0 0 21 21" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M20.9998 19.564C20.889 19.8108 20.8225 20.08 20.6675 20.282C19.9808 21.2018 18.8289 21.2467 18.0092 20.4166C16.5029 18.8909 15.0187 17.3877 13.5124 15.8621C13.3573 15.705 13.2687 15.705 13.0915 15.8172C11.3637 16.9614 9.45861 17.4102 7.42064 17.1409C5.05038 16.8493 3.12317 15.705 1.68329 13.7755C0.46494 12.0929 -0.11101 10.2082 -0.000250221 8.1217C0.132661 5.8108 1.06304 3.83644 2.74658 2.26593C4.05355 1.07683 5.55988 0.336442 7.28772 0.0896467C8.92696 -0.134712 10.5219 0.0896467 12.0282 0.78516C13.7118 1.57042 15.0187 2.80439 15.927 4.44221C16.5251 5.51913 16.8573 6.66336 16.946 7.8749C17.0789 9.71465 16.7023 11.3973 15.7719 12.9679C15.6833 13.1025 15.7276 13.1922 15.8384 13.282C17.2782 14.7403 18.7181 16.2211 20.1801 17.6794C20.5567 18.0608 20.9111 18.4422 21.0219 19.0031V19.5416L20.9998 19.564ZM14.2213 8.61529C14.2213 5.42939 11.6738 2.82683 8.50608 2.80439C5.36051 2.78195 2.74658 5.36208 2.74658 8.59285C2.74658 11.8461 5.29405 14.4037 8.46177 14.4037C11.6295 14.4037 14.1991 11.8012 14.1991 8.59285L14.2213 8.61529Z"
+                                                fill="#D2D2D2" />
+                                        </svg>
+                                    </div>
+                                    <div class="map-view">
+                                        <iframe
+                                            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13612.269782401412!2d74.2686174!3d31.4673308!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3919051533e95177%3A0xd55e06f9aed17bb8!2sCrymzee%20Networks%20(Pvt.)%20Ltd.!5e0!3m2!1sen!2s!4v1680426688403!5m2!1sen!2s"
+                                            style="border:0;" allowfullscreen="" loading="lazy"
+                                            referrerpolicy="no-referrer-when-downgrade">
+                                        </iframe>
+                                    </div>
+                                </div>
+                                <div class="amenety-input">
+                                    <p>Ameneties <span>&nbsp; &nbsp; &nbsp;Seperate with a coma after each
+                                            amenity</span>
+                                    </p>
+                                    <div class="tags-container">
+                                        <div class="tags-input">
+                                            <div class="tags"></div>
+                                            <input type="text" class="tags-textbox" name="ameneties" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="button-container">
+                                <button type="submit" data-id="delete" class="delete-btn">
+                                    <span class="spinner-border spinner-border-sm hide" role="status"
+                                        aria-hidden="true"></span>
+                                    <span class="btn-text">Delete</span>
+                                </button>
+                                <button type="submit" class="publish-property-btn" id="publish-property-btn">
+                                    <span class="spinner-border spinner-border-sm hide" role="status"
+                                        aria-hidden="true"></span>
+                                    <span class="btn-text">Publish</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
+
+    <!-- Delete Listing Modal -->
+    {% include '../modals/delete-listing-modal.html' %}
+
     {% endblock %}
 </body>
+{% block scripts %}
+<script src="{% static 'Assets/administration/js/listings.js' %}"></script>
+{% endblock %}
 
 </html>

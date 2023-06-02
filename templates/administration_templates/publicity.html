@@ -24,7 +24,36 @@
         <div class="page-content">
             <h1>Paid Publicity</h1>
             <div class="publicity-card-container">
-                <div class="publicity-card">
+                {% if publicity %}
+                {% for obj in publicity.data %}
+                <form class="publicity-card" onsubmit="submitPublicityForm(event, '{{obj.id}}');">
+                    {% csrf_token %}
+                    <div class="publicity-card-header">
+                        <span>{{obj.name}}</span>
+                        <span>({{obj.width}}x{{obj.height}})</span>
+                    </div>
+                    <div class="publicity-card-content">
+                        <div class="image-input-container">
+                            <label for="home-page" class="image-input-label">
+                                <img class="uploader-logo" src="{% static 'Assets/administration/images/uploader_logo.svg' %}" alt="Uploader Logo" />
+                                <input type="file" id="home-page" accept="image/jpeg, image/jpg, image/png, image/gif" name="picture" onchange="previewImage(event);" />
+                                <img class="publicity-img" src="{% if obj.picture != None %}{{obj.picture}}{% endif %}" alt="Publicity Image" />
+                                <span class="uploader-text">Upload Image</span>
+                            </label>
+                        </div>
+                        <div class="publicity-input">
+                            <span>URL</span>
+                            <input type="url" value="{{obj.url}}" name="url" id="" />
+                        </div>
+                        <button type="submit" class="save-publicity-btn">
+                            <span class="spinner-border spinner-border-sm hide" role="status" aria-hidden="true"></span>
+                            <span class="btn-text">Save Changes</span>
+                        </button>
+                    </div>
+                </form>
+                {% endfor %}
+                {% endif %}
+                <!-- <div class="publicity-card">
                     <div class="publicity-card-header">
                         <span>Home Page</span>
                         <span>(436x207)</span>
@@ -143,7 +172,7 @@
                             <span class="btn-text">Save Changes</span>
                         </button>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

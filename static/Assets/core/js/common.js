@@ -46,6 +46,14 @@ function parseJwt (token) {
     return JSON.parse(jsonPayload);
 };
 
+// let cookie = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg1NzE2ODQxLCJqdGkiOiI5MjU3NzI0YzFhMWI0Njk4ODA1ZGU3MDVlMGJkYzRjMCIsInVzZXJfaWQiOjEwLCJzdGVwIjoiY29tcGxldGVkIiwicm9sZSI6ImFkbWluIn0.egox8tE_tM8HJpArqr-OEOhbvMKWXtWoGzA4-3TVgVA';
+// let parsedCookie = parseJwt(cookie);
+// console.log("Parsed Cookie: ", parsedCookie);
+// let date = new Date(parsedCookie.exp * 1000);
+// console.log(date.getTime());
+// console.log("To Locale String: ", date.toLocaleString());
+// console.log("Cookie Expiry Time: ", date.toUTCString());
+
 
 function setCookie(name, value, expiry) {
     if(name === 'access'){
@@ -55,8 +63,7 @@ function setCookie(name, value, expiry) {
     }else{
         name=name
     }
-    var date = new Date();
-    date.setTime(date.getTime() + expiry);
+    var date = new Date(expiry * 1000);
     expires = "; expires=" + date.toUTCString();
     document.cookie = name + "=" + (value || "") + expires + "; path=/";
 }
@@ -113,6 +120,12 @@ async function onRefreshToken() {
     return refreshResponse;
 }
 
+async function onAdminRefreshToken() {
+    let refreshToken = getCookie('admin_refresh');
+    let myData = {"refresh": `${refreshToken}`};
+    let refreshResponse = await requestAPI(`${apiURL}/refresh`, myData, {}, 'POST');
+    return refreshResponse; 
+}
 
 function clearTokens(){
     setCookie('access', '', 0);
@@ -243,14 +256,15 @@ function matchingPassword(password, confirmPassword) {
     }
 }
 
+// /^\d+$/.test(number.value)
 
 function isValidNumber(number) {
-    let numberMsg = number.closest('.mobile-input').querySelector('.mobile-msg');
-    if(number.value.trim().length < 11) {
-        numberMsg.innerText = 'Number must be 11 digits long!';
+    let numberMsg = number.nextElementSibling;
+    if(number.value.trim().length == 0) {
+        numberMsg.innerText = 'Required Field';
         return false;
     }
-    else if(!(!isNaN(number.value) && /^\d+$/.test(number.value))) {
+    else if(!(!isNaN(number.value) && /^\d+(\.\d+)?$/.test(number.value))) {
         numberMsg.innerText = 'Number must contain only digits';
     }
     // else if(!phoneRegex.test(number.value)) {

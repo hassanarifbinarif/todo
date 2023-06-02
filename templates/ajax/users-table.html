@@ -45,8 +45,11 @@
                             </clipPath>
                         </defs>
                     </svg>
-                    <img src="{% static 'Assets/core/images/editing_logo.svg' %}" alt="edit" />
-                    <img src="{% static 'Assets/core/images/delete_logo.svg' %}" alt="delete" />
+                    <img src="{% static 'Assets/core/images/editing_logo.svg' %}"
+                        onclick="openEditUserModal('edit-user', '{{obj.id}}')"
+                        alt="edit" />
+                    <img src="{% static 'Assets/core/images/delete_logo.svg' %}"
+                        onclick="openDelUserModal('del-user', '{{obj.id}}')" alt="delete" />
                 </div>
             </td>
         </tr>
@@ -63,13 +66,13 @@
     <span>{{users.pagination|page_number}}</span>
     <div>
         <svg class="{% if users.pagination.links.previous is None %}cursor-not-allowed{% endif %}"
-            onclick="getUsers(event, '{% if users.pagination.links.previous is not None %}{{users.pagination.links.previous}}{% else %}null{% endif %}');"
+            onclick="getUsers('{% if users.pagination.links.previous is not None %}{{users.pagination.links.previous}}{% else %}null{% endif %}');"
             width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M15 18L9.07071 12.0707C9.03166 12.0317 9.03166 11.9683 9.07071 11.9293L15 6" stroke="#9A9A9A"
                 stroke-width="2" stroke-linecap="round" />
         </svg>
         <svg class="{% if users.pagination.links.next is None %}cursor-not-allowed{% endif %}"
-            onclick="getUsers(event, '{% if users.pagination.links.next is not None %}{{users.pagination.links.next}}{% else %}null{% endif %}');"
+            onclick="getUsers('{% if users.pagination.links.next is not None %}{{users.pagination.links.next}}{% else %}null{% endif %}');"
             width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M9 18L14.9293 12.0707C14.9683 12.0317 14.9683 11.9683 14.9293 11.9293L9 6" stroke="#9A9A9A"
                 stroke-width="2" stroke-linecap="round" />

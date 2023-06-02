@@ -1,0 +1,69 @@
+{% load static %}
+{% load custom_tags %}
+<table class="listings-table">
+    <thead>
+        <tr>
+            <th>Ref</th>
+            <th>Date</th>
+            <th>User</th>
+            <th>Plan</th>
+            <th>Property Type</th>
+            <th>Price</th>
+            <th>City</th>
+            <th>Neighbourhood</th>
+            <th>Boosted</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if listings.data %}
+        {% for obj in listings.data %}
+        <tr>
+            <td>{{obj.id}}</td>
+            <td>{{obj.created_at|custom_date}}</td>
+            <td>{{obj.user.first_name}} {{obj.user.last_name}}</td>
+            <td>Corredor</td>
+            <td>{{obj.property_type|title}}</td>
+            <td>${{obj.price|floatformat:"g"}}</td>
+            <td>{{obj.city}}</td>
+            <td>{{obj.neighbourhood}}</td>
+            <td>NO</td>
+            <td>
+                <div>
+                    {% if obj.is_published %}
+                    <img src="{% static 'Assets/core/images/promotion_logo_on.svg' %}" alt="promotion" />
+                    {% else %}
+                    <img src="{% static 'Assets/core/images/promotion_logo.svg' %}" alt="promotion" />
+                    {% endif %}
+                    <img src="{% static 'Assets/core/images/reserved_logo.svg' %}" alt="reserved" />
+                    <img src="{% static 'Assets/core/images/editing_logo.svg' %}" onclick="toggleListingView(event, '{{obj.id}}');" id="edit-listing-btn" alt="edit" />
+                    <img src="{% static 'Assets/core/images/delete_logo.svg' %}" onclick="openDelListingModal('del-listing', '{{obj.id}}')" alt="delete" />
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td colspan="10" class="no-record-row">No record available</td>
+        </tr>
+        {% endif %}
+    </tbody>
+</table>
+{% if listings.data %}
+<div class="pagination-container">
+    <span>{{listings.pagination|page_number}}</span>
+    <div>
+        <svg class="{% if listings.pagination.links.previous is None %}cursor-not-allowed{% endif %}"
+            onclick="getListings(event, '{% if listings.pagination.links.previous is not None %}{{listings.pagination.links.previous}}{% else %}null{% endif %}');"
+            width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 18L9.07071 12.0707C9.03166 12.0317 9.03166 11.9683 9.07071 11.9293L15 6" stroke="#9A9A9A"
+                stroke-width="2" stroke-linecap="round" />
+        </svg>
+        <svg class="{% if listings.pagination.links.next is None %}cursor-not-allowed{% endif %}"
+            onclick="getListings(event, '{% if listings.pagination.links.next is not None %}{{listings.pagination.links.next}}{% else %}null{% endif %}');"
+            width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 18L14.9293 12.0707C14.9683 12.0317 14.9683 11.9683 14.9293 11.9293L9 6" stroke="#9A9A9A"
+                stroke-width="2" stroke-linecap="round" />
+        </svg>
+    </div>
+</div>
+{% endif %}

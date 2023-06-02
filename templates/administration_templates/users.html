@@ -13,6 +13,8 @@
     {% block links %}
 
     <link rel="stylesheet" href="{% static 'Assets/administration/css/users.css' %}" />
+    <link rel="stylesheet" href="{% static 'Assets/administration/css/edit_user_modal.css' %}" />
+    <link rel="stylesheet" href="{% static 'Assets/administration/css/del_user_modal.css' %}" />
 
     {% endblock %}
 
@@ -70,6 +72,13 @@
             </div>
         </div>
     </div>
+
+    <!-- Edit User Modal -->
+    {% include '../modals/edit-user-modal.html' %}
+
+    <!-- Delete User Modal -->
+    {% include '../modals/delete-user-modal.html' %}
+
     {% endblock %}
 </body>
 {% block scripts %}

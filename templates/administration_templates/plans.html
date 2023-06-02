@@ -26,7 +26,8 @@
             <div class="plan-container">
                 {% if plans %}
                 {% for obj in plans.data %}
-                <div class="plan-card">
+                <form class="plan-card" onsubmit="updatePlanForm(event, '{{obj.id}}')">
+                    {% csrf_token %}
                     <div class="plan-number">
                         <span>Plan {{forloop.counter}}</span>
                     </div>
@@ -34,31 +35,37 @@
                         <div class="input">
                             <span>Name</span>
                             <input type="text" name="name" value="{{obj.name}}" id="" />
+                            <small class="name-msg input-error-msg"></small>
                         </div>
                         <div class="input">
                             <span>Number of Listings</span>
                             <input type="number" name="num_of_listings" value="{{obj.num_of_listings}}" id="" />
+                            <small class="listings-msg input-error-msg"></small>
                         </div>
                         <div class="input">
                             <span>Number of Images</span>
                             <input type="number" name="num_of_images" value="{{obj.num_of_images}}" id="" />
+                            <small class="images-msg input-error-msg"></small>
                         </div>
                         <div class="input">
                             <span>Price</span>
                             <input type="number" name="price" value="{{obj.price}}" id="" />
+                            <small class="price-msg input-error-msg"></small>
                         </div>
                     </div>
-                </div>
+                    <button type="submit" class="save-plan-btn">
+                        <span class="spinner-border spinner-border-sm hide" role="status" aria-hidden="true"></span>
+                        <span class="btn-text">Save Changes</span>
+                    </button>
+                </form>
                 {% endfor %}
                 {% endif %}
             </div>
-            <button type="submit" class="save-plan-btn">
-                <span class="spinner-border spinner-border-sm hide" role="status" aria-hidden="true"></span>
-                <span class="btn-text">Save Changes</span>
-            </button>
         </div>
     </div>
     {% endblock %}
 </body>
-
+{% block scripts %}
+<script src="{% static 'Assets/administration/js/plans.js' %}"></script>
+{% endblock %}
 </html>

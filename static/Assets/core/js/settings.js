@@ -239,7 +239,6 @@ async function profileForm(event) {
                 return false;
             }
         });
-        // location.href = location.origin + '/settings/';
     }
 }
 

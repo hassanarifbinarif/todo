@@ -1,0 +1,50 @@
+<div class="modal fade" id="del-listing" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="delListingLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0 justify-content-end pt-4 pb-5">
+                <svg class="cursor-pointer" data-bs-dismiss="modal" aria-label="Close" width="13" height="13"
+                    viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M11.8245 12.1156C11.698 12.1916 11.5714 12.2675 11.4196 12.3181C10.8881 12.4953 10.4072 12.3687 10.0275 11.9891C8.83792 10.7995 7.67364 9.63523 6.48406 8.44564C6.43344 8.39502 6.40813 8.36971 6.3322 8.29378C6.28158 8.3444 6.23096 8.39502 6.20565 8.42033C5.01606 9.60992 3.85179 10.7742 2.6622 11.9638C2.25724 12.3687 1.75103 12.47 1.21952 12.2928C0.688 12.1156 0.358966 11.736 0.283035 11.1538C0.232414 10.6983 0.333656 10.2933 0.66269 9.96426C1.85227 8.77468 3.01655 7.6104 4.20613 6.42082C4.25675 6.3702 4.28206 6.34489 4.35799 6.26896C4.30737 6.21834 4.25675 6.16771 4.20613 6.11709C3.04186 4.95282 1.85227 3.76324 0.688 2.59896C0.181794 2.09276 0.131173 1.28283 0.561448 0.751309C0.991724 0.219792 1.75103 0.0679308 2.35848 0.371654C2.48503 0.447586 2.58627 0.548826 2.68751 0.650068C3.85179 1.81434 5.01606 2.97862 6.18034 4.14289C6.23096 4.19351 6.25627 4.21882 6.3322 4.29475C6.38282 4.24413 6.43344 4.19351 6.45875 4.1682C7.62302 3.00393 8.76199 1.86496 9.92626 0.700688C10.4831 0.143861 11.1158 0.0679298 11.7739 0.472895C11.7739 0.472895 11.7739 0.472895 11.7992 0.498205L12.1029 0.801929C12.1029 0.801929 12.1029 0.801929 12.1283 0.827239C12.5332 1.48531 12.4573 2.11807 11.9005 2.67489C10.7362 3.83917 9.59723 4.97813 8.43295 6.1424L8.3064 6.26896C8.35702 6.31958 8.40764 6.3702 8.45826 6.42082C9.62254 7.58509 10.8121 8.77468 11.9764 9.93895C12.4067 10.3692 12.5332 11.002 12.2548 11.5335C12.2042 11.5841 12.1536 11.6854 12.1283 11.7613L11.8245 12.065L11.8245 12.1156Z"
+                        fill="#414042" />
+                </svg>
+            </div>
+            <div class="modal-body d-flex flex-column align-items-center pt-0">
+                <svg width="66" height="67" viewBox="0 0 66 67" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="5" y="5.51758" width="56" height="56" rx="28" fill="#FAD1D1" />
+                    <path
+                        d="M36 43V37.6C36 37.0399 36 36.7599 35.891 36.546C35.7951 36.3578 35.6422 36.2049 35.454 36.109C35.2401 36 34.9601 36 34.4 36H31.6C31.0399 36 30.7599 36 30.546 36.109C30.3578 36.2049 30.2049 36.3578 30.109 36.546C30 36.7599 30 37.0399 30 37.6V43M40 43V28.2C40 27.0799 40 26.5198 39.782 26.092C39.5903 25.7157 39.2843 25.4097 38.908 25.218C38.4802 25 37.9201 25 36.8 25H29.2C28.0799 25 27.5198 25 27.092 25.218C26.7157 25.4097 26.4097 25.7157 26.218 26.092C26 26.5198 26 27.0799 26 28.2V43M42 43H24M30.5 30H30.51M35.5 30H35.51M31 30C31 30.2761 30.7761 30.5 30.5 30.5C30.2239 30.5 30 30.2761 30 30C30 29.7239 30.2239 29.5 30.5 29.5C30.7761 29.5 31 29.7239 31 30ZM36 30C36 30.2761 35.7761 30.5 35.5 30.5C35.2239 30.5 35 30.2761 35 30C35 29.7239 35.2239 29.5 35.5 29.5C35.7761 29.5 36 29.7239 36 30Z"
+                        stroke="#C63F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <rect x="5" y="5.51758" width="56" height="56" rx="28" stroke="#FDECEC" stroke-width="10" />
+                </svg>
+                <form action="" class="align-items-center w-100">
+                    {% csrf_token %}
+                    <div class="alert hide">
+                        <span class="closebtn" onclick="this.parentElement.classList.add('hide');">&times;</span>
+                        <span class="error-text"></span>
+                    </div>
+                    <div class="w-100 text-center">
+                        <h3>Delete Listing?</h3>
+                        <p class="del-warning">Are you sure you wish to delete the following listing?
+                        </p>
+                    </div>
+                    <div class="w-100 d-flex justify-content-center gap-4">
+                        <button type="submit" data-id="delete" class="submit-btn">
+                            <span class="spinner-border spinner-border-sm hide" role="status" aria-hidden="true"></span>
+                            <span class="btn-text">Confirm</span>
+                        </button>
+                    </div>
+                </form>
+                <div class="back-link" data-bs-dismiss="modal">
+                    <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16.3332 10H4.6665M4.6665 10L10.4998 15.8333M4.6665 10L10.4998 4.16667"
+                            stroke="#475467" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <span>Back</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" class="del-listing" data-bs-toggle="modal" data-bs-target="#del-listing" />

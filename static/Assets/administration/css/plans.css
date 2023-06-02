@@ -3,6 +3,8 @@
     left: 200px;
     min-height: 100vh;
     background-image: url('../../core/images/authentication_bg.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
     padding: 0px 20px;
     width: calc(100vw - 200px);
 }
@@ -79,7 +81,6 @@
 }
 
 .save-plan-btn {
-    margin-top: 40px;
     width: 263px;
     height: 40px;
     background-color: #8DC63F;
