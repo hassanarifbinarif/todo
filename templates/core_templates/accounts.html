@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+    
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -36,7 +36,26 @@
                 </div>
                 <div class="login-auth-content" id="login-content">
                     <div class="third-party-auth-btn">
-                        <button>Sign in with Google</button>
+                        <!-- <button onclick="getAuthCode();">Sign in with Google</button> -->
+                        <div>
+                            <div id="g_id_onload"
+                                data-client_id="952441311880-fakfeiphp8nnuuob4aekn1i56tookjj9.apps.googleusercontent.com"
+                                data-context="signin"
+                                data-ux_mode="popup"
+                                data-callback="googleSigninCallback"
+                                data-nonce=""
+                                data-auto_prompt="false">
+                            </div>
+                            <div class="g_id_signin"
+                                data-type="standard"
+                                data-shape="rectangular"
+                                data-theme="outline"
+                                data-text="signin_with"
+                                data-size="large"
+                                data-logo_alignment="center">
+                            </div>
+                            <small class="google-signin-msg input-error-msg"></small>
+                        </div>
                         <button>Sign in with Facebook</button>
                     </div>
                     <hr />
@@ -69,7 +88,23 @@
                 </div>
                 <div class="register-auth-content hide" id="register-content">
                     <div class="third-party-auth-btn">
-                        <button>Sign in with Google</button>
+                        <!-- <button onclick="signinWithGoogle()">Sign in with Google</button> -->
+                        <div id="g_id_onload"
+                            data-client_id="952441311880-fakfeiphp8nnuuob4aekn1i56tookjj9.apps.googleusercontent.com"
+                            data-context="signin"
+                            data-ux_mode="popup"
+                            data-callback="googleSigninCallback"
+                            data-nonce=""
+                            data-auto_prompt="false">
+                        </div>
+                        <div class="g_id_signin"
+                            data-type="standard"
+                            data-shape="rectangular"
+                            data-theme="outline"
+                            data-text="signin_with"
+                            data-size="large"
+                            data-logo_alignment="center">
+                        </div>
                         <button>Sign in with Facebook</button>
                     </div>
                     <hr />
@@ -149,6 +184,7 @@
     {% endblock %}
 </body>
 {% block scripts %}
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 <script src="{% static 'Assets/core/js/accounts.js' %}"></script>
 {% endblock %}
 </html>

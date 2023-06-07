@@ -15,15 +15,18 @@ async function submitPublicityForm(event, id) {
     event.preventDefault();
     let form = event.currentTarget;
     let formData = new FormData(form);
-    let data = formDataToObject(formData);
-    console.log(data);
     let button = form.querySelector('button[type="submit"]');
     let buttonText = button.innerText;
     beforeLoad(button);
     let response = await publicityAPI(formData, id);
-    afterLoad(button, buttonText);
     response.json().then(function(res) {
         console.log(response, res);
+        if(response.status == 200) {
+            afterLoad(button, 'Saved');
+        }
+        else {
+            afterLoad(button, 'Error! Retry');
+        }
     })
 }
 

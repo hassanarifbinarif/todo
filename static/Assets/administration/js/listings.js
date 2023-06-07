@@ -66,47 +66,54 @@ function getTodayRecords() {
 }
 
 
-async function toggleListingView(event, id) {
+async function toggleListingView(event, data) {
     let element = event.currentTarget;
     if(element.id == 'edit-listing-btn' && listingEditView.classList.contains('hide')) {
         listingMainView.classList.add('hide');
-        let token = getCookie('admin_access');
-        let headers = {
-            "Authorization": `Bearer ${token}`
-        };
-        let response = await requestAPI(`${apiURL}/admin/listings/${id}`, null, headers, 'GET');
-        response.json().then(function(res) {
-            console.log(res);
-            let form = listingEditView.querySelector('form');
-            form.setAttribute('onsubmit', `updateListing(event, '${id}')`);
-            form.querySelector('#listing-id').innerText = res.data.id;
-            let date = new Date(res.data.created_at);
-            form.querySelector('#listing-date').innerText = date.getUTCDate() + '/' + (date.getUTCMonth() + 1) + '/' + date.getUTCFullYear();
-            form.querySelector('#property-description').innerText = res.data.description;
-            form.querySelector(`input[name="criteria"][value="${res.data.criteria}"]`).checked = true;
-            form.querySelector('input[name="price"]').value = res.data.price;
-            form.querySelector(`select[name="property_type"] option[value="${res.data.property_type}"]`).selected = true;
-            form.querySelector('input[name="land"]').value = res.data.land;
-            form.querySelector('input[name="construction"]').value = res.data.construction;
-            form.querySelector('input[name="neighbourhood"]').value = res.data.neighbourhood;
-            if(res.data.bedrooms < 5 && res.data.bedrooms > 0)
-                form.querySelector(`input[name="bedrooms"][value="${res.data.bedrooms}"]`).checked = true;
-            else if(res.data.bedrooms >= 5)
-                form.querySelector('input[name="bedrooms"]:last-of-type').checked = true;
-            if(res.data.bathrooms < 5 && res.data.bathrooms > 0)
-                form.querySelector(`input[name="bathrooms"][value="${res.data.bathrooms}"]`).checked = true;
-            else if(res.data.bathrooms >= 5)
-                form.querySelector('input[name="bathrooms"]:last-of-type').checked = true;
-            form.querySelector('input[name="city"]').value = res.data.city;
-            form.querySelector('input[name="parking"]').value = res.data.parking;
-            form.querySelector('input[name="antiquity"]').value = res.data.antiquity;
-            form.querySelector('input[name="location"]').value = res.data.location;
-            let tagsString = res.data.ameneties.split(',');
-            tagsString.forEach((tag) => {
-                let tagBody = createTag(tag);
-                tags.push(tagBody);
-            })
+        let form = listingEditView.querySelector('form');
+        form.setAttribute('onsubmit', `updateListing(event, '${data.id}')`);
+        form.querySelector('#listing-id').innerText = data.id;
+        let date = new Date(data.created_at);
+        form.querySelector('#listing-date').innerText = date.getUTCDate() + '/' + (date.getUTCMonth() + 1) + '/' + date.getUTCFullYear();
+        form.querySelector('#property-description').innerText = data.description;
+        form.querySelector(`input[name="criteria"][value="${data.criteria}"]`).checked = true;
+        form.querySelector('input[name="price"]').value = data.price;
+        form.querySelector(`select[name="property_type"] option[value="${data.property_type}"]`).selected = true;
+        form.querySelector('input[name="land"]').value = data.land;
+        form.querySelector('input[name="construction"]').value = data.construction;
+        form.querySelector('input[name="neighbourhood"]').value = data.neighbourhood;
+        if(data.bedrooms < 5 && data.bedrooms > 0)
+            form.querySelector(`input[name="bedrooms"][value="${data.bedrooms}"]`).checked = true;
+        else if(data.bedrooms >= 5)
+            form.querySelector('input[name="bedrooms"]:last-of-type').checked = true;
+        if(data.bathrooms < 5 && data.bathrooms > 0)
+            form.querySelector(`input[name="bathrooms"][value="${data.bathrooms}"]`).checked = true;
+        else if(data.bathrooms >= 5)
+            form.querySelector('input[name="bathrooms"]:last-of-type').checked = true;
+        form.querySelector('input[name="city"]').value = data.city;
+        form.querySelector('input[name="parking"]').value = data.parking;
+        form.querySelector('input[name="antiquity"]').value = data.antiquity;
+        form.querySelector('input[name="location"]').value = data.location;
+        document.querySelectorAll('.tag').forEach(function(tag) {
+            tag.parentNode.removeChild(tag);
         })
+        tags = [];
+        let tagsString = data.ameneties.split(',');
+        tagsString.forEach((tag) => {
+            let tagBody = createTag(tag);
+            tags.push(tagBody);
+        })
+        let images = imageContainer.querySelectorAll('.uploaded-image');
+        images.forEach(function(imageTag) {
+            imageTag.parentNode.removeChild(imageTag);
+        })
+        data.images.forEach((image) => {
+            let imageTag = `<div class="uploaded-image">
+                                <img src="${image.image}" alt="property image" />
+                            </div>`;
+            imageContainer.insertAdjacentHTML('afterbegin', imageTag);
+        })
+        form.querySelector('#publish-property-btn').querySelector('.btn-text').innerText = 'Publish';
         listingEditView.classList.remove('hide');
     }
     else if(element.id == 'back-btn' && listingMainView.classList.contains('hide')) {

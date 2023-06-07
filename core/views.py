@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from core.helpers import check_user_login, confirm_user_email, get_dict_from_token, requestAPI
 from todo.decorators import signin_required, signout_required
 from django.conf import settings as django_settings
+from django.http import HttpResponse
 
 
 def index(request):
@@ -30,8 +31,9 @@ def property_listing(request):
 
 @signout_required
 def accounts(request):
-    return render(request, 'core_templates/accounts.html')
-
+    response = render(request, 'core_templates/accounts.html')
+    response["Cross-Origin-Opener-Policy"] = "same-origin-allow-popups"
+    return response
 
 def verify_registeration(request):
     msg = None
@@ -79,7 +81,6 @@ def settings(request):
             listing_status, listing_response = requestAPI('GET', f'{django_settings.API_URL}/listings', headers, {})
             if listing_status == 200:
                 context['listings'] = listing_response
-                # print(listing_response)
     except Exception as e:
         print(e)
     context['login'] = True
@@ -108,3 +109,19 @@ def news(request):
     if status == 200:
         context['login'] = True
     return render(request, 'core_templates/news.html', context)
+
+
+def terms_and_conditions(request):
+    context = {}
+    status, response = check_user_login(request)
+    if status == 200:
+        context['login'] = True
+    return render(request, 'core_templates/terms-and-conditions.html', context)
+
+
+def privacy_policy(request):
+    context = {}
+    status, response = check_user_login(request)
+    if status == 200:
+        context['login'] = True
+    return render(request, 'core_templates/privacy-policy.html', context)

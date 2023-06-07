@@ -119,6 +119,10 @@
     gap: 15px;
 }
 
+.block_logo {
+    cursor: pointer;
+}
+
 .block_logo.active path {
     fill: #C63F3F;
 }

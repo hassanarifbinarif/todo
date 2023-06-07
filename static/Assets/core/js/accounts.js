@@ -66,7 +66,7 @@ async function loginForm(event) {
     let emailMsg = form.querySelector(".email-msg");
     let passwordField = form.querySelector('input[name="password"]');
     let passwordMsg = form.querySelector(".password-msg");
-	let button = form.querySelector('button[type="submit"]');
+    let button = form.querySelector('button[type="submit"]');
     let buttonText = button.innerText;
 
     if (!isValidEmail(emailField)) {
@@ -114,12 +114,13 @@ async function loginForm(event) {
                 "Content-Type": "application/json",
                 "X-CSRFToken": data.csrfmiddlewaretoken,
             };
-            let response = await requestAPI(`${apiURL}/login`,
+            let response = await requestAPI(
+                `${apiURL}/login`,
                 JSON.stringify(data),
                 headers,
                 "POST"
             );
-            response.json().then(function (res) {
+            response.json().then(async function (res) {
                 if (response.status == 400) {
                     emailMsg.innerText = res.messages.password;
                     passwordMsg.innerText = res.messages.password;
@@ -127,16 +128,33 @@ async function loginForm(event) {
                     passwordMsg.classList.add("active");
                     afterLoad(button, buttonText);
                 } else if (response.status == 200) {
-                    emailMsg.innerText = "";
-                    passwordMsg.innerText = "";
-                    emailMsg.classList.remove("active");
-                    passwordMsg.classList.remove("active");
-                    afterLoad(button, buttonText);
-                    const accessToken = parseJwt(res.access);
-                    const refreshToken = parseJwt(res.refresh);
-                    setCookie("access", res.access, accessToken.exp);
-                    setCookie("refresh", res.refresh, refreshToken.exp);
-                    location.href = location.origin + "/";
+                    let myHeader = {
+                        Authorization: `Bearer ${res.access}`,
+                    };
+                    let myRes = await requestAPI(
+                        `${apiURL}/me`,
+                        null,
+                        myHeader,
+                        "GET"
+                    );
+                    myRes.json().then(function (myres) {
+                        if (myRes.status == 401) {
+                            emailField.classList.add("input-error");
+                            emailMsg.classList.add("active");
+                            emailMsg.innerText = myres.messages.non_field;
+                        } else if (myRes.status == 200) {
+                            emailMsg.innerText = "";
+                            passwordMsg.innerText = "";
+                            emailMsg.classList.remove("active");
+                            passwordMsg.classList.remove("active");
+                            const accessToken = parseJwt(res.access);
+                            const refreshToken = parseJwt(res.refresh);
+                            setCookie("access", res.access, accessToken.exp);
+                            setCookie("refresh", res.refresh, refreshToken.exp);
+                            location.href = location.origin + "/";
+                        }
+                        afterLoad(button, buttonText);
+                    });
                 } else {
                     passwordMsg.innerText =
                         "An error occured. Please try again";
@@ -146,12 +164,11 @@ async function loginForm(event) {
             });
         } catch (err) {
             console.log(err);
-			afterLoad(button, 'Error occurred! Retry later');
+            afterLoad(button, "Error occurred! Retry later");
             setTimeout(() => {
                 afterLoad(button, buttonText);
             }, 2000);
         }
-        // location.href = location.origin + '/property-listing/';
     }
 }
 
@@ -294,7 +311,8 @@ async function registerForm(event) {
                 "X-CSRFToken": data.csrfmiddlewaretoken,
             };
             beforeLoad(button);
-            let response = await requestAPI(`${apiURL}/register`,
+            let response = await requestAPI(
+                `${apiURL}/register`,
                 JSON.stringify(data),
                 headers,
                 "POST"
@@ -332,7 +350,7 @@ async function registerForm(event) {
             }
         } catch (err) {
             console.log(err);
-			afterLoad(button, buttonText);
+            afterLoad(button, buttonText);
         }
     }
 }
@@ -350,7 +368,8 @@ async function resendConfirmationEmail(event) {
         let button = form.querySelector('button[type="submit"]');
         let buttonText = button.innerText;
         beforeLoad(button);
-        let response = await requestAPI(`${apiURL}/users/resend-confirm`,
+        let response = await requestAPI(
+            `${apiURL}/users/resend-confirm`,
             JSON.stringify(data),
             headers,
             "PATCH"
@@ -386,6 +405,67 @@ async function resendConfirmationEmail(event) {
         }
     } catch (err) {
         console.log(err);
-		afterLoad(button, buttonText);
+        afterLoad(button, buttonText);
     }
+}
+
+// Signin With Google
+
+// var client;
+// function initClient() {
+//     client = google.accounts.oauth2.initCodeClient({
+//         client_id: "952441311880-fakfeiphp8nnuuob4aekn1i56tookjj9.apps.googleusercontent.com",
+//         scope: "openid email profile",
+//         ux_mode: "popup",
+//         callback: async (response) => {
+//             console.log(response);
+//             let headers = {
+//                 "Content-Type": "application/json",
+//             };
+//             let data = {"code": `${response.code}`};
+//             let res = await requestAPI(`${apiURL}/auth/google/`, JSON.stringify(data), headers, 'POST');
+//             console.log(res);
+//             res.json().then(function(resObj) {
+//                 console.log(resObj);
+//             })
+//         },
+//     });
+// }
+// function getAuthCode() {
+//     // Request authorization code and obtain user consent
+//     client.requestCode();
+// }
+
+
+async function googleSigninCallback(response) {
+    let loginMsg = document.querySelector('.google-signin-msg');
+    let headers = {
+        "Content-Type": "application/json",
+    };
+    let data = {"access_token": `${response.credential}`};
+    let res = await requestAPI(`${apiURL}/auth/google/`, JSON.stringify(data), headers, 'POST');
+    res.json().then(async function(resObj) {
+        if(res.status == 200) {
+            let myHeader = {
+                Authorization: `Bearer ${resObj.access}`,
+            };
+            let myRes = await requestAPI(`${apiURL}/me`, null, myHeader, "GET");
+            myRes.json().then(function(myResObj) {
+                if(myRes.status == 401) {
+                    console.log(myResObj);
+                    loginMsg.classList.add('active');
+                    loginMsg.innerText = myResObj.messages.non_field;
+                }
+                else if(myRes.status == 200) {
+                    loginMsg.innerText = '';
+                    loginMsg.classList.remove('active');
+                    const accessToken = parseJwt(resObj.access);
+                    const refreshToken = parseJwt(resObj.refresh);
+                    setCookie("access", resObj.access, accessToken.exp);
+                    setCookie("refresh", resObj.refresh, refreshToken.exp);
+                    location.href = location.origin + "/";   
+                }
+            })
+        }
+    })
 }

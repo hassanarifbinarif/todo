@@ -236,3 +236,30 @@ async function deleteUser(event, id) {
         afterLoad(button, "Error! Retry");
     }
 }
+
+
+async function toggleUserState(event, id, isBlocked) {
+    let blockSwitch = event.currentTarget;
+    let token = getCookie('admin_access');
+    let headers = {
+        "Authorization": `Bearer ${token}`,
+    };
+    if(isBlocked == 'False') {
+        let response = await requestAPI(`${apiURL}/admin/users/${id}/block`, null, headers, 'POST');
+        response.json().then(function(res) {
+            if(response.status == 200) {
+                blockSwitch.setAttribute('onclick', `toggleUserState(event, '${id}', 'True')`);
+                blockSwitch.classList.add('active');
+            }
+        })
+    }
+    else if(isBlocked == 'True') {
+        let response = await requestAPI(`${apiURL}/admin/users/${id}/unblock`, null, headers, 'POST');
+        response.json().then(function(res) {
+            if(response.status == 200) {
+                blockSwitch.setAttribute('onclick', `toggleUserState(event, '${id}', 'False')`);
+                blockSwitch.classList.remove('active');
+            }
+        })
+    }
+}

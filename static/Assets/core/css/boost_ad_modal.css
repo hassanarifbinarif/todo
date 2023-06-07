@@ -1,0 +1,60 @@
+#boost-ad .modal-dialog-centered {
+    justify-content: center;
+}
+
+#boost-ad .modal-content {
+    border: 1px solid transparent;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    max-width: 434px;
+    padding-bottom: 70px;
+}
+
+#boost-ad .modal-content .modal-body {
+    padding-right: 37px;
+    padding-left: 37px;
+}
+
+#boost-ad .modal-content .modal-body h3 {
+    font-weight: 600;
+    font-size: 1.875rem;
+    line-height: 1.25rem;
+    text-align: center;
+    color: #101828;
+    margin-top: 24px;
+}
+
+#boost-ad .del-warning {
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    text-align: center;
+    color: #475467;
+    margin-bottom: 32px;
+}
+
+
+#boost-ad .submit-btn {
+    max-width: 360px;
+    width: 100%;
+    height: 44px;
+    background-color: #8DC63F;
+    border: 1px solid #8DC63F;
+    box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: #FFFFFF;
+}
+
+#boost-ad .back-link {
+    align-self: center;
+    font-weight: 600;
+    font-size: .875rem;
+    line-height: 1.25rem;
+    color: #8DC63F;
+    margin-top: 32px;
+    cursor: pointer;
+}

@@ -21,12 +21,12 @@
             <td>{{obj.id}}</td>
             <td>{{obj.created_at|custom_date}}</td>
             <td>{{obj.user.first_name}} {{obj.user.last_name}}</td>
-            <td>Corredor</td>
+            <td></td>
             <td>{{obj.property_type|title}}</td>
             <td>${{obj.price|floatformat:"g"}}</td>
             <td>{{obj.city}}</td>
             <td>{{obj.neighbourhood}}</td>
-            <td>NO</td>
+            <td></td>
             <td>
                 <div>
                     {% if obj.is_published %}
@@ -35,7 +35,7 @@
                     <img src="{% static 'Assets/core/images/promotion_logo.svg' %}" alt="promotion" />
                     {% endif %}
                     <img src="{% static 'Assets/core/images/reserved_logo.svg' %}" alt="reserved" />
-                    <img src="{% static 'Assets/core/images/editing_logo.svg' %}" onclick="toggleListingView(event, '{{obj.id}}');" id="edit-listing-btn" alt="edit" />
+                    <img src="{% static 'Assets/core/images/editing_logo.svg' %}" onclick="toggleListingView(event, {id:'{{obj.id}}', created_at:'{{obj.created_at}}', description:'{{obj.description}}', criteria:'{{obj.criteria}}', price:'{{obj.price}}', property_type:'{{obj.property_type}}', land:'{{obj.land}}', construction:'{{obj.construction}}', neighbourhood:'{{obj.neighbourhood}}', bedrooms:'{{obj.bedrooms}}', bathrooms:'{{obj.bathrooms}}', city:'{{obj.city}}', parking:'{{obj.parking}}', antiquity:'{{obj.antiquity}}', location:'{{obj.location}}', ameneties:'{{obj.ameneties}}', images: {{obj.images}}});" id="edit-listing-btn" alt="edit" />
                     <img src="{% static 'Assets/core/images/delete_logo.svg' %}" onclick="openDelListingModal('del-listing', '{{obj.id}}')" alt="delete" />
                 </div>
             </td>

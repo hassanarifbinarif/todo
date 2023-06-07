@@ -1,0 +1,40 @@
+<div class="modal fade" id="boost-ad" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="delUserLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0 justify-content-end pt-4 pb-5">
+            </div>
+            <div class="modal-body d-flex flex-column align-items-center pt-0">
+                <svg width="66" height="67" viewBox="0 0 66 67" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="5" y="5.51807" width="56" height="56" rx="28" fill="#F3FEE7" />
+                    <path
+                        d="M23.4995 31H42.4995M30.9995 25L28.9995 31L32.9995 42.5L36.9995 31L34.9995 25M33.6141 42.2625L42.5727 31.5121C42.7246 31.33 42.8005 31.2389 42.8295 31.1372C42.8551 31.0475 42.8551 30.9525 42.8295 30.8628C42.8005 30.7611 42.7246 30.67 42.5727 30.4879L38.2394 25.2879C38.1512 25.182 38.1072 25.1291 38.0531 25.0911C38.0052 25.0574 37.9518 25.0324 37.8953 25.0172C37.8314 25 37.7626 25 37.6248 25H28.3742C28.2365 25 28.1676 25 28.1038 25.0172C28.0473 25.0324 27.9938 25.0574 27.946 25.0911C27.8919 25.1291 27.8478 25.182 27.7597 25.2879L23.4263 30.4879C23.2745 30.67 23.1986 30.7611 23.1696 30.8628C23.144 30.9525 23.144 31.0475 23.1696 31.1372C23.1986 31.2389 23.2745 31.33 23.4263 31.5121L32.385 42.2625C32.596 42.5158 32.7015 42.6424 32.8279 42.6886C32.9387 42.7291 33.0603 42.7291 33.1712 42.6886C33.2975 42.6424 33.4031 42.5158 33.6141 42.2625Z"
+                        stroke="#039855" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <rect x="5" y="5.51807" width="56" height="56" rx="28" stroke="#FAFEF5" stroke-width="10" />
+                </svg>
+                <form action="" class="align-items-center w-100">
+                    {% csrf_token %}
+                    <div class="alert hide">
+                        <span class="closebtn" onclick="this.parentElement.classList.add('hide');">&times;</span>
+                        <span class="error-text"></span>
+                    </div>
+                    <div class="w-100 text-center">
+                        <h3>Feature your ad?</h3>
+                        <p class="del-warning">Do you want to feature your ad for 30 days for only $4.99?
+                        </p>
+                    </div>
+                    <div class="w-100 d-flex justify-content-center gap-4">
+                        <button type="submit" class="submit-btn">
+                            <span class="spinner-border spinner-border-sm hide" role="status" aria-hidden="true"></span>
+                            <span class="btn-text">Feature</span>
+                        </button>
+                    </div>
+                </form>
+                <div class="back-link" data-bs-dismiss="modal">
+                    <span>No, Thanks</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" class="boost-ad" data-bs-toggle="modal" data-bs-target="#boost-ad" />

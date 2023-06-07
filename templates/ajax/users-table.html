@@ -24,12 +24,12 @@
             <td>{{obj.email}}</td>
             <td>{{obj.phone}}</td>
             <td>{{obj.city}}</td>
-            <td>Basico</td>
-            <td>4/5</td>
+            <td></td>
+            <td></td>
             <td>{{obj.created_at|custom_date}}</td>
             <td>
                 <div>
-                    <svg class="block_logo {% if obj.is_blocked %}active{% endif %}" width="15" height="15"
+                    <svg onclick="toggleUserState(event, '{{obj.id}}', '{{obj.is_blocked}}');" class="block_logo {% if obj.is_blocked %}active{% endif %}" width="15" height="15"
                         viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_28_6705)">
                             <path

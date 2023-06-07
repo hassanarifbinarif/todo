@@ -12,5 +12,7 @@ urlpatterns = [
     path('about-us/', views.about_us, name='about_us'),
     path('news/', views.news, name='news'),
     path('forgot-password/', views.forgot_password, name='forgot_password'),
-    path('verify-email/', views.verify_email, name='verify_email')
+    path('verify-email/', views.verify_email, name='verify_email'),
+    path('terms-and-conditions/', views.terms_and_conditions, name='terms_and_conditions'),
+    path('privacy-policy/', views.privacy_policy, name='privacy_policy'),
 ]
