@@ -232,6 +232,9 @@ async function deleteUser(event, id) {
     else if(response.status == 404) {
         afterLoad(button, "User not found");
     }
+    else if(response.status == 500) {
+        afterLoad(button, "Error! Retry");
+    }
     else {
         afterLoad(button, "Error! Retry");
     }

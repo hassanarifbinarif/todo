@@ -411,32 +411,6 @@ async function resendConfirmationEmail(event) {
 
 // Signin With Google
 
-// var client;
-// function initClient() {
-//     client = google.accounts.oauth2.initCodeClient({
-//         client_id: "952441311880-fakfeiphp8nnuuob4aekn1i56tookjj9.apps.googleusercontent.com",
-//         scope: "openid email profile",
-//         ux_mode: "popup",
-//         callback: async (response) => {
-//             console.log(response);
-//             let headers = {
-//                 "Content-Type": "application/json",
-//             };
-//             let data = {"code": `${response.code}`};
-//             let res = await requestAPI(`${apiURL}/auth/google/`, JSON.stringify(data), headers, 'POST');
-//             console.log(res);
-//             res.json().then(function(resObj) {
-//                 console.log(resObj);
-//             })
-//         },
-//     });
-// }
-// function getAuthCode() {
-//     // Request authorization code and obtain user consent
-//     client.requestCode();
-// }
-
-
 async function googleSigninCallback(response) {
     let loginMsg = document.querySelector('.google-signin-msg');
     let headers = {
@@ -452,7 +426,6 @@ async function googleSigninCallback(response) {
             let myRes = await requestAPI(`${apiURL}/me`, null, myHeader, "GET");
             myRes.json().then(function(myResObj) {
                 if(myRes.status == 401) {
-                    console.log(myResObj);
                     loginMsg.classList.add('active');
                     loginMsg.innerText = myResObj.messages.non_field;
                 }
