@@ -46,14 +46,6 @@ function parseJwt (token) {
     return JSON.parse(jsonPayload);
 };
 
-// let cookie = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg1NzE2ODQxLCJqdGkiOiI5MjU3NzI0YzFhMWI0Njk4ODA1ZGU3MDVlMGJkYzRjMCIsInVzZXJfaWQiOjEwLCJzdGVwIjoiY29tcGxldGVkIiwicm9sZSI6ImFkbWluIn0.egox8tE_tM8HJpArqr-OEOhbvMKWXtWoGzA4-3TVgVA';
-// let parsedCookie = parseJwt(cookie);
-// console.log("Parsed Cookie: ", parsedCookie);
-// let date = new Date(parsedCookie.exp * 1000);
-// console.log(date.getTime());
-// console.log("To Locale String: ", date.toLocaleString());
-// console.log("Cookie Expiry Time: ", date.toUTCString());
-
 
 function setCookie(name, value, expiry) {
     if(name === 'access'){
@@ -256,7 +248,6 @@ function matchingPassword(password, confirmPassword) {
     }
 }
 
-// /^\d+$/.test(number.value)
 
 function isValidNumber(number) {
     let numberMsg = number.nextElementSibling;
@@ -295,4 +286,11 @@ function isValidImage(image) {
         pictureMsg.classList.remove('active');
         return true;
     }
+}
+
+
+function roundDecimalPlaces(number) {
+    let value = parseFloat(number);
+    let roundedValue = Math.round(value * 100) / 100;
+    return roundedValue.toFixed(2);
 }

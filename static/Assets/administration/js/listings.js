@@ -4,6 +4,8 @@ let listingMainView = document.querySelector('.listing-main-view');
 let listingEditView = document.querySelector('.listing-edit-view');
 
 
+// Listening for browser back button click to restore previous table state (if any)
+
 window.addEventListener("popstate", (event) => {
     const { state } = event;
     if (state) {
@@ -13,6 +15,8 @@ window.addEventListener("popstate", (event) => {
 
 window.history.pushState({data: listingTableContainer.innerHTML}, '', `${location.pathname}`);
 
+
+// Getting records for each case e.g. search, sorting, etc.
 
 async function getListings(url) {
     if (url != 'null') {
@@ -48,6 +52,8 @@ async function getListings(url) {
 }
 
 
+// Searching records for user entered keywords
+
 function searchForm(event) {
     event.preventDefault();
     let form = event.currentTarget;
@@ -59,6 +65,8 @@ function searchForm(event) {
 }
 
 
+// Getting all records created today
+
 function getTodayRecords() {
     let currentTime = new Date().toISOString();
     let startTime = new Date(new Date(new Date().setHours(0, 0, 0, 0)).toString().split('GMT')[0] + ' UTC').toISOString();
@@ -66,16 +74,20 @@ function getTodayRecords() {
 }
 
 
+// Toggling between main listing UI and edit listing UI
+
 async function toggleListingView(event, data) {
     let element = event.currentTarget;
     if(element.id == 'edit-listing-btn' && listingEditView.classList.contains('hide')) {
+
+        // Populating fields in edit listing UI when edit button is clicked on a listing row
         listingMainView.classList.add('hide');
         let form = listingEditView.querySelector('form');
         form.setAttribute('onsubmit', `updateListing(event, '${data.id}')`);
         form.querySelector('#listing-id').innerText = data.id;
         let date = new Date(data.created_at);
         form.querySelector('#listing-date').innerText = date.getUTCDate() + '/' + (date.getUTCMonth() + 1) + '/' + date.getUTCFullYear();
-        form.querySelector('#property-description').innerText = data.description;
+        form.querySelector('#property-description').textContent = data.description;
         form.querySelector(`input[name="criteria"][value="${data.criteria}"]`).checked = true;
         form.querySelector('input[name="price"]').value = data.price;
         form.querySelector(`select[name="property_type"] option[value="${data.property_type}"]`).selected = true;
@@ -128,6 +140,9 @@ async function toggleListingView(event, data) {
 let imageContainer = document.getElementById("uploaded-image-container");
 let imageInput = document.getElementById("image-input");
 let imageArray = [];
+
+
+// Previewing and inserting images in array on upload
 
 imageInput.addEventListener("change", function () {
     const imageFiles = imageInput.files;
@@ -201,6 +216,8 @@ function createTag(text) {
 }
 
 
+// Updating Listing Details
+
 async function updateListing(event, id) {
     event.preventDefault();
     if(event.submitter.hasAttribute('data-id', 'delete')) {
@@ -210,6 +227,9 @@ async function updateListing(event, id) {
         let form = event.currentTarget;
         let button = form.querySelector('#publish-property-btn');
         let buttonText = button.innerText;
+        form.querySelector('input[name="price"]').value = roundDecimalPlaces(form.querySelector('input[name="price"]').value);
+        form.querySelector('input[name="land"]').value = roundDecimalPlaces(form.querySelector('input[name="land"]').value);
+        form.querySelector('input[name="construction"]').value = roundDecimalPlaces(form.querySelector('input[name="construction"]').value);
         let formData = new FormData(form);
         let data = formDataToObject(formData);
         let tagText = tags.map((tag) => tag.querySelector('span').innerText).join(',');
@@ -222,6 +242,7 @@ async function updateListing(event, id) {
         beforeLoad(button);
         let response = await requestAPI(`${apiURL}/admin/listings/${id}`, formData, headers, 'PATCH');
         response.json().then(function(res) {
+            console.log(res);
             if(response.status == 200) {
                 afterLoad(button, 'Listing Updated');
                 getListings(requiredDataURL);
@@ -237,6 +258,8 @@ async function updateListing(event, id) {
 }
 
 
+// Opening Delete Listing Modal
+
 function openDelListingModal(modalId, id) {
     let modal = document.querySelector(`#${modalId}`);
     let form = modal.querySelector('form');
@@ -245,6 +268,8 @@ function openDelListingModal(modalId, id) {
     document.querySelector(`.${modalId}`).click();
 }
 
+
+// Handling Listing Removal
 
 async function deleteListing(event, id) {
     event.preventDefault();
@@ -257,7 +282,7 @@ async function deleteListing(event, id) {
     let headers = {
         "Authorization": `Bearer ${token}`,
         "X-CSRFToken": data.csrfmiddlewaretoken,
-    }
+    };
     beforeLoad(button);
     let response = await requestAPI(`${apiURL}/admin/listings/${id}`, null, headers, 'DELETE');
     if(response.status == 204) {
@@ -266,9 +291,6 @@ async function deleteListing(event, id) {
     }
     else if(response.status == 404) {
         afterLoad(button, "Listing not found");
-    }
-    else if(response.status == 500) {
-        afterLoad(button, "Error! Retry");
     }
     else {
         afterLoad(button, "Error! Retry");

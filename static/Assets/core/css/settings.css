@@ -20,6 +20,8 @@
 
 .my-ads-section {
     background-image: url('../images/authentication_bg.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
     display: flex;
     flex-direction: column;
     justify-content: center;

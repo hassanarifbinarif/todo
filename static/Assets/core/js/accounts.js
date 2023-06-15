@@ -122,6 +122,7 @@ async function loginForm(event) {
             );
             response.json().then(async function (res) {
                 if (response.status == 400) {
+                    console.log(res);
                     emailMsg.innerText = res.messages.password;
                     passwordMsg.innerText = res.messages.password;
                     emailMsg.classList.add("active");

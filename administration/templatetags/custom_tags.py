@@ -1,18 +1,18 @@
-import math
 from django import template
 from datetime import datetime
+from django.template.defaultfilters import date
 
 register = template.Library()
 
 
-def convert_to_date(value):
+def convert_to_date(value, arg):
     if not value:
         return ''
     try:
         date_obj = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%fZ')
     except Exception as e:
         return value
-    formatted_date = date_obj.strftime('%d/%m/%Y')
+    formatted_date = date(date_obj, arg)
     return formatted_date
 
 

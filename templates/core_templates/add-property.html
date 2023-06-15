@@ -27,8 +27,9 @@
                     <span>List your property</span>
                 </div>
                 <form class="add-property-main-content" onsubmit="addPropertyForm(event);">
+                    {% csrf_token %}
                     <div class="image-input-container">
-                        <input type="file" multiple accept="image/jpeg, image/jpg, image/png, image/gif" name="property_image" id="image-input" />
+                        <input type="file" multiple accept="image/jpeg, image/jpg, image/png, image/gif" name="images" id="image-input" />
                         <label for="image-input" class="image-input-label">
                             <svg width="124" height="124" viewBox="0 0 124 124" fill="none"
                                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -49,12 +50,12 @@
                     </div>
                     <div class="property-description-input">
                         <span>Description</span>
-                        <textarea name="property_description" placeholder="Samborondon, Ceibos etc"
+                        <textarea name="description" required placeholder="Samborondon, Ceibos etc"
                             id="property-description" cols="30" rows="10"></textarea>
                         <small class="description-msg input-error-msg"></small>
                     </div>
                     <div class="property-details-input-container">
-                        <!-- row-cols-xxl-5 row-cols-xl-3 row-cols-lg-2 row-cols-md-2 row-cols-sm-1 -->
+                         <!-- row-cols-xxl-5 row-cols-xl-3 row-cols-lg-2 row-cols-md-2 row-cols-sm-1 -->
                         <div class="property-details-input-group">
                             <div class="">
                                 <p>Criteria</p>
@@ -72,7 +73,7 @@
                             </div>
                             <div class="">
                                 <p>Price</p>
-                                <input class="general-input" type="number" min="0" placeholder="$450,000" name="price"
+                                <input class="general-input" type="number" step="any" min="0" placeholder="$450,000" name="price"
                                     id="price" required />
                             </div>
                             <div class="">
@@ -82,7 +83,7 @@
                                     <option value="house">House</option>
                                     <option value="apartment">Apartment</option>
                                     <option value="land">Land</option>
-                                    <option value="retail">Retail Space</option>
+                                    <option value="retail_space">Retail Space</option>
                                     <option value="office">Office</option>
                                     <option value="practice">Practice</option>
                                     <option value="warehouse">Warehouse</option>
@@ -91,11 +92,11 @@
                             </div>
                             <div class="">
                                 <p>Land</p>
-                                <input class="general-input" type="text" placeholder="450m2" min="0" name="land" id="land" required />
+                                <input class="general-input" type="number" step="any" placeholder="450m2" min="0" name="land" id="land" required />
                             </div>
                             <div class="">
                                 <p>Construction</p>
-                                <input class="general-input" type="text" placeholder="450m2" min="0" name="construction"
+                                <input class="general-input" type="number" step="any" placeholder="450m2" min="0" name="construction"
                                     id="construction" required />
                             </div>
                             <div class="neighbourhood-input">
@@ -107,24 +108,24 @@
                                 <p>Bedrooms</p>
                                 <div class="btn-group bedroom-count-radio-group" role="group"
                                     aria-label="Basic radio toggle button group">
-                                    <input type="radio" class="btn-check" name="bedroom" id="bedroombtnradio1"
+                                    <input type="radio" class="btn-check" name="bedrooms" id="bedroombtnradio1"
                                         checked required value="1">
                                     <label class="btn btn-outline-primary bedroom-count-radio-btn"
                                         for="bedroombtnradio1">1</label>
 
-                                    <input type="radio" class="btn-check" name="bedroom" id="bedroombtnradio2" value="2" required>
+                                    <input type="radio" class="btn-check" name="bedrooms" id="bedroombtnradio2" value="2" required>
                                     <label class="btn btn-outline-primary bedroom-count-radio-btn"
                                         for="bedroombtnradio2">2</label>
 
-                                    <input type="radio" class="btn-check" name="bedroom" id="bedroombtnradio3" value="3" required>
+                                    <input type="radio" class="btn-check" name="bedrooms" id="bedroombtnradio3" value="3" required>
                                     <label class="btn btn-outline-primary bedroom-count-radio-btn"
                                         for="bedroombtnradio3">3</label>
 
-                                    <input type="radio" class="btn-check" name="bedroom" id="bedroombtnradio4" value="4" required>
+                                    <input type="radio" class="btn-check" name="bedrooms" id="bedroombtnradio4" value="4" required>
                                     <label class="btn btn-outline-primary bedroom-count-radio-btn"
                                         for="bedroombtnradio4">4</label>
 
-                                    <input type="radio" class="btn-check" name="bedroom" id="bedroombtnradio5" value="5" required>
+                                    <input type="radio" class="btn-check" name="bedrooms" id="bedroombtnradio5" value="5" required>
                                     <label class="btn btn-outline-primary bedroom-count-radio-btn"
                                         for="bedroombtnradio5">5+</label>
                                 </div>
@@ -133,27 +134,27 @@
                                 <p>Bathrooms</p>
                                 <div class="btn-group bedroom-count-radio-group" role="group"
                                     aria-label="Basic radio toggle button group">
-                                    <input type="radio" class="btn-check" name="bathroom" id="bathroombtnradio1"
+                                    <input type="radio" class="btn-check" name="bathrooms" id="bathroombtnradio1"
                                         checked required value="1">
                                     <label class="btn btn-outline-primary bedroom-count-radio-btn"
                                         for="bathroombtnradio1">1</label>
 
-                                    <input type="radio" class="btn-check" name="bathroom"
+                                    <input type="radio" class="btn-check" name="bathrooms"
                                         id="bathroombtnradio2" required value="2">
                                     <label class="btn btn-outline-primary bedroom-count-radio-btn"
                                         for="bathroombtnradio2">2</label>
 
-                                    <input type="radio" class="btn-check" name="bathroom"
+                                    <input type="radio" class="btn-check" name="bathrooms"
                                         id="bathroombtnradio3" required value="3">
                                     <label class="btn btn-outline-primary bedroom-count-radio-btn"
                                         for="bathroombtnradio3">3</label>
 
-                                    <input type="radio" class="btn-check" name="bathroom"
+                                    <input type="radio" class="btn-check" name="bathrooms"
                                         id="bathroombtnradio4" required value="4">
                                     <label class="btn btn-outline-primary bedroom-count-radio-btn"
                                         for="bathroombtnradio4">4</label>
 
-                                    <input type="radio" class="btn-check" name="bathroom"
+                                    <input type="radio" class="btn-check" name="bathrooms"
                                         id="bathroombtnradio5" required value="5">
                                     <label class="btn btn-outline-primary bedroom-count-radio-btn"
                                         for="bathroombtnradio5">5+</label>
@@ -179,7 +180,7 @@
                                 <p>Location</p>
                                 <div class="search-location">
                                     <input class="general-input" type="text" placeholder="Aires del batan"
-                                        name="location" required />
+                                        name="location" />
                                     <svg width="21" height="21" viewBox="0 0 21 21" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -196,7 +197,7 @@
                                 </div>
                             </div>
                             <div class="amenety-input">
-                                <p>Ameneties <span>&nbsp; &nbsp; &nbsp;Sepearte with a coma after each amenity</span>
+                                <p>Ameneties <span>&nbsp; &nbsp; &nbsp;Seperate with a coma after each amenity</span>
                                 </p>
                                 <div class="tags-container">
                                     <div class="tags-input">
@@ -206,7 +207,10 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="publish-property-btn" id="publish-property-btn">Publish</button>
+                        <button type="submit" class="publish-property-btn" id="publish-property-btn">
+                            <span class="spinner-border spinner-border-sm hide" role="status" aria-hidden="true"></span>
+                            <span class="btn-text">Publish</span>
+                        </button>
                     </div>
                 </form>
             </div>

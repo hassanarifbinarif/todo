@@ -129,13 +129,6 @@
     background-color: #F1F1F1;
 }
 
-.no-record-row {
-    text-align: center;
-    font-size: 1.5rem!important;
-    color: black!important;
-    font-weight: 700;
-}
-
 .pagination-container {
     align-self: flex-end;
     display: flex;
@@ -314,7 +307,11 @@ input::placeholder {
 }
 
 input[name="criteria"] {
-    display: none;
+    opacity: 0;
+}
+
+input[name="criteria"]:invalid + label {
+    border: 2px solid #C63F3F;
 }
 
 input[name="criteria"]:checked+.radio-label {
@@ -337,16 +334,6 @@ input[name="criteria"]:checked+.radio-label {
     height: 40px;
 }
 
-.general-input,
-select {
-    width: 150px;
-    height: 40px;
-    background-color: #FFFFFF;
-    border: 0.5px solid #9A9A9A;
-    border-radius: 2px;
-    padding: 10px 14px;
-}
-
 .criteria-radio-btn .radio-label {
     display: flex;
     justify-content: center;
@@ -357,7 +344,19 @@ select {
     background-color: #FFFFFF;
     border: 0.5px solid #9A9A9A;
     border-radius: 2px;
+    position: absolute;
+    top: 0px;
     transition: all ease .2s;
+}
+
+.general-input,
+select {
+    width: 150px;
+    height: 40px;
+    background-color: #FFFFFF;
+    border: 0.5px solid #9A9A9A;
+    border-radius: 2px;
+    padding: 10px 14px;
 }
 
 .neighbourhood-input>input,
@@ -559,7 +558,7 @@ select {
 
 
 @media (max-width: 768px) {
-    .add-property-container {
+    .add-property-main-content {
         padding: 56px 10px 0px;
     }
 

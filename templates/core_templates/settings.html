@@ -8,10 +8,12 @@
     
     {% extends '../layouts/base.html' %}
     {% load static %}
+    {% load custom_tags %}
 
     {% block links %}
 
     <link rel="stylesheet" href="{% static 'Assets/core/css/settings.css' %}">
+    <link rel="stylesheet" href="{% static 'Assets/administration/css/del_listing_modal.css' %}">
     <script src="https://kit.fontawesome.com/0d5a0a2089.js" crossorigin="anonymous"></script>
 
     {% endblock %}
@@ -71,7 +73,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% if listings %}
+                            {% if listings.data %}
                             {% for obj in listings.data %}
                             <tr>
                                 <td scope="row">
@@ -82,268 +84,32 @@
                                 </td>
                                 <td>
                                     <div class="property-image">
-                                        <img src="{{obj.images.0.image}}" alt="Property Image">
+                                        <img src="{{obj.images.0.image}}" loading="lazy" alt="Property Image" />
                                     </div>
                                 </td>
-                                <td>
-                                    <script>
-                                        var date = new Date("{{obj.created_at}}");
-                                        var month = ["January", "February", "March", "April", "May", "June",
-                                        "July", "August", "September", "October", "November", "December"][date.getMonth()];
-                                        var review_date = ('0' + date.getUTCDate()).slice(-2) + ', ' + month + ', ' + date.getFullYear();
-                                        document.write(review_date)
-                                    </script>    
-                                </td>
+                                <td>{{obj.created_at|custom_date:"d, F, Y"}}</td>
                                 <td>{{obj.property_type|title}}</td>
                                 <td>{{obj.neighbourhood|title}}</td>
                                 <td>{{obj.construction}}m2</td>
                                 <td>{{obj.land}}m2</td>
                                 <td>{{obj.bedrooms}}</td>
                                 <td>{{obj.bathrooms}}</td>
-                                <td>${{obj.price}}</td>
+                                <td>${{obj.price|floatformat:"2g"}}</td>
                                 <td>
                                     <div class="property-actions">
                                         <img src="{% static 'Assets/core/images/promotion_logo.svg' %}" alt="Promotion Button">
                                         <img src="{% static 'Assets/core/images/reserved_logo.svg' %}" alt="Reserved Button">
                                         <img src="{% static 'Assets/core/images/editing_logo.svg' %}" alt="Editing Button">
-                                        <img src="{% static 'Assets/core/images/delete_logo.svg' %}" alt="Delete Button">
+                                        <img src="{% static 'Assets/core/images/delete_logo.svg' %}" onclick="openDelListingModal('del-listing', '{{obj.id}}')" alt="Delete Button">
                                     </div>
                                 </td>
                             </tr>
                             {% endfor %}
+                            {% else %}
+                            <tr>
+                                <td colspan="11" class="no-record-row">No record available</td>
+                            </tr>
                             {% endif %}
-                            <tr>
-                                <td scope="row">
-                                    <div class="form-check listing-checkbox">
-                                        <input class="form-check-input listing-checkbox-input" type="checkbox" value=""
-                                            id="flexCheckDefault">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="property-image">
-                                        <img src="{% static 'Assets/core/images/property_image_1.png' %}" alt="Property Image">
-                                    </div>
-                                </td>
-                                <td>23, Noviembre, 2022</td>
-                                <td>Casa</td>
-                                <td>Samborondon</td>
-                                <td>350m2</td>
-                                <td>400m2</td>
-                                <td>4</td>
-                                <td>4.5</td>
-                                <td>$450,000</td>
-                                <td>
-                                    <div class="property-actions">
-                                        <img src="{% static 'Assets/core/images/promotion_logo.svg' %}" alt="Promotion Button">
-                                        <img src="{% static 'Assets/core/images/reserved_logo.svg' %}" alt="Reserved Button">
-                                        <img src="{% static 'Assets/core/images/editing_logo.svg' %}" alt="Editing Button">
-                                        <img src="{% static 'Assets/core/images/delete_logo.svg' %}" alt="Delete Button">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td scope="row">
-                                    <div class="form-check listing-checkbox">
-                                        <input class="form-check-input listing-checkbox-input" type="checkbox" value=""
-                                            id="flexCheckDefault">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="property-image">
-                                        <img src="{% static 'Assets/core/images/property_image_1.png' %}" alt="Property Image">
-                                    </div>
-                                </td>
-                                <td>23, Noviembre, 2022</td>
-                                <td>Casa</td>
-                                <td>Samborondon</td>
-                                <td>350m2</td>
-                                <td>400m2</td>
-                                <td>4</td>
-                                <td>4.5</td>
-                                <td>$450,000</td>
-                                <td>
-                                    <div class="property-actions">
-                                        <img src="{% static 'Assets/core/images/promotion_logo.svg' %}" alt="Promotion Button">
-                                        <img src="{% static 'Assets/core/images/reserved_logo.svg' %}" alt="Reserved Button">
-                                        <img src="{% static 'Assets/core/images/editing_logo.svg' %}" alt="Editing Button">
-                                        <img src="{% static 'Assets/core/images/delete_logo.svg' %}" alt="Delete Button">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td scope="row">
-                                    <div class="form-check listing-checkbox">
-                                        <input class="form-check-input listing-checkbox-input" type="checkbox" value=""
-                                            id="flexCheckDefault">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="property-image">
-                                        <img src="{% static 'Assets/core/images/property_image_1.png' %}" alt="Property Image">
-                                    </div>
-                                </td>
-                                <td>23, Noviembre, 2022</td>
-                                <td>Casa</td>
-                                <td>Samborondon</td>
-                                <td>350m2</td>
-                                <td>400m2</td>
-                                <td>4</td>
-                                <td>4.5</td>
-                                <td>$450,000</td>
-                                <td>
-                                    <div class="property-actions">
-                                        <img src="{% static 'Assets/core/images/promotion_logo.svg' %}" alt="Promotion Button">
-                                        <img src="{% static 'Assets/core/images/reserved_logo.svg' %}" alt="Reserved Button">
-                                        <img src="{% static 'Assets/core/images/editing_logo.svg' %}" alt="Editing Button">
-                                        <img src="{% static 'Assets/core/images/delete_logo.svg' %}" alt="Delete Button">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td scope="row">
-                                    <div class="form-check listing-checkbox">
-                                        <input class="form-check-input listing-checkbox-input" type="checkbox" value=""
-                                            id="flexCheckDefault">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="property-image">
-                                        <img src="{% static 'Assets/core/images/property_image_1.png' %}" alt="Property Image">
-                                    </div>
-                                </td>
-                                <td>23, Noviembre, 2022</td>
-                                <td>Casa</td>
-                                <td>Samborondon</td>
-                                <td>350m2</td>
-                                <td>400m2</td>
-                                <td>4</td>
-                                <td>4.5</td>
-                                <td>$450,000</td>
-                                <td>
-                                    <div class="property-actions">
-                                        <img src="{% static 'Assets/core/images/promotion_logo.svg' %}" alt="Promotion Button">
-                                        <img src="{% static 'Assets/core/images/reserved_logo.svg' %}" alt="Reserved Button">
-                                        <img src="{% static 'Assets/core/images/editing_logo.svg' %}" alt="Editing Button">
-                                        <img src="{% static 'Assets/core/images/delete_logo.svg' %}" alt="Delete Button">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td scope="row">
-                                    <div class="form-check listing-checkbox">
-                                        <input class="form-check-input listing-checkbox-input" type="checkbox" value=""
-                                            id="flexCheckDefault">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="property-image">
-                                        <img src="{% static 'Assets/core/images/property_image_1.png' %}" alt="Property Image">
-                                    </div>
-                                </td>
-                                <td>23, Noviembre, 2022</td>
-                                <td>Casa</td>
-                                <td>Samborondon</td>
-                                <td>350m2</td>
-                                <td>400m2</td>
-                                <td>4</td>
-                                <td>4.5</td>
-                                <td>$450,000</td>
-                                <td>
-                                    <div class="property-actions">
-                                        <img src="{% static 'Assets/core/images/promotion_logo.svg' %}" alt="Promotion Button">
-                                        <img src="{% static 'Assets/core/images/reserved_logo.svg' %}" alt="Reserved Button">
-                                        <img src="{% static 'Assets/core/images/editing_logo.svg' %}" alt="Editing Button">
-                                        <img src="{% static 'Assets/core/images/delete_logo.svg' %}" alt="Delete Button">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td scope="row">
-                                    <div class="form-check listing-checkbox">
-                                        <input class="form-check-input listing-checkbox-input" type="checkbox" value=""
-                                            id="flexCheckDefault">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="property-image">
-                                        <img src="{% static 'Assets/core/images/property_image_1.png' %}" alt="Property Image">
-                                    </div>
-                                </td>
-                                <td>23, Noviembre, 2022</td>
-                                <td>Casa</td>
-                                <td>Samborondon</td>
-                                <td>350m2</td>
-                                <td>400m2</td>
-                                <td>4</td>
-                                <td>4.5</td>
-                                <td>$450,000</td>
-                                <td>
-                                    <div class="property-actions">
-                                        <img src="{% static 'Assets/core/images/promotion_logo.svg' %}" alt="Promotion Button">
-                                        <img src="{% static 'Assets/core/images/reserved_logo.svg' %}" alt="Reserved Button">
-                                        <img src="{% static 'Assets/core/images/editing_logo.svg' %}" alt="Editing Button">
-                                        <img src="{% static 'Assets/core/images/delete_logo.svg' %}" alt="Delete Button">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td scope="row">
-                                    <div class="form-check listing-checkbox">
-                                        <input class="form-check-input listing-checkbox-input" type="checkbox" value=""
-                                            id="flexCheckDefault">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="property-image">
-                                        <img src="{% static 'Assets/core/images/property_image_1.png' %}" alt="Property Image">
-                                    </div>
-                                </td>
-                                <td>23, Noviembre, 2022</td>
-                                <td>Casa</td>
-                                <td>Samborondon</td>
-                                <td>350m2</td>
-                                <td>400m2</td>
-                                <td>4</td>
-                                <td>4.5</td>
-                                <td>$450,000</td>
-                                <td>
-                                    <div class="property-actions">
-                                        <img src="{% static 'Assets/core/images/promotion_logo.svg' %}" alt="Promotion Button">
-                                        <img src="{% static 'Assets/core/images/reserved_logo.svg' %}" alt="Reserved Button">
-                                        <img src="{% static 'Assets/core/images/editing_logo.svg' %}" alt="Editing Button">
-                                        <img src="{% static 'Assets/core/images/delete_logo.svg' %}" alt="Delete Button">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td scope="row">
-                                    <div class="form-check listing-checkbox">
-                                        <input class="form-check-input listing-checkbox-input" type="checkbox" value=""
-                                            id="flexCheckDefault">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="property-image">
-                                        <img src="{% static 'Assets/core/images/property_image_1.png' %}" alt="Property Image">
-                                    </div>
-                                </td>
-                                <td>23, Noviembre, 2022</td>
-                                <td>Casa</td>
-                                <td>Samborondon</td>
-                                <td>350m2</td>
-                                <td>400m2</td>
-                                <td>4</td>
-                                <td>4.5</td>
-                                <td>$450,000</td>
-                                <td>
-                                    <div class="property-actions">
-                                        <img src="{% static 'Assets/core/images/promotion_logo.svg' %}" alt="Promotion Button">
-                                        <img src="{% static 'Assets/core/images/reserved_logo.svg' %}" alt="Reserved Button">
-                                        <img src="{% static 'Assets/core/images/editing_logo.svg' %}" alt="Editing Button">
-                                        <img src="{% static 'Assets/core/images/delete_logo.svg' %}" alt="Delete Button">
-                                    </div>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -373,7 +139,7 @@
                             <tr>
                                 <td>
                                     <div class="property-image">
-                                        <img src="{% static 'Assets/core/images/property_image_1.png' %}" alt="Property Image">
+                                        <img src="{% static 'Assets/core/images/property_image_1.png' %}" loading="lazy" alt="Property Image" />
                                     </div>
                                 </td>
                                 <td>23, Noviembre, 2022</td>
@@ -401,7 +167,7 @@
                             <tr>
                                 <td>
                                     <div class="property-image">
-                                        <img src="{% static 'Assets/core/images/property_image_1.png' %}" alt="Property Image">
+                                        <img src="{% static 'Assets/core/images/property_image_1.png' %}" loading="lazy" alt="Property Image" />
                                     </div>
                                 </td>
                                 <td>23, Noviembre, 2022</td>
@@ -429,7 +195,7 @@
                             <tr>
                                 <td>
                                     <div class="property-image">
-                                        <img src="{% static 'Assets/core/images/property_image_1.png' %}" alt="Property Image">
+                                        <img src="{% static 'Assets/core/images/property_image_1.png' %}" loading="lazy" alt="Property Image" />
                                     </div>
                                 </td>
                                 <td>23, Noviembre, 2022</td>
@@ -457,7 +223,7 @@
                             <tr>
                                 <td>
                                     <div class="property-image">
-                                        <img src="{% static 'Assets/core/images/property_image_1.png' %}" alt="Property Image">
+                                        <img src="{% static 'Assets/core/images/property_image_1.png' %}" loading="lazy" alt="Property Image" />
                                     </div>
                                 </td>
                                 <td>23, Noviembre, 2022</td>
@@ -485,7 +251,7 @@
                             <tr>
                                 <td>
                                     <div class="property-image">
-                                        <img src="{% static 'Assets/core/images/property_image_1.png' %}" alt="Property Image">
+                                        <img src="{% static 'Assets/core/images/property_image_1.png' %}" loading="lazy" alt="Property Image" />
                                     </div>
                                 </td>
                                 <td>23, Noviembre, 2022</td>
@@ -513,7 +279,7 @@
                             <tr>
                                 <td>
                                     <div class="property-image">
-                                        <img src="{% static 'Assets/core/images/property_image_1.png' %}" alt="Property Image">
+                                        <img src="{% static 'Assets/core/images/property_image_1.png' %}" loading="lazy" alt="Property Image" />
                                     </div>
                                 </td>
                                 <td>23, Noviembre, 2022</td>
@@ -541,7 +307,7 @@
                             <tr>
                                 <td>
                                     <div class="property-image">
-                                        <img src="{% static 'Assets/core/images/property_image_1.png' %}" alt="Property Image">
+                                        <img src="{% static 'Assets/core/images/property_image_1.png' %}" loading="lazy" alt="Property Image" />
                                     </div>
                                 </td>
                                 <td>23, Noviembre, 2022</td>
@@ -569,7 +335,7 @@
                             <tr>
                                 <td>
                                     <div class="property-image">
-                                        <img src="{% static 'Assets/core/images/property_image_1.png' %}" alt="Property Image">
+                                        <img src="{% static 'Assets/core/images/property_image_1.png' %}" loading="lazy" alt="Property Image" />
                                     </div>
                                 </td>
                                 <td>23, Noviembre, 2022</td>
@@ -715,6 +481,9 @@
             </div>
         </div>
     </section>
+
+    <!-- Delete Listing Modal -->
+    {% include '../modals/delete-listing-modal.html' %}
 
     {% endblock %}
 </body>

@@ -1,5 +1,7 @@
 .add-property-section {
     background-image: url('../images/authentication_bg.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .add-property-container {
@@ -128,6 +130,20 @@ input[id=image-input] {
     aspect-ratio: 1 / .752688;
     background-color: #F2F2F2;
     border-radius: 5px;
+    position: relative;
+}
+
+.uploaded-image:hover .del-img-btn {
+    display: inline;
+}
+
+.del-img-btn {
+    display: none;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 0px;
+    cursor: pointer;
 }
 
 .uploaded-image>img {
@@ -157,7 +173,11 @@ input::placeholder {
 }
 
 input[name="criteria"] {
-    display: none;
+    opacity: 0;
+}
+
+input[name="criteria"]:invalid + label {
+    border: 2px solid #C63F3F;
 }
 
 input[name="criteria"]:checked+.radio-label {
@@ -180,16 +200,6 @@ input[name="criteria"]:checked+.radio-label {
     height: 40px;
 }
 
-.general-input,
-select {
-    width: 150px;
-    height: 40px;
-    background-color: #FFFFFF;
-    border: 0.5px solid #9A9A9A;
-    border-radius: 2px;
-    padding: 10px 14px;
-}
-
 .criteria-radio-btn .radio-label {
     display: flex;
     justify-content: center;
@@ -200,7 +210,19 @@ select {
     background-color: #FFFFFF;
     border: 0.5px solid #9A9A9A;
     border-radius: 2px;
+    position: absolute;
+    top: 0px;
     transition: all ease .2s;
+}
+
+.general-input,
+select {
+    width: 150px;
+    height: 40px;
+    background-color: #FFFFFF;
+    border: 0.5px solid #9A9A9A;
+    border-radius: 2px;
+    padding: 10px 14px;
 }
 
 .neighbourhood-input>input,

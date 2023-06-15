@@ -26,7 +26,7 @@
             <td>{{obj.city}}</td>
             <td></td>
             <td></td>
-            <td>{{obj.created_at|custom_date}}</td>
+            <td>{{obj.created_at|custom_date:"d/m/Y"}}</td>
             <td>
                 <div>
                     <svg onclick="toggleUserState(event, '{{obj.id}}', '{{obj.is_blocked}}');" class="block_logo {% if obj.is_blocked %}active{% endif %}" width="15" height="15"

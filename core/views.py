@@ -2,8 +2,6 @@ from django.shortcuts import render
 from core.helpers import check_user_login, confirm_user_email, get_dict_from_token, requestAPI
 from todo.decorators import signin_required, signout_required
 from django.conf import settings as django_settings
-from django.http import HttpResponse
-
 
 def index(request):
     context = {}

@@ -271,3 +271,62 @@ async function profileAPI(data) {
         }
     }
 }
+
+
+// Opening Delete Listing Modal
+
+function openDelListingModal(modalId, id) {
+    let modal = document.querySelector(`#${modalId}`);
+    let form = modal.querySelector('form');
+    form.setAttribute('onsubmit', `deleteListing(event, '${id}')`);
+    form.querySelector('.btn-text').innerText = 'Confirm';
+    document.querySelector(`.${modalId}`).click();
+}
+
+
+// Handling Listing Removal
+
+async function deleteListing(event, id) {
+    event.preventDefault();
+    let form = event.currentTarget;
+    let button = form.querySelector('button[type=submit][data-id="delete"]');
+    let buttonText = button.innerText;
+    let formData = new FormData(form);
+    let data = formDataToObject(formData);
+    beforeLoad(button);
+    let response = await deleteListingAPI(data, id);
+    if(response.status == 204) {
+        afterLoad(button, "Listing Deleted");
+    }
+    else if(response.status == 404) {
+        afterLoad(button, "Listing not found");
+    }
+    else {
+        afterLoad(button, "Error! Retry");
+    }
+}
+
+async function deleteListingAPI(data, id) {
+    let token = getAccessTokenFromCookie();
+    let headers = {
+        "Authorization": `Bearer ${token}`,
+        "X-CSRFToken": data.csrfmiddlewaretoken
+    };
+    let response = await requestAPI(`${apiURL}/listings/${id}`, null, headers, 'DELETE');
+    if(response.status == 401) {
+        let myRes = await onRefreshToken();
+        if(myRes.status == 200) {
+            let accessToken = parseJwt(myRes.access);
+            let refreshToken = parseJwt(myRes.refresh);
+            setCookie('access', myRes.access, accessToken.exp);
+            setCookie('refresh', myRes.refresh, refreshToken.exp);
+            return deleteListingAPI(data, id);
+        }
+        else {
+            logout();
+        }
+    }
+    else {
+        return response;
+    }
+}

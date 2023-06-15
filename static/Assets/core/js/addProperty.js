@@ -24,7 +24,9 @@ tagsTextbox.addEventListener("input", function (e) {
 function createTag(text) {
     const tag = document.createElement("div");
     tag.classList.add("tag");
-    tag.textContent = text;
+    let tagText = document.createElement("span");
+    tagText.innerText = text;
+    tag.appendChild(tagText);
 
     const removeBtn = document.createElement("button");
     removeBtn.classList.add("remove-btn");
@@ -51,12 +53,12 @@ let publishPropertyConfirmationContent = document.querySelector(
     ".publish-property-confirmation"
 );
 
-publishBtn.addEventListener("click", function () {
-    if (!addPropertyContent.classList.contains("hide")) {
-        addPropertyContent.classList.add("hide");
-        publishPropertyConfirmationContent.classList.remove("hide");
-    }
-});
+// publishBtn.addEventListener("click", function () {
+//     if (!addPropertyContent.classList.contains("hide")) {
+//         addPropertyContent.classList.add("hide");
+//         publishPropertyConfirmationContent.classList.remove("hide");
+//     }
+// });
 
 // Upload and show images
 
@@ -105,15 +107,34 @@ function previewImages() {
     let images = "";
     imageArray.forEach((image, index) => {
         images += `<div class="uploaded-image">
-        <img src="${URL.createObjectURL(image)}" alt="property image" />
-    </div>`;
+                        <svg class="del-img-btn" onclick="delPropertyImage(event);" width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_4674_1683)">
+                                <path d="M15.4999 2.58301C8.357 2.58301 2.58325 8.35676 2.58325 15.4997C2.58325 22.6426 8.357 28.4163 15.4999 28.4163C22.6428 28.4163 28.4166 22.6426 28.4166 15.4997C28.4166 8.35676 22.6428 2.58301 15.4999 2.58301ZM21.9583 20.1368L20.137 21.958L15.4999 17.3209L10.8628 21.958L9.04159 20.1368L13.6787 15.4997L9.04159 10.8626L10.8628 9.04134L15.4999 13.6784L20.137 9.04134L21.9583 10.8626L17.3212 15.4997L21.9583 20.1368Z" fill="#FC0909"/>
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_4674_1683">
+                                    <rect width="31" height="31" fill="white"/>
+                                </clipPath>
+                            </defs>
+                        </svg>
+                        <img src="${URL.createObjectURL(image)}" alt="property image" />
+                    </div>`;
     });
     imageContainer.innerHTML = images;
 }
 
+function delPropertyImage(event) {
+    let imageElement = event.currentTarget.nextElementSibling;
+    let parentElement = imageElement.parentNode;
+    let index = Array.from(parentElement.parentNode.children).indexOf(parentElement);
+    parentElement.remove();
+    imageArray.splice(index, 1);
+}
+
+
 // Handling Add Property Form
 
-function isValidImage(images) {
+function isValidImageData(images) {
     if (images.children.length == 0) {
         images.previousElementSibling.innerText = "Property images required!";
         images.previousElementSibling.scrollIntoView();
@@ -146,29 +167,71 @@ propertyDescription.addEventListener("input", function () {
     }
 });
 
-function addPropertyForm(event) {
+
+async function addPropertyForm(event) {
     event.preventDefault();
     let form = event.currentTarget;
-    let formData = new FormData(form);
-    let data = formDataToObject(formData);
-    let tagText = [];
-    data.property_image = imageArray;
-    tags.forEach((tag) => {
-        tagText.push(tag.textContent);
-    });
-    data.ameneties = tagText;
-    console.log(data);
-
-    if (!isValidImage(imageContainer)) {
+    let button = form.querySelector('button[type="submit"]');
+    let buttonText = button.innerText;
+    if (!isValidImageData(imageContainer)) {
         imageContainer.previousElementSibling.classList.add("active");
-        return false;
-    } else if (!isValidContent(propertyDescription)) {
+        return true;
+    } else 
+    if (!isValidContent(propertyDescription)) {
         propertyDescription.nextElementSibling.classList.add("active");
         return false;
     } else {
-        if (!addPropertyContent.classList.contains("hide")) {
-            addPropertyContent.classList.add("hide");
-            publishPropertyConfirmationContent.classList.remove("hide");
+        form.querySelector('input[name="price"]').value = roundDecimalPlaces(form.querySelector('input[name="price"]').value);
+        form.querySelector('input[name="land"]').value = roundDecimalPlaces(form.querySelector('input[name="land"]').value);
+        form.querySelector('input[name="construction"]').value = roundDecimalPlaces(form.querySelector('input[name="construction"]').value);
+        let formData = new FormData(form);
+        let tagText = tags.map((tag) => tag.querySelector('span').innerText).join(',');
+        formData.append('ameneties', tagText);
+        formData.append('location', JSON.stringify({"type": "point", "coordinates": [31.460294, 74.288639]}));
+        formData.delete('images');
+        imageArray.forEach((file) => {
+            formData.append('images', file);
+        })
+        beforeLoad(button);
+        let response = await listingAPI(formData);
+        response.json().then(function(res) {
+            if(response.status == 201) {
+                if (!addPropertyContent.classList.contains("hide")) {
+                    addPropertyContent.classList.add("hide");
+                    publishPropertyConfirmationContent.classList.remove("hide");
+                }
+                window.scrollTo({top: 0, behavior: 'smooth'});
+                afterLoad(button, buttonText);
+            }
+            else {
+                afterLoad(button, 'Error! Retry');
+            }
+        })
+    }
+}
+
+async function listingAPI(formData) {
+    let token = getAccessTokenFromCookie();
+    let data = formDataToObject(formData);
+    let headers = {
+        "Authorization": `Bearer ${token}`,
+        "X-CSRFToken": data.csrfmiddlewaretoken,
+    };
+    let response = await requestAPI(`${apiURL}/listings`, formData, headers, 'POST');
+    if(response.status == 401) {
+        let myRes = await onRefreshToken();
+        if(myRes.status == 200) {
+            const accessToken = parseJwt(myRes.access);
+            const refreshToken = parseJwt(myRes.refresh);
+            setCookie("access", myRes.access, accessToken.exp);
+            setCookie("refresh", myRes.refresh, refreshToken.exp);
+            return listingAPI(formData);
         }
+        else {
+            logout()
+        }
+    }
+    else {
+        return response;
     }
 }
