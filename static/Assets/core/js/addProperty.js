@@ -5,6 +5,12 @@ const tagsInput = document.querySelector(".tags-input");
 const tagsTextbox = document.querySelector(".tags-textbox");
 const tags = [];
 
+tagsTextbox.addEventListener("keydown", function(event) {
+    if(event.keyCode === 13) {
+        event.preventDefault();
+    }
+});
+
 tagsContainer.addEventListener("click", function () {
     tagsTextbox.focus();
 });
@@ -196,6 +202,7 @@ async function addPropertyForm(event) {
         let response = await listingAPI(formData);
         response.json().then(function(res) {
             if(response.status == 201) {
+                openBoostAdModal('boost-ad', res.data.id);
                 if (!addPropertyContent.classList.contains("hide")) {
                     addPropertyContent.classList.add("hide");
                     publishPropertyConfirmationContent.classList.remove("hide");
@@ -234,4 +241,12 @@ async function listingAPI(formData) {
     else {
         return response;
     }
+}
+
+
+function openBoostAdModal(modalId, id) {
+    let modal = document.querySelector(`#${modalId}`);
+    let form = modal.querySelector('form');
+    form.setAttribute('onsubmit', `boostAdForm(event, '${id}')`);
+    document.querySelector(`.${modalId}`).click();
 }

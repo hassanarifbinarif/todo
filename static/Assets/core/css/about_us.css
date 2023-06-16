@@ -30,6 +30,7 @@ header > p:last-of-type {
     background-image: url('../images/authentication_bg.svg');
     background-repeat: no-repeat;
     background-size: cover;
+    padding-bottom: 50px;
 }
 
 .about-us-container,
@@ -50,6 +51,14 @@ header > p:last-of-type {
     align-items: center;
     position: relative;
     width: 1105px;
+    border-radius: 10px;
+}
+
+.about-us-card > a {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    text-decoration: none;
 }
 
 .about-us-container > div:nth-child(even) .about-us-description,
@@ -61,6 +70,13 @@ header > p:last-of-type {
 
 .about-us-container > div:nth-child(even) .about-us-image,
 .about-us-news-container > div:nth-child(even) .about-us-image {
+    order: 2;
+    position: absolute;
+    right: 0px;
+}
+
+
+.about-us-news-container > div:nth-child(even) > a:first-of-type {
     order: 2;
     position: absolute;
     right: 0px;
@@ -86,6 +102,7 @@ header > p:last-of-type {
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
     max-width: 533px;
+    width: 100%;
     height: 319px;
     position: absolute;
     right: 0px;
@@ -103,6 +120,29 @@ header > p:last-of-type {
     font-size: 1rem;
     line-height: 1.25rem;
     color: #000000;
+    overflow: hidden;
+    position: relative;
+    max-height: 80px;
+    text-align: justify;
+    margin-right: -1em;
+    padding-right: 1em;
+}
+
+.about-us-card .about-us-description > p:before {
+    content: '...';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.about-us-card .about-us-description > p:after {
+    content: '';
+    position: absolute;
+    right: 0;
+    width: 1em;
+    height: 1em;
+    margin-top: .2em;
+    background-color: #FFFFFF;
 }
 
 .news-section > h2 {
@@ -114,16 +154,13 @@ header > p:last-of-type {
 }
 
 .bottom-page-ad {
-    width: 100%;
-    height: 90px;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 50px 0px;
 }
 
 .bottom-page-ad > div {
-    width: 86%;
+    width: 67.3%;
     max-width: 970px;
     height: 90px;
     display: flex;
@@ -163,7 +200,7 @@ header > p:last-of-type {
     }
 
     .about-us-news-container {
-        padding: 50px 80px 100px;
+        padding-top: 35px;
     }
 
     .about-us-card {
@@ -250,14 +287,25 @@ header > p:last-of-type {
         text-align: center;
     }
 
-    .about-us-container {
+    .about-us-container,
+    .about-us-news-container {
         padding: 100px 30px 50px;
+        gap: 35px;
+    }
+
+    .about-us-news-container {
+        padding-top: 20px;
     }
 
     .about-us-card {
         flex-direction: column;
-        width: fit-content;
+        width: 100%;
         background-color: #FFFFFF;
+    }
+
+    .about-us-card > a {
+        flex-direction: column;
+        width: 100%;
     }
 
     .about-us-container > div:nth-child(even) .about-us-description,
@@ -272,6 +320,16 @@ header > p:last-of-type {
         order: 1;
         position: relative;
         right: unset;
+    }
+
+    .about-us-news-container > div:nth-child(even) > a:first-of-type {
+        order: 1;
+        position: relative;
+        right: unset;
+    }
+
+    .about-us-news-container > div:nth-child(even) > a:last-of-type {
+        order: 2;
     }
 
     .about-us-card .about-us-image {

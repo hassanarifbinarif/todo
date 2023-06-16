@@ -102,6 +102,7 @@ input[name="my_ads_radio"]:checked + .radio-label{
 .favourite-table-container > table {
     min-width: 1100px;
     vertical-align: middle;
+    margin-bottom: 10px;
 }
 
 .listing-table-container > table > thead,
@@ -112,6 +113,7 @@ input[name="my_ads_radio"]:checked + .radio-label{
 .listing-table-container > table > thead > tr,
 .favourite-table-container > table > thead > tr {
     text-align: center;
+    border-bottom: 1px solid #D2D2D2;
 }
 
 .listing-table-container > table > thead > tr > th,
@@ -125,7 +127,8 @@ input[name="my_ads_radio"]:checked + .radio-label{
 .listing-table-container > table > tbody > tr,
 .favourite-table-container > table > tbody > tr {
     height: 96px;
-    text-align: center; 
+    text-align: center;
+    border-bottom: 1px solid #D2D2D2;
 }
 
 .listing-table-container > table > tbody > tr > td,

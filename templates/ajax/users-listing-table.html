@@ -1,0 +1,68 @@
+{% load static %}
+{% load custom_tags %}
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">
+                <div class="send-col">
+                    <span>Send</span>
+                </div>
+            </th>
+            <th scope="col">Listing Date</th>
+            <th scope="col">Property Type</th>
+            <th scope="col">Location</th>
+            <th scope="col">Construction</th>
+            <th scope="col">Land</th>
+            <th scope="col">Bedrooms</th>
+            <th scope="col">Bathrooms</th>
+            <th scope="col">Price</th>
+            <th scope="col">
+                <select class="order-select" name="order" id="">
+                    <option value="" disabled selected hidden>Order</option>
+                    <option value="order1">Order1</option>
+                    <option value="order2">Order2</option>
+                </select>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+    {% if listings.data %}
+    {% for obj in listings.data %}
+        <tr>
+            <td scope="row">
+                <div class="form-check listing-checkbox">
+                    <input class="form-check-input listing-checkbox-input" type="checkbox" value=""
+                        id="flexCheckDefault">
+                </div>
+            </td>
+            <td>
+                <div class="property-image">
+                    <img src="{{obj.images.0.image}}" loading="lazy" alt="Property Image" />
+                </div>
+            </td>
+            <td>{{obj.created_at|custom_date:"d, F, Y"}}</td>
+            <td>{{obj.property_type|title}}</td>
+            <td>{{obj.neighbourhood|title}}</td>
+            <td>{{obj.construction}}m2</td>
+            <td>{{obj.land}}m2</td>
+            <td>{{obj.bedrooms}}</td>
+            <td>{{obj.bathrooms}}</td>
+            <td>${{obj.price|floatformat:"2g"}}</td>
+            <td>
+                <div class="property-actions">
+                    <img src="{% static 'Assets/core/images/promotion_logo.svg' %}" onclick="openBoostAdModal('boost-ad', '{{obj.id}}')" alt="Promotion Button" />
+                    <img src="{% static 'Assets/core/images/reserved_logo.svg' %}" alt="Reserved Button" />
+                    <img src="{% static 'Assets/core/images/editing_logo.svg' %}" alt="Editing Button" />
+                    <img src="{% static 'Assets/core/images/delete_logo.svg' %}" onclick="openDelListingModal('del-listing', '{{obj.id}}')" alt="Delete Button" />
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td colspan="11" class="no-record-row">No record available</td>
+        </tr>
+        {% endif %}
+    </tbody>
+</table>

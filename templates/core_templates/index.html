@@ -33,7 +33,8 @@
                     <span>Property</span>
                 </div>
             </div>
-            <form class="property-select-options">
+            <form class="property-select-options" onsubmit="propertySearchForm(event);">
+                {% csrf_token %}
                 <div class="option-row1">
                     <div class="option-row1-col">
                         <div class="option">
@@ -74,12 +75,12 @@
                         <span>City</span>
                         <input type="text" name="city" id="city" />
                     </div>
-                    <a href="{% url 'property_search' %}">
+                    <!-- <a href="{% url 'property_search' %}"> -->
                         <button type="submit" class="search-home-btn">
                             <span>Search Homes</span>
                             <span>3.765 Listings found</span>
                         </button>
-                    </a>
+                    <!-- </a> -->
                 </div>
             </form>
         </div>
@@ -603,6 +604,7 @@
 </body>
 
 {% block scripts %}
+<script src="{% static 'Assets/core/js/homePage.js' %}"></script>
 {% endblock %}
 
 </html>

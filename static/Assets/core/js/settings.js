@@ -137,86 +137,6 @@ async function profileForm(event) {
         });
         return false;
     }
-    // else if(!isValidNumber(mobileField)) {
-    //     mobileField.classList.add('input-error');
-    //     mobileMsg.classList.add('active');
-    //     mobileField.addEventListener('input', function() {
-    //         if(isValidNumber(this)) {
-    //             this.classList.remove('input-error');
-    //         }
-    //         else {
-    //             let inputField = this;
-    //             if(timeOut) {
-    //                 clearTimeout(timeOut);
-    //             }
-    //             timeOut = setTimeout(function() {
-    //                 inputField.classList.add('input-error');
-    //                 mobileMsg.classList.add('active');
-    //             }, 1500);
-    //         }
-    //     });
-    //     return false;        
-    // }
-    // else if(!isValidName(businessField)) {
-    //     businessField.classList.add('input-error');
-    //     businessNameMsg.classList.add('active');
-    //     businessField.addEventListener('input', function() {
-    //         if(isValidName(this)) {
-    //             this.classList.remove('input-error');
-    //         }
-    //         else {
-    //             let inputField = this;
-    //             if(timeOut) {
-    //                 clearTimeout(timeOut);
-    //             }
-    //             timeOut = setTimeout(function() {
-    //                 inputField.classList.add('input-error');
-    //                 businessNameMsg.classList.add('active');
-    //             }, 1500);
-    //         }
-    //     });
-    //     return false;
-    // }
-    // else if(!isValidName(addressField)) {
-    //     addressField.classList.add('input-error');
-    //     addressMsg.classList.add('active');
-    //     addressField.addEventListener('input', function() {
-    //         if(isValidName(this)) {
-    //             this.classList.remove('input-error');
-    //         }
-    //         else {
-    //             let inputField = this;
-    //             if(timeOut) {
-    //                 clearTimeout(timeOut);
-    //             }
-    //             timeOut = setTimeout(function() {
-    //                 inputField.classList.add('input-error');
-    //                 addressMsg.classList.add('active');
-    //             }, 1500);
-    //         }
-    //     });
-    //     return false;
-    // }
-    // else if(!isValidName(cityField)) {
-    //     cityField.classList.add('input-error');
-    //     cityMsg.classList.add('active');
-    //     cityField.addEventListener('input', function() {
-    //         if(isValidName(this)) {
-    //             this.classList.remove('input-error');
-    //         }
-    //         else {
-    //             let inputField = this;
-    //             if(timeOut) {
-    //                 clearTimeout(timeOut);
-    //             }
-    //             timeOut = setTimeout(function() {
-    //                 inputField.classList.add('input-error');
-    //                 cityMsg.classList.add('active');
-    //             }, 1500);
-    //         }
-    //     });
-    //     return false;
-    // }
     else {
         let formData = new FormData(form);
         formData.append('step','personal_information');
@@ -297,6 +217,7 @@ async function deleteListing(event, id) {
     let response = await deleteListingAPI(data, id);
     if(response.status == 204) {
         afterLoad(button, "Listing Deleted");
+        getUserListings();
     }
     else if(response.status == 404) {
         afterLoad(button, "Listing not found");
@@ -329,4 +250,30 @@ async function deleteListingAPI(data, id) {
     else {
         return response;
     }
+}
+
+
+// Opening Boost Ad Modal
+
+function openBoostAdModal(modalId, id) {
+    let modal = document.querySelector(`#${modalId}`);
+    let form = modal.querySelector('form');
+    form.setAttribute('onsubmit', `boostAdForm(event, '${id}')`);
+    document.querySelector(`.${modalId}`).click();
+}
+
+
+// Get User Listings
+
+async function getUserListings() {
+    listingTableContent.innerHTML = '<div class="w-100 d-flex justify-content-center align-items-center pt-2 pb-2"><span class="spinner-border spinner-border-md" style="color: #8DC63F;" role="status" aria-hidden="true"></span></div>';
+    let response = await requestAPI('/get-user-listings/', null, {}, 'GET');
+    response.json().then(function(res) {
+        if(res.success) {
+            listingTableContent.innerHTML = res.listing_data;
+        }
+        else {
+            listingTableContent.innerHTML = '<div class="w-100 d-flex justify-content-center align-items-center pt-2 pb-2"><span class="no-record-row">No records found</span></div>';
+        }
+    })
 }

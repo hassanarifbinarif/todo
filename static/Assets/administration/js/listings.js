@@ -171,7 +171,7 @@ tagsTextbox.addEventListener("keydown", function(event) {
     if(event.keyCode === 13) {
         event.preventDefault();
     }
-})
+});
 
 tagsContainer.addEventListener("click", function () {
     tagsTextbox.focus();

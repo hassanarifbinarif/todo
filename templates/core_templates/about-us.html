@@ -54,17 +54,23 @@
         <div class="news-section" id="news">
             <h2>News</h2>
             <div class="about-us-news-container">
-                <div class="about-us-card">
-                    <div class="about-us-image">
-                        <img src="{% static 'Assets/core/images/about-us-1.svg' %}" alt="">
+                {% if news_list.data %}
+                {% for obj in news_list.data %}
+                    <div class="about-us-card">
+                        <a href="{% url 'news' pk=obj.id %}">
+                            <div class="about-us-image">
+                                <img src="{{obj.picture}}" loading="lazy" alt="News Image" />
+                            </div>
+                        </a>
+                        <a href="{% url 'news' pk=obj.id %}">
+                            <div class="about-us-description">
+                                <h3>{{obj.title}}</h3>
+                                <p>{{obj.content}}</p>
+                            </div>
+                        </a>
                     </div>
-                    <div class="about-us-description">
-                        <h3>Nuestra Mision</h3>
-                        <p>Nuestra misión es interrumpir la industria de bienes raíces y el mercado de bienes online de
-                            Ecuador, proporcionando a los compradores, vendedores y agentes inmobiliarios los recursos que
-                            necesitan, para tener todo en un solo lugar.</p>
-                    </div>
-                </div>
+                {% endfor %}
+                {% endif %}
             </div>
         </div>
         <div class="bottom-page-ad">

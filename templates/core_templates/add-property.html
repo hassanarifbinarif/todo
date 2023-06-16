@@ -12,6 +12,7 @@
     {% block links %}
 
     <link rel="stylesheet" href="{% static 'Assets/core/css/add_property.css' %}">
+    <link rel="stylesheet" href="{% static 'Assets/core/css/boost_ad_modal.css' %}">
     
     {% endblock %}
 
@@ -109,23 +110,23 @@
                                 <div class="btn-group bedroom-count-radio-group" role="group"
                                     aria-label="Basic radio toggle button group">
                                     <input type="radio" class="btn-check" name="bedrooms" id="bedroombtnradio1"
-                                        checked required value="1">
+                                        checked required value="1" />
                                     <label class="btn btn-outline-primary bedroom-count-radio-btn"
                                         for="bedroombtnradio1">1</label>
 
-                                    <input type="radio" class="btn-check" name="bedrooms" id="bedroombtnradio2" value="2" required>
+                                    <input type="radio" class="btn-check" name="bedrooms" id="bedroombtnradio2" value="2" required />
                                     <label class="btn btn-outline-primary bedroom-count-radio-btn"
                                         for="bedroombtnradio2">2</label>
 
-                                    <input type="radio" class="btn-check" name="bedrooms" id="bedroombtnradio3" value="3" required>
+                                    <input type="radio" class="btn-check" name="bedrooms" id="bedroombtnradio3" value="3" required />
                                     <label class="btn btn-outline-primary bedroom-count-radio-btn"
                                         for="bedroombtnradio3">3</label>
 
-                                    <input type="radio" class="btn-check" name="bedrooms" id="bedroombtnradio4" value="4" required>
+                                    <input type="radio" class="btn-check" name="bedrooms" id="bedroombtnradio4" value="4" required />
                                     <label class="btn btn-outline-primary bedroom-count-radio-btn"
                                         for="bedroombtnradio4">4</label>
 
-                                    <input type="radio" class="btn-check" name="bedrooms" id="bedroombtnradio5" value="5" required>
+                                    <input type="radio" class="btn-check" name="bedrooms" id="bedroombtnradio5" value="5" required />
                                     <label class="btn btn-outline-primary bedroom-count-radio-btn"
                                         for="bedroombtnradio5">5+</label>
                                 </div>
@@ -135,27 +136,27 @@
                                 <div class="btn-group bedroom-count-radio-group" role="group"
                                     aria-label="Basic radio toggle button group">
                                     <input type="radio" class="btn-check" name="bathrooms" id="bathroombtnradio1"
-                                        checked required value="1">
+                                        checked required value="1" />
                                     <label class="btn btn-outline-primary bedroom-count-radio-btn"
                                         for="bathroombtnradio1">1</label>
 
                                     <input type="radio" class="btn-check" name="bathrooms"
-                                        id="bathroombtnradio2" required value="2">
+                                        id="bathroombtnradio2" required value="2" />
                                     <label class="btn btn-outline-primary bedroom-count-radio-btn"
                                         for="bathroombtnradio2">2</label>
 
                                     <input type="radio" class="btn-check" name="bathrooms"
-                                        id="bathroombtnradio3" required value="3">
+                                        id="bathroombtnradio3" required value="3" />
                                     <label class="btn btn-outline-primary bedroom-count-radio-btn"
                                         for="bathroombtnradio3">3</label>
 
                                     <input type="radio" class="btn-check" name="bathrooms"
-                                        id="bathroombtnradio4" required value="4">
+                                        id="bathroombtnradio4" required value="4" />
                                     <label class="btn btn-outline-primary bedroom-count-radio-btn"
                                         for="bathroombtnradio4">4</label>
 
                                     <input type="radio" class="btn-check" name="bathrooms"
-                                        id="bathroombtnradio5" required value="5">
+                                        id="bathroombtnradio5" required value="5" />
                                     <label class="btn btn-outline-primary bedroom-count-radio-btn"
                                         for="bathroombtnradio5">5+</label>
                                 </div>
@@ -244,6 +245,9 @@
             </div>
         </div>
     </section>
+
+    <!-- Boost Ad Modal -->
+    {% include '../modals/boost-ad-modal.html' %}
 
     {% endblock %}
 </body>
