@@ -76,7 +76,7 @@ function getTodayRecords() {
 
 // Toggling between main listing UI and edit listing UI
 
-async function toggleListingView(event, data) {
+function toggleListingView(event, data) {
     let element = event.currentTarget;
     if(element.id == 'edit-listing-btn' && listingEditView.classList.contains('hide')) {
 
@@ -242,7 +242,6 @@ async function updateListing(event, id) {
         beforeLoad(button);
         let response = await requestAPI(`${apiURL}/admin/listings/${id}`, formData, headers, 'PATCH');
         response.json().then(function(res) {
-            console.log(res);
             if(response.status == 200) {
                 afterLoad(button, 'Listing Updated');
                 getListings(requiredDataURL);

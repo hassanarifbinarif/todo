@@ -1,5 +1,5 @@
 import json
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from core.helpers import check_user_login, confirm_user_email, get_dict_from_token, requestAPI
 from todo.decorators import signin_required, signout_required
 from django.conf import settings as django_settings
@@ -161,7 +161,6 @@ def terms_and_conditions(request):
     context = {}
     status, response = check_user_login(request)
     if status == 200:
-
         context['login'] = True
     return render(request, 'core_templates/terms-and-conditions.html', context)
 

@@ -108,16 +108,36 @@ const apiURL = 'https://api-dev.todo.com.ec/api';
 async function onRefreshToken() {
     let refreshToken = getRefreshTokenFromCookie();
     let myData = {"refresh": `${refreshToken}`};
-    let refreshResponse = await requestAPI(`${apiURL}/refresh`, myData, {}, 'POST');
+    let headers = {
+        "Content-Type": "application/json",
+    };
+    let refreshResponse = await requestAPI(`${apiURL}/refresh`, JSON.stringify(myData), headers, 'POST');
+    if(refreshResponse.status == 200) {
+        refreshResponse.json().then(function(res) {
+            const accessToken = parseJwt(res.access);
+            setCookie("access", res.access, accessToken.exp);
+        })
+    }
     return refreshResponse;
 }
+
 
 async function onAdminRefreshToken() {
     let refreshToken = getCookie('admin_refresh');
     let myData = {"refresh": `${refreshToken}`};
-    let refreshResponse = await requestAPI(`${apiURL}/refresh`, myData, {}, 'POST');
+    let headers = {
+        "Content-Type": "application/json",
+    };
+    let refreshResponse = await requestAPI(`${apiURL}/refresh`, JSON.stringify(myData), {}, 'POST');
+    if(refreshResponse.status == 200) {
+        refreshResponse.json().then(function(res) {
+            const accessToken = parseJwt(res.access);
+            setCookie("admin_access", res.access, accessToken.exp);
+        })
+    }
     return refreshResponse; 
 }
+
 
 function clearTokens(){
     setCookie('access', '', 0);

@@ -197,7 +197,7 @@ async function addPropertyForm(event) {
         formData.delete('images');
         imageArray.forEach((file) => {
             formData.append('images', file);
-        })
+        });
         beforeLoad(button);
         let response = await listingAPI(formData);
         response.json().then(function(res) {
@@ -228,10 +228,6 @@ async function listingAPI(formData) {
     if(response.status == 401) {
         let myRes = await onRefreshToken();
         if(myRes.status == 200) {
-            const accessToken = parseJwt(myRes.access);
-            const refreshToken = parseJwt(myRes.refresh);
-            setCookie("access", myRes.access, accessToken.exp);
-            setCookie("refresh", myRes.refresh, refreshToken.exp);
             return listingAPI(formData);
         }
         else {
