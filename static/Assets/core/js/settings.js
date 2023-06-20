@@ -213,6 +213,7 @@ async function deleteListing(event, id) {
     }
 }
 
+
 async function deleteListingAPI(data, id) {
     let token = getAccessTokenFromCookie();
     let headers = {

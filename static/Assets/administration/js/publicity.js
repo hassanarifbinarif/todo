@@ -33,26 +33,22 @@ async function submitPublicityForm(event, id) {
 
 async function publicityAPI(formData, id) {
     let token = getCookie('admin_access');
-    let objectData = formDataToObject(formData)
+    let data = formDataToObject(formData)
     let headers = {
         "Authorization": `Bearer ${token}`,
-        "X-CSRFToken": objectData.csrfmiddlewaretoken,
+        "X-CSRFToken": data.csrfmiddlewaretoken,
     }
     let response = await requestAPI(`${apiURL}/admin/publicity/${id}`, formData, headers, 'PATCH');
-    if(response.status == 200 || response.status == 400) {
-        return response;
-    }
-    else {
+    if(response.status == 401) {
         let myRes = await onAdminRefreshToken();
         if(myRes.status == 200) {
-            const accessToken = parseJwt(myRes.access);
-            const refreshToken = parseJwt(myRes.refresh);
-            setCookie("admin_access", myRes.access, accessToken.exp);
-            setCookie("admin_refresh", myRes.refresh, refreshToken.exp);
-            return publicityAPI(formData);
+            return publicityAPI(formData, id);
         }
         else {
-            adminLogout();
+            adminLogout()
         }
+    }
+    else {
+        return response;
     }
 }

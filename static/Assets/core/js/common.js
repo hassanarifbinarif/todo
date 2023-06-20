@@ -22,6 +22,13 @@ function formDataToObject(formData) {
 }
 
 
+function clearFormData(formData){
+    for(var a of formData.entries()){
+        formData.delete(a[0])
+    }
+}
+
+
 function beforeLoad(button) {
     button.querySelector('.btn-text').innerText = '';
     button.querySelector('.spinner-border').classList.remove('hide');
@@ -92,9 +99,9 @@ function getRefreshTokenFromCookie() {
 
 function getCookieExpirationTime(name) {
     if(name === 'access'){
-        name = 'buyer_access_token'
+        name = 'user_access_token'
     }else if(name === 'refresh'){
-        name = 'buyer_refresh_token'
+        name = 'user_refresh_token'
     }else{
         name=name
     }
@@ -128,7 +135,7 @@ async function onAdminRefreshToken() {
     let headers = {
         "Content-Type": "application/json",
     };
-    let refreshResponse = await requestAPI(`${apiURL}/refresh`, JSON.stringify(myData), {}, 'POST');
+    let refreshResponse = await requestAPI(`${apiURL}/refresh`, JSON.stringify(myData), headers, 'POST');
     if(refreshResponse.status == 200) {
         refreshResponse.json().then(function(res) {
             const accessToken = parseJwt(res.access);

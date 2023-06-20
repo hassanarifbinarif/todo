@@ -231,28 +231,42 @@ async function updateListing(event, id) {
         form.querySelector('input[name="land"]').value = roundDecimalPlaces(form.querySelector('input[name="land"]').value);
         form.querySelector('input[name="construction"]').value = roundDecimalPlaces(form.querySelector('input[name="construction"]').value);
         let formData = new FormData(form);
-        let data = formDataToObject(formData);
         let tagText = tags.map((tag) => tag.querySelector('span').innerText).join(',');
         formData.append('ameneties', tagText);
-        let token = getCookie('admin_access');
-        let headers = {
-            "Authorization": `Bearer ${token}`,
-            "X-CSRFToken": data.csrfmiddlewaretoken
-        };
         beforeLoad(button);
-        let response = await requestAPI(`${apiURL}/admin/listings/${id}`, formData, headers, 'PATCH');
-        response.json().then(function(res) {
-            if(response.status == 200) {
-                afterLoad(button, 'Listing Updated');
-                getListings(requiredDataURL);
-            }
-            else if(response.status == 404) {
-                afterLoad(button, 'Not Found');
-            }
-            else {
-                afterLoad(button, 'Error! Retry');
-            }
-        })
+        let response = await updateListingAPI(formData, id);
+        if (response.status == 200) {
+            afterLoad(button, 'Listing Updated');
+            getListings(requiredDataURL);    
+        }
+        else if(response.status == 404) {
+            afterLoad(button, 'Listing not found');
+        }
+        else {
+            afterLoad(button, 'Error! Retry');
+        }
+    }
+}
+
+async function updateListingAPI(formData, id) {
+    let data = formDataToObject(formData);
+    let token = getCookie('admin_access');
+    let headers = {
+        "Authorization": `Bearer ${token}`,
+        "X-CSRFToken": data.csrfmiddlewaretoken
+    };
+    let response = await requestAPI(`${apiURL}/admin/listings/${id}`, formData, headers, 'PATCH');
+    if(response.status == 401) {
+        let myRes = await onAdminRefreshToken();
+        if(myRes.status == 200) {
+            return updateListingAPI(formData, id);
+        }
+        else {
+            adminLogout();
+        }
+    }
+    else {
+        return response;
     }
 }
 
@@ -277,13 +291,8 @@ async function deleteListing(event, id) {
     let buttonText = button.innerText;
     let formData = new FormData(form);
     let data = formDataToObject(formData);
-    let token = getCookie('admin_access');
-    let headers = {
-        "Authorization": `Bearer ${token}`,
-        "X-CSRFToken": data.csrfmiddlewaretoken,
-    };
     beforeLoad(button);
-    let response = await requestAPI(`${apiURL}/admin/listings/${id}`, null, headers, 'DELETE');
+    let response = await deleteListingAPI(data, id);
     if(response.status == 204) {
         afterLoad(button, "Listing Deleted");
         getListings(requiredDataURL);
@@ -293,5 +302,26 @@ async function deleteListing(event, id) {
     }
     else {
         afterLoad(button, "Error! Retry");
+    }
+}
+
+async function deleteListingAPI(data, id) {
+    let token = getCookie('admin_access');
+    let headers = {
+        "Authorization": `Bearer ${token}`,
+        "X-CSRFTOKEN": data.csrfmiddlewaretoken,
+    };
+    let response = await requestAPI(`${apiURL}/admin/listings/${id}`, null, headers, 'DELETE');
+    if(response.status == 401) {
+        let myRes = await onAdminRefreshToken();
+        if(myRes.status == 200) {
+            return deleteListingAPI(data, id);
+        }
+        else {
+            adminLogout();
+        }
+    }
+    else {
+        return response;
     }
 }

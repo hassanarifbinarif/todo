@@ -585,7 +585,13 @@
         </div>
         <div class="ads">
             <div>
+                {% if publicity %}
+                <a href="{{publicity.url}}" target="_blank">
+                    <img src="{{publicity.picture}}" loading="lazy" alt="Publicity" />
+                </a>
+                {% else %}
                 <span>Paid Publicity</span>
+                {% endif %}
             </div>
             <div>
                 <span>Google Adsense</span>

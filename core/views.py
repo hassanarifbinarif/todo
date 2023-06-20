@@ -12,6 +12,12 @@ def index(request):
     context = {}
     status, response = check_user_login(request)
     if status == 200:
+        try:
+            publicity_status, publicity_response = requestAPI('GET', f'{django_settings.API_URL}/publicity/1', {}, {})
+            if publicity_status == 200:
+                context['publicity'] = publicity_response
+        except Exception as e:
+            print(e)
         context['login'] = True
     return render(request, 'core_templates/index.html', context)
 
@@ -131,9 +137,7 @@ def about_us(request):
     if status == 200:
         context['login'] = True
         try:
-            access_token = request.COOKIES.get('user_access_token')
-            headers = {"Authorization": f"Bearer {access_token}"}
-            status, response = requestAPI('GET', f'{django_settings.API_URL}/news/list', headers, {})
+            status, response = requestAPI('GET', f'{django_settings.API_URL}/news/list', {}, {})
             if status == 200:
                 context['news_list'] = response
         except Exception as e:
@@ -147,9 +151,7 @@ def news(request, pk):
     if status == 200:
         context['login'] = True
         try:
-            access_token = request.COOKIES.get('user_access_token')
-            headers = {"Authorization": f"Bearer {access_token}"}
-            status, response = requestAPI('GET', f'{django_settings.API_URL}/news/{pk}', headers, {})
+            status, response = requestAPI('GET', f'{django_settings.API_URL}/news/{pk}', {}, {})
             if status == 200:
                 context['news_content'] = response
         except Exception as e:

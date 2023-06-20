@@ -100,7 +100,6 @@ input[type=file] {
     width: 100%;
     height: 100%;
     border-radius: 10px;
-    display: none;
 }
 
 .publicity-input {

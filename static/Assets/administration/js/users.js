@@ -79,8 +79,8 @@ async function openEditUserModal(modalId, id) {
         "Authorization": `Bearer ${token}`,
     };
     let response = await requestAPI(`${apiURL}/admin/users/${id}/personal-information`, null, headers, 'GET');
-    response.json().then(function(res) {
-        if(response.status == 200) {
+    if(response.status == 200) {
+        response.json().then(function(res) {
             let form = modal.querySelector('form');
             form.setAttribute('onsubmit', `editUser(event, '${id}')`);
             form.querySelector('input[name="first_name"]').value = res.data.first_name;
@@ -94,8 +94,29 @@ async function openEditUserModal(modalId, id) {
             form.querySelector('.btn-text').innerText = 'Save Changes';
             modal.querySelector('.modal-content').classList.remove('hide');
             modal.querySelector('.loader').classList.add('hide');
+        })
+    }
+}
+
+
+async function getUserInfoAPI(id) {
+    let token = getCookie('admin_access');
+    let headers = {
+        "Authorization": `Bearer ${token}`,
+    };
+    let response = await requestAPI(`${apiURL}/admin/users/${id}/personal-information`, null, headers, 'GET');
+    if(response.status == 401) {
+        let myRes = await onAdminRefreshToken();
+        if(myRes.status == 200) {
+            return getUserInfoAPI(id);
         }
-    })
+        else {
+            adminLogout()
+        }
+    }
+    else {
+        return response;
+    }
 }
 
 
@@ -173,14 +194,8 @@ async function editUser(event, id) {
     }
     else {
         let formData = new FormData(form);
-        let data = formDataToObject(formData);
-        let token = getCookie('admin_access');
-        let headers = {
-            "Authorization": `Bearer ${token}`,
-            "X-CSRFToken": data.csrfmiddlewaretoken
-        };
         beforeLoad(button);
-        let response = await requestAPI(`${apiURL}/admin/users/${id}/personal-information`, formData, headers, 'PATCH');
+        let response = await editUserAPI(formData, id);
         response.json().then(function(res) {
             if(response.status == 200) {
                 afterLoad(button, "User Updated");
@@ -202,6 +217,29 @@ async function editUser(event, id) {
 }
 
 
+async function editUserAPI(formData, id) {
+    let data = formDataToObject(formData);
+    let token = getCookie('admin_access');
+    let headers = {
+        "Authorization": `Bearer ${token}`,
+        "X-CSRFToken": data.csrfmiddlewaretoken
+    };
+    let response = await requestAPI(`${apiURL}/admin/users/${id}/personal-information`, formData, headers, 'PATCH');
+    if(response.status == 401) {
+        let myRes = await onAdminRefreshToken();
+        if(myRes.status == 200) {
+            return editUserAPI(formData, id);
+        }
+        else {
+            adminLogout();
+        }
+    }
+    else {
+        return response;
+    }
+}
+
+
 function openDelUserModal(modalId, id) {
     let modal = document.querySelector(`#${modalId}`);
     let form = modal.querySelector('form');
@@ -218,13 +256,8 @@ async function deleteUser(event, id) {
     let buttonText = button.innerText;
     let formData = new FormData(form);
     let data = formDataToObject(formData);
-    let token = getCookie('admin_access');
-    let headers = {
-        "Authorization": `Bearer ${token}`,
-        "X-CSRFToken": data.csrfmiddlewaretoken,
-    };
     beforeLoad(button);
-    let response = await requestAPI(`${apiURL}/admin/users/${id}`, null, headers, 'DELETE');
+    let response = await deleteUserAPI(data, id);
     if(response.status == 204) {
         afterLoad(button, "User Deleted");
         getUsers(requiredDataURL);
@@ -232,11 +265,30 @@ async function deleteUser(event, id) {
     else if(response.status == 404) {
         afterLoad(button, "User not found");
     }
-    else if(response.status == 500) {
-        afterLoad(button, "Error! Retry");
-    }
     else {
         afterLoad(button, "Error! Retry");
+    }
+}
+
+
+async function deleteUserAPI(data, id) {
+    let token = getCookie('admin_access');
+    let headers = {
+        "Authorization": `Bearer ${apiURL}`,
+        "X-CSRFToken": data.csrfmiddlewaretoken,
+    };
+    let response = await requestAPI(`${apiURL}/admin/users/${id}`, null, headers, 'DELETE');
+    if(response.status == 401) {
+        let myRes = await onAdminRefreshToken();
+        if(myRes.status == 200) {
+            return deleteUserAPI(data, id);
+        }
+        else {
+            adminLogout();
+        }
+    }
+    else {
+        return response;
     }
 }
 

@@ -71,27 +71,17 @@ async function addNewsForm(event) {
     } else {
         try {
             let formData = new FormData(form);
-            let data = formDataToObject(formData);
-            let token = getCookie("admin_access");
-            let headers = {
-                Authorization: `Bearer ${token}`,
-                "X-CSRFToken": data.csrfmiddlewaretoken,
-            };
             beforeLoad(button);
-            let response = await requestAPI(
-                `${apiURL}/admin/news`,
-                formData,
-                headers,
-                "POST"
-            );
+            let response = await addNewsAPI(formData);
             response.json().then(function (res) {
                 if (response.status == 200 || response.status == 201) {
                     afterLoad(button, "Uploaded");
                     setTimeout(() => {
+                        clearFormData(formData);
                         afterLoad(button, buttonText);
                     }, 2000);
                 } else {
-                    afterLoad(button, "Retry Later");
+                    afterLoad(button, "Error! Retry");
                     setTimeout(() => {
                         afterLoad(button, buttonText);
                     }, 2000);
@@ -104,5 +94,28 @@ async function addNewsForm(event) {
             }, 2000);
             console.log(err);
         }
+    }
+}
+
+
+async function addNewsAPI(formData) {
+    let data = formDataToObject(formData);
+    let token = getCookie('admin_access');
+    let headers = {
+        "Authorization": `Bearer ${token}`,
+        "X-CSRFToken": data.csrfmiddlewaretoken,
+    };
+    let response = await requestAPI(`${apiURL}/admin/news`, formData, headers, 'POST');
+    if(response.status == 401) {
+        let myRes = await onAdminRefreshToken();
+        if(myRes.status == 200) {
+            return addNewsAPI(formData);
+        }
+        else {
+            adminLogout();
+        }
+    }
+    else {
+        return response;
     }
 }

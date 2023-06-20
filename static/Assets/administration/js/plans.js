@@ -99,15 +99,9 @@ async function updatePlanForm(event, id) {
         response.json().then(function(res) {
             if(response.status == 200) {
                 afterLoad(button, 'Plan Updated');
-                setTimeout(() => {
-                    afterLoad(button, buttonText);
-                }, 2000);
             }
             else {
                 afterLoad(button, 'Error Occurred');
-                setTimeout(() => {
-                    afterLoad(button, buttonText);
-                }, 2000);
             }
         })
     }
@@ -121,20 +115,16 @@ async function plansAPI(data, id) {
         "X-CSRFToken": data.csrfmiddlewaretoken,
     }
     let response = await requestAPI(`${apiURL}/admin/plans/${id}`, JSON.stringify(data), headers, 'PATCH');
-    if(response.status == 200 || response.status == 400) {
-        return response;
-    }
-    else {
+    if(response.status == 401) {
         let myRes = await onAdminRefreshToken();
         if(myRes.status == 200) {
-            const accessToken = parseJwt(myRes.access);
-            const refreshToken = parseJwt(myRes.refresh);
-            setCookie("admin_access", myRes.access, accessToken.exp);
-            setCookie("admin_refresh", myRes.refresh, refreshToken.exp);
-            return plansAPI(formData);
+            return plansAPI(data, id);
         }
         else {
             adminLogout();
         }
+    }
+    else {
+        return response;
     }
 }

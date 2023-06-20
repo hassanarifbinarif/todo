@@ -35,10 +35,15 @@
                     <div class="publicity-card-content">
                         <div class="image-input-container">
                             <label for="home-page" class="image-input-label">
+                                {% if obj.picture != None %}
+                                <img class="publicity-img" src="{{obj.picture}}" alt="Publicity Image" />
+                                <img class="uploader-logo hide" src="{% static 'Assets/administration/images/uploader_logo.svg' %}" alt="Uploader Logo" />
+                                <span class="uploader-text hide">Upload Image</span>
+                                {% else %}
                                 <img class="uploader-logo" src="{% static 'Assets/administration/images/uploader_logo.svg' %}" alt="Uploader Logo" />
-                                <input type="file" id="home-page" accept="image/jpeg, image/jpg, image/png, image/gif" name="picture" onchange="previewImage(event);" />
-                                <img class="publicity-img" src="{% if obj.picture != None %}{{obj.picture}}{% endif %}" alt="Publicity Image" />
                                 <span class="uploader-text">Upload Image</span>
+                                {% endif %}
+                                <input type="file" id="home-page" accept="image/jpeg, image/jpg, image/png, image/gif" name="picture" onchange="previewImage(event);" />
                             </label>
                         </div>
                         <div class="publicity-input">
