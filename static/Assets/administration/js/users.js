@@ -199,6 +199,7 @@ async function editUser(event, id) {
         response.json().then(function(res) {
             if(response.status == 200) {
                 afterLoad(button, "User Updated");
+                clearFormData(formData);
                 getUsers(requiredDataURL);
             }
             else if(response.status == 400) {

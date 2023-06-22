@@ -34,5 +34,16 @@ def get_page_numbers(value):
     return value
 
 
+def split_string(value, arg):
+    if not value:
+        return ''
+    try:
+        return value.split(arg)
+    except Exception as e:
+        print(e)
+        return e
+
+
 register.filter("custom_date", convert_to_date)
 register.filter("page_number", get_page_numbers)
+register.filter("split_string", split_string)

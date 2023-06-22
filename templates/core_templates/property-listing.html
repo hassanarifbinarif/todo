@@ -8,6 +8,7 @@
 
     {% extends '../layouts/base.html' %}
     {% load static %}
+    {% load custom_tags %}
 
     {% block links %}
 
@@ -32,72 +33,32 @@
         </a>
     </div>
 
+    {% if property %}
     <section class="property-image-gallery">
         <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff; --swiper-navigation-size:25px;" class="swiper mySwiper2">
             <div class="swiper-wrapper">
+                {% for obj in property.images %}
                 <div class="swiper-slide">
-                    <img src="{% static 'Assets/core/images/property_image_1.png' %}" />
+                    <img src="{{obj.image}}" loading="lazy" alt="Property Image" />
                 </div>
-                <div class="swiper-slide">
-                    <img src="{% static 'Assets/core/images/property_image_3.svg' %}" />
-                </div>
-                <div class="swiper-slide">
-                    <img src="{% static 'Assets/core/images/property_image_2.svg' %}" />
-                </div>
-                <div class="swiper-slide">
-                    <img src="{% static 'Assets/core/images/property_image_3.svg' %}" />
-                </div>
-                <div class="swiper-slide">
-                    <img src="{% static 'Assets/core/images/property_image_2.svg' %}" />
-                </div>
+                {% endfor %}
             </div>
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
         </div>
         <div thumbsSlider="" class="swiper mySwiper">
             <div class="swiper-wrapper">
+                {% for obj in property.images %}
                 <div class="swiper-slide">
-                    <img src="{% static 'Assets/core/images/property_image_1.png' %}" />
+                    <img src="{{obj.image}}" loading="lazy" alt="Property Image" />
                 </div>
-                <div class="swiper-slide">
-                    <img src="{% static 'Assets/core/images/property_image_3.svg' %}" />
-                </div>
-                <div class="swiper-slide">
-                    <img src="{% static 'Assets/core/images/property_image_2.svg' %}" />
-                </div>
-                <div class="swiper-slide">
-                    <img src="{% static 'Assets/core/images/property_image_3.svg' %}" />
-                </div>
-                <div class="swiper-slide">
-                    <img src="{% static 'Assets/core/images/property_image_2.svg' %}" />
-                </div>
+                {% endfor %}
             </div>
         </div>
-
-        <!-- <div class="main-image">
-            <img src="../Assets/images/property_image_1.png" class="" alt="Property Image" />
-        </div>
-        <div class="other-images">
-            <div class="image-row">
-                <div class="image-col">
-                    <img src="../Assets/images/property_image_1.png" alt="property_image">
-                </div>
-                <div class="image-col">
-                    <img src="../Assets/images/property_image_1.png" alt="property_image">
-                </div>
-            </div>
-            <div class="image-row">
-                <div class="image-col">
-                    <img src="../Assets/images/property_image_1.png" alt="property_image">
-                </div>
-                <div class="image-col">
-                    <img src="../Assets/images/property_image_1.png" alt="property_image">
-                </div>
-            </div>
-        </div> -->
     </section>
-
+    {% endif %}
     <section class="property-details-container">
+        {% if property %}
         <div class="property-info">
             <div class="property-header">
                 <div class="property-name">
@@ -131,38 +92,38 @@
                 </div>
             </div>
             <div class="property-price">
-                <span>$540,000</span>
-                <span>Listed on 28/11/2023</span>
+                <span>${{property.price|floatformat:"-2g"}}</span>
+                <span>Listed on {{property.created_at|custom_date:"d/m/Y"}}</span>
             </div>
             <hr />
             <div class="property-properties">
                 <div class="property-attribute">
                     <span>LAND</span>
-                    <span>350m2</span>
+                    <span>{{property.land}}m<sup>2</sup></span>
                 </div>
                 <div class="property-attribute">
                     <span>CONSTRUCTION</span>
-                    <span>350m2</span>
+                    <span>{{property.construction}}m<sup>2</sup></span>
                 </div>
                 <div class="property-attribute">
                     <span>PROPERTY TYPE</span>
-                    <span>Casa</span>
+                    <span>{{property.property_type|title}}</span>
                 </div>
                 <div class="property-attribute">
                     <span>BEDROOMS</span>
-                    <span>5</span>
+                    <span>{{property.bedrooms}}</span>
                 </div>
                 <div class="property-attribute">
                     <span>BATHROOMS</span>
-                    <span>5.5</span>
+                    <span>{{property.bathrooms}}</span>
                 </div>
                 <div class="property-attribute">
                     <span>PARKING</span>
-                    <span>2</span>
+                    <span>{{property.parking}}</span>
                 </div>
                 <div class="property-attribute">
                     <span>ANTIQUITY</span>
-                    <span>10</span>
+                    <span>{{property.antiquity}}</span>
                 </div>
             </div>
             <hr />
@@ -170,16 +131,9 @@
                 <h3>AMENETIES</h3>
                 <div class="ameneties-list">
                     <div class="ameneties-row">
-                        <div class="column">&#x2022; Green Areas</div>
-                        <div class="column">&#x2022; Studio</div>
-                        <div class="column">&#x2022; Laundry Roome</div>
-                        <div class="column">&#x2022; Servant Quarters</div>
-                        <div class="column">&#x2022; Roofed Garage</div>
-                        <div class="column">&#x2022; Centralized Gas</div>
-                        <div class="column">&#x2022; Gated Community</div>
-                        <div class="column">&#x2022; Play Area</div>
-                        <div class="column">&#x2022; Private Security</div>
-                        <div class="column">&#x2022; Social Area</div>
+                        {% for amenety in property.ameneties|split_string:"," %}
+                        <div class="column">&#x2022; {{amenety}}</div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
@@ -187,22 +141,7 @@
             <div class="property-description">
                 <h3>DESCRIPTION</h3>
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                    culpa qui officia deserunt mollit anim id est laborum.
-                    <br />
-                    <br />
-                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
-                    totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
-                    dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit,
-                    sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam
-                    est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius
-                    modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima
-                    veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea
-                    commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil
-                    molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+                    {{property.description|linebreaksbr}}
                 </p>
             </div>
             <hr />
@@ -214,6 +153,7 @@
                 </iframe>
             </div>
         </div>
+        {% endif %}
         <div class="sidebar">
             <div class="schedule-visit-container">
                 <div class="property-manager">
@@ -233,9 +173,15 @@
                     <button>Schedule a visit</button>
                 </div>
             </div>
+            {% if publicity.picture %}
+            <a href="{{publicity.url}}" target="_blank" class="sidebar-ad1">
+                <img src="{{publicity.picture}}" loading="lazy" alt="Publicity" />
+            </a>
+            {% else %}
             <div class="sidebar-ad1">
                 Paid Publicity
             </div>
+            {% endif %}
             <div class="sidebar-ad2">
                 Google Adsense
             </div>

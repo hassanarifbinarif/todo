@@ -5,8 +5,5 @@ async function propertySearchForm(event) {
     let form = event.currentTarget;
     let formData = new FormData(form);
     let data = formDataToObject(formData);
-    let headers = {
-        "X-CSRFToken": data.csrfmiddlewaretoken,
-    };
-    let response = await requestAPI('/property-search/', JSON.stringify(data), headers, 'POST');
+    location.href = location.origin + `/property-search/?property_type=${data.property_type}&criteria=${data.criteria}&city=${data.city}&min_price=${data.min_price}&max_price=${data.max_price}`;
 }

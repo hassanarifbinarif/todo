@@ -23,13 +23,25 @@
 
     <section class="property-search-top-ads">
         <div class="ad">
+            {% if publicity.publicity1.picture %}
+            <a href="{{publicity.publicity1.url}}" target="_blank">
+                <img src="{{publicity.publicity1.picture}}" loading="lazy" alt="Publicity" />
+            </a>
+            {% else %}
             <span>Paid Publicity</span>
+            {% endif %}
         </div>
         <div class="focused-ad">
             <span>Google Adsense</span>
         </div>
         <div class="ad">
+            {% if publicity.publicity2.picture %}
+            <a href="{{publicity.publicity2.url}}" target="_blank">
+                <img src="{{publicity.publicity2.picture}}" loading="lazy" alt="Publicity" />
+            </a>
+            {% else %}
             <span>Paid Publicity</span>
+            {% endif %}
         </div>
         <!-- <div class="left-ad-column">    
         </div> -->
@@ -222,7 +234,13 @@
                 </form>
             </div>
             <div class="side-publicity-ad">
+                {% if publicity.publicity3.picture %}
+                <a href="{{publicity.publicity3.url}}" target="_blank">
+                    <img src="{{publicity.publicity3.picture}}" loading="lazy" alt="Publicity" />
+                </a>
+                {% else %}
                 <span>Paid Publicity</span>
+                {% endif %}
             </div>
         </div>
         <div class="property-search-results">
@@ -280,6 +298,7 @@
                     </iframe>
                 </div>
                 <div class="property-search-result-card-container">
+                    {% include '../ajax/property-card.html' %}
                     <div class="property-card">
                         <div class="property-card-image-container">
                             <div class="card-type">

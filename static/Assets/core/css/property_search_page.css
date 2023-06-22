@@ -254,6 +254,7 @@ input[name="criteria_radio"]:checked + .radio-label{
     line-height: .875rem;
     color: #000000;
     border: 0.5px solid #D2D2D2;
+    border-radius: 2px;
     transition: all ease-in-out .2s;
 }
 
@@ -342,6 +343,10 @@ input[name="criteria_radio"]:checked + .radio-label{
     justify-content: space-between;
     gap: 20px;
     flex-wrap: wrap;
+}
+
+.property-search-result-card-container > a {
+    text-decoration: none;
 }
 
 .property-card {
@@ -570,6 +575,10 @@ input[name="criteria_radio"]:checked + .radio-label{
 
     .property-search-result-card-container {
         justify-content: center;
+    }
+
+    .property-search-result-card-container > a {
+        width: 100%;
     }
 
     .property-card {
