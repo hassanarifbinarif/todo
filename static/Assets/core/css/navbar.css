@@ -121,30 +121,30 @@ nav {
     color: #8DC63F;
 }
 
-.input-group {
+.navbar-input-group {
     height: 42px;
     max-width: 883px;
 }
 
-.input-group > input:first-of-type {
+.navbar-input-group > input:first-of-type {
     border-radius: unset;
     border-top-left-radius: 25px;
     border-bottom-left-radius: 25px;
     flex: 70%;
 }
 
-.input-group > input:last-of-type {
+.navbar-input-group > input:last-of-type {
     border-top-right-radius: 25px!important;
     border-bottom-right-radius: 25px!important;
     flex: 30%;
     padding-right: 46px;
 }
 
-.input-group input::placeholder {
+.navbar-input-group input::placeholder {
     color: #C8C8C8;
 }
 
-.input-group-append {
+.navbar-input-group-append {
     position: absolute;
     right: 0px;
     height: 100%;
@@ -180,7 +180,7 @@ nav {
         gap: 10px;
     }
 
-    .input-group {
+    .navbar-input-group {
         display: none;
     }
 
