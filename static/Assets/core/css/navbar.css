@@ -13,23 +13,29 @@ nav {
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
     padding-left: 2%!important;
     padding-right: 2%!important;
+    gap: 5px;
 }
 
 .nav-functions {
     display: flex;
     align-items: flex-end;
     gap: 25px;
+    flex-shrink: 0;
 }
 
-.nav-functions > a {
+.nav-functions > a,
+.nav-functions > div {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 3px;
     text-decoration: none;
+    position: relative;
+    cursor: pointer;
 }
 
-.nav-functions > a > span {
+.nav-functions > a > span,
+.nav-functions > div > span {
     font-size: .875rem;
     line-height: .875rem;
     color: #ffffff;
@@ -80,6 +86,80 @@ nav {
     justify-content: flex-end;
 }
 
+.profile-menu {
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 16px;
+    width: 150px;
+    background-color: #414042;
+    border-radius: 0px 0px 8px 8px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    padding: 16px;
+    right: -16px;
+    top: 36px;
+    z-index: 11;
+}
+
+.profile-container:hover .profile-menu {
+    display: flex;
+}
+
+.profile-menu > a {
+    text-decoration: none;
+    color: #ffffff;
+    text-align: right;
+    font-family: Arial, sans-serif;
+    font-size: .875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.profile-menu > a:hover {
+    color: #8DC63F;
+}
+
+.input-group {
+    height: 42px;
+    max-width: 883px;
+}
+
+.input-group > input:first-of-type {
+    border-radius: unset;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    flex: 70%;
+}
+
+.input-group > input:last-of-type {
+    border-top-right-radius: 25px!important;
+    border-bottom-right-radius: 25px!important;
+    flex: 30%;
+    padding-right: 46px;
+}
+
+.input-group input::placeholder {
+    color: #C8C8C8;
+}
+
+.input-group-append {
+    position: absolute;
+    right: 0px;
+    height: 100%;
+    border-radius: 50px;
+    z-index: 6;
+}
+
+.search-btn {
+    border-radius: 50px;
+    height: 42px;
+    width: 42px;
+    border: 1px solid transparent;
+    background-color: #8DC63F;
+}
+
 
 @media (max-width: 768px) {
     .services {
@@ -100,7 +180,11 @@ nav {
         gap: 10px;
     }
 
-    .nav-functions > div > span {
-        font-size: .75rem;
+    .input-group {
+        display: none;
     }
+
+    /* .nav-functions > div > span {
+        font-size: .75rem;
+    } */
 }

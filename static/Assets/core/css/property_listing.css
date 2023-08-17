@@ -280,7 +280,7 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    width: 25%;
+    width: 320px;
 }
 
 .sidebar .schedule-visit-container {
@@ -394,7 +394,8 @@
     margin-top: 40px;
     display: flex;
     flex-direction: column;
-    gap: 20px
+    gap: 20px;
+    overflow-x: auto;
 }
 
 .similar-properties>h2 {
@@ -408,7 +409,9 @@
 .spotlight-card-container {
     display: flex;
     gap: 20px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    width: fit-content;
+    margin-bottom: 5px;
 }
 
 .spotlight-card {
@@ -743,6 +746,10 @@
         width: 100%;
     }
 
+    .sidebar .sidebar-ad1 {
+        max-width: 320px;
+    }
+
     .sidebar .sidebar-ad2 {
         width: 67.3%;
         height: 90px;
@@ -806,10 +813,10 @@
         padding: 0px 10px 0px;
     }
 
-    .spotlight-card {
+    /* .spotlight-card {
         width: 100%;
         height: fit-content;
-    }
+    } */
 
     .spotlight-card-image-container {
         height: unset;

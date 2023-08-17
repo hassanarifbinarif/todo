@@ -34,16 +34,17 @@
                     </div>
                     <div class="publicity-card-content">
                         <div class="image-input-container">
-                            <label for="home-page" class="image-input-label">
+                            <label for="home-page{{forloop.counter}}" class="image-input-label">
                                 {% if obj.picture != None %}
                                 <img class="publicity-img" src="{{obj.picture}}" alt="Publicity Image" />
                                 <img class="uploader-logo hide" src="{% static 'Assets/administration/images/uploader_logo.svg' %}" alt="Uploader Logo" />
                                 <span class="uploader-text hide">Upload Image</span>
                                 {% else %}
+                                <img class="publicity-img hide" alt="Publicity Image" />
                                 <img class="uploader-logo" src="{% static 'Assets/administration/images/uploader_logo.svg' %}" alt="Uploader Logo" />
                                 <span class="uploader-text">Upload Image</span>
                                 {% endif %}
-                                <input type="file" id="home-page" accept="image/jpeg, image/jpg, image/png, image/gif" name="picture" onchange="previewImage(event);" />
+                                <input type="file" id="home-page{{forloop.counter}}" accept="image/jpeg, image/jpg, image/png, image/gif" name="picture" onchange="previewImage(event);" />
                             </label>
                         </div>
                         <div class="publicity-input">

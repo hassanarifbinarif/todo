@@ -1,3 +1,18 @@
+window.onload = () => {
+    if(location.href.includes('#profile')) {
+        document.querySelector('#listing').checked = false;
+        document.querySelector('#profile').checked = true;
+        listingEditView.classList.add('hide');
+        profileContent.classList.remove('hide');
+        if(!favouriteTableContent.classList.contains('hide')) {
+            favouriteTableContent.classList.add('hide')
+        }
+        else if(!listingTableContent.classList.contains('hide')) {
+            listingTableContent.classList.add('hide');
+        }
+    }
+}
+
 // Toggling between listings, favourites and profile views
 
 let adsRadioBtn = document.getElementsByName('my_ads_radio');

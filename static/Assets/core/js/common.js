@@ -110,7 +110,7 @@ function getCookieExpirationTime(name) {
     return ca
 }
 
-const apiURL = 'https://api-dev.todo.com.ec/api';
+const apiURL = 'http://api-dev.todo.com.ec/api';
 
 async function onRefreshToken() {
     let refreshToken = getRefreshTokenFromCookie();

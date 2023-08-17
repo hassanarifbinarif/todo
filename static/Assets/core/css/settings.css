@@ -414,18 +414,21 @@ input[name="my_ads_radio"]:checked + .radio-label{
 
 .plan-card .plan-duration .plan-price > p {
     margin: 0px;
+    font-family: "SF Pro Text Regular"!important;
 }
 
 .plan-card .plan-duration .plan-price > p > span:first-of-type {
     font-weight: 600;
     font-size: 2.25rem;
     line-height: 2.75rem;
+    font-family: "SF Pro Text Regular"!important;
 }
 
 .plan-card .plan-duration .plan-price > p > span:last-of-type {
     font-weight: 600;
     font-size: 1.25rem;
     line-height: 1.75rem;
+    font-family: "SF Pro Text Regular"!important;
 }
 
 .plan-card .plan-duration .plan-period {
@@ -447,6 +450,10 @@ input[name="my_ads_radio"]:checked + .radio-label{
     font-weight: 300;
     font-size: 1rem;
     line-height: 1.25rem;
+}
+
+.plan-card .plan-features ul li span {
+    font-weight: 700;
 }
 
 .change-plan-btn {

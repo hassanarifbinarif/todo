@@ -43,8 +43,6 @@
             <span>Paid Publicity</span>
             {% endif %}
         </div>
-        <!-- <div class="left-ad-column">    
-        </div> -->
     </section>
 
     <section class="property-search-content">
@@ -233,7 +231,7 @@
                     </div>
                 </form>
             </div>
-            <div class="side-publicity-ad">
+            <div class="ad side-publicity-ad">
                 {% if publicity.publicity3.picture %}
                 <a href="{{publicity.publicity3.url}}" target="_blank">
                     <img src="{{publicity.publicity3.picture}}" loading="lazy" alt="Publicity" />
@@ -298,7 +296,6 @@
                     </iframe>
                 </div>
                 <div class="property-search-result-card-container">
-                    {% include '../ajax/property-card.html' %}
                     <div class="property-card">
                         <div class="property-card-image-container">
                             <div class="card-type">
@@ -1300,14 +1297,14 @@
                     </div>
                     <p class="total-search-count">1-20 de 540 Propiedades</p>
                 </div>
-                <div class="bottom-page-ad">
-                    <div>
-                        Google Adsense
-                    </div>
-                </div>
             </div>
         </div>
     </section>
+    <div class="bottom-page-ad">
+        <div>
+            Google Adsense
+        </div>
+    </div>
 
     {% endblock %}
 </body>

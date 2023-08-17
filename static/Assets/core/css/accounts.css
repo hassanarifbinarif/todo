@@ -196,7 +196,7 @@ input[name="authentication_radio"]:checked + .radio-label{
 .login-auth-content > p,
 .register-auth-content > p {
     font-weight: 300;
-    font-size: .75rem;
+    font-size: .875rem;
     line-height: 1rem;
     color: #000000;
     margin: 20px 0 0;
