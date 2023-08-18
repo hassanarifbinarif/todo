@@ -167,6 +167,14 @@ nav {
     }
 }
 
+
+@media (max-width: 640px) {
+    .navbar-input-group {
+        display: none;
+    }
+}
+
+
 @media (max-width: 480px) {
     nav > a {
         width: 95px;
@@ -178,10 +186,6 @@ nav {
 
     .nav-functions {
         gap: 10px;
-    }
-
-    .navbar-input-group {
-        display: none;
     }
 
     /* .nav-functions > div > span {

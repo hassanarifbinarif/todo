@@ -117,11 +117,31 @@
     justify-content: space-between;
 }
 
+.filter-btn > span {
+    color: #000000;
+}
+
 .filter-dropdown {
     display: none;
     flex-direction: column;
     border-radius: 2px;
     position: absolute;
+    top: 48px;
+    z-index: 1;
+    background-color: #FFFFFF;
+    padding: 10px 6px;
+    width: 100%;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.radio-btn > label {
+    width: 100%;
+    border-radius: 2px;
+    padding: 0px 4px;
+}
+
+.radio-btn > label:hover {
+    background-color: #DDDDDD;
 }
 
 .filter-dropdown input {
@@ -211,7 +231,6 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
-    width: fit-content;
 }
 
 .spotlight-header {
@@ -241,7 +260,8 @@
 .spotlight-card-container {
     display: flex;
     gap: 20px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    overflow-x: auto;
 }
 
 .spotlight-card {
@@ -250,6 +270,16 @@
     background-color: #FFFFFF;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
+    flex-shrink: 0;
+    margin-bottom: 10px;
+}
+
+.spotlight-card-container > .spotlight-card:first-of-type {
+    margin-left: 5px;
+}
+
+.spotlight-card-container > .spotlight-card:last-of-type {
+    margin-right: 5px;
 }
 
 .spotlight-card-image-container {
@@ -305,6 +335,24 @@
     font-size: .875rem;
     line-height: 1rem;
     color: #000000;
+}
+
+.details-row1-column2 > label {
+    cursor: pointer;
+}
+
+.details-row1-column2 > label > input[type=checkbox] {
+    display: none;
+}
+
+.details-row1-column2 > label > svg {
+    width: 14px;
+    height: 13px;
+}
+
+.details-row1-column2 > label > input[type=checkbox]:checked + svg > path {
+    fill: #8DC63F;
+    stroke: #8DC63F;
 }
 
 .spotlight-card-details .details-row2 {
@@ -417,6 +465,13 @@ input::-webkit-inner-spin-button {
 }
 
 
+@media (max-width: 1440px) {
+    .spotlight {
+        width: calc(100vw - 310px);
+    }
+}
+
+
 @media (max-width: 768px) {
 
     .header {
@@ -522,6 +577,10 @@ input::-webkit-inner-spin-button {
 
     .option {
         width: 50%;
+    }
+
+    .filter-btn {
+        width: 100%;
     }
 
     .option > select {

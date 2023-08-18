@@ -104,9 +104,9 @@ def settings(request):
         status, response = requestAPI('GET', f'{django_settings.API_URL}/me', headers, {})
         if status == 200:
             context['profile_info'] = response
-            plan_status, plan_response = requestAPI('GET', f'{django_settings.API_URL}/plans/list', headers, {})
-            if plan_status == 200:
-                context['plan_list'] = plan_response
+            # plan_status, plan_response = requestAPI('GET', f'{django_settings.API_URL}/plans/list', headers, {})
+            # if plan_status == 200:
+            #     context['plan_list'] = plan_response
             listing_status, listing_response = requestAPI('GET', f'{django_settings.API_URL}/listings', headers, {})
             if listing_status == 200:
                 context['listings'] = listing_response

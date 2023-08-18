@@ -306,6 +306,7 @@
                             <div class="profile-photo-container">
                                 <span>Logo/Photo</span>
                                 <div class="profile-image-container">
+                                    <!-- <img src="{% static 'Assets/core/images/property_manager.png' %}" id="profile-image" alt="Profile Image" /> -->
                                     <img src="{{profile_info.profile_picture}}" id="profile-image" alt="Profile Image" />
                                     <input type="file" accept="image/jpeg, image/jpg, image/png" name="profile_picture" id="profile-image-input"
                                         onchange="previewImage(event);">
@@ -368,7 +369,70 @@
                         <form class="plan-container">
                             <span>Plan</span>
                             <div class="plan-card-container">
-                                {% if plan_list %}
+                                <div class="plan-radio-btn">
+                                    <input id="basic" type="radio" name="plan_radio">
+                                    <label for="basic" class="plan-card">
+                                        <div class="plan-duration">
+                                            <div class="plan-price">
+                                                <p><span>$0.</span><span>00</span></p>
+                                            </div>
+                                            <div class="plan-period">
+                                                <span>Monthly</span>
+                                            </div>
+                                        </div>
+                                        <div class="plan-features">
+                                            <span>Basic Plan</span>
+                                            <ul>
+                                                <li>Upload up to <span>5</span> properties</li>
+                                                <li>Maximum <span>5</span> images per listing</li>
+                                                <li>Contact via Whatsapp</li>
+                                            </ul>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="plan-radio-btn">
+                                    <input id="corredor" type="radio" checked name="plan_radio">
+                                    <label for="corredor" class="plan-card">
+                                        <div class="plan-duration">
+                                            <div class="plan-price">
+                                                <p><span>$20.</span><span>00</span></p>
+                                            </div>
+                                            <div class="plan-period">
+                                                <span>Monthly</span>
+                                            </div>
+                                        </div>
+                                        <div class="plan-features">
+                                            <span>Plan Corredor</span>
+                                            <ul>
+                                                <li>Upload up to <span>25</span> properties</li>
+                                                <li>Maximum <span>15</span> images per listing</li>
+                                                <li>Contact via Whatsapp</li>
+                                            </ul>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="plan-radio-btn">
+                                    <input id="inmobilaria" type="radio" name="plan_radio">
+                                    <label for="inmobilaria" class="plan-card">
+                                        <div class="plan-duration">
+                                            <div class="plan-price">
+                                                <p><span>$40.</span><span>00</span></p>
+                                            </div>
+                                            <div class="plan-period">
+                                                <span>Monthly</span>
+                                            </div>
+                                        </div>
+                                        <div class="plan-features">
+                                            <span>Plan Inmobilaria</span>
+                                            <ul>
+                                                <li>Upload up to <span>50</span> properties</li>
+                                                <li>Maximum <span>30</span> images per listing</li>
+                                                <li>Contact via Whatsapp</li>
+                                            </ul>
+                                        </div>
+                                    </label>
+                                </div>
+                                <!-- {% if plan_list %}
                                 {% for obj in plan_list.data %}
                                 <div class="plan-radio-btn">
                                     <input id="{{obj.id}}" type="radio" name="plan_radio">
@@ -392,7 +456,7 @@
                                     </label>
                                 </div>
                                 {% endfor %}
-                                {% endif %}
+                                {% endif %} -->
                             </div>
                             <button class="change-plan-btn">Change Plan</button>
                         </form>
