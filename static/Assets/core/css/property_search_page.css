@@ -48,6 +48,10 @@
     gap: 7px;
 }
 
+.view-grid-btn {
+    padding: 0px 5px;
+}
+
 .view-map-btn > span,
 .view-grid-btn > span,
 .filter-btn > span {
