@@ -90,8 +90,13 @@ input[name="my_ads_radio"]:checked + .radio-label{
     width: calc(100vw - 100px);
 }
 
+.listing-table-container, .favourite-table-container {
+    padding-top: 40px;
+}
+
 .favourite-table-container {
     padding: 0px 50px;
+    padding-top: 40px;
 }
 
 .profile-content-container {
@@ -107,7 +112,7 @@ input[name="my_ads_radio"]:checked + .radio-label{
 
 .listing-table-container > table > thead,
 .favourite-table-container > table > thead {
-    height: 80px;
+    height: 40px;
 }
 
 .listing-table-container > table > thead > tr,
@@ -122,6 +127,7 @@ input[name="my_ads_radio"]:checked + .radio-label{
     font-size: 1rem;
     line-height: 1rem;
     color: #000000;
+    vertical-align: middle;
 }
 
 .listing-table-container > table > tbody > tr,
@@ -160,6 +166,7 @@ input[name="my_ads_radio"]:checked + .radio-label{
 
 .property-actions {
     display: flex;
+    justify-content: center;
     align-items: center;
     gap: 15px;
 }
@@ -168,7 +175,7 @@ input[name="my_ads_radio"]:checked + .radio-label{
     cursor: pointer;
 }
 
-.order-select {
+/* .order-select {
     width: 100%;
     background-color: #FFFFFF;
     border: 0.5px solid #A3A3A3;
@@ -178,6 +185,73 @@ input[name="my_ads_radio"]:checked + .radio-label{
     line-height: 1rem;
     color: #9A9A9A;
     padding: 3px 6px;
+} */
+
+.order-row {
+    align-self: flex-end;
+    position: relative;
+}
+
+.favourite-table-container .order-row {
+    min-width: 150px;
+    width: 100%;
+}
+
+.order-btn {
+    width: 100%;
+    height: 25px;
+    border-radius: 5px;
+    border: 0.5px solid #A3A3A3;
+    background: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.order-btn > span {
+    color: #9A9A9A;
+    font-size: .875rem;
+}
+
+.order-dropdown {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    border-radius: 0px 0px 5px 5px;
+    position: absolute;
+    top: 25px;
+    z-index: 1;
+    background-color: #FFFFFF;
+    padding: 10px 6px;
+    width: 100%;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    color: #9A9A9A;
+}
+
+.radio-btn {
+    width: 100%;
+    height: 24px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.radio-btn > label {
+    width: 100%;
+    border-radius: 2px;
+    padding: 0px 4px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.radio-btn > label:hover {
+    background-color: #DDDDDD;
+}
+
+.order-dropdown input {
+    display: none;
 }
 
 .favourite-table-container .order-select {
@@ -563,53 +637,6 @@ input[name="plan_radio"]:checked + .plan-card{
         flex-direction: column;
         gap: 15px;
         padding: 19px 0px 60px 0px;
-    }
-
-    .order-row {
-        align-self: flex-end;
-    }
-
-    .order-btn {
-        width: 150px;
-        height: 25px;
-        border-radius: 5px;
-        border: 0.5px solid #A3A3A3;
-        background: #FFFFFF;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-    
-    .order-btn > span {
-        color: #9A9A9A;
-    }
-    
-    .order-dropdown {
-        display: none;
-        flex-direction: column;
-        border-radius: 0px 0px 5px 5px;
-        position: absolute;
-        top: 44px;
-        z-index: 1;
-        background-color: #FFFFFF;
-        padding: 10px 6px;
-        width: 150px;
-        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-        color: #9A9A9A;
-    }
-    
-    .radio-btn > label {
-        width: 100%;
-        border-radius: 2px;
-        padding: 0px 4px;
-    }
-    
-    .radio-btn > label:hover {
-        background-color: #DDDDDD;
-    }
-    
-    .order-dropdown input {
-        display: none;
     }
 
     .mobile-card {

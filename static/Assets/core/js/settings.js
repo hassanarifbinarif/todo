@@ -61,6 +61,21 @@ for (let i = 0; i < adsRadioBtn.length; i++) {
 }
 
 
+let listingDropdown = document.getElementById('listing-order-dropdown');
+let listingDropdownBtn = document.getElementById('listing-order');
+let listingOptions = document.querySelectorAll('input[name="listing_radio"]');
+
+listingOptions.forEach((option) => {
+    option.addEventListener('change', function() {
+        if(this.checked) {
+            document.getElementById('selected-listing-order').innerText = this.nextElementSibling.innerText;
+        }
+    })
+})
+
+listingDropdownBtn.addEventListener('click', toggleDropdown);
+
+
 let favouriteDropdown = document.getElementById('favourite-order-dropdown');
 let favouriteDropdownBtn = document.getElementById('favourite-order');
 let favouriteOptions = document.querySelectorAll('input[name="favourite_radio"]');
@@ -98,12 +113,10 @@ function closeDropdowns(event) {
         favouriteDropdown.style.display = 'none';
         favouriteDropdownBtn.style.zIndex = '2';
     }
-    // else if((!typeOfPropertyDropdownBtn.contains(event.target)) && typeOfPropertyDropdown.style.display == 'flex') {
-    //     typeOfPropertyDropdown.style.display = 'none';
-    //     typeOfPropertyDropdownBtn.style.borderRadius = '4px';
-    //     typeOfPropertyDropdownBtn.style.boxShadow = 'unset';
-    //     typeOfPropertyDropdownBtn.style.zIndex = '2';
-    // }
+    else if((!listingDropdownBtn.contains(event.target)) && listingDropdown.style.display == 'flex') {
+        listingDropdown.style.display = 'none';
+        listingDropdownBtn.style.zIndex = '2';
+    }
 }
 
 document.body.addEventListener('click', closeDropdowns);

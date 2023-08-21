@@ -110,3 +110,45 @@ sidebar.addEventListener("change", function (event) {
       localStorage.setItem(input.id, value);
     }
 });
+
+
+let orderDropdown = document.getElementById('order-dropdown');
+let orderDropdownBtn = document.getElementById('order');
+let orderOptions = document.querySelectorAll('input[name="order_radio"]');
+
+
+orderOptions.forEach((option) => {
+    option.addEventListener('change', function() {
+        if(this.checked) {
+            document.getElementById('selected-order').innerText = this.nextElementSibling.innerText;
+        }
+    })
+})
+
+orderDropdownBtn.addEventListener('click', toggleDropdown);
+
+
+function toggleDropdown(event) {
+    let elementBtn = event.target;
+    if(!elementBtn.classList.contains('order-btn')) {
+        elementBtn = elementBtn.closest('.order-btn');
+    }
+    let elementDropdown = elementBtn.nextElementSibling;
+    if(elementDropdown.style.display == 'flex') {
+        elementDropdown.style.display = 'none';
+        elementBtn.style.zIndex = '2';
+    }
+    else {
+        elementDropdown.style.display = 'flex';
+        elementBtn.style.zIndex = '2';
+    }
+}
+
+function closeDropdowns(event) {
+    if((!orderDropdownBtn.contains(event.target)) && orderDropdown.style.display == 'flex') {
+        orderDropdown.style.display = 'none';
+        orderDropdownBtn.style.zIndex = '2';
+    }
+}
+
+document.body.addEventListener('click', closeDropdowns);
