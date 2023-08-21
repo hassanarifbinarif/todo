@@ -23,7 +23,6 @@ criteriaOptions.forEach((option) => {
         if(this.checked) {
             document.getElementById('selected-criteria').innerText = this.nextElementSibling.innerText;
         }
-        criteriaDropdownBtn.click();
     })
 })
 
@@ -35,7 +34,6 @@ typeOfPropertyOptions.forEach((option) => {
         if(this.checked) {
             document.getElementById('selected-property-type').innerText = this.nextElementSibling.innerText;
         }
-        typeOfPropertyDropdownBtn.click();
     })
 })
 
@@ -61,3 +59,20 @@ function toggleDropdown(event) {
         elementBtn.style.zIndex = '2';
     }
 }
+
+function closeDropdowns(event) {
+    if((!criteriaDropdownBtn.contains(event.target)) && criteriaDropdown.style.display == 'flex') {
+        criteriaDropdown.style.display = 'none';
+        criteriaDropdownBtn.style.borderRadius = '4px';
+        criteriaDropdownBtn.style.boxShadow = 'unset';
+        criteriaDropdownBtn.style.zIndex = '2';
+    }
+    else if((!typeOfPropertyDropdownBtn.contains(event.target)) && typeOfPropertyDropdown.style.display == 'flex') {
+        typeOfPropertyDropdown.style.display = 'none';
+        typeOfPropertyDropdownBtn.style.borderRadius = '4px';
+        typeOfPropertyDropdownBtn.style.boxShadow = 'unset';
+        typeOfPropertyDropdownBtn.style.zIndex = '2';
+    }
+}
+
+document.body.addEventListener('click', closeDropdowns);

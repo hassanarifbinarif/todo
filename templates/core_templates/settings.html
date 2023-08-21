@@ -46,10 +46,74 @@
                         <label for="profile" class="radio-label">My Profile</label>
                     </div>
                 </div>
-                <div class="listing-table-container" id="listing-table">
+                <div class="listing-table-container hide" id="listing-table">
                     {% include '../ajax/users-listing-table.html' %}
                 </div>
-                <div class="favourite-table-container hide" id="favourite-table">
+                <div class="favourite-table-container" id="favourite-table">
+                    <div class="favourite-mobile-view hide">
+                        <div class="order-row">
+                            <button class="order-btn" id="favourite-order" type="button">
+                                <span id="selected-favourite-order">Order</span>
+                                <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M10 0.863883C9.95436 1.10388 9.77171 1.24788 9.63473 1.43988C8.26486 2.87988 6.895 4.31988 5.52514 5.75988C5.29683 5.99988 5.06852 6.09588 4.74888 5.95188C4.65756 5.95188 4.52057 5.85588 4.47491 5.75988C3.05938 4.27188 1.64386 2.78388 0.228334 1.29588C-0.136963 0.911883 -0.0456384 0.287883 0.410983 0.0958825C0.639293 -0.0481175 0.913266 -0.000117473 1.09591 0.143883C1.14158 0.143883 1.18724 0.239883 1.2329 0.287883C2.46578 1.58388 3.65299 2.83188 4.88587 4.12788C4.88587 4.12788 4.93153 4.17588 4.97719 4.22388C4.97719 4.22388 5.02286 4.17588 5.06852 4.12788C6.30139 2.83188 7.53427 1.53588 8.76715 0.239883C8.99546 -0.000117473 9.22377 -0.0961175 9.5434 0.0478825C9.77171 0.143883 9.9087 0.287883 10 0.527883C10 0.527883 10 0.575883 10 0.623883V0.911883V0.863883Z" fill="#9A9A9A"/>
+                                </svg>
+                            </button>
+                            <div class="order-dropdown" id="favourite-order-dropdown">
+                                <div class="radio-btn">
+                                    <input id="order1" type="radio" name="favourite_radio">
+                                    <label for="order1" class="radio-label">Order 1</label>
+                                </div>
+                                <div class="radio-btn">
+                                    <input id="order2" type="radio" name="favourite_radio">
+                                    <label for="order2" class="radio-label">Order 2</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="favourite-data">
+                            <div class="mobile-card">
+                                <div class="mobile-card-image">
+                                    <img src="{% static 'Assets/core/images/property_image_1.png' %}" loading="lazy" alt="Property Image" />
+                                </div>
+                                <div class="property-details">
+                                    <span>Casa</span>
+                                    <span>Samborondon</span>
+                                    <div class="property-detail-attributes">
+                                        <div>
+                                            <div>
+                                                <img src="{% static 'Assets/core/images/area_logo.svg' %}" alt="area">
+                                                <span>400 m2</span>
+                                            </div>
+                                            <div>
+                                                <img src="{% static 'Assets/core/images/house_logo.svg' %}" alt="house">                                        
+                                                <span>320 m2</span>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div>
+                                                <img src="{% static 'Assets/core/images/bed_logo.svg' %}" alt="bed">
+                                                <span>4</span>                                        
+                                            </div>
+                                            <div>
+                                                <img src="{% static 'Assets/core/images/bathroom_logo.svg' %}" alt="bathroom">
+                                                <span>4.5</span>                                        
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="favourite-property">
+                                        <input type="checkbox" id="favourite-property" name="favourite_property" />
+                                        <svg class="favourite-logo" width="25" height="22" viewBox="0 0 25 22"
+                                            fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M22.6377 3.15345C21.1419 1.47213 19.2008 0.801797 16.9286 1.08202C15.4613 1.26334 14.2681 1.97762 13.2747 3.01608C13.0635 3.23586 12.8751 3.46663 12.6695 3.6974C12.4583 3.45564 12.2699 3.21938 12.0586 3.00509C10.2488 1.16993 8.06794 0.560039 5.56733 1.31828C3.22086 2.03257 1.85066 3.67542 1.23408 5.92817C1.11989 6.35674 1.07422 6.8018 1 7.24136V8.25235C1.01142 8.3018 1.02855 8.35125 1.03425 8.4007C1.15415 9.73586 1.65655 10.9337 2.41016 12.0491C3.20374 13.2304 4.18 14.2688 5.26474 15.1974C7.39997 17.0326 9.56945 18.8293 11.7332 20.637C12.3441 21.148 13.0292 21.1205 13.6686 20.593C15.3243 19.2194 16.9856 17.8458 18.6356 16.4666C20.0343 15.2963 21.3931 14.0765 22.5064 12.6425C23.3571 11.5436 24.0079 10.3512 24.2249 8.98861C24.5674 6.82927 24.1335 4.84575 22.6377 3.15894V3.15345Z"
+                                                fill="none" stroke="#000000" />
+                                        </svg>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <table class="table">
                         <thead>
                             <tr>

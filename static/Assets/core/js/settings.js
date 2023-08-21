@@ -61,6 +61,53 @@ for (let i = 0; i < adsRadioBtn.length; i++) {
 }
 
 
+let favouriteDropdown = document.getElementById('favourite-order-dropdown');
+let favouriteDropdownBtn = document.getElementById('favourite-order');
+let favouriteOptions = document.querySelectorAll('input[name="favourite_radio"]');
+
+
+favouriteOptions.forEach((option) => {
+    option.addEventListener('change', function() {
+        if(this.checked) {
+            document.getElementById('selected-favourite-order').innerText = this.nextElementSibling.innerText;
+        }
+    })
+})
+
+favouriteDropdownBtn.addEventListener('click', toggleDropdown);
+
+
+function toggleDropdown(event) {
+    let elementBtn = event.target;
+    if(!elementBtn.classList.contains('order-btn')) {
+        elementBtn = elementBtn.closest('.order-btn');
+    }
+    let elementDropdown = elementBtn.nextElementSibling;
+    if(elementDropdown.style.display == 'flex') {
+        elementDropdown.style.display = 'none';
+        elementBtn.style.zIndex = '2';
+    }
+    else {
+        elementDropdown.style.display = 'flex';
+        elementBtn.style.zIndex = '2';
+    }
+}
+
+function closeDropdowns(event) {
+    if((!favouriteDropdownBtn.contains(event.target)) && favouriteDropdown.style.display == 'flex') {
+        favouriteDropdown.style.display = 'none';
+        favouriteDropdownBtn.style.zIndex = '2';
+    }
+    // else if((!typeOfPropertyDropdownBtn.contains(event.target)) && typeOfPropertyDropdown.style.display == 'flex') {
+    //     typeOfPropertyDropdown.style.display = 'none';
+    //     typeOfPropertyDropdownBtn.style.borderRadius = '4px';
+    //     typeOfPropertyDropdownBtn.style.boxShadow = 'unset';
+    //     typeOfPropertyDropdownBtn.style.zIndex = '2';
+    // }
+}
+
+document.body.addEventListener('click', closeDropdowns);
+
 
 // Preview Image on profile form
 
