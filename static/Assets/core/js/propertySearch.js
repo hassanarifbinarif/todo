@@ -152,3 +152,34 @@ function closeDropdowns(event) {
 }
 
 document.body.addEventListener('click', closeDropdowns);
+
+
+async function filterPropertyForm(event) {
+    let form = event.currentTarget;
+    let formData = new FormData(form);
+    let data = formDataToObject(formData);
+    let property_type = formData.getAll('property_type');
+    property_type = property_type.length === 0 ? '' : property_type.join(',');
+    let ameneties = formData.getAll('ameneties');
+    ameneties = ameneties.length === 0 ? '' : ameneties.join(',');
+    let bedrooms = data.bedroombtnradio || '';
+    let bathrooms = data.bathroombtnradio || '';
+    let queryString = `?criteria=${data.criteria_radio || ''}&property_type__in=${property_type}&price__gte=${data.min_price || ''}&price__lte=${data.max_price || ''}&${bedrooms >= 5 ? 'bedrooms__gte' : 'bedrooms'}=${bedrooms}&${bathrooms >= 5 ? 'bathrooms__gte' : 'bathrooms'}=${bathrooms}&construction__gte=${data.min_construction_area || ''}&construction__lte=${data.max_construction_area}&land__gte=${data.min_land_area || ''}&land__lte=${data.max_land_area}&ameneties__contains=${ameneties}`;
+    document.querySelector('#property-search-result-card-container').innerHTML = '<div class="w-100 d-flex justify-content-center align-items-center pt-5 pb-2"><span class="spinner-border spinner-border-md" style="color: #8DC63F;" role="status" aria-hidden="true"></span></div>';
+    let response = await requestAPI(`${apiURL}/search-listings${queryString}`, null, {}, 'GET');
+    response.json().then(async function(res) {
+        if(response.status == 200) {
+            let resp = await requestAPI('/get-search-properties/', JSON.stringify(res), {}, 'POST');
+            resp.json().then(function(myRes) {
+                document.querySelector('#property-search-result-card-container').innerHTML = myRes.property;
+            })
+        }
+    })
+}
+
+function triggerForm(event) {
+    // console.log(event);
+    // let form = event.target.closest('form');
+    // var event = new Event('change');
+    // form.dispatchEvent(event);
+}

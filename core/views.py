@@ -27,18 +27,40 @@ def property_search(request):
     status, response = check_user_login(request)
     if status == 200:
         context['login'] = True
-    # try:
-    #     status, response = requestAPI('GET', f'{django_settings.API_URL}/search-listings/list', {}, {})
-    #     context['properties'] = response
-    #     publicity_status1, publicity_response1 = requestAPI('GET', f'{django_settings.API_URL}/publicity/2', {}, {})
-    #     publicity_status2, publicity_response2 = requestAPI('GET', f'{django_settings.API_URL}/publicity/3', {}, {})
-    #     publicity_status3, publicity_response3 = requestAPI('GET', f'{django_settings.API_URL}/publicity/4', {}, {})
-    #     context['publicity'] = {"publicity1": publicity_response1,
-    #                             "publicity2": publicity_response2,
-    #                             "publicity3": publicity_response3} 
-    # except Exception as e:
-    #     print(e)
+    else:
+        context['login'] = False
+    try:
+        if context['login'] == True:
+            access_token = request.COOKIES.get('user_access_token')
+            headers = {"Authorization": f"Bearer {access_token}"}
+            status, response = requestAPI('GET', f'{django_settings.API_URL}/search-listings', headers, {})
+        else:
+            status, response = requestAPI('GET', f'{django_settings.API_URL}/search-listings', {}, {})
+        context['properties'] = response
+        # publicity_status1, publicity_response1 = requestAPI('GET', f'{django_settings.API_URL}/publicity/2', {}, {})
+        # publicity_status2, publicity_response2 = requestAPI('GET', f'{django_settings.API_URL}/publicity/3', {}, {})
+        # publicity_status3, publicity_response3 = requestAPI('GET', f'{django_settings.API_URL}/publicity/4', {}, {})
+        # context['publicity'] = {"publicity1": publicity_response1,
+        #                         "publicity2": publicity_response2,
+        #                         "publicity3": publicity_response3} 
+    except Exception as e:
+        print(e, 'here')
     return render(request, 'core_templates/property-search.html', context)
+
+
+@csrf_exempt
+def get_search_properties(request):
+    context = {}
+    try:
+        request_data = json.loads(request.body.decode('utf-8'))
+        text_template = loader.get_template('ajax/property-card.html')
+        html = text_template.render({'properties':request_data})
+        context['property'] = html
+        context['msg'] = 'Filter successful'
+        context['success'] = True
+    except Exception as e:
+        print(e)
+    return JsonResponse(context)
 
 
 def property_listing(request):
@@ -98,6 +120,7 @@ def forgot_password(request):
 @signin_required
 def settings(request):
     context = {}
+    context['is_mobile'] = request.user_agent.is_mobile
     try:
         access_token = request.COOKIES.get('user_access_token')
         headers = {"Authorization": f"Bearer {access_token}"}
