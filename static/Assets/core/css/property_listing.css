@@ -797,7 +797,7 @@
     }
 
     .grid-swiper-slide {
-        height: fit-content!important;
+        height: 100%!important;
     }
 
     .main-image {
