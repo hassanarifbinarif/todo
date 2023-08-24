@@ -46,11 +46,11 @@ if (window.innerWidth <= 768 && previousScreenWidth <= 768) {
 window.addEventListener("resize", toggleFilterContainer);
 
 function toggleFilterContainer() {
-  if (window.innerWidth <= 768 && previousScreenWidth <= 768) {
-  } else if (window.innerWidth <= 768 && previousScreenWidth > 768) {
-    dropdown.appendChild(sidebar.querySelector("form"));
-  } else if (window.innerWidth > 768 && previousScreenWidth <= 768) {
-    sidebar.appendChild(dropdown.querySelector("form"));
+    if (window.innerWidth <= 768 && previousScreenWidth <= 768) {
+    } else if (window.innerWidth <= 768 && previousScreenWidth > 768) {
+        dropdown.appendChild(sidebar.querySelector("form"));
+    } else if (window.innerWidth > 768 && previousScreenWidth <= 768) {
+        sidebar.appendChild(dropdown.querySelector("form"));
   } else {
   }
   previousScreenWidth = window.innerWidth;
@@ -59,22 +59,22 @@ function toggleFilterContainer() {
 
 // Check if mobile view
 function isMobileView() {
-  return window.innerWidth <= 768;
+    return window.innerWidth <= 768;
 }
 
 // Show/hide dropdown on button click
 var button = document.getElementById("filter-btn");
 var dropdownVisible = false;
 button.addEventListener("click", function () {
-  if (isMobileView()) {
-    if (dropdownVisible) {
-      dropdown.style.display = "none";
-      dropdownVisible = false;
-    } else {
-      dropdown.style.display = "block";
-      dropdownVisible = true;
+    if (isMobileView()) {
+        if (dropdownVisible) {
+            dropdown.style.display = "none";
+            dropdownVisible = false;
+        } else {
+            dropdown.style.display = "block";
+            dropdownVisible = true;
+        }
     }
-  }
 });
 
 localStorage.clear();
@@ -82,32 +82,32 @@ localStorage.clear();
 // Check local storage for selected inputs and set them
 var inputs = sidebar.querySelectorAll("input");
 for (var i = 0; i < inputs.length; i++) {
-  var input = inputs[i];
-  var value = localStorage.getItem(input.id);
-  if (value !== null) {
-    if (input.type === "checkbox") {
-      input.checked = value === "true";
-    } else if (input.type === "radio") {
-      input.checked = value === "true";
-    } else if (input.type === "number") {
-      input.value = value;
+    var input = inputs[i];
+    var value = localStorage.getItem(input.id);
+    if (value !== null) {
+        if (input.type === "checkbox") {
+            input.checked = value === "true";
+        } else if (input.type === "radio") {
+            input.checked = value === "true";
+        } else if (input.type === "number") {
+            input.value = value;
+        }
     }
-  }
 }
 
 // Save selected inputs to local storage on change
 sidebar.addEventListener("change", function (event) {
     var input = event.target;
     if (input.matches("#sidebar input")) {
-      var value;
-      if (input.type === "checkbox") {
-        value = input.checked.toString();
-      } else if (input.type === "radio") {
-        value = input.checked.toString();
-      } else if (input.type === "number") {
-        value = input.value;
-      }
-      localStorage.setItem(input.id, value);
+        var value;
+        if (input.type === "checkbox") {
+            value = input.checked.toString();
+        } else if (input.type === "radio") {
+            value = input.checked.toString();
+        } else if (input.type === "number") {
+            value = input.value;
+        }
+        localStorage.setItem(input.id, value);
     }
 });
 
@@ -148,6 +148,10 @@ function closeDropdowns(event) {
     if((!orderDropdownBtn.contains(event.target)) && orderDropdown.style.display == 'flex') {
         orderDropdown.style.display = 'none';
         orderDropdownBtn.style.zIndex = '2';
+    }
+    else if((!button.contains(event.target)) && (!dropdown.contains(event.target)) && dropdownVisible == true) {
+        dropdown.style.display = "none";
+        dropdownVisible = false;
     }
 }
 

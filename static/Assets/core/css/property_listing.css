@@ -14,12 +14,13 @@
 }
 
 .property-image-gallery {
-    padding: 0px 49px 0px;
+    padding: 0px 50px 0px;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    width: 65%;
+    justify-content: space-between;
+    gap: 20px;
+    width: calc(100%);
+    height: 414px;
     gap: 10px;
 }
 
@@ -547,8 +548,9 @@
     background-color: #B1B1B1;
 }
 
+/* ---------------------------------------- */
 
-.swiper {
+/* .swiper {
     width: 100%;
 }
 
@@ -622,7 +624,108 @@
     width: 40px!important;
     height: 40px!important;
     left: 0px!important;
+} */
+
+
+
+/* For big preview image */
+
+.swiper {
+    width: 100%;
+    height: 100%;
 }
+
+.main-swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* .swiper-pagination,
+.autoplay-progress {
+    display: none!important;
+} */
+
+.carousel-div-1 {
+    width: calc(56.76%);
+    height: 416px;
+}
+
+
+/* --------------------------------------- */
+
+/* For Grid Swiper */
+
+.gridSwiper {
+    width: 100%!important;
+    height: 100%!important;
+    margin-left: auto!important;
+    margin-right: auto!important;
+}
+
+.grid-swiper-slide {
+    text-align: center!important;
+    font-size: 18px!important;
+    background: #fff!important;
+    height: calc((100% - 20px) / 2)!important;
+
+    display: flex!important;
+    justify-content: center!important;
+    align-items: center!important;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.carousel-div-2 {
+    width: calc(41%);
+    height: 416px;
+}
+
+
+.swiper-button-next,
+.swiper-button-prev {
+    width: 40px!important;
+    height: 40px!important;
+    right: 0px!important;
+    background-color: rgba(0, 0, 0, 0.60);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.mainswiper-button-next,
+.mainswiper-button-prev {
+    display: none;
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+    color: #FFFFFF!important;
+    font-size: 16px!important;
+}
+
+.swiper-button-prev {
+    right: unset!important;
+    left: 0px!important;
+}
+
+.swiper-button-disabled {
+    display: none!important;
+}
+
 
 
 @media (max-width: 1024px) {
@@ -672,18 +775,29 @@
         flex-direction: column;
         width: 100%;
         gap: 10px;
-    }
-
-    .mySwiper2 {
-        width: 100%;
-        aspect-ratio: 1 / .54;
-        transform: unset;
+        height: fit-content;
     }
     
-    .mySwiper {
+    .gridSwiper {
         width: 100%;
         aspect-ratio: 1 / .17;
-        transform: unset;
+        transform: unset!important;
+        position: relative;
+    }
+
+    .carousel-div-1 {
+        aspect-ratio: 1 / .61;
+        height: fit-content;
+        min-height: 224px;
+    }
+
+    .carousel-div-2 {
+        position: relative;
+        height: fit-content;
+    }
+
+    .grid-swiper-slide {
+        height: fit-content!important;
     }
 
     .main-image {
@@ -755,6 +869,53 @@
     .sidebar .sidebar-ad2 {
         width: 67.3%;
         height: 90px;
+    }
+
+    .mainswiper-button-next,
+    .mainswiper-button-prev {
+        display: flex!important;
+        background: rgba(0, 0, 0, 0.60);
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        width: 40px;
+        height: 40px;
+    }
+
+    .mainswiper-button-next > svg,
+    .mainswiper-button-prev > svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .mainswiper-button-prev {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translatey(-50%);
+        z-index: 10;
+        cursor: pointer;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .mainswiper-button-next {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translatey(-50%);
+        z-index: 10;
+        cursor: pointer;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+    .carousel-div-1,
+    .carousel-div-2 {
+        width: calc(100%)!important;
+    }
+
+    .swiper-button-disabled {
+        display: none!important;
     }
 
 }

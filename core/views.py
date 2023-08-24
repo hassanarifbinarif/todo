@@ -13,6 +13,16 @@ def index(request):
     status, response = check_user_login(request)
     if status == 200:
         context['login'] = True
+        access_token = request.COOKIES.get('user_access_token')
+        headers = {"Authorization": f"Bearer {access_token}"}
+        try:
+            recent_viewed_status, recent_viewed_response = requestAPI('GET', f'{django_settings.API_URL}/search-listings/recently-visited', headers, {})
+            context['recently_viewed'] = recent_viewed_response
+        except Exception as e:
+            print(e)
+    if request.method == 'POST':
+        print('I am in index')
+        return render(request, 'core_templates/property-search.html', context)
     # try:
     #     publicity_status, publicity_response = requestAPI('GET', f'{django_settings.API_URL}/publicity/1', {}, {})
     #     if publicity_status == 200:
@@ -27,24 +37,38 @@ def property_search(request):
     status, response = check_user_login(request)
     if status == 200:
         context['login'] = True
+        access_token = request.COOKIES.get('user_access_token')
+        headers = {"Authorization": f"Bearer {access_token}"}
     else:
         context['login'] = False
-    try:
-        if context['login'] == True:
-            access_token = request.COOKIES.get('user_access_token')
-            headers = {"Authorization": f"Bearer {access_token}"}
-            status, response = requestAPI('GET', f'{django_settings.API_URL}/search-listings', headers, {})
+    try:    
+        if request.method == 'POST':
+            context["criteria"] = request.POST.get('criteria_radio', '')
+            context["property_type"] = request.POST.get('property_radio', '')
+            context["min_price"] = request.POST.get('min_price', '')
+            context["max_price"] = request.POST.get('max_price')
+            context["city"] = request.POST.get('city')
+            if context['login'] == True:
+                status, response = requestAPI('GET', f'{django_settings.API_URL}/search-listings?criteria={context["criteria"]}&property_type__in={context["property_type"]}&price__gte={context["min_price"]}&price__lte={context["max_price"]}&city={context["city"]}', headers, {})
+            else:
+                status, response = requestAPI('GET', f'{django_settings.API_URL}/search-listings?criteria={context["criteria"]}&property_type__in={context["property_type"]}&price__gte={context["min_price"]}&price__lte={context["max_price"]}&city={context["city"]}', {}, {})
+            context['properties'] = response
+            print(response)
         else:
-            status, response = requestAPI('GET', f'{django_settings.API_URL}/search-listings', {}, {})
-        context['properties'] = response
-        # publicity_status1, publicity_response1 = requestAPI('GET', f'{django_settings.API_URL}/publicity/2', {}, {})
-        # publicity_status2, publicity_response2 = requestAPI('GET', f'{django_settings.API_URL}/publicity/3', {}, {})
-        # publicity_status3, publicity_response3 = requestAPI('GET', f'{django_settings.API_URL}/publicity/4', {}, {})
-        # context['publicity'] = {"publicity1": publicity_response1,
-        #                         "publicity2": publicity_response2,
-        #                         "publicity3": publicity_response3} 
+            if context['login'] == True:
+                status, response = requestAPI('GET', f'{django_settings.API_URL}/search-listings', headers, {})
+            else:
+                status, response = requestAPI('GET', f'{django_settings.API_URL}/search-listings', {}, {})
+            context['properties'] = response
+            # context['properties'] = response
+            # publicity_status1, publicity_response1 = requestAPI('GET', f'{django_settings.API_URL}/publicity/2', {}, {})
+            # publicity_status2, publicity_response2 = requestAPI('GET', f'{django_settings.API_URL}/publicity/3', {}, {})
+            # publicity_status3, publicity_response3 = requestAPI('GET', f'{django_settings.API_URL}/publicity/4', {}, {})
+            # context['publicity'] = {"publicity1": publicity_response1,
+            #                         "publicity2": publicity_response2,
+            #                         "publicity3": publicity_response3} 
     except Exception as e:
-        print(e, 'here')
+        print(e)
     return render(request, 'core_templates/property-search.html', context)
 
 
@@ -63,14 +87,21 @@ def get_search_properties(request):
     return JsonResponse(context)
 
 
-def property_listing(request):
+def property_listing(request, pk):
     context = {}
     status, response = check_user_login(request)
+    context['is_mobile'] = request.user_agent.is_mobile
     if status == 200:
         context['login'] = True
+        access_token = request.COOKIES.get('user_access_token')
+        headers = {"Authorization": f"Bearer {access_token}"}
+    else:
+        context['login'] = False
     try:
-        # status, response = requestAPI('GET', f'{django_settings.API_URL}/search-listings/{pk}', {}, {})
-        # print(response)
+        if context['login'] == True:
+            status, response = requestAPI('GET', f'{django_settings.API_URL}/search-listings/{pk}', headers, {})
+        else:
+            status, response = requestAPI('GET', f'{django_settings.API_URL}/search-listings/{pk}', {}, {})
         context['property'] = response
         # publicity_status, publicity_response = requestAPI('GET', f'{django_settings.API_URL}/publicity/5', {}, {})
         # context['publicity'] = publicity_response

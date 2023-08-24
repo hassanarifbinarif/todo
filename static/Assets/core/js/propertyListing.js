@@ -1,17 +1,19 @@
-var swiper = new Swiper(".mySwiper", {
-  spaceBetween: 10,
-  slidesPerView: 5,
-  freeMode: true,
-  watchSlidesProgress: true,
-});
-
-var swiper2 = new Swiper(".mySwiper2", {
-  spaceBetween: 10,
-  navigation: {
-    nextEl: ".swiper-button-next",
-    prevEl: ".swiper-button-prev",
-  },
-  thumbs: {
-    swiper: swiper,
-  },
+var swiper2 = new Swiper(".mainSwiper", {
+    spaceBetween: 10,
+    slidesPerView: 1,
+    autoplay: {
+        delay: 10000,
+        disableOnInteraction: false
+    },
+    thumbs: {
+        swiper: swiper,
+    },
+    navigation: {
+        nextEl: ".mainswiper-button-next",
+        prevEl: ".mainswiper-button-prev",
+    },
+    breakpoints: {
+        768: {
+        }
+    }
 });

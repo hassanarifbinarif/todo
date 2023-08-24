@@ -2,6 +2,7 @@
 <div class="property-card-container">
 {% if properties.data %}
 {% for obj in properties.data %}
+<a href="{% url 'property_listing' pk=obj.id %}">
     <div class="property-card">
         <div class="property-card-image-container">
             {% if obj.is_published %}
@@ -58,9 +59,10 @@
             </div>
         </div>
     </div>
+</a>
 {% endfor %}
 {% else %}
-<div class="w-100 text-center pt-4">
+<div class="w-100 text-center pt-4 no-properties">
     <h2>No Properties Found</h2>
 </div>
 {% endif %}

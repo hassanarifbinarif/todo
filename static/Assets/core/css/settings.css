@@ -267,15 +267,15 @@ input[name="my_ads_radio"]:checked + .radio-label{
     cursor: pointer;
 }
 
-.favourite-table-container .property-actions > label {
+.favourite-property-checkbox {
     cursor: pointer;
 }
 
-.favourite-table-container .property-actions input[type=checkbox] {
+.favourite-property-checkbox input[type=checkbox] {
     display: none;
 }
 
-.favourite-table-container .property-actions input[type=checkbox]:checked + svg > path {
+.favourite-property-checkbox input[type=checkbox]:checked + svg > path {
     fill: #8DC63F;
     stroke: #8DC63F;
 }
@@ -335,12 +335,18 @@ input[name="my_ads_radio"]:checked + .radio-label{
 
 .mobile-card {
     display: flex;
+    justify-content: space-between;
     gap: 15px;
     padding: 15px 0px;
     border-top: 1px solid #D2D2D2;
     border-bottom: 1px solid #D2D2D2;
     width: 100%;
     height: 123px;
+}
+
+.mobile-details {
+    display: flex;
+    gap: 15px;
 }
 
 .mobile-card-image {
@@ -367,6 +373,12 @@ input[name="my_ads_radio"]:checked + .radio-label{
     flex-direction: column;
 }
 
+.property-detail-attributes > div {
+    display: flex;
+    gap: 10px;
+    font-size: .75rem;
+    line-height: .875rem;
+}
 
 /* Profile Section Styles */
 
@@ -1133,3 +1145,25 @@ select {
     margin-right: auto;
     margin-left: auto;
 }
+
+/* ---------------------------------------------------------- */
+
+{% load static %}
+{% if is_mobile %}
+
+@media (max-width: 768px) {
+    .favourite-table-container {
+        padding-top: 0px;
+        padding: 0px 10px;
+    }
+    
+    .mobile-actions {
+        align-self: center;
+    }
+    
+    .order-row {
+        width: 150px!important;
+    }
+}
+
+{% endif %}

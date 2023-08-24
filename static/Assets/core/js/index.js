@@ -1,15 +1,20 @@
 // Handling Property Search Form
 
-async function propertySearchForm(event) {
-    // event.preventDefault();
-    // let form = event.currentTarget;
-    // let formData = new FormData(form);
-    // let data = formDataToObject(formData);
-    // console.log(data);
-    // let header = {...data};
-    // let response = await requestAPI('/property-search/', null, data, 'POST');
-    // location.href = location.origin + `/property-search/?property_type=${data.property_type}&criteria=${data.criteria}&city=${data.city}&min_price=${data.min_price}&max_price=${data.max_price}`;
-}
+// async function propertySearchForm(event) {
+//     event.preventDefault();
+//     let form = event.currentTarget;
+//     let formData = new FormData(form);
+//     let data = formDataToObject(formData);
+//     data.criteria_radio = data.criteria_radio || '';
+//     data.property_radio = data.property_radio || '';
+//     console.log(data);
+//     let headers = {
+//         "Content-Type": "application/json",
+//         "X-CSRFToken": data.csrfmiddlewaretoken,
+//     };
+//     let response = await requestAPI('/property-search/', JSON.stringify(data), headers, 'POST');
+//     // location.href = location.origin + `/property-search/?property_type=${data.property_type}&criteria=${data.criteria}&city=${data.city}&min_price=${data.min_price}&max_price=${data.max_price}`;
+// }
 
 
 let criteriaDropdown = document.getElementById('criteria-dropdown');

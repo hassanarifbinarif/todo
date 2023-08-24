@@ -438,6 +438,10 @@ input[name="criteria_radio"]:checked + .radio-label{
     text-decoration: none;
 }
 
+.property-card-container > a:hover .property-card {
+    background-color: #EEEEEE;
+}
+
 .property-card {
     width: 207px;
     height: 300px;
@@ -702,7 +706,7 @@ input::-webkit-inner-spin-button {
         position: absolute;
         z-index: 2;
         background-color: white;
-        top: 29px;
+        top: 35px;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         padding: 10px;
         border-radius: 5px;
@@ -713,6 +717,11 @@ input::-webkit-inner-spin-button {
 
 
 @media(max-width: 480px) {
+    
+    .no-properties {
+        margin-left: 50%;
+    }
+
     .property-search-results-header > span {
         display: none;
     }
