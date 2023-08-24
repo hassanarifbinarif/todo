@@ -275,7 +275,12 @@ input[name="my_ads_radio"]:checked + .radio-label{
     display: none;
 }
 
-.favourite-property-checkbox input[type=checkbox]:checked + svg > path {
+/* .favourite-property-checkbox input[type=checkbox]:checked + svg > path {
+    fill: #8DC63F;
+    stroke: #8DC63F;
+} */
+
+.favourite-property-checkbox.active input[type=checkbox]:checked + svg > path {
     fill: #8DC63F;
     stroke: #8DC63F;
 }

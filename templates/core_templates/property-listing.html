@@ -129,8 +129,8 @@
                             fill="black" />
                     </svg>
                     <div class="vertical-rule"></div>
-                    <label for="{{property.data.id}}">
-                        <input type="checkbox" id="{{property.data.id}}" name="favourite_property" />
+                    <label for="{{property.data.id}}" class="favourite-property-checkbox {% if property.data.is_favourite == True %}active{% endif %}" {% if property.data.is_favourite == True %}onclick="removeFavourite(event, '{{property.data.id}}');"{% else %}onclick="makeFavourite(event, '{{property.data.id}}');"{% endif %}>
+                        <input type="checkbox" readonly {% if obj.is_favourite == true %}checked{% endif %} id="{{property.data.id}}" name="favourite_property" />
                         <svg class="favourite-logo" width="25" height="22" viewBox="0 0 25 22"
                             fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path

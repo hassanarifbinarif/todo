@@ -43,8 +43,11 @@ def property_search(request):
         headers = {"Authorization": f"Bearer {access_token}"}
     else:
         context['login'] = False
+    count = 0
     try:    
         if request.method == 'POST':
+            count = count + 1
+            print(count)
             context["criteria"] = request.POST.get('criteria_radio', '')
             context["property_type"] = request.POST.get('property_radio', '')
             context["min_price"] = request.POST.get('min_price', '')
@@ -166,8 +169,10 @@ def settings(request):
             # if plan_status == 200:
             #     context['plan_list'] = plan_response
             listing_status, listing_response = requestAPI('GET', f'{django_settings.API_URL}/listings', headers, {})
-            if listing_status == 200:
-                context['listings'] = listing_response
+            context['listings'] = listing_response
+            favourite_listing_status, favourite_listing_response = requestAPI('GET', f'{django_settings.API_URL}/listings/favourites', headers, {})
+            context['favourite_listings'] = favourite_listing_response
+            print(favourite_listing_response)
     except Exception as e:
         print(e)
     context['login'] = True
@@ -188,6 +193,26 @@ def get_user_listings(request):
             html = text_template.render({'listings':response})
             context['listing_data'] = html
             context['msg'] = 'Listings retrieved'
+            context['success'] = True
+    except Exception as e:
+        print(e)
+    return JsonResponse(context)
+
+
+@csrf_exempt
+def get_user_favourite_listings(request):
+    context = {}
+    context['msg'] = None
+    context['success'] = False
+    try:
+        user_access_token = request.COOKIES.get('user_access_token')
+        headers = {"Authorization": f'Bearer {user_access_token}'}
+        status, response = requestAPI('GET', 'https://api-dev.todo.com.ec/api/listings/favourites', headers, {})
+        if status == 200:
+            text_template = loader.get_template('ajax/users-favourite-listing-table.html')
+            html = text_template.render({'favourite_listings':response})
+            context['favourite_listing_data'] = html
+            context['msg'] = 'Favourite Listings retrieved'
             context['success'] = True
     except Exception as e:
         print(e)

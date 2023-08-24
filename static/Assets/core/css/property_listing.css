@@ -126,15 +126,15 @@
     width: 29px;
 }
 
-.property-links > label {
+.favourite-property-checkbox {
     cursor: pointer;
 }
 
-.property-links input[type=checkbox] {
+.favourite-property-checkbox input[type=checkbox] {
     display: none;
 }
 
-.property-links input[type=checkbox]:checked + svg > path {
+.favourite-property-checkbox.active input[type=checkbox]:checked + svg > path {
     fill: #8DC63F;
     stroke: #8DC63F;
 }

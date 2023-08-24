@@ -604,3 +604,41 @@ async function updateListingAPI(formData, id) {
         return response;
     }
 }
+
+
+async function removeFavourite(event, id) {
+    event.preventDefault();
+    let token = getAccessTokenFromCookie();
+    let headers = {
+        "Authorization": `Bearer ${token}`
+    };
+    let response = await requestAPI(`${apiURL}/listings/favourites/${id}`, null, headers, 'DELETE');
+    if(response.status == 401) {
+        let myRes = await onRefreshToken();
+        if(myRes.status == 200) {
+            return removeFavourite(event, id);
+        }
+        else {
+            logout();
+        }
+    }
+    else if(response.status == 200) {
+        getUserFavouriteListings();
+    }
+}
+
+
+// Get User Listings
+
+async function getUserFavouriteListings() {
+    favouriteTableContent.innerHTML = '<div class="w-100 d-flex justify-content-center align-items-center pt-2 pb-2"><span class="spinner-border spinner-border-md" style="color: #8DC63F;" role="status" aria-hidden="true"></span></div>';
+    let response = await requestAPI('/get-user-favourite-listings/', null, {}, 'GET');
+    response.json().then(function(res) {
+        if(res.success) {
+            favouriteTableContent.innerHTML = res.favourite_listing_data;
+        }
+        else {
+            favouriteTableContent.innerHTML = '<div class="w-100 d-flex justify-content-center align-items-center pt-2 pb-2"><span class="no-record-row">No records found</span></div>';
+        }
+    })
+}
