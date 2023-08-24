@@ -114,30 +114,29 @@ async function loginForm(event) {
                 "Content-Type": "application/json",
                 "X-CSRFToken": data.csrfmiddlewaretoken,
             };
-            let response = await requestAPI(
-                `${apiURL}/login`,
-                JSON.stringify(data),
-                headers,
-                "POST"
-            );
+            let response = await requestAPI(`${apiURL}/login`, JSON.stringify(data), headers, "POST");
             response.json().then(async function (res) {
                 if (response.status == 400) {
-                    console.log(res);
-                    emailMsg.innerText = res.messages.password;
-                    passwordMsg.innerText = res.messages.password;
-                    emailMsg.classList.add("active");
-                    passwordMsg.classList.add("active");
+                    if(res.messages.password) {
+                        passwordField.classList.add("input-error");
+                        passwordMsg.classList.add("active");
+                        res.messages.password.forEach((message) => {
+                            passwordMsg.innerHTML += `${message}. <br />`;
+                        });
+                    }
+                    else if(res.messages.email) {
+                        emailField.classList.add("input-error");
+                        emailMsg.classList.add("active");
+                        res.messages.email.forEach((message) => {
+                            emailMsg.innerHTML += `${message}. <br />`;
+                        });
+                    }
                     afterLoad(button, buttonText);
                 } else if (response.status == 200) {
                     let myHeader = {
                         Authorization: `Bearer ${res.access}`,
                     };
-                    let myRes = await requestAPI(
-                        `${apiURL}/me`,
-                        null,
-                        myHeader,
-                        "GET"
-                    );
+                    let myRes = await requestAPI(`${apiURL}/me`, null, myHeader, "GET");
                     myRes.json().then(function (myres) {
                         if (myRes.status == 401) {
                             emailField.classList.add("input-error");
@@ -369,12 +368,7 @@ async function resendConfirmationEmail(event) {
         let button = form.querySelector('button[type="submit"]');
         let buttonText = button.innerText;
         beforeLoad(button);
-        let response = await requestAPI(
-            `${apiURL}/users/resend-confirm`,
-            JSON.stringify(data),
-            headers,
-            "PATCH"
-        );
+        let response = await requestAPI(`${apiURL}/users/resend-confirm`, JSON.stringify(data), headers, "PATCH");
         let msgField = form.querySelector(".resend-email-msg");
         if (response.status == 400) {
             response.json().then(function (res) {

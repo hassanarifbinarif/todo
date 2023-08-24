@@ -1,11 +1,12 @@
 {% load static %}
 {% load custom_tags %}
+{% if is_mobile == False %}
 <table class="table">
     <thead>
         <tr>
             <th scope="col"></th>
             <th scope="col">
-                <div class="send-col">
+                <div class="send-col hide">
                     <span>Send</span>
                 </div>
             </th>
@@ -79,3 +80,73 @@
         {% endif %}
     </tbody>
 </table>
+{% else %}
+<div class="mobile-view">
+    <div class="order-row">
+        <button class="order-btn" id="listing-order" type="button">
+            <span id="selected-listing-order">Order</span>
+            <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 0.863883C9.95436 1.10388 9.77171 1.24788 9.63473 1.43988C8.26486 2.87988 6.895 4.31988 5.52514 5.75988C5.29683 5.99988 5.06852 6.09588 4.74888 5.95188C4.65756 5.95188 4.52057 5.85588 4.47491 5.75988C3.05938 4.27188 1.64386 2.78388 0.228334 1.29588C-0.136963 0.911883 -0.0456384 0.287883 0.410983 0.0958825C0.639293 -0.0481175 0.913266 -0.000117473 1.09591 0.143883C1.14158 0.143883 1.18724 0.239883 1.2329 0.287883C2.46578 1.58388 3.65299 2.83188 4.88587 4.12788C4.88587 4.12788 4.93153 4.17588 4.97719 4.22388C4.97719 4.22388 5.02286 4.17588 5.06852 4.12788C6.30139 2.83188 7.53427 1.53588 8.76715 0.239883C8.99546 -0.000117473 9.22377 -0.0961175 9.5434 0.0478825C9.77171 0.143883 9.9087 0.287883 10 0.527883C10 0.527883 10 0.575883 10 0.623883V0.911883V0.863883Z" fill="#9A9A9A"/>
+            </svg>
+        </button>
+        <div class="order-dropdown" id="listing-order-dropdown">
+            <div class="radio-btn">
+                <input id="order1" type="radio" name="listing_radio">
+                <label for="order1" class="radio-label">Order 1</label>
+            </div>
+            <div class="radio-btn">
+                <input id="order2" type="radio" name="listing_radio">
+                <label for="order2" class="radio-label">Order 2</label>
+            </div>
+        </div>
+    </div>
+    <div class="mobile-data">
+        {% if listings.data %}
+        {% for obj in listings.data %}
+        <div class="mobile-card listing-mobile-card">
+            <div class="mobile-details">
+                <div class="mobile-card-image">
+                    <img src="{{obj.images.0.image}}" loading="lazy" alt="Property Image" />
+                </div>
+            </div>
+            <div class="property-details">
+                <span>{{obj.property_type|title}}</span>
+                <span>{{obj.neighbourhood|title}}</span>
+                <div class="property-detail-attributes">
+                    <div>
+                        <div>
+                            <img src="{% static 'Assets/core/images/area_logo.svg' %}" alt="area">
+                            <span>{{obj.construction}} m<sup>2</sup></span>
+                        </div>
+                        <div>
+                            <img src="{% static 'Assets/core/images/house_logo.svg' %}" alt="house">                                        
+                            <span>{{obj.land}} m<sup>2</sup></span>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <img src="{% static 'Assets/core/images/bed_logo.svg' %}" alt="bed">
+                            <span>{{obj.bedrooms}}</span>                                        
+                        </div>
+                        <div>
+                            <img src="{% static 'Assets/core/images/bathroom_logo.svg' %}" alt="bathroom">
+                            <span>{{obj.bathrooms}}</span>                                     
+                        </div>
+                    </div>
+                    <div>
+                        <span>${{obj.price|floatformat:"2g"}}</span>
+                        <div class="property-actions">
+                            <img src="{% static 'Assets/core/images/promotion_logo.svg' %}" onclick="openBoostAdModal('boost-ad', '{{obj.id}}')" alt="Promotion Button" />
+                            <img src="{% static 'Assets/core/images/reserved_logo.svg' %}" alt="Reserved Button" />
+                            <img src="{% static 'Assets/core/images/editing_logo.svg' %}" id="edit-listing-btn" onclick="toggleListingView(event, {id:'{{obj.id}}', created_at:'{{obj.created_at}}', description:`{{obj.description}}`, criteria:'{{obj.criteria}}', price:'{{obj.price}}', property_type:'{{obj.property_type}}', land:'{{obj.land}}', construction:'{{obj.construction}}', neighbourhood:'{{obj.neighbourhood}}', bedrooms:'{{obj.bedrooms}}', bathrooms:'{{obj.bathrooms}}', city:'{{obj.city}}', parking:'{{obj.parking}}', antiquity:'{{obj.antiquity}}', location:'{{obj.location}}', ameneties:'{{obj.ameneties}}', images: {{obj.images}}})" alt="Editing Button" />
+                            <img src="{% static 'Assets/core/images/delete_logo.svg' %}" onclick="openDelListingModal('del-listing', '{{obj.id}}')" alt="Delete Button" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endif %}

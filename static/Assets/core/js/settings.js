@@ -76,6 +76,28 @@ listingOptions.forEach((option) => {
 listingDropdownBtn.addEventListener('click', toggleDropdown);
 
 
+let checkedListings = document.querySelectorAll('.listing-checkbox-input');
+
+if(checkedListings) {
+    checkedListings.forEach((checkbox) => {
+        checkbox.addEventListener('change', function() {
+            let checkedCount = 0;
+            checkedListings.forEach((checkbox) => {
+                if(checkbox.checked) {
+                    checkedCount++;
+                }
+            })
+            if(checkedCount > 0) {
+                document.querySelector('.send-col').classList.remove('hide');
+            }
+            else {
+                document.querySelector('.send-col').classList.add('hide');
+            }
+        })
+    })
+}
+
+
 let favouriteDropdown = document.getElementById('favourite-order-dropdown');
 let favouriteDropdownBtn = document.getElementById('favourite-order');
 let favouriteOptions = document.querySelectorAll('input[name="favourite_radio"]');
@@ -387,21 +409,12 @@ async function toggleListingView(event, data) {
         })
         data.images.forEach((image) => {
             let imageTag = `<div class="uploaded-image">
-                                <svg class="del-img-btn" onclick="delPropertyImage(event);" width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <g clip-path="url(#clip0_4674_1683)">
-                                        <path d="M15.4999 2.58301C8.357 2.58301 2.58325 8.35676 2.58325 15.4997C2.58325 22.6426 8.357 28.4163 15.4999 28.4163C22.6428 28.4163 28.4166 22.6426 28.4166 15.4997C28.4166 8.35676 22.6428 2.58301 15.4999 2.58301ZM21.9583 20.1368L20.137 21.958L15.4999 17.3209L10.8628 21.958L9.04159 20.1368L13.6787 15.4997L9.04159 10.8626L10.8628 9.04134L15.4999 13.6784L20.137 9.04134L21.9583 10.8626L17.3212 15.4997L21.9583 20.1368Z" fill="#FC0909"/>
-                                    </g>
-                                    <defs>
-                                        <clipPath id="clip0_4674_1683">
-                                            <rect width="31" height="31" fill="white"/>
-                                        </clipPath>
-                                    </defs>
-                                </svg>
                                 <img src="${image.image}" alt="property image" />
                             </div>`;
             imageContainer.insertAdjacentHTML('afterbegin', imageTag);
         })
         form.querySelector('#publish-property-btn').querySelector('.btn-text').innerText = 'Publish';
+        form.querySelector('.update-error-msg').classList.remove('active');
         listingEditView.classList.remove('hide');
     }
     else if(element.id == 'back-btn' && baseView.classList.contains('hide')) {
@@ -430,20 +443,21 @@ imageInput.addEventListener("change", function () {
 
 function previewImages(imageFile) {
     let image = `<div class="uploaded-image">
-                    <svg class="del-img-btn" onclick="delPropertyImage(event);" width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0_4674_1683)">
-                            <path d="M15.4999 2.58301C8.357 2.58301 2.58325 8.35676 2.58325 15.4997C2.58325 22.6426 8.357 28.4163 15.4999 28.4163C22.6428 28.4163 28.4166 22.6426 28.4166 15.4997C28.4166 8.35676 22.6428 2.58301 15.4999 2.58301ZM21.9583 20.1368L20.137 21.958L15.4999 17.3209L10.8628 21.958L9.04159 20.1368L13.6787 15.4997L9.04159 10.8626L10.8628 9.04134L15.4999 13.6784L20.137 9.04134L21.9583 10.8626L17.3212 15.4997L21.9583 20.1368Z" fill="#FC0909"/>
-                        </g>
-                        <defs>
-                            <clipPath id="clip0_4674_1683">
-                                <rect width="31" height="31" fill="white"/>
-                            </clipPath>
-                        </defs>
-                    </svg>
                     <img src="${URL.createObjectURL(imageFile)}" alt="property image" />
                 </div>`;
     imageContainer.insertAdjacentHTML('afterbegin', image);
 }
+
+{/* <svg class="del-img-btn" onclick="delPropertyImage(event);" width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g clip-path="url(#clip0_4674_1683)">
+        <path d="M15.4999 2.58301C8.357 2.58301 2.58325 8.35676 2.58325 15.4997C2.58325 22.6426 8.357 28.4163 15.4999 28.4163C22.6428 28.4163 28.4166 22.6426 28.4166 15.4997C28.4166 8.35676 22.6428 2.58301 15.4999 2.58301ZM21.9583 20.1368L20.137 21.958L15.4999 17.3209L10.8628 21.958L9.04159 20.1368L13.6787 15.4997L9.04159 10.8626L10.8628 9.04134L15.4999 13.6784L20.137 9.04134L21.9583 10.8626L17.3212 15.4997L21.9583 20.1368Z" fill="#FC0909"/>
+    </g>
+    <defs>
+        <clipPath id="clip0_4674_1683">
+            <rect width="31" height="31" fill="white"/>
+        </clipPath>
+    </defs>
+</svg> */}
 
 function delPropertyImage(event) {
     let imageElement = event.currentTarget.nextElementSibling;
@@ -461,9 +475,16 @@ let tagsInput = document.querySelector(".tags-input");
 let tagsTextbox = document.querySelector(".tags-textbox");
 let tags = [];
 
-tagsTextbox.addEventListener("keydown", function(event) {
-    if(event.keyCode === 13) {
-        event.preventDefault();
+tagsTextbox.addEventListener("keydown", function(e) {
+    if(e.keyCode === 13) {
+        e.preventDefault();
+        const enteredText = e.target.value.trim();
+        if (enteredText.length > 0) {
+            const newTag = createTag(enteredText);
+            tags.push(newTag);
+            tagsTextbox.value = "";
+            tagsTextbox.focus();
+        }
     }
 });
 
@@ -520,6 +541,7 @@ async function updateListing(event, id) {
     else {
         let form = event.currentTarget;
         let button = form.querySelector('#publish-property-btn');
+        let errorMsg = document.querySelector('.update-error-msg');
         let buttonText = button.innerText;
         form.querySelector('input[name="price"]').value = roundDecimalPlaces(form.querySelector('input[name="price"]').value);
         form.querySelector('input[name="land"]').value = roundDecimalPlaces(form.querySelector('input[name="land"]').value);
@@ -535,12 +557,26 @@ async function updateListing(event, id) {
         let response = await updateListingAPI(formData, id);
         if(response.status == 200) {
             afterLoad(button, 'Listing Updated');
+            errorMsg.classList.remove('active');
+            errorMsg.innerText = '';
             getUserListings();
         }
         else if(response.status == 404) {
             afterLoad(button, 'Not Found');
         }
+        else if(response.status == 400) {
+            response.json().then(function(res) {
+                errorMsg.classList.add('active');
+                if (res.messages) {
+                    let key = Object.keys(res.messages);
+                    errorMsg.innerText = `${res.messages[key[0]]}`;
+                }
+            })
+            afterLoad(button, 'Error!');
+        }
         else {
+            errorMsg.classList.remove('active');
+            errorMsg.innerText = '';
             afterLoad(button, 'Error! Retry');
         }
     }

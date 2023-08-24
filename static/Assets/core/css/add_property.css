@@ -375,6 +375,13 @@ select {
     color: #9A9A9A;
 }
 
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
 .publish-property-btn {
     height: 40px;
     max-width: 320px;

@@ -5,9 +5,16 @@ const tagsInput = document.querySelector(".tags-input");
 const tagsTextbox = document.querySelector(".tags-textbox");
 const tags = [];
 
-tagsTextbox.addEventListener("keydown", function(event) {
-    if(event.keyCode === 13) {
-        event.preventDefault();
+tagsTextbox.addEventListener("keydown", function(e) {
+    if(e.keyCode === 13) {
+        e.preventDefault();
+        const enteredText = e.target.value.trim();
+        if (enteredText.length > 0) {
+            const newTag = createTag(enteredText);
+            tags.push(newTag);
+            tagsTextbox.value = "";
+            tagsTextbox.focus();
+        }
     }
 });
 
@@ -178,6 +185,7 @@ async function addPropertyForm(event) {
     event.preventDefault();
     let form = event.currentTarget;
     let button = form.querySelector('button[type="submit"]');
+    let errorMsg = document.querySelector('.update-error-msg');
     let buttonText = button.innerText;
     if (!isValidImageData(imageContainer)) {
         imageContainer.previousElementSibling.classList.add("active");
@@ -186,7 +194,14 @@ async function addPropertyForm(event) {
     if (!isValidContent(propertyDescription)) {
         propertyDescription.nextElementSibling.classList.add("active");
         return false;
-    } else {
+    } else if (tags.length === 0) {
+        tagsContainer.scrollIntoView();
+        tagsContainer.nextElementSibling.classList.add('active');
+        tagsContainer.nextElementSibling.innerText = 'Add ameneties';
+    }
+     else {
+        tagsContainer.nextElementSibling.classList.remove('active');
+        tagsContainer.nextElementSibling.innerText = '';
         form.querySelector('input[name="price"]').value = roundDecimalPlaces(form.querySelector('input[name="price"]').value);
         form.querySelector('input[name="land"]').value = roundDecimalPlaces(form.querySelector('input[name="land"]').value);
         form.querySelector('input[name="construction"]').value = roundDecimalPlaces(form.querySelector('input[name="construction"]').value);
@@ -202,6 +217,8 @@ async function addPropertyForm(event) {
         let response = await listingAPI(formData);
         response.json().then(function(res) {
             if(response.status == 201) {
+                errorMsg.classList.remove('active');
+                errorMsg.innerText = '';
                 openBoostAdModal('boost-ad', res.data.id);
                 if (!addPropertyContent.classList.contains("hide")) {
                     addPropertyContent.classList.add("hide");
@@ -210,7 +227,17 @@ async function addPropertyForm(event) {
                 window.scrollTo({top: 0, behavior: 'smooth'});
                 afterLoad(button, buttonText);
             }
+            else if(response.status == 400) {
+                errorMsg.classList.add('active');
+                if (res.messages) {
+                    let key = Object.keys(res.messages);
+                    errorMsg.innerText = `${res.messages[key[0]]}`;
+                }
+                afterLoad(button, 'Error!');
+            }
             else {
+                errorMsg.classList.remove('active');
+                errorMsg.innerText = '';
                 afterLoad(button, 'Error! Retry');
             }
         })

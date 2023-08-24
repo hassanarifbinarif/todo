@@ -326,7 +326,7 @@ input[name="my_ads_radio"]:checked + .radio-label{
 
 /* Styles if page loaded on mobile */
 
-.favourite-mobile-view {
+.mobile-view {
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -342,6 +342,21 @@ input[name="my_ads_radio"]:checked + .radio-label{
     border-bottom: 1px solid #D2D2D2;
     width: 100%;
     height: 123px;
+}
+
+.mobile-card.listing-mobile-card {
+    height: fit-content;
+    gap: 5px;
+}
+
+.listing-mobile-card .property-details {
+    width: 100%;
+}
+
+.listing-mobile-card .property-actions {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 8px;
 }
 
 .mobile-details {
@@ -361,11 +376,15 @@ input[name="my_ads_radio"]:checked + .radio-label{
 .property-details {
     display: flex;
     flex-direction: column;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .property-details > span {
     font-size: .875rem;
     color: #000000;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .property-detail-attributes {
@@ -378,6 +397,17 @@ input[name="my_ads_radio"]:checked + .radio-label{
     gap: 10px;
     font-size: .75rem;
     line-height: .875rem;
+}
+
+.listing-mobile-card .property-detail-attributes > div:last-of-type {
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+}
+
+.property-detail-attributes > div:last-of-type > span {
+    font-size: 1rem;
+    line-height: 1rem;
 }
 
 /* Profile Section Styles */
@@ -1128,6 +1158,7 @@ select {
 
 .button-container {
     display: flex;
+    flex-direction: column;
     align-items: center;
     width: 100%;
 }
@@ -1146,6 +1177,37 @@ select {
     margin-left: auto;
 }
 
+
+@media (max-width: 768px) {
+    .add-property-main-content {
+        padding: 50px 20px;
+    }
+
+    .other-inputs {
+        flex-wrap: wrap;
+    }
+
+    .location-input {
+        width: 100%;
+    }
+
+    .location-input > .search-location {
+        width: 100%;
+    }
+
+    .location-input>.search-location>input {
+        width: 100%;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .publish-property-btn {
+        width: 100%;
+    }
+}
+
+
 /* ---------------------------------------------------------- */
 
 {% load static %}
@@ -1163,6 +1225,11 @@ select {
     
     .order-row {
         width: 150px!important;
+    }
+
+    .property-actions > img {
+        width: 18px;
+        height: 18px;
     }
 }
 

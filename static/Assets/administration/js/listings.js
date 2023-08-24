@@ -167,9 +167,16 @@ let tagsInput = document.querySelector(".tags-input");
 let tagsTextbox = document.querySelector(".tags-textbox");
 let tags = [];
 
-tagsTextbox.addEventListener("keydown", function(event) {
-    if(event.keyCode === 13) {
-        event.preventDefault();
+tagsTextbox.addEventListener("keydown", function(e) {
+    if(e.keyCode === 13) {
+        e.preventDefault();
+        const enteredText = e.target.value.trim();
+        if (enteredText.length > 0) {
+            const newTag = createTag(enteredText);
+            tags.push(newTag);
+            tagsTextbox.value = "";
+            tagsTextbox.focus();
+        }
     }
 });
 

@@ -6,6 +6,7 @@ from django.conf import settings as django_settings
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.template import loader
+from django.core.paginator import Paginator
 
 
 def index(request):
@@ -53,7 +54,6 @@ def property_search(request):
             else:
                 status, response = requestAPI('GET', f'{django_settings.API_URL}/search-listings?criteria={context["criteria"]}&property_type__in={context["property_type"]}&price__gte={context["min_price"]}&price__lte={context["max_price"]}&city={context["city"]}', {}, {})
             context['properties'] = response
-            print(response)
         else:
             if context['login'] == True:
                 status, response = requestAPI('GET', f'{django_settings.API_URL}/search-listings', headers, {})
@@ -77,6 +77,9 @@ def get_search_properties(request):
     context = {}
     try:
         request_data = json.loads(request.body.decode('utf-8'))
+        # paginator = Paginator(request_data.get('data'), per_page=1)
+        # print(paginator.count)
+        # print(paginator.page_range)
         text_template = loader.get_template('ajax/property-card.html')
         html = text_template.render({'properties':request_data})
         context['property'] = html
