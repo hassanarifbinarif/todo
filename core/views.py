@@ -33,6 +33,7 @@ def index(request):
     return render(request, 'core_templates/index.html', context)
 
 
+@csrf_exempt
 def property_search(request):
     context = {}
     status, response = check_user_login(request)
