@@ -612,6 +612,7 @@ async function removeFavourite(event, id) {
     let headers = {
         "Authorization": `Bearer ${token}`
     };
+    favouriteTableContent.innerHTML = '<div class="w-100 d-flex justify-content-center align-items-center pt-2 pb-2"><span class="spinner-border spinner-border-md" style="color: #8DC63F;" role="status" aria-hidden="true"></span></div>';
     let response = await requestAPI(`${apiURL}/listings/favourites/${id}`, null, headers, 'DELETE');
     if(response.status == 401) {
         let myRes = await onRefreshToken();
@@ -631,7 +632,6 @@ async function removeFavourite(event, id) {
 // Get User Listings
 
 async function getUserFavouriteListings() {
-    favouriteTableContent.innerHTML = '<div class="w-100 d-flex justify-content-center align-items-center pt-2 pb-2"><span class="spinner-border spinner-border-md" style="color: #8DC63F;" role="status" aria-hidden="true"></span></div>';
     let response = await requestAPI('/get-user-favourite-listings/', null, {}, 'GET');
     response.json().then(function(res) {
         if(res.success) {

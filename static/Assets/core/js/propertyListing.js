@@ -47,7 +47,6 @@ async function makeFavourite(event, id) {
         favouriteElement.removeAttribute('onclick');
         favouriteElement.setAttribute('onclick', `removeFavourite(event, '${id}')`);
         favouriteElement.querySelector('input').checked = true;
-        // getUserFavouriteListings();
     }
 }
 
@@ -78,6 +77,5 @@ async function removeFavourite(event, id) {
         favouriteElement.removeAttribute('onclick');
         favouriteElement.setAttribute('onclick', `makeFavourite(event, '${id}')`);
         favouriteElement.querySelector('input').checked = false;
-        // getUserFavouriteListings();
     }
 }

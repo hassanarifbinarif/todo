@@ -264,6 +264,14 @@
     overflow-x: auto;
 }
 
+.spotlight-card-container > a {
+    text-decoration: none;
+}
+
+.spotlight-card-container > a:hover .spotlight-card {
+    background-color: #EEEEEE;
+}
+
 .spotlight-card {
     width: 207px;
     height: 300px;
@@ -274,11 +282,15 @@
     margin-bottom: 10px;
 }
 
-.spotlight-card-container > .spotlight-card:first-of-type {
+.spotlight-card hr {
+    color: #D2D2D2;
+}
+
+.spotlight-card-container .spotlight-card:first-of-type {
     margin-left: 5px;
 }
 
-.spotlight-card-container > .spotlight-card:last-of-type {
+.spotlight-card-container .spotlight-card:last-of-type {
     margin-right: 5px;
 }
 
@@ -329,6 +341,13 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
+}
+
+.spotlight-card-details .details-row1 .details-row1-column1 > span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .details-row1-column1 {
@@ -337,20 +356,40 @@
     color: #000000;
 }
 
-.details-row1-column2 > label {
+
+.spot .details-row1-column2 > label {
     cursor: pointer;
 }
 
-.details-row1-column2 > label > input[type=checkbox] {
+.spot .details-row1-column2 > label > input[type=checkbox] {
     display: none;
 }
 
-.details-row1-column2 > label > svg {
+.spot .details-row1-column2 > label > svg {
     width: 14px;
     height: 13px;
 }
 
-.details-row1-column2 > label > input[type=checkbox]:checked + svg > path {
+.spot .details-row1-column2 > label > input[type=checkbox]:checked + svg > path {
+    fill: #8DC63F;
+    stroke: #8DC63F;
+}
+
+
+.favourite-property-checkbox {
+    cursor: pointer;
+}
+
+.favourite-property-checkbox input[type=checkbox] {
+    display: none;
+}
+
+.favourite-property-checkbox svg {
+    width: 14px;
+    height: 13px;
+}
+
+.favourite-property-checkbox.active input[type=checkbox]:checked + svg > path {
     fill: #8DC63F;
     stroke: #8DC63F;
 }
@@ -396,6 +435,9 @@
     font-size: .875rem;
     line-height: 1rem;
     color: #000000;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .details-row3 > span:last-of-type {

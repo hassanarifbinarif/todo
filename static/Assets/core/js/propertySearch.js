@@ -168,9 +168,16 @@ async function filterPropertyForm(event) {
     ameneties = ameneties.length === 0 ? '' : ameneties.join(',');
     let bedrooms = data.bedroombtnradio || '';
     let bathrooms = data.bathroombtnradio || '';
+    let accessToken = getAccessTokenFromCookie();
+    let headers = {};
+    if(accessToken) {
+        headers = {
+            "Authorization": `Bearer ${accessToken}`,
+        };
+    }
     let queryString = `?criteria=${data.criteria_radio || ''}&property_type__in=${property_type}&price__gte=${data.min_price || ''}&price__lte=${data.max_price || ''}&${bedrooms >= 5 ? 'bedrooms__gte' : 'bedrooms'}=${bedrooms}&${bathrooms >= 5 ? 'bathrooms__gte' : 'bathrooms'}=${bathrooms}&construction__gte=${data.min_construction_area || ''}&construction__lte=${data.max_construction_area}&land__gte=${data.min_land_area || ''}&land__lte=${data.max_land_area}&ameneties__contains=${ameneties}`;
     document.querySelector('#property-search-result-card-container').innerHTML = '<div class="w-100 d-flex justify-content-center align-items-center pt-5 pb-2"><span class="spinner-border spinner-border-md" style="color: #8DC63F;" role="status" aria-hidden="true"></span></div>';
-    let response = await requestAPI(`${apiURL}/search-listings${queryString}`, null, {}, 'GET');
+    let response = await requestAPI(`${apiURL}/search-listings${queryString}`, null, headers, 'GET');
     response.json().then(async function(res) {
         if(response.status == 200) {
             let resp = await requestAPI('/get-search-properties/', JSON.stringify(res), {}, 'POST');
@@ -186,4 +193,60 @@ function triggerForm(event) {
     // let form = event.target.closest('form');
     // var event = new Event('change');
     // form.dispatchEvent(event);
+}
+
+
+async function makeFavourite(event, id) {
+    event.preventDefault();
+    event.stopPropagation();
+    let favouriteElement = event.target.closest('.favourite-property-checkbox');
+    let formData = new FormData();
+    formData.append('listing', `${id}`);
+    let token = getAccessTokenFromCookie();
+    let headers = {
+        "Authorization": `Bearer ${token}`
+    };
+    let response = await requestAPI(`${apiURL}/listings/favourites`, formData, headers, 'POST');
+    if(response.status == 401) {
+        let myRes = await onRefreshToken();
+        if(myRes.status == 200) {
+            return removeFavourite(event, id);
+        }
+        else {
+            logout();
+        }
+    }
+    else if(response.status == 200) {
+        favouriteElement.classList.add('active');
+        favouriteElement.removeAttribute('onclick');
+        favouriteElement.setAttribute('onclick', `removeFavourite(event, '${id}')`);
+        favouriteElement.querySelector('input').checked = true;
+    }
+}
+
+
+async function removeFavourite(event, id) {
+    event.preventDefault();
+    event.stopPropagation();
+    let favouriteElement = event.target.closest('.favourite-property-checkbox');
+    let token = getAccessTokenFromCookie();
+    let headers = {
+        "Authorization": `Bearer ${token}`
+    };
+    let response = await requestAPI(`${apiURL}/listings/favourites/${id}`, null, headers, 'DELETE');
+    if(response.status == 401) {
+        let myRes = await onRefreshToken();
+        if(myRes.status == 200) {
+            return removeFavourite(event, id);
+        }
+        else {
+            logout();
+        }
+    }
+    else if(response.status == 200) {
+        favouriteElement.classList.remove('active');
+        favouriteElement.removeAttribute('onclick');
+        favouriteElement.setAttribute('onclick', `makeFavourite(event, '${id}')`);
+        favouriteElement.querySelector('input').checked = false;
+    }
 }

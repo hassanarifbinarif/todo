@@ -22,7 +22,6 @@ def index(request):
         except Exception as e:
             print(e)
     if request.method == 'POST':
-        print('I am in index')
         return render(request, 'core_templates/property-search.html', context)
     # try:
     #     publicity_status, publicity_response = requestAPI('GET', f'{django_settings.API_URL}/publicity/1', {}, {})
@@ -43,11 +42,8 @@ def property_search(request):
         headers = {"Authorization": f"Bearer {access_token}"}
     else:
         context['login'] = False
-    count = 0
     try:    
         if request.method == 'POST':
-            count = count + 1
-            print(count)
             context["criteria"] = request.POST.get('criteria_radio', '')
             context["property_type"] = request.POST.get('property_radio', '')
             context["min_price"] = request.POST.get('min_price', '')

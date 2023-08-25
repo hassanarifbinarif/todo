@@ -15,12 +15,12 @@
         <div class="property-card-details">
             <div class="details-row1">
                 <div class="details-row1-column1">
-                    <span>{{obj.property_type}}</span>
-                    <span>{{obj.neighbourhood}}</span>
+                    <span title="{{obj.property_type}}">{{obj.property_type}}</span>
+                    <span title="{{obj.neighbourhood}}">{{obj.neighbourhood}}</span>
                 </div>
                 <div class="details-row1-column2">
-                    <label for="{{obj.id}}">
-                        <input type="checkbox" id="{{obj.id}}" {% if obj.is_favourite == None or obj.is_favourite == False %}{% else %}checked{% endif %} name="favourite_property" />
+                    <label for="{{obj.id}}" class="favourite-property-checkbox {% if obj.is_favourite == True %}active{% endif %}" {% if obj.is_favourite == True %}onclick="removeFavourite(event, '{{obj.id}}');"{% else %}onclick="makeFavourite(event, '{{obj.id}}');"{% endif %}>
+                        <input type="checkbox" readonly {% if obj.is_favourite == True %}checked{% endif %} id="{{obj.id}}" name="favourite_property" />
                         <svg class="favourite-logo" width="25" height="22" viewBox="0 0 25 22"
                             fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -54,7 +54,7 @@
             </div>
             <hr />
             <div class="details-row3">
-                <span>{{obj.neighbourhood}}, {{obj.city}}</span>
+                <span title="{{obj.neighbourhood}}, {{obj.city}}">{{obj.neighbourhood}}, {{obj.city}}</span>
                 <span class="price">${{obj.price|floatformat:"-2g"}}</span>
             </div>
         </div>
