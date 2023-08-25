@@ -121,7 +121,7 @@
                         <form class="plan-container">
                             <span>Plan</span>
                             <div class="plan-card-container">
-                                <div class="plan-radio-btn">
+                                <!-- <div class="plan-radio-btn">
                                     <input id="basic" type="radio" name="plan_radio">
                                     <label for="basic" class="plan-card">
                                         <div class="plan-duration">
@@ -183,8 +183,8 @@
                                             </ul>
                                         </div>
                                     </label>
-                                </div>
-                                <!-- {% if plan_list %}
+                                </div> -->
+                                {% if plan_list %}
                                 {% for obj in plan_list.data %}
                                 <div class="plan-radio-btn">
                                     <input id="{{obj.id}}" type="radio" name="plan_radio">
@@ -208,9 +208,9 @@
                                     </label>
                                 </div>
                                 {% endfor %}
-                                {% endif %} -->
+                                {% endif %}
                             </div>
-                            <button class="change-plan-btn">Change Plan</button>
+                            <button class="change-plan-btn" type="button">Change Plan</button>
                         </form>
                     </div>
                 </div>

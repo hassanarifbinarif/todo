@@ -74,6 +74,13 @@ input[type=file] {
     border-radius: 10px;
     cursor: pointer;
     transition: all ease-in-out .2s;
+    position: relative;
+}
+
+.input-error-msg.active {
+    position: absolute!important;
+    bottom: -25px;
+    left: 0px;
 }
 
 .image-input-label > .uploader-logo {

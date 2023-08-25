@@ -286,11 +286,11 @@
     color: #D2D2D2;
 }
 
-.spotlight-card-container .spotlight-card:first-of-type {
+.spotlight-card-container a:first-of-type {
     margin-left: 5px;
 }
 
-.spotlight-card-container .spotlight-card:last-of-type {
+.spotlight-card-container a:last-of-type {
     margin-right: 5px;
 }
 

@@ -418,6 +418,14 @@
     margin-bottom: 5px;
 }
 
+.spotlight-card-container > a {
+    text-decoration: none;
+}
+
+.spotlight-card-container > a:hover .spotlight-card {
+    background-color: #EEEEEE;
+}
+
 .spotlight-card {
     width: 207px;
     height: 300px;
@@ -462,6 +470,18 @@
     padding: 10px;
 }
 
+.spotlight-card hr {
+    color: #D2D2D2;
+}
+
+.spotlight-card-container .spotlight-card:first-of-type {
+    margin-left: 5px;
+}
+
+.spotlight-card-container .spotlight-card:last-of-type {
+    margin-right: 5px;
+}
+
 .spotlight-card-details .details-row1 {
     display: flex;
     justify-content: space-between;
@@ -473,6 +493,13 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
+}
+
+.spotlight-card-details .details-row1 .details-row1-column1 > span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .details-row1-column1 {
@@ -517,19 +544,41 @@
     margin: .5rem 0;
 }
 
-.details-row3>span:first-of-type {
+.spotlight-card .favourite-property-checkbox {
+    cursor: pointer;
+}
+
+.spotlight-card .favourite-property-checkbox input[type=checkbox] {
+    display: none;
+}
+
+.spotlight-card .favourite-property-checkbox svg {
+    width: 14px;
+    height: 13px;
+}
+
+.spotlight-card .favourite-property-checkbox.active input[type=checkbox]:checked + svg > path {
+    fill: #8DC63F;
+    stroke: #8DC63F;
+}
+
+.details-row3 > span:first-of-type {
     font-weight: 300;
     font-size: .875rem;
     line-height: 1rem;
     color: #000000;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
-.details-row3>span:last-of-type {
+.details-row3 > span:last-of-type {
     font-weight: 400;
     font-size: 1rem;
     line-height: 1.25rem;
     color: #000000;
 }
+
 
 .bottom-page-ad {
     margin-top: 90px;

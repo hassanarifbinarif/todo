@@ -7,6 +7,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.template import loader
 from django.core.paginator import Paginator
+import requests
 
 
 def index(request):
@@ -21,14 +22,16 @@ def index(request):
             context['recently_viewed'] = recent_viewed_response
         except Exception as e:
             print(e)
-    if request.method == 'POST':
-        return render(request, 'core_templates/property-search.html', context)
-    # try:
-    #     publicity_status, publicity_response = requestAPI('GET', f'{django_settings.API_URL}/publicity/1', {}, {})
-    #     if publicity_status == 200:
-    #         context['publicity'] = publicity_response
-    # except Exception as e:
-    #     print(e)
+    try:
+        if context['login'] == True:
+            spotlight_status, spotlight_response = requestAPI('GET', f'{django_settings.API_URL}/search-listings?location=SRID=4326;POINT (31.460294 74.288639)', headers, {})
+        else:
+            spotlight_status, spotlight_response = requestAPI('GET', f'{django_settings.API_URL}/search-listings?location=SRID=4326;POINT (31.460294 74.288639)', {}, {})
+        context['spotlight_properties'] = spotlight_response
+        publicity_status, publicity_response = requestAPI('GET', f'{django_settings.API_URL}/publicity/1', {}, {})
+        context['publicity'] = publicity_response
+    except Exception as e:
+        print(e)
     return render(request, 'core_templates/index.html', context)
 
 
@@ -47,7 +50,7 @@ def property_search(request):
             context["criteria"] = request.POST.get('criteria_radio', '')
             context["property_type"] = request.POST.get('property_radio', '')
             context["min_price"] = request.POST.get('min_price', '')
-            context["max_price"] = request.POST.get('max_price')
+            context["max_price"] = request.POST.get('max_price', '')
             context["city"] = request.POST.get('city')
             if context['login'] == True:
                 status, response = requestAPI('GET', f'{django_settings.API_URL}/search-listings?criteria={context["criteria"]}&property_type__in={context["property_type"]}&price__gte={context["min_price"]}&price__lte={context["max_price"]}&city={context["city"]}', headers, {})
@@ -60,13 +63,12 @@ def property_search(request):
             else:
                 status, response = requestAPI('GET', f'{django_settings.API_URL}/search-listings', {}, {})
             context['properties'] = response
-            # context['properties'] = response
-            # publicity_status1, publicity_response1 = requestAPI('GET', f'{django_settings.API_URL}/publicity/2', {}, {})
-            # publicity_status2, publicity_response2 = requestAPI('GET', f'{django_settings.API_URL}/publicity/3', {}, {})
-            # publicity_status3, publicity_response3 = requestAPI('GET', f'{django_settings.API_URL}/publicity/4', {}, {})
-            # context['publicity'] = {"publicity1": publicity_response1,
-            #                         "publicity2": publicity_response2,
-            #                         "publicity3": publicity_response3} 
+        publicity_status1, publicity_response1 = requestAPI('GET', f'{django_settings.API_URL}/publicity/2', {}, {})
+        publicity_status2, publicity_response2 = requestAPI('GET', f'{django_settings.API_URL}/publicity/3', {}, {})
+        publicity_status3, publicity_response3 = requestAPI('GET', f'{django_settings.API_URL}/publicity/4', {}, {})
+        context['publicity'] = {"publicity1": publicity_response1,
+                                "publicity2": publicity_response2,
+                                "publicity3": publicity_response3} 
     except Exception as e:
         print(e)
     return render(request, 'core_templates/property-search.html', context)
@@ -103,13 +105,19 @@ def property_listing(request, pk):
     try:
         if context['login'] == True:
             status, response = requestAPI('GET', f'{django_settings.API_URL}/search-listings/{pk}', headers, {})
+            if response:
+                print(response)
+                similar_properties_status, similar_properties_response = requestAPI('GET', f'{django_settings.API_URL}/search-listings?exclude_ids={pk}&property_type__in={response["data"]["property_type"]}&location={response["data"]["location"]}', headers, {})
+                print(similar_properties_response)
         else:
             status, response = requestAPI('GET', f'{django_settings.API_URL}/search-listings/{pk}', {}, {})
+            similar_properties_status, similar_properties_response = requestAPI('GET', f'{django_settings.API_URL}/search-listings?exclude_ids={pk}&property_type__in={response["data"]["property_type"]}&location={response["data"]["location"]}', {}, {})
         context['property'] = response
-        # publicity_status, publicity_response = requestAPI('GET', f'{django_settings.API_URL}/publicity/5', {}, {})
-        # context['publicity'] = publicity_response
+        context['similar_properties'] = similar_properties_response
     except Exception as e:
         print(e)
+    publicity_status, publicity_response = requestAPI('GET', f'{django_settings.API_URL}/publicity/5', {}, {})
+    context['publicity'] = publicity_response
     return render(request, 'core_templates/property-listing.html', context)
 
 
@@ -161,9 +169,9 @@ def settings(request):
         status, response = requestAPI('GET', f'{django_settings.API_URL}/me', headers, {})
         if status == 200:
             context['profile_info'] = response
-            # plan_status, plan_response = requestAPI('GET', f'{django_settings.API_URL}/plans/list', headers, {})
-            # if plan_status == 200:
-            #     context['plan_list'] = plan_response
+            plan_status, plan_response = requestAPI('GET', f'{django_settings.API_URL}/plans/list', headers, {})
+            context['plan_list'] = plan_response
+            print(plan_response)
             listing_status, listing_response = requestAPI('GET', f'{django_settings.API_URL}/listings', headers, {})
             context['listings'] = listing_response
             favourite_listing_status, favourite_listing_response = requestAPI('GET', f'{django_settings.API_URL}/listings/favourites', headers, {})

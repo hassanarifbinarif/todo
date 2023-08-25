@@ -26,7 +26,7 @@
             <div class="publicity-card-container">
                 {% if publicity %}
                 {% for obj in publicity.data %}
-                <form class="publicity-card" onsubmit="submitPublicityForm(event, '{{obj.id}}');">
+                <form class="publicity-card" onsubmit="submitPublicityForm(event, '{{obj.id}}', '{{obj.width}}', '{{obj.height}}');">
                     {% csrf_token %}
                     <div class="publicity-card-header">
                         <span>{{obj.name}}</span>
@@ -34,7 +34,7 @@
                     </div>
                     <div class="publicity-card-content">
                         <div class="image-input-container">
-                            <label for="home-page{{forloop.counter}}" class="image-input-label">
+                            <label for="home-page{{forloop.counter}}" data-width="{{obj.height}}" data-height="{{obj.width}}" class="image-input-label">
                                 {% if obj.picture != None %}
                                 <img class="publicity-img" src="{{obj.picture}}" alt="Publicity Image" />
                                 <img class="uploader-logo hide" src="{% static 'Assets/administration/images/uploader_logo.svg' %}" alt="Uploader Logo" />
@@ -44,7 +44,8 @@
                                 <img class="uploader-logo" src="{% static 'Assets/administration/images/uploader_logo.svg' %}" alt="Uploader Logo" />
                                 <span class="uploader-text">Upload Image</span>
                                 {% endif %}
-                                <input type="file" id="home-page{{forloop.counter}}" accept="image/jpeg, image/jpg, image/png, image/gif" name="picture" onchange="previewImage(event);" />
+                                <input type="file" class="image-uploader-tag" id="home-page{{forloop.counter}}" accept="image/jpeg, image/jpg, image/png, image/gif" name="picture" />
+                                <small class="image-msg input-error-msg"></small>
                             </label>
                         </div>
                         <div class="publicity-input">
