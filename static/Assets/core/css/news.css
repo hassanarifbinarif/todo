@@ -97,8 +97,16 @@
 
 
 @media (max-width: 1024px) {
-    .side-page-ad {
+    /* .side-page-ad {
         width: 170px;
+    } */
+
+    .news-section {
+        padding: 50px 20px;
+    }
+
+    .news {
+        padding: 40px 20px 80px;
     }
 }
 

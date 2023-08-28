@@ -55,7 +55,7 @@
         <div class="news-section" id="news">
             <h2>News</h2>
             <div class="about-us-news-container">
-                <div class="about-us-card">
+                <!-- <div class="about-us-card">
                     <a href="#">
                         <div class="about-us-image">
                             <img src="{% static 'Assets/core/images/news_img.svg' %}" loading="lazy" alt="News Image" />
@@ -67,8 +67,8 @@
                             <p>Sostenibilidad y entretenimiento son los dos pilares fundamentales bajo los cuales fue concebido el proyecto, que cumple los requisitos de la ordenanza verde del Municipio de Guayaquil.</p>
                         </div>
                     </a>
-                </div>
-                <!-- {% if news_list.data %}
+                </div> -->
+                {% if news_list.data %}
                 {% for obj in news_list.data %}
                     <div class="about-us-card">
                         <a href="{% url 'news' pk=obj.id %}">
@@ -78,13 +78,13 @@
                         </a>
                         <a href="{% url 'news' pk=obj.id %}">
                             <div class="about-us-description">
-                                <h3>{{obj.title}}</h3>
+                                <h3>{{obj.title|title}}</h3>
                                 <p>{{obj.content}}</p>
                             </div>
                         </a>
                     </div>
                 {% endfor %}
-                {% endif %} -->
+                {% endif %}
             </div>
         </div>
         <div class="bottom-page-ad">

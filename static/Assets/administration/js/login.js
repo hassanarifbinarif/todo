@@ -74,29 +74,29 @@ async function loginForm(event) {
                 "Content-Type": "application/json",
                 "X-CSRFToken": data.csrfmiddlewaretoken,
             };
-            let response = await requestAPI(
-                `${apiURL}/login`,
-                JSON.stringify(data),
-                headers,
-                "POST"
-            );
+            let response = await requestAPI(`${apiURL}/login`, JSON.stringify(data), headers, "POST");
             response.json().then(async function (res) {
                 if (response.status == 400) {
-                    emailMsg.innerText = res.messages.password;
-                    passwordMsg.innerText = res.messages.password;
-                    emailMsg.classList.add("active");
-                    passwordMsg.classList.add("active");
+                    if(res.messages.password) {
+                        passwordField.classList.add("input-error");
+                        passwordMsg.classList.add("active");
+                        res.messages.password.forEach((message) => {
+                            passwordMsg.innerHTML += `${message}. <br />`;
+                        });
+                    }
+                    else if(res.messages.email) {
+                        emailField.classList.add("input-error");
+                        emailMsg.classList.add("active");
+                        res.messages.email.forEach((message) => {
+                            emailMsg.innerHTML += `${message}. <br />`;
+                        });
+                    }
                     afterLoad(button, buttonText);
                 } else if (response.status == 200) {
                     let header = {
                         "Authorization": `Bearer ${res.access}`,
                     };
-                    let checkAdmin = await requestAPI(
-                        `${apiURL}/admin/news`,
-                        null,
-                        header,
-                        "GET"
-                    );
+                    let checkAdmin = await requestAPI(`${apiURL}/admin/news`, null, header, "GET");
                     checkAdmin.json().then(function (validRes) {
                         if (validRes.key == "validations") {
                             emailMsg.classList.add("active");

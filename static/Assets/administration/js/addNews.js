@@ -75,12 +75,24 @@ async function addNewsForm(event) {
             let response = await addNewsAPI(formData);
             response.json().then(function (res) {
                 if (response.status == 200 || response.status == 201) {
+                    form.reset();
+                    document.querySelector(".uploader-logo").style.display = "inline-block";
+                    document.querySelector(".uploader-text").style.display = "inline-block";
+                    document.getElementById("news-blog-img").src = '';
+                    document.getElementById("news-blog-img").style.display = 'none';
                     afterLoad(button, "Uploaded");
                     setTimeout(() => {
                         clearFormData(formData);
                         afterLoad(button, buttonText);
                     }, 2000);
                 } else {
+                    if(res.messages.title) {
+                        titleField.classList.add("input-error");
+                        titleMsg.classList.add("active");
+                        res.messages.title.forEach((message) => {
+                            titleMsg.innerHTML += `${message} <br />`;
+                        });
+                    }
                     afterLoad(button, "Error! Retry");
                     setTimeout(() => {
                         afterLoad(button, buttonText);

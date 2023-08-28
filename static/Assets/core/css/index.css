@@ -507,7 +507,15 @@ input::-webkit-inner-spin-button {
 }
 
 
+@media (min-width: 1441px) {
+    .main-content {
+        min-width: 1120px;
+    }
+}
+
+
 @media (max-width: 1440px) {
+
     .spotlight {
         width: calc(100vw - 310px);
     }

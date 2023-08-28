@@ -24,7 +24,7 @@
         <div class="news-container">
             <div class="news">
                 <div class="back-to-search">
-                    <a href="{% url 'about_us' %}">
+                    <a href="{% url 'about_us' %}#news">
                         <svg width="11" height="7" viewBox="0 0 11 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M1.76282 3.94711H1.90385C4.72436 3.94711 7.58013 3.94711 10.4006 3.94711C10.4712 3.94711 10.5769 3.94711 10.6474 3.94711C10.859 3.8546 11 3.66958 11 3.48456C11 3.2687 10.7885 3.08368 10.5417 3.08368C10.4712 3.08368 10.4359 3.08368 10.3654 3.08368C7.54487 3.08368 4.6891 3.08368 1.86859 3.08368H1.69231C1.72756 3.05284 1.76282 3.022 1.79808 2.99116C2.64423 2.25108 3.45513 1.54183 4.30128 0.801737C4.51282 0.616715 4.54808 0.431693 4.40705 0.246671C4.23077 -2.50041e-05 3.87821 -0.030862 3.63141 0.15416C3.38462 0.370019 3.13782 0.585878 2.89103 0.801737C2.00962 1.57266 1.09295 2.37442 0.211538 3.14535C-0.0705128 3.39205 -0.0705128 3.6079 0.211538 3.8546C1.33974 4.84138 2.50321 5.85901 3.63141 6.84579C3.77244 6.96914 3.94872 7.03081 4.16026 6.99998C4.51282 6.90746 4.65385 6.53742 4.40705 6.29072C4.33654 6.22905 4.26603 6.16738 4.19551 6.1057C3.41987 5.42729 2.64423 4.74887 1.83333 4.07046C1.83333 4.07046 1.76282 4.03962 1.72756 4.00879C1.72756 4.00879 1.72756 3.97795 1.76282 3.94711Z"
@@ -33,7 +33,7 @@
                         <span>Return</span>
                     </a>
                 </div>
-                <h1>Acqua Gardens es el nuevo proyecto de Pronobis y Coloncorp</h1>
+                <!-- <h1>Acqua Gardens es el nuevo proyecto de Pronobis y Coloncorp</h1>
                 <p>Sostenibilidad y entretenimiento son los dos pilares bajo los cuales fue concebido el complejo inmobiliario, que se construirá en Los Ceibos.</p>
                 <div class="news-image">
                     <img src="{% static 'Assets/core/images/news_img.svg' %}" alt="news" />
@@ -46,16 +46,16 @@
                     <br>
                     <br>
                     El diseño se alinea con el concepto de ‘ciudades de 15 minutos’. “Quince minutos para resolver todas las necesidades del día a día. Hay colegios, centros comerciales, supermercados, iglesias, parques, eso significa menos tiempo desplazándose y más tiempo en familia, es decir, mejor calidad de vida para los compradores”, sostuvo Bernal.
-                </p>
-                <!-- {% if news_content %}
+                </p> -->
+                {% if news_content %}
                 <h1>{{news_content.title}}</h1>
                 <div class="news-image">
-                    <img src="{{news_content.picture}}" alt="news" />
+                    <img src="{{news_content.picture}}" loading="lazy" alt="news" />
                 </div>
                 <p>
                     {{news_content.content|linebreaksbr}}
                 </p>
-                {% endif %} -->
+                {% endif %}
             </div>
             <div class="side-page-ad">
                 <div class="ad">

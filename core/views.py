@@ -13,6 +13,7 @@ import requests
 def index(request):
     context = {}
     status, response = check_user_login(request)
+    headers = {}
     if status == 200:
         context['login'] = True
         access_token = request.COOKIES.get('user_access_token')
@@ -23,15 +24,14 @@ def index(request):
         except Exception as e:
             print(e)
     try:
-        if context['login'] == True:
-            spotlight_status, spotlight_response = requestAPI('GET', f'{django_settings.API_URL}/search-listings?location=SRID=4326;POINT (31.460294 74.288639)', headers, {})
-        else:
-            spotlight_status, spotlight_response = requestAPI('GET', f'{django_settings.API_URL}/search-listings?location=SRID=4326;POINT (31.460294 74.288639)', {}, {})
+        loc_status, loc_response = requestAPI('GET', 'https://ipinfo.io/json', {}, {})
+        lat, lng = loc_response['loc'].split(',')
+        spotlight_status, spotlight_response = requestAPI('GET', f'{django_settings.API_URL}/search-listings?location=SRID=4326;POINT ({lng} {lat})', headers, {})
         context['spotlight_properties'] = spotlight_response
-        publicity_status, publicity_response = requestAPI('GET', f'{django_settings.API_URL}/publicity/1', {}, {})
-        context['publicity'] = publicity_response
     except Exception as e:
         print(e)
+    publicity_status, publicity_response = requestAPI('GET', f'{django_settings.API_URL}/publicity/1', {}, {})
+    context['publicity'] = publicity_response
     return render(request, 'core_templates/index.html', context)
 
 
@@ -237,26 +237,24 @@ def about_us(request):
     status, response = check_user_login(request)
     if status == 200:
         context['login'] = True
-    # try:
-    #     status, response = requestAPI('GET', f'{django_settings.API_URL}/news/list', {}, {})
-    #     if status == 200:
-    #         context['news_list'] = response
-    # except Exception as e:
-    #     print(e)
+    try:
+        news_status, news_response = requestAPI('GET', f'{django_settings.API_URL}/news/list?perPage=1000', {}, {})
+        context['news_list'] = news_response
+    except Exception as e:
+        print(e)
     return render(request, 'core_templates/about-us.html', context)
 
 
-def news(request):
+def news(request, pk):
     context = {}
     status, response = check_user_login(request)
     if status == 200:
         context['login'] = True
-    # try:
-    #     status, response = requestAPI('GET', f'{django_settings.API_URL}/news/{pk}', {}, {})
-    #     if status == 200:
-    #         context['news_content'] = response
-    # except Exception as e:
-    #     print(e)
+    try:
+        news_status, new_response = requestAPI('GET', f'{django_settings.API_URL}/news/{pk}', {}, {})
+        context['news_content'] = new_response
+    except Exception as e:
+        print(e)
     return render(request, 'core_templates/news.html', context)
 
 
