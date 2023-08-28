@@ -217,7 +217,7 @@
     padding: 0px 50px;
     margin-top: 95px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     gap: 20px;
 }
 
@@ -508,9 +508,9 @@ input::-webkit-inner-spin-button {
 
 
 @media (min-width: 1441px) {
-    .main-content {
+    /* .main-content {
         min-width: 1120px;
-    }
+    } */
 }
 
 

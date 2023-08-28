@@ -171,7 +171,6 @@ def settings(request):
             context['profile_info'] = response
             plan_status, plan_response = requestAPI('GET', f'{django_settings.API_URL}/plans/list', headers, {})
             context['plan_list'] = plan_response
-            print(plan_response)
             listing_status, listing_response = requestAPI('GET', f'{django_settings.API_URL}/listings', headers, {})
             context['listings'] = listing_response
             favourite_listing_status, favourite_listing_response = requestAPI('GET', f'{django_settings.API_URL}/listings/favourites', headers, {})
