@@ -158,6 +158,8 @@ function closeDropdowns(event) {
 document.body.addEventListener('click', closeDropdowns);
 
 
+let queryString = '';
+
 async function filterPropertyForm(event) {
     let form = event.currentTarget;
     let formData = new FormData(form);
@@ -168,25 +170,34 @@ async function filterPropertyForm(event) {
     ameneties = ameneties.length === 0 ? '' : ameneties.join(',');
     let bedrooms = data.bedroombtnradio || '';
     let bathrooms = data.bathroombtnradio || '';
-    let accessToken = getAccessTokenFromCookie();
-    let headers = {};
-    if(accessToken) {
-        headers = {
-            "Authorization": `Bearer ${accessToken}`,
-        };
-    }
-    let queryString = `?criteria=${data.criteria_radio || ''}&property_type__in=${property_type}&price__gte=${data.min_price || ''}&price__lte=${data.max_price || ''}&${bedrooms >= 5 ? 'bedrooms__gte' : 'bedrooms'}=${bedrooms}&${bathrooms >= 5 ? 'bathrooms__gte' : 'bathrooms'}=${bathrooms}&construction__gte=${data.min_construction_area || ''}&construction__lte=${data.max_construction_area}&land__gte=${data.min_land_area || ''}&land__lte=${data.max_land_area}&ameneties__contains=${ameneties}`;
-    document.querySelector('#property-search-result-card-container').innerHTML = '<div class="w-100 d-flex justify-content-center align-items-center pt-5 pb-2"><span class="spinner-border spinner-border-md" style="color: #8DC63F;" role="status" aria-hidden="true"></span></div>';
-    let response = await requestAPI(`${apiURL}/search-listings${queryString}`, null, headers, 'GET');
-    response.json().then(async function(res) {
-        if(response.status == 200) {
-            let resp = await requestAPI('/get-search-properties/', JSON.stringify(res), {}, 'POST');
-            resp.json().then(function(myRes) {
-                document.querySelector('#property-search-result-card-container').innerHTML = myRes.property;
-            })
-        }
-    })
+    queryString = `${apiURL}/search-listings?perPage=20&criteria=${data.criteria_radio || ''}&property_type__in=${property_type}&price__gte=${data.min_price || ''}&price__lte=${data.max_price || ''}&${bedrooms >= 5 ? 'bedrooms__gte' : 'bedrooms'}=${bedrooms}&${bathrooms >= 5 ? 'bathrooms__gte' : 'bathrooms'}=${bathrooms}&construction__gte=${data.min_construction_area || ''}&construction__lte=${data.max_construction_area}&land__gte=${data.min_land_area || ''}&land__lte=${data.max_land_area}&ameneties__contains=${ameneties}`;
+    getListings(queryString);
 }
+
+
+async function getListings(url) {
+    if (url != 'null') {
+        let accessToken = getAccessTokenFromCookie();
+        let headers = {};
+        if(accessToken) {
+            headers = {
+                "Authorization": `Bearer ${accessToken}`,
+            };
+        }
+        document.querySelector('#property-search-result-card-container').innerHTML = '<div class="w-100 d-flex justify-content-center align-items-center pt-5 pb-2"><span class="spinner-border spinner-border-md" style="color: #8DC63F;" role="status" aria-hidden="true"></span></div>';
+        let response = await requestAPI(`${url}`, null, headers, 'GET');
+        response.json().then(async function(res) {
+            console.log(res);
+            if(response.status == 200) {
+                let resp = await requestAPI('/get-search-properties/', JSON.stringify(res), {}, 'POST');
+                resp.json().then(function(myRes) {
+                    document.querySelector('#property-search-result-card-container').innerHTML = myRes.property;
+                })
+            }
+        })
+    }
+}
+
 
 function triggerForm(event) {
     // console.log(event);
@@ -249,4 +260,152 @@ async function removeFavourite(event, id) {
         favouriteElement.setAttribute('onclick', `makeFavourite(event, '${id}')`);
         favouriteElement.querySelector('input').checked = false;
     }
+}
+
+
+// let map = document.getElementById('map');
+
+let markerArray = [];
+
+async function initMap() {
+    const { Map } = await google.maps.importLibrary("maps");
+  
+    map = new Map(document.getElementById("map"), {
+        center: { lat: 31.4, lng: 74.368 },
+        zoom: 8,
+        disableDefaultUI: true,
+    });
+
+    // Create the DIV to hold the control.
+    const centerControlDiv = document.createElement("div");
+    // Create the control.
+    const centerControl = createCenterControl(map);
+    // Append the control to the DIV.
+    centerControlDiv.appendChild(centerControl);
+    map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
+
+    createMarkers(map);
+    // console.log(markerArray);
+    // let abc = new markerClusterer.MarkerClusterer({markerArray, map});
+    // console.log(abc);
+}
+
+
+function createMarkers(map) {
+    const infowindow = new google.maps.InfoWindow();
+    const markerIcon = {
+        url: location.origin+"/static/Assets/core/images/map_marker.svg",
+        scaledSize: new google.maps.Size(30, 30)
+    };
+    for (let i = 0; i < map_properties.length; i++) {
+        let {lat, lng} = getLatLngFromString(map_properties[i].location);
+        const marker = new google.maps.Marker({
+            position: {
+                lat: lat,
+                lng: lng
+            },
+            map,
+            icon: markerIcon,
+            animation: google.maps.Animation.DROP
+        });
+        markerArray.push(marker);
+        google.maps.event.addListener(marker, "click", function () {
+            infowindow.setContent(createInfoWindowContent(map_properties[i]));
+            map.setCenter(marker.getPosition());
+            infowindow.open(map, marker);
+            // const targetLocation = document.querySelector(`[data-index="${i}"]`);
+            // if (document.querySelector(".location.active")) {
+            //   document
+            //     .querySelector(".location.active")
+            //     .classList.remove(activeClass);
+            // }
+            // targetLocation.classList.add(activeClass);
+            // scroll({
+            //   top: targetLocation.offsetTop,
+            //   behavior: "smooth"
+            // });
+        });
+    }
+
+}
+
+
+function createInfoWindowContent(propertyDetails) {
+    let propertyCard = document.createElement('div');
+    propertyCard.classList.add('property-card');
+    let propertyCardImageContainer = document.createElement('div');
+    propertyCardImageContainer.classList.add('property-card-image-container');
+    let cardImage = document.createElement('img');
+    cardImage.src = propertyDetails.images[0].image;
+    propertyCardImageContainer.appendChild(cardImage);
+    if (propertyDetails.is_new) {
+        let cardType = document.createElement('div');
+        cardType.classList.add('card-type');
+        let cardText = document.createElement('span');
+        cardText.innerText = 'New';
+        cardType.appendChild(cardText);
+        propertyCardImageContainer.appendChild(cardType);
+    }
+    propertyCard.appendChild(propertyCardImageContainer);
+    
+    let propertyCardDetails = document.createElement('div');
+    propertyCardDetails.classList.add('property-card-details');
+    let detailsRow1 = document.createElement('div');
+    detailsRow1.classList.add('details-row1');
+    let detailsRow1Column1 = document.createElement('div');
+    detailsRow1Column1.classList.add('details-row1-column1');
+    let propertyType = document.createElement('span');
+    propertyType.innerText = propertyDetails.property_type;
+    propertyType.title = propertyDetails.property_type;
+    let propertyNeighbourhood = document.createElement('span');
+    propertyNeighbourhood.innerText = propertyDetails.neighbourhood;
+    propertyNeighbourhood.title = propertyDetails.neighbourhood;
+    detailsRow1Column1.appendChild(propertyType);
+    detailsRow1Column1.appendChild(propertyNeighbourhood);
+    detailsRow1.appendChild(detailsRow1Column1);
+
+    let detailsRow1Column2 = document.createElement('div');
+    detailsRow1Column2.classList.add('details-row1-column2');
+    let propertyLabel = document.createElement('label');
+    propertyLabel.setAttribute('for', `${propertyDetails.id}`);
+    propertyLabel.classList.add('favourite-property-checkbox');
+    if (propertyDetails.is_favourite) {
+        propertyLabel.classList.add('active');
+    }
+    propertyLabel.setAttribute()
+
+    propertyCardDetails.appendChild(detailsRow1)
+    propertyCard.appendChild(propertyCardDetails);
+    
+    return propertyCard; 
+}
+
+
+function createCenterControl(map) {
+    const controlButton = document.createElement("button");
+  
+    // Set CSS for the control.
+    controlButton.style.backgroundColor = "#8DC63F";
+    controlButton.style.border = "0.5px solid #8DC63F";
+    controlButton.style.borderRadius = "2px";
+    controlButton.style.color = "#FFFFFF";
+    controlButton.style.cursor = "pointer";
+    controlButton.style.width = '207px';
+    controlButton.style.height = '30px';
+    // controlButton.style.fontFamily = "Roboto,Arial,sans-serif";
+    controlButton.style.fontSize = "14px";
+    controlButton.style.fontWeight = 700;
+    controlButton.style.lineHeight = "16px";
+    controlButton.style.marginTop = "47px";
+    // controlButton.style.padding = "0 5px";
+    controlButton.style.textAlign = "center";
+    controlButton.textContent = "Search this area";
+    // controlButton.title = "Click to recenter the map";
+    controlButton.type = "button";
+    // Setup the click event listeners: simply set the map to Chicago.
+    controlButton.addEventListener("click", () => {
+        // map.setCenter(chicago);
+        alert('button clicked');
+    });
+    return controlButton;
 }

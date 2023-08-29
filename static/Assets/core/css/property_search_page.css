@@ -611,6 +611,10 @@ input[name="criteria_radio"]:checked + .radio-label{
     align-items: center;
 }
 
+.next-page-arrow {
+    cursor: pointer;
+}
+
 .current-page {
     background-color: #8DC63F;
 }

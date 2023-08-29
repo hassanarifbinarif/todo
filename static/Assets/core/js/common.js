@@ -195,6 +195,8 @@ function getSearchURL(searchURL, baseURL) {
 
 const emailRegex = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}/i
 const phoneRegex = /^(\+593|593|09)([2-9]\d{7})$/;
+const locationRegex = /POINT \((-?\d+\.\d+) (-?\d+\.\d+)\)/;
+
 let timeOut;
 
 function isValidEmail(email) {
@@ -312,6 +314,21 @@ function isValidImage(image) {
         pictureMsg.innerText = '';
         pictureMsg.classList.remove('active');
         return true;
+    }
+}
+
+
+function getLatLngFromString(locationString) {
+    const match = locationString.match(locationRegex);
+    if (match && match.length === 3) {
+        const latitude = parseFloat(match[1]);
+        const longitude = parseFloat(match[2]);
+      
+        // console.log("Latitude:", latitude);
+        // console.log("Longitude:", longitude);
+        return {lat: latitude, lng: longitude};
+    } else {
+        console.log("Could not extract latitude and longitude.");
     }
 }
 

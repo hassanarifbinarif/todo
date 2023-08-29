@@ -7,7 +7,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.template import loader
 from django.core.paginator import Paginator
-import requests
+import math
 
 
 def index(request):
@@ -53,16 +53,29 @@ def property_search(request):
             context["max_price"] = request.POST.get('max_price', '')
             context["city"] = request.POST.get('city')
             if context['login'] == True:
-                status, response = requestAPI('GET', f'{django_settings.API_URL}/search-listings?criteria={context["criteria"]}&property_type__in={context["property_type"]}&price__gte={context["min_price"]}&price__lte={context["max_price"]}&city={context["city"]}', headers, {})
+                status, response = requestAPI('GET', f'{django_settings.API_URL}/search-listings?perPage=20&criteria={context["criteria"]}&property_type__in={context["property_type"]}&price__gte={context["min_price"]}&price__lte={context["max_price"]}&city={context["city"]}', headers, {})
             else:
-                status, response = requestAPI('GET', f'{django_settings.API_URL}/search-listings?criteria={context["criteria"]}&property_type__in={context["property_type"]}&price__gte={context["min_price"]}&price__lte={context["max_price"]}&city={context["city"]}', {}, {})
-            context['properties'] = response
+                status, response = requestAPI('GET', f'{django_settings.API_URL}/search-listings?perPage=20&criteria={context["criteria"]}&property_type__in={context["property_type"]}&price__gte={context["min_price"]}&price__lte={context["max_price"]}&city={context["city"]}', {}, {})
         else:
             if context['login'] == True:
-                status, response = requestAPI('GET', f'{django_settings.API_URL}/search-listings', headers, {})
+                status, response = requestAPI('GET', f'{django_settings.API_URL}/search-listings?perPage=20', headers, {})
             else:
-                status, response = requestAPI('GET', f'{django_settings.API_URL}/search-listings', {}, {})
-            context['properties'] = response
+                status, response = requestAPI('GET', f'{django_settings.API_URL}/search-listings?perPage=20', {}, {})
+        
+        if response['pagination']['links']['next']:
+            next_page_number = response['pagination']['currentPage'] + 1
+            next_next_page_number = next_page_number + 1
+            if next_page_number >= response['pagination']['total']:
+                response['pagination']['next_page_number'] = None
+            else:
+                response['pagination']['next_page_number'] = next_page_number
+            if next_next_page_number >= response['pagination']['total']:
+                response['pagination']['next_next_page_number'] = None
+            else:
+                response['pagination']['next_next_page_number'] = next_next_page_number
+        response['pagination']['starting_record'] = (response['pagination']['currentPage'] - 1) * response['pagination']['perPage'] + 1
+        response['pagination']['ending_record'] = min(response['pagination']['starting_record'] + response['pagination']['perPage'] - 1, response['pagination']['count'])
+        context['properties'] = response
         publicity_status1, publicity_response1 = requestAPI('GET', f'{django_settings.API_URL}/publicity/2', {}, {})
         publicity_status2, publicity_response2 = requestAPI('GET', f'{django_settings.API_URL}/publicity/3', {}, {})
         publicity_status3, publicity_response3 = requestAPI('GET', f'{django_settings.API_URL}/publicity/4', {}, {})
@@ -79,6 +92,19 @@ def get_search_properties(request):
     context = {}
     try:
         request_data = json.loads(request.body.decode('utf-8'))
+        if request_data['pagination']['links']['next']:
+            next_page_number = request_data['pagination']['currentPage'] + 1
+            next_next_page_number = next_page_number + 1
+            if next_page_number >= request_data['pagination']['total']:
+                request_data['pagination']['next_page_number'] = None
+            else:
+                request_data['pagination']['next_page_number'] = next_page_number
+            if next_next_page_number >= request_data['pagination']['total']:
+                request_data['pagination']['next_next_page_number'] = None
+            else:
+                request_data['pagination']['next_next_page_number'] = next_next_page_number
+        request_data['pagination']['starting_record'] = (request_data['pagination']['currentPage'] - 1) * request_data['pagination']['perPage'] + 1
+        request_data['pagination']['ending_record'] = min(request_data['pagination']['starting_record'] + request_data['pagination']['perPage'] - 1, request_data['pagination']['count'])
         # paginator = Paginator(request_data.get('data'), per_page=1)
         # print(paginator.count)
         # print(paginator.page_range)
@@ -106,9 +132,7 @@ def property_listing(request, pk):
         if context['login'] == True:
             status, response = requestAPI('GET', f'{django_settings.API_URL}/search-listings/{pk}', headers, {})
             if response:
-                print(response)
                 similar_properties_status, similar_properties_response = requestAPI('GET', f'{django_settings.API_URL}/search-listings?exclude_ids={pk}&property_type__in={response["data"]["property_type"]}&location={response["data"]["location"]}', headers, {})
-                print(similar_properties_response)
         else:
             status, response = requestAPI('GET', f'{django_settings.API_URL}/search-listings/{pk}', {}, {})
             similar_properties_status, similar_properties_response = requestAPI('GET', f'{django_settings.API_URL}/search-listings?exclude_ids={pk}&property_type__in={response["data"]["property_type"]}&location={response["data"]["location"]}', {}, {})
@@ -175,7 +199,6 @@ def settings(request):
             context['listings'] = listing_response
             favourite_listing_status, favourite_listing_response = requestAPI('GET', f'{django_settings.API_URL}/listings/favourites', headers, {})
             context['favourite_listings'] = favourite_listing_response
-            print(favourite_listing_response)
     except Exception as e:
         print(e)
     context['login'] = True

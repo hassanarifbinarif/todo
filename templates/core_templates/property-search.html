@@ -12,6 +12,7 @@
     {% block links %}
 
     <link rel="stylesheet" href="{% static 'Assets/core/css/property_search_page.css' %}">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     
     {% endblock %}
 
@@ -301,15 +302,15 @@
                 </div>
             </div>
             <div class="property-search-result-container">
-                <div class="map-view hide">
+                <div class="map-view hide" id="map">
                     <div class="map-search-btn-container">
                         <button class="map-search-btn">Search this area</button>
                     </div>
-                    <iframe
+                    <!-- <iframe
                         src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13612.269782401412!2d74.2686174!3d31.4673308!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3919051533e95177%3A0xd55e06f9aed17bb8!2sCrymzee%20Networks%20(Pvt.)%20Ltd.!5e0!3m2!1sen!2s!4v1680426688403!5m2!1sen!2s"
                         width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
                         referrerpolicy="no-referrer-when-downgrade">
-                    </iframe>
+                    </iframe> -->
                 </div>
                 <div class="property-search-result-card-container" id="property-search-result-card-container">
                     {% include '../ajax/property-card.html' %}
@@ -323,9 +324,17 @@
         </div>
     </div>
 
+    {{properties.data|json_script:"map_properties"}}
+
     {% endblock %}
 </body>
 {% block scripts %}
+<script>
+    let map_properties = JSON.parse(document.getElementById('map_properties').textContent);
+    // console.log(map_properties);
+</script>
+<script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
 <script src="{% static 'Assets/core/js/propertySearch.js' %}"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEwkiflsmSXuuFRI_xt3P0AISrPZEicyY&callback=initMap"></script>
 {% endblock %}
 </html>

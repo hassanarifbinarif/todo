@@ -5,7 +5,7 @@
 <a href="{% url 'property_listing' pk=obj.id %}">
     <div class="property-card">
         <div class="property-card-image-container">
-            {% if obj.is_published %}
+            {% if obj.is_new %}
             <div class="card-type">
                 <span>New</span>
             </div>
@@ -70,19 +70,27 @@
 
 <div class="property-search-pagination">
     <div>
+        <div class="page-label next-page-arrow {% if properties.pagination.links.previous == None %}hide{% endif %}" {% if properties.pagination.links.previous %}onclick="getListings('{{properties.pagination.links.previous}}')"{% endif %}>
+            <svg width="29" height="29" viewBox="0 0 29 29" fill="none"
+                xmlns="http://www.w3.org/2000/svg" style="transform: rotate(180deg);">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M14.5 29C22.5081 29 29 22.5081 29 14.5C29 6.49187 22.5081 0 14.5 0C6.49187 0 0 6.49187 0 14.5C0 22.5081 6.49187 29 14.5 29ZM12.8307 8.36756C12.6779 8.23064 12.5296 8.09774 12.3218 8.05555H12.0318H11.9158C11.6258 8.17326 11.4518 8.34982 11.3358 8.64409C11.1618 9.05606 11.2778 9.35033 11.5678 9.6446L16.2658 14.4117L16.3818 14.5294L16.2658 14.6471L11.6258 19.3554C11.6064 19.375 11.5807 19.3946 11.5549 19.4143C11.5033 19.4535 11.4518 19.4927 11.4518 19.532C11.2778 19.7674 11.2198 20.1205 11.3938 20.4148C11.6258 21.0033 12.3798 21.121 12.8438 20.6502L18.2378 15.1768C18.3538 15.118 18.4698 14.9414 18.4698 14.8237C18.6438 14.4117 18.5278 14.1175 18.2378 13.8232L13.0178 8.52638C12.9521 8.47638 12.891 8.42165 12.8307 8.36756Z"
+                    fill="#9A9A9A" />
+            </svg>
+        </div>
         <div class="page-label current-page">
             <span>{{properties.pagination.currentPage}}</span>
         </div>
-        {% if properties.pagination.next == null %}
+        {% if properties.pagination.links.next == None %}
         <div class="page-label">
             <span>...</span>
         </div>
         {% else %}
-        <div class="page-label">
-            <span>2</span>
+        <div class="page-label {% if properties.pagination.next_page_number == None %}hide{% endif %}">
+            <span>{{properties.pagination.next_page_number}}</span>
         </div>
-        <div class="page-label">
-            <span>3</span>
+        <div class="page-label {% if properties.pagination.next_next_page_number == None %}hide{% endif %}">
+            <span>{{properties.pagination.next_next_page_number}}</span>
         </div>
         <div class="page-label">
             <span>...</span>
@@ -91,7 +99,7 @@
         <div class="page-label">
             <span>{{properties.pagination.total}}</span>
         </div>
-        <div class="page-label next-page-arrow">
+        <div class="page-label next-page-arrow {% if properties.pagination.links.next == None %}hide{% endif %}" {% if properties.pagination.links.next %}onclick="getListings('{{properties.pagination.links.next}}')"{% endif %}>
             <svg width="29" height="29" viewBox="0 0 29 29" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd"
@@ -100,5 +108,11 @@
             </svg>
         </div>
     </div>
-    <p class="total-search-count">{{properties.pagination.currentPage}}-{{properties.pagination.count}} of {{properties.pagination.count}} Properties</p>
+    <p class="total-search-count">
+        {% if properties.pagination.count == 0 %}
+        0-0 of 0 Properties
+        {% else %}
+        {{properties.pagination.starting_record}}-{{properties.pagination.ending_record}} of {{properties.pagination.count}} Properties
+        {% endif %}
+    </p>
 </div>
