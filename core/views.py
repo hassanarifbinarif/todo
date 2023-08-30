@@ -76,14 +76,9 @@ def property_search(request):
         response['pagination']['starting_record'] = (response['pagination']['currentPage'] - 1) * response['pagination']['perPage'] + 1
         response['pagination']['ending_record'] = min(response['pagination']['starting_record'] + response['pagination']['perPage'] - 1, response['pagination']['count'])
         context['properties'] = response
-        publicity_status1, publicity_response1 = requestAPI('GET', f'{django_settings.API_URL}/publicity/2', {}, {})
-        publicity_status2, publicity_response2 = requestAPI('GET', f'{django_settings.API_URL}/publicity/3', {}, {})
-        publicity_status3, publicity_response3 = requestAPI('GET', f'{django_settings.API_URL}/publicity/4', {}, {})
-        context['publicity'] = {"publicity1": publicity_response1,
-                                "publicity2": publicity_response2,
-                                "publicity3": publicity_response3} 
     except Exception as e:
         print(e)
+    context['key'] = django_settings.GOOGLE_MAPS_API_KEY
     return render(request, 'core_templates/property-search.html', context)
 
 
@@ -202,6 +197,7 @@ def settings(request):
     except Exception as e:
         print(e)
     context['login'] = True
+    context['key'] = django_settings.GOOGLE_MAPS_API_KEY
     return render(request, 'core_templates/settings.html', context)
 
 
@@ -251,6 +247,7 @@ def add_property(request):
     status, response = check_user_login(request)
     if status == 200:
         context['login'] = True
+    context['key'] = django_settings.GOOGLE_MAPS_API_KEY
     return render(request, 'core_templates/add-property.html', context)
 
 

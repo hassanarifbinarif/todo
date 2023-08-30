@@ -1,3 +1,50 @@
+window.onload = () => {
+    getPublicities();
+}
+
+
+async function getPublicities() {
+    let publicity1 = document.getElementById('publicity-1');
+    let publicity2 = document.getElementById('publicity-2');
+    let publicity3 = document.getElementById('publicity-3');
+    publicity1.innerHTML = '<div class="w-100 d-flex justify-content-center align-items-center pt-3 pb-2"><span class="spinner-border spinner-border-md" style="color: #8DC63F;" role="status" aria-hidden="true"></span></div>';
+    publicity2.innerHTML = '<div class="w-100 d-flex justify-content-center align-items-center pt-3 pb-2"><span class="spinner-border spinner-border-md" style="color: #8DC63F;" role="status" aria-hidden="true"></span></div>';
+    publicity3.innerHTML = '<div class="w-100 d-flex justify-content-center align-items-center pt-3 pb-2"><span class="spinner-border spinner-border-md" style="color: #8DC63F;" role="status" aria-hidden="true"></span></div>';
+    let response1 = await requestAPI(`${apiURL}/publicity/2`, null, {}, 'GET');
+    let response2 = await requestAPI(`${apiURL}/publicity/3`, null, {}, 'GET');
+    let response3 = await requestAPI(`${apiURL}/publicity/4`, null, {}, 'GET');
+    response1.json().then(function(res) {
+        if (response1.status == 200) {
+            publicity1.innerHTML = `<a href="${res.url}" target="_blank">
+                                        <img src="${res.picture}" loading="lazy" alt="Publicity" />
+                                    </a>`;
+        }
+        else {
+            publicity1.innerHTML = `<span>Paid Publicity</span>`;
+        }
+    })
+    response2.json().then(function(res) {
+        if (response2.status == 200) {
+            publicity2.innerHTML = `<a href="${res.url}" target="_blank">
+                                        <img src="${res.picture}" loading="lazy" alt="Publicity" />
+                                    </a>`;
+        }
+        else {
+            publicity2.innerHTML = `<span>Paid Publicity</span>`;
+        }
+    })
+    response3.json().then(function(res) {
+        if (response3.status == 200) {
+            publicity3.innerHTML = `<a href="${res.url}" target="_blank">
+                                        <img src="${res.picture}" loading="lazy" alt="Publicity" />
+                                    </a>`;
+        }
+        else {
+            publicity3.innerHTML = `<span>Paid Publicity</span>`;
+        }
+    })
+}
+
 // Toggling between grid view and map view
 
 let viewMapBtn = document.querySelector(".view-map-btn");
@@ -187,8 +234,11 @@ async function getListings(url) {
         document.querySelector('#property-search-result-card-container').innerHTML = '<div class="w-100 d-flex justify-content-center align-items-center pt-5 pb-2"><span class="spinner-border spinner-border-md" style="color: #8DC63F;" role="status" aria-hidden="true"></span></div>';
         let response = await requestAPI(`${url}`, null, headers, 'GET');
         response.json().then(async function(res) {
-            console.log(res);
+            // console.log(res);
             if(response.status == 200) {
+                map_properties = res.data;
+                updateMarkers();
+                // console.log(map_properties);
                 let resp = await requestAPI('/get-search-properties/', JSON.stringify(res), {}, 'POST');
                 resp.json().then(function(myRes) {
                     document.querySelector('#property-search-result-card-container').innerHTML = myRes.property;
@@ -196,14 +246,6 @@ async function getListings(url) {
             }
         })
     }
-}
-
-
-function triggerForm(event) {
-    // console.log(event);
-    // let form = event.target.closest('form');
-    // var event = new Event('change');
-    // form.dispatchEvent(event);
 }
 
 
@@ -263,18 +305,32 @@ async function removeFavourite(event, id) {
 }
 
 
-// let map = document.getElementById('map');
-
 let markerArray = [];
+let map;
+let bounds;
 
 async function initMap() {
     const { Map } = await google.maps.importLibrary("maps");
+    bounds = new google.maps.LatLngBounds();
   
     map = new Map(document.getElementById("map"), {
         center: { lat: 31.4, lng: 74.368 },
         zoom: 8,
         disableDefaultUI: true,
     });
+
+    navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const pos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude,
+            };
+            map.setCenter(pos);
+        },
+        () => {
+            map.getCenter();
+        },
+    );
 
     // Create the DIV to hold the control.
     const centerControlDiv = document.createElement("div");
@@ -311,22 +367,42 @@ function createMarkers(map) {
         markerArray.push(marker);
         google.maps.event.addListener(marker, "click", function () {
             infowindow.setContent(createInfoWindowContent(map_properties[i]));
-            map.setCenter(marker.getPosition());
+            // map.setCenter(marker.getPosition());
+            infowindow.setPosition(marker.getPosition());
+            infowindow.setOptions({
+                pixelOffset: new google.maps.Size(110, 10),
+            });
             infowindow.open(map, marker);
-            // const targetLocation = document.querySelector(`[data-index="${i}"]`);
-            // if (document.querySelector(".location.active")) {
-            //   document
-            //     .querySelector(".location.active")
-            //     .classList.remove(activeClass);
-            // }
-            // targetLocation.classList.add(activeClass);
-            // scroll({
-            //   top: targetLocation.offsetTop,
-            //   behavior: "smooth"
-            // });
+            google.maps.event.addListener(map, "click", () => {
+                infowindow.close();
+            });
+            infowindow.addListener("domready", () => {
+                const infoWindowContent = infowindow.getContent();
+              
+                infoWindowContent.addEventListener("click", (event) => {
+                    event.stopPropagation();
+                });
+            });
         });
     }
+}
 
+
+function updateMarkers() {
+    deleteMarkers();
+    createMarkers(map);
+    markerArray.forEach((marker) => {
+        bounds.extend(marker.getPosition());
+    });
+    map.fitBounds(bounds);
+}
+
+
+function deleteMarkers() {
+    for (let i = 0; i < markerArray.length; i++) {
+        markerArray[i].setMap(null);
+    }
+    markerArray = [];
 }
 
 
@@ -371,10 +447,74 @@ function createInfoWindowContent(propertyDetails) {
     propertyLabel.classList.add('favourite-property-checkbox');
     if (propertyDetails.is_favourite) {
         propertyLabel.classList.add('active');
+        propertyLabel.setAttribute('onclick', `removeFavourite(event, '${propertyDetails.id}')`);
     }
-    propertyLabel.setAttribute()
+    else {
+        propertyLabel.setAttribute('onclick', `makeFavourite(event, '${propertyDetails.id}')`);
+    }
+    let favouriteInput = document.createElement('input');
+    favouriteInput.type = 'checkbox';
+    favouriteInput.readOnly = true;
+    favouriteInput.setAttribute('id', `${propertyDetails.id}`);
+    favouriteInput.setAttribute('name', 'favourite_property');
+    if (propertyDetails.is_favourite) {
+        favouriteInput.checked = true;
+    }
+    propertyLabel.appendChild(favouriteInput);
+    propertyLabel.innerHTML += `<svg class="favourite-logo" width="25" height="22" viewBox="0 0 25 22"
+                                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M22.6377 3.15345C21.1419 1.47213 19.2008 0.801797 16.9286 1.08202C15.4613 1.26334 14.2681 1.97762 13.2747 3.01608C13.0635 3.23586 12.8751 3.46663 12.6695 3.6974C12.4583 3.45564 12.2699 3.21938 12.0586 3.00509C10.2488 1.16993 8.06794 0.560039 5.56733 1.31828C3.22086 2.03257 1.85066 3.67542 1.23408 5.92817C1.11989 6.35674 1.07422 6.8018 1 7.24136V8.25235C1.01142 8.3018 1.02855 8.35125 1.03425 8.4007C1.15415 9.73586 1.65655 10.9337 2.41016 12.0491C3.20374 13.2304 4.18 14.2688 5.26474 15.1974C7.39997 17.0326 9.56945 18.8293 11.7332 20.637C12.3441 21.148 13.0292 21.1205 13.6686 20.593C15.3243 19.2194 16.9856 17.8458 18.6356 16.4666C20.0343 15.2963 21.3931 14.0765 22.5064 12.6425C23.3571 11.5436 24.0079 10.3512 24.2249 8.98861C24.5674 6.82927 24.1335 4.84575 22.6377 3.15894V3.15345Z"
+                                            fill="none" stroke="#000000" />
+                                    </svg>`;
+    detailsRow1Column2.appendChild(propertyLabel);
+    detailsRow1.appendChild(detailsRow1Column2);
 
-    propertyCardDetails.appendChild(detailsRow1)
+    let detailsRow2 = document.createElement('div');
+    detailsRow2.classList.add('details-row2');
+    let detailsRow2Row1 = document.createElement('div');
+    detailsRow2Row1.classList.add('details-row2-column');
+    let div1 = document.createElement('div');
+    let landImg = document.createElement('img');
+    landImg.src = location.origin+"/static/Assets/core/images/area_logo.svg";
+    div1.appendChild(landImg);
+    div1.innerHTML += `<span>${propertyDetails.land} m<sup>2</sup></span>`;
+    let div2 = document.createElement('div');
+    let constructionImg = document.createElement('img');
+    constructionImg.src = location.origin+"/static/Assets/core/images/house_logo.svg";
+    div2.appendChild(constructionImg);
+    div2.innerHTML += `<span>${propertyDetails.construction} m<sup>2</sup></span>`;
+    detailsRow2Row1.appendChild(div1);
+    detailsRow2Row1.appendChild(div2);
+
+    let detailsRow2Row2 = document.createElement('div');
+    detailsRow2Row2.classList.add('details-row2-column');
+    let div3 = document.createElement('div');
+    let bedImg = document.createElement('img');
+    bedImg.src = location.origin+"/static/Assets/core/images/bed_logo.svg";
+    div3.appendChild(bedImg);
+    div3.innerHTML += `<span>${propertyDetails.bedrooms}</span>`;
+    let div4 = document.createElement('div');
+    let bathroomImg = document.createElement('img');
+    bathroomImg.src = location.origin+"/static/Assets/core/images/bathroom_logo.svg";
+    div4.appendChild(bathroomImg);
+    div4.innerHTML += `<span>${propertyDetails.bathrooms}</span>`;
+    detailsRow2Row2.appendChild(div3);
+    detailsRow2Row2.appendChild(div4);
+    detailsRow2.appendChild(detailsRow2Row1);
+    detailsRow2.appendChild(detailsRow2Row2);
+
+    let hr = document.createElement('hr');
+
+    let detailsRow3 = document.createElement('div');
+    detailsRow3.classList.add('details-row3');
+    detailsRow3.innerHTML = `<span title="${propertyDetails.neighbourhood}, ${propertyDetails.city}">${propertyDetails.neighbourhood}, ${propertyDetails.city}</span>
+                            <span class="price">$${propertyDetails.price}</span>`;
+
+    propertyCardDetails.appendChild(detailsRow1);
+    propertyCardDetails.appendChild(detailsRow2);
+    propertyCardDetails.appendChild(hr);
+    propertyCardDetails.appendChild(detailsRow3);
     propertyCard.appendChild(propertyCardDetails);
     
     return propertyCard; 
@@ -392,20 +532,17 @@ function createCenterControl(map) {
     controlButton.style.cursor = "pointer";
     controlButton.style.width = '207px';
     controlButton.style.height = '30px';
-    // controlButton.style.fontFamily = "Roboto,Arial,sans-serif";
     controlButton.style.fontSize = "14px";
     controlButton.style.fontWeight = 700;
     controlButton.style.lineHeight = "16px";
-    controlButton.style.marginTop = "47px";
-    // controlButton.style.padding = "0 5px";
+    controlButton.style.marginTop = "20px";
     controlButton.style.textAlign = "center";
     controlButton.textContent = "Search this area";
-    // controlButton.title = "Click to recenter the map";
     controlButton.type = "button";
-    // Setup the click event listeners: simply set the map to Chicago.
     controlButton.addEventListener("click", () => {
         // map.setCenter(chicago);
-        alert('button clicked');
+        // alert('button clicked');
+        // updateMarkers();
     });
     return controlButton;
 }

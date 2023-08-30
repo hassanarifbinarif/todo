@@ -23,26 +23,12 @@
     {% block body %}
 
     <section class="property-search-top-ads">
-        <div class="ad">
-            {% if publicity.publicity1.picture %}
-            <a href="{{publicity.publicity1.url}}" target="_blank">
-                <img src="{{publicity.publicity1.picture}}" loading="lazy" alt="Publicity" />
-            </a>
-            {% else %}
-            <span>Paid Publicity</span>
-            {% endif %}
+        <div class="ad" id="publicity-1">
         </div>
         <div class="focused-ad">
             <span>Google Adsense</span>
         </div>
-        <div class="ad">
-            {% if publicity.publicity2.picture %}
-            <a href="{{publicity.publicity2.url}}" target="_blank">
-                <img src="{{publicity.publicity2.picture}}" loading="lazy" alt="Publicity" />
-            </a>
-            {% else %}
-            <span>Paid Publicity</span>
-            {% endif %}
+        <div class="ad" id="publicity-2">
         </div>
     </section>
 
@@ -119,8 +105,8 @@
                     <div class="property-price">
                         <span>Price</span>
                         <div class="property-minmax-price-input-group">
-                            <input type="number" {% if min_price%}value="{{min_price}}"{% endif %} name="min_price" id="" placeholder="Min" oninput="triggerForm(event)">
-                            <input type="number" {% if max_price%}value="{{max_price}}"{% endif %} name="max_price" id="" placeholder="Max" oninput="triggerForm(event)">
+                            <input type="number" {% if min_price%}value="{{min_price}}"{% endif %} name="min_price" id="" placeholder="Min">
+                            <input type="number" {% if max_price%}value="{{max_price}}"{% endif %} name="max_price" id="" placeholder="Max">
                         </div>
                     </div>
                     <div class="bedroom-count-filter">
@@ -166,15 +152,15 @@
                     <div class="property-price">
                         <span>Construction</span>
                         <div class="property-minmax-price-input-group">
-                            <input type="number" name="min_construction_area" id="" placeholder="Min" oninput="triggerForm(event)">
-                            <input type="number" name="max_construction_area" id="" placeholder="Max" oninput="triggerForm(event)">
+                            <input type="number" name="min_construction_area" id="" placeholder="Min">
+                            <input type="number" name="max_construction_area" id="" placeholder="Max">
                         </div>
                     </div>
                     <div class="property-price">
                         <span>Land</span>
                         <div class="property-minmax-price-input-group">
-                            <input type="number" name="min_land_area" id="" placeholder="Min" oninput="triggerForm(event)">
-                            <input type="number" name="max_land_area" id="" placeholder="Max" oninput="triggerForm(event)">
+                            <input type="number" name="min_land_area" id="" placeholder="Min">
+                            <input type="number" name="max_land_area" id="" placeholder="Max">
                         </div>
                     </div>
                     <div class="property-type-filter">
@@ -232,14 +218,7 @@
                     </div>
                 </form>
             </div>
-            <div class="ad side-publicity-ad">
-                {% if publicity.publicity3.picture %}
-                <a href="{{publicity.publicity3.url}}" target="_blank">
-                    <img src="{{publicity.publicity3.picture}}" loading="lazy" alt="Publicity" />
-                </a>
-                {% else %}
-                <span>Paid Publicity</span>
-                {% endif %}
+            <div class="ad side-publicity-ad" id="publicity-3">
             </div>
         </div>
         <div class="property-search-results">
@@ -302,7 +281,7 @@
                 </div>
             </div>
             <div class="property-search-result-container">
-                <div class="map-view hide" id="map">
+                <div class="map-view" id="map">
                     <div class="map-search-btn-container">
                         <button class="map-search-btn">Search this area</button>
                     </div>
@@ -312,7 +291,7 @@
                         referrerpolicy="no-referrer-when-downgrade">
                     </iframe> -->
                 </div>
-                <div class="property-search-result-card-container" id="property-search-result-card-container">
+                <div class="property-search-result-card-container hide" id="property-search-result-card-container">
                     {% include '../ajax/property-card.html' %}
                 </div>
             </div>
@@ -331,10 +310,10 @@
 {% block scripts %}
 <script>
     let map_properties = JSON.parse(document.getElementById('map_properties').textContent);
-    // console.log(map_properties);
+    console.log(map_properties);
 </script>
 <script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
 <script src="{% static 'Assets/core/js/propertySearch.js' %}"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEwkiflsmSXuuFRI_xt3P0AISrPZEicyY&callback=initMap"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{key}}&callback=initMap"></script>
 {% endblock %}
 </html>

@@ -655,6 +655,26 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+
+/* Google Map Marker */
+
+.gm-style-iw-d {
+    overflow: unset!important;
+}
+
+.gm-style .gm-style-iw-c {
+    padding: 0px!important;
+}
+
+.gm-style .gm-style-iw-tc {
+    display: none!important;
+}
+
+.gm-ui-hover-effect {
+    display: none!important;
+}
+
+
 @media (max-width: 768px) {
 
     .property-search-top-ads {

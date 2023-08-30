@@ -642,3 +642,8 @@ async function getUserFavouriteListings() {
         }
     })
 }
+
+
+async function initMap() {
+    
+}

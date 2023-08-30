@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{% static 'Assets/administration/css/del_listing_modal.css' %}">
     <link rel="stylesheet" href="{% static 'Assets/core/css/boost_ad_modal.css' %}">
     <script src="https://kit.fontawesome.com/0d5a0a2089.js" crossorigin="anonymous"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
     {% endblock %}
 
@@ -446,5 +447,6 @@
 </body>
 {% block scripts %}
 <script src="{% static 'Assets/core/js/settings.js' %}"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{key}}&callback=initMap"></script>
 {% endblock %}
 </html>

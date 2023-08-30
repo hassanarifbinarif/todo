@@ -273,3 +273,18 @@ function openBoostAdModal(modalId, id) {
     form.setAttribute('onsubmit', `boostAdForm(event, '${id}')`);
     document.querySelector(`.${modalId}`).click();
 }
+
+
+// async function initMap() {
+//     const { Map } = await google.maps.importLibrary("maps");
+  
+//     map = new Map(document.getElementById("map"), {
+//         center: { lat: 31.4, lng: 74.368 },
+//         zoom: 8,
+//         disableDefaultUI: true,
+//         mapTypeId: 'roadmap',
+//     });
+
+//     const addressElement = document.getElementById("location-address");
+//     const searchBox = new google.maps.places.SearchBox(addressElement)
+// }

@@ -137,3 +137,4 @@ STATIC_ROOT = os.path.join(root, "static")
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 API_URL = env.str('API_URL')
+GOOGLE_MAPS_API_KEY = env.str('GOOGLE_MAPS_API_KEY')

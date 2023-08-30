@@ -13,6 +13,7 @@
 
     <link rel="stylesheet" href="{% static 'Assets/core/css/add_property.css' %}">
     <link rel="stylesheet" href="{% static 'Assets/core/css/boost_ad_modal.css' %}">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     
     {% endblock %}
 
@@ -78,49 +79,6 @@
                                     id="price" required />
                             </div>
                             <div class="">
-                                <!-- <div class="option">
-                                    <span>Type of Property</span>
-                                    <button class="filter-btn" id="type-of-property" type="button">
-                                        <span id="selected-property-type">Choose</span>
-                                        <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M10 0.863883C9.95436 1.10388 9.77171 1.24788 9.63473 1.43988C8.26486 2.87988 6.895 4.31988 5.52514 5.75988C5.29683 5.99988 5.06852 6.09588 4.74888 5.95188C4.65756 5.95188 4.52057 5.85588 4.47491 5.75988C3.05938 4.27188 1.64386 2.78388 0.228334 1.29588C-0.136963 0.911883 -0.0456384 0.287883 0.410983 0.0958825C0.639293 -0.0481175 0.913266 -0.000117473 1.09591 0.143883C1.14158 0.143883 1.18724 0.239883 1.2329 0.287883C2.46578 1.58388 3.65299 2.83188 4.88587 4.12788C4.88587 4.12788 4.93153 4.17588 4.97719 4.22388C4.97719 4.22388 5.02286 4.17588 5.06852 4.12788C6.30139 2.83188 7.53427 1.53588 8.76715 0.239883C8.99546 -0.000117473 9.22377 -0.0961175 9.5434 0.0478825C9.77171 0.143883 9.9087 0.287883 10 0.527883C10 0.527883 10 0.575883 10 0.623883V0.911883V0.863883Z" fill="#000000"/>
-                                        </svg>
-                                    </button>
-                                    <div class="filter-dropdown" id="type-of-property-dropdown">
-                                        <div class="radio-btn">
-                                            <input id="house" type="radio" name="property_radio">
-                                            <label for="house" class="radio-label">House</label>
-                                        </div>
-                                        <div class="radio-btn">
-                                            <input id="apartment" type="radio" name="property_radio">
-                                            <label for="apartment" class="radio-label">Apartment</label>
-                                        </div>
-                                        <div class="radio-btn">
-                                            <input id="land" type="radio" name="property_radio">
-                                            <label for="land" class="radio-label">Land</label>
-                                        </div>
-                                        <div class="radio-btn">
-                                            <input id="retail_space" type="radio" name="property_radio">
-                                            <label for="retail_space" class="radio-label">Retail Space</label>
-                                        </div>
-                                        <div class="radio-btn">
-                                            <input id="office" type="radio" name="property_radio">
-                                            <label for="office" class="radio-label">Office</label>
-                                        </div>
-                                        <div class="radio-btn">
-                                            <input id="practice" type="radio" name="property_radio">
-                                            <label for="practice" class="radio-label">Practice</label>
-                                        </div>
-                                        <div class="radio-btn">
-                                            <input id="warehouse" type="radio" name="property_radio">
-                                            <label for="warehouse" class="radio-label">Warehouse</label>
-                                        </div>
-                                        <div class="radio-btn">
-                                            <input id="suite" type="radio" name="property_radio">
-                                            <label for="suite" class="radio-label">Suite</label>
-                                        </div>
-                                    </div>
-                                </div> -->
                                 <p>Property Type</p>
                                 <select class="" name="property_type" id="property-type" required>
                                     <option value disabled selected hidden>Choose</option>
@@ -224,7 +182,7 @@
                                 <p>Location</p>
                                 <div class="search-location">
                                     <input class="general-input" type="text" placeholder="Aires del batan"
-                                        name="location" />
+                                        name="location" id="location-address" />
                                     <svg width="21" height="21" viewBox="0 0 21 21" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -232,7 +190,7 @@
                                             fill="#D2D2D2" />
                                     </svg>
                                 </div>
-                                <div class="map-view">
+                                <div class="map-view" id="map">
                                     <iframe
                                         src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13612.269782401412!2d74.2686174!3d31.4673308!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3919051533e95177%3A0xd55e06f9aed17bb8!2sCrymzee%20Networks%20(Pvt.)%20Ltd.!5e0!3m2!1sen!2s!4v1680426688403!5m2!1sen!2s"
                                         style="border:0;" allowfullscreen="" loading="lazy"
@@ -300,5 +258,6 @@
 </body>
 {% block scripts %}
 <script src="{% static 'Assets/core/js/addProperty.js' %}"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{key}}&libraries=places&callback=initMap"></script>
 {% endblock %}
 </html>
