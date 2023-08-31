@@ -310,7 +310,6 @@ let map;
 let bounds;
 let markerCluster;
 
-// google.maps.MapTypeId.ROADMAP
 
 async function initMap() {
     const { Map } = await google.maps.importLibrary("maps");
@@ -386,6 +385,9 @@ function createMarkers(map) {
             });
         });
     }
+    // google.maps.event.addListener(map, 'bounds_changed', function() {
+    //     map.fitBounds(bounds, {padding: 100});
+    // });
     const renderer = {
         render: ({ count, position }) =>
             new google.maps.Marker({
@@ -395,13 +397,9 @@ function createMarkers(map) {
              // adjust zIndex to be above other markers
                 zIndex: Number(google.maps.Marker.MAX_ZINDEX) + count,
         }),
-    };     
+    };
     markerCluster = new markerClusterer.MarkerClusterer( {map, markers, renderer} );
 }
-
-google.maps.event.addListener(map, 'bounds_changed', function() {
-    map.fitBounds(bounds, {padding: 100});
-});
 
 
 function paddedBounds(npad, spad, epad, wpad) {
@@ -578,7 +576,7 @@ function createCenterControl(map) {
     controlButton.style.fontSize = "14px";
     controlButton.style.fontWeight = 700;
     controlButton.style.lineHeight = "16px";
-    controlButton.style.marginTop = "20px";
+    controlButton.style.marginTop = "5px";
     controlButton.style.textAlign = "center";
     controlButton.textContent = "Search this area";
     controlButton.type = "button";
