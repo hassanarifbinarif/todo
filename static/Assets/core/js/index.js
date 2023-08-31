@@ -1,3 +1,25 @@
+window.onload = () => {
+    getPublicities();
+}
+
+
+async function getPublicities() {
+    let publicity = document.getElementById('publicity-1');
+    publicity.innerHTML = '<div class="w-100 d-flex justify-content-center align-items-center pt-3 pb-2"><span class="spinner-border spinner-border-md" style="color: #8DC63F;" role="status" aria-hidden="true"></span></div>';
+    let response = await requestAPI(`${apiURL}/publicity/1`, null, {}, 'GET');
+    response.json().then(function(res) {
+        if (response.status == 200) {
+            publicity.innerHTML = `<a href="${res.url}" target="_blank">
+                                        <img src="${res.picture}" loading="lazy" alt="Publicity" />
+                                    </a>`;
+        }
+        else {
+            publicity.innerHTML = `<span>Paid Publicity</span>`;
+        }
+    })
+}
+
+
 // Handling Property Search Form
 
 // async function propertySearchForm(event) {

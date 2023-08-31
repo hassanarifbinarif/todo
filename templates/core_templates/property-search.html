@@ -310,10 +310,11 @@
 {% block scripts %}
 <script>
     let map_properties = JSON.parse(document.getElementById('map_properties').textContent);
-    console.log(map_properties);
+    // let key = JSON.parse(document.getElementById('key').textContent);
+    // console.log(map_properties);
 </script>
-<script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
 <script src="{% static 'Assets/core/js/propertySearch.js' %}"></script>
+<script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key={{key}}&callback=initMap"></script>
 {% endblock %}
 </html>

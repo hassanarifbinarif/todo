@@ -305,9 +305,12 @@ async function removeFavourite(event, id) {
 }
 
 
-let markerArray = [];
+let markers = [];
 let map;
 let bounds;
+let markerCluster;
+
+// google.maps.MapTypeId.ROADMAP
 
 async function initMap() {
     const { Map } = await google.maps.importLibrary("maps");
@@ -317,6 +320,7 @@ async function initMap() {
         center: { lat: 31.4, lng: 74.368 },
         zoom: 8,
         disableDefaultUI: true,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
     });
 
     navigator.geolocation.getCurrentPosition(
@@ -341,16 +345,13 @@ async function initMap() {
     map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
 
     createMarkers(map);
-    // console.log(markerArray);
-    // let abc = new markerClusterer.MarkerClusterer({markerArray, map});
-    // console.log(abc);
 }
 
 
 function createMarkers(map) {
     const infowindow = new google.maps.InfoWindow();
     const markerIcon = {
-        url: location.origin+"/static/Assets/core/images/map_marker.svg",
+        url: "/static/Assets/core/images/map_marker.svg",
         scaledSize: new google.maps.Size(30, 30)
     };
     for (let i = 0; i < map_properties.length; i++) {
@@ -364,7 +365,7 @@ function createMarkers(map) {
             icon: markerIcon,
             animation: google.maps.Animation.DROP
         });
-        markerArray.push(marker);
+        markers.push(marker);
         google.maps.event.addListener(marker, "click", function () {
             infowindow.setContent(createInfoWindowContent(map_properties[i]));
             // map.setCenter(marker.getPosition());
@@ -385,24 +386,66 @@ function createMarkers(map) {
             });
         });
     }
+    const renderer = {
+        render: ({ count, position }) =>
+            new google.maps.Marker({
+                icon: { url:"/static/Assets/core/images/marker_clusterer_icon.svg", scaledSize: new google.maps.Size(40, 40) }, 
+                label: { text: String(count), color: "#000000", fontSize: "14px" },
+                position,
+             // adjust zIndex to be above other markers
+                zIndex: Number(google.maps.Marker.MAX_ZINDEX) + count,
+        }),
+    };     
+    markerCluster = new markerClusterer.MarkerClusterer( {map, markers, renderer} );
+}
+
+google.maps.event.addListener(map, 'bounds_changed', function() {
+    map.fitBounds(bounds, {padding: 100});
+});
+
+
+function paddedBounds(npad, spad, epad, wpad) {
+    var SW = map.getBounds().getSouthWest();
+    var NE = map.getBounds().getNorthEast();
+    var topRight = map.getProjection().fromLatLngToPoint(NE);
+    var bottomLeft = map.getProjection().fromLatLngToPoint(SW);
+    var scale = Math.pow(2, map.getZoom());
+
+    var SWtopoint = map.getProjection().fromLatLngToPoint(SW);
+    var SWpoint = new google.maps.Point(((SWtopoint.x - bottomLeft.x) * scale) + wpad, ((SWtopoint.y - topRight.y) * scale) - spad);
+    var SWworld = new google.maps.Point(SWpoint.x / scale + bottomLeft.x, SWpoint.y / scale + topRight.y);
+    var pt1 = map.getProjection().fromPointToLatLng(SWworld);
+
+    var NEtopoint = map.getProjection().fromLatLngToPoint(NE);
+    var NEpoint = new google.maps.Point(((NEtopoint.x - bottomLeft.x) * scale) - epad, ((NEtopoint.y - topRight.y) * scale) + npad);
+    var NEworld = new google.maps.Point(NEpoint.x / scale + bottomLeft.x, NEpoint.y / scale + topRight.y);
+    var pt2 = map.getProjection().fromPointToLatLng(NEworld);
+
+    return new google.maps.LatLngBounds(pt1, pt2);
 }
 
 
 function updateMarkers() {
     deleteMarkers();
     createMarkers(map);
-    markerArray.forEach((marker) => {
+    markers.forEach((marker) => {
         bounds.extend(marker.getPosition());
     });
-    map.fitBounds(bounds);
+    if(markers.length == 1) {
+        map.setCenter(markers[0].position);
+    }
+    else {
+        map.fitBounds(bounds);
+    }
 }
 
 
 function deleteMarkers() {
-    for (let i = 0; i < markerArray.length; i++) {
-        markerArray[i].setMap(null);
+    for (let i = 0; i < markers.length; i++) {
+        markers[i].setMap(null);
     }
-    markerArray = [];
+    markers = [];
+    markerCluster.clearMarkers();
 }
 
 

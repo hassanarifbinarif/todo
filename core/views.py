@@ -30,8 +30,6 @@ def index(request):
         context['spotlight_properties'] = spotlight_response
     except Exception as e:
         print(e)
-    publicity_status, publicity_response = requestAPI('GET', f'{django_settings.API_URL}/publicity/1', {}, {})
-    context['publicity'] = publicity_response
     return render(request, 'core_templates/index.html', context)
 
 
@@ -126,17 +124,16 @@ def property_listing(request, pk):
     try:
         if context['login'] == True:
             status, response = requestAPI('GET', f'{django_settings.API_URL}/search-listings/{pk}', headers, {})
-            if response:
-                similar_properties_status, similar_properties_response = requestAPI('GET', f'{django_settings.API_URL}/search-listings?exclude_ids={pk}&property_type__in={response["data"]["property_type"]}&location={response["data"]["location"]}', headers, {})
+            similar_properties_status, similar_properties_response = requestAPI('GET', f'{django_settings.API_URL}/search-listings?exclude_ids={pk}&property_type__in={response["data"]["property_type"]}&location={response["data"]["location"]}', headers, {})
         else:
             status, response = requestAPI('GET', f'{django_settings.API_URL}/search-listings/{pk}', {}, {})
             similar_properties_status, similar_properties_response = requestAPI('GET', f'{django_settings.API_URL}/search-listings?exclude_ids={pk}&property_type__in={response["data"]["property_type"]}&location={response["data"]["location"]}', {}, {})
         context['property'] = response
+        context['property_location'] = response['data']['location']
         context['similar_properties'] = similar_properties_response
     except Exception as e:
         print(e)
-    publicity_status, publicity_response = requestAPI('GET', f'{django_settings.API_URL}/publicity/5', {}, {})
-    context['publicity'] = publicity_response
+    context['key'] = django_settings.GOOGLE_MAPS_API_KEY
     return render(request, 'core_templates/property-listing.html', context)
 
 
@@ -244,9 +241,7 @@ def get_user_favourite_listings(request):
 @signin_required
 def add_property(request):
     context = {}
-    status, response = check_user_login(request)
-    if status == 200:
-        context['login'] = True
+    context['login'] = True
     context['key'] = django_settings.GOOGLE_MAPS_API_KEY
     return render(request, 'core_templates/add-property.html', context)
 

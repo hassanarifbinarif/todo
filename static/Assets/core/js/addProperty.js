@@ -275,6 +275,8 @@ function openBoostAdModal(modalId, id) {
 }
 
 
+let marker;
+
 // async function initMap() {
 //     const { Map } = await google.maps.importLibrary("maps");
   
@@ -285,6 +287,22 @@ function openBoostAdModal(modalId, id) {
 //         mapTypeId: 'roadmap',
 //     });
 
+//     navigator.geolocation.getCurrentPosition(
+//         (position) => {
+//           const pos = {
+//                 lat: position.coords.latitude,
+//                 lng: position.coords.longitude,
+//             };
+//             map.setCenter(pos);
+//         },
+//         () => {
+//             map.getCenter();
+//         },
+//     );
+
 //     const addressElement = document.getElementById("location-address");
-//     const searchBox = new google.maps.places.SearchBox(addressElement)
+//     const searchBox = new google.maps.places.SearchBox(addressElement);
+//     map.addListener("bounds_changed", function() {
+//         searchBox.setBounds(map.getBounds());
+//     });
 // }

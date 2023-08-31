@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
     <link rel="stylesheet" href="{% static 'Assets/core/css/property_listing.css' %}">
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" /> -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
     {% endblock %}
 
@@ -113,7 +113,7 @@
                 <div class="property-name">
                     <h2>{{property.data.property_type}}, {{property.data.neighbourhood}}</h2>
                     <div class="vertical-rule"></div>
-                    <a href="#maps">
+                    <a href="#map">
                         <svg width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M0 8.58885C0 4.6376 1.89431 1.78321 4.93568 0.590133C9.5764 -1.23155 14.8791 1.30213 15.8427 6.40797C16.3212 8.94164 15.705 11.2316 14.0467 13.2329C12.2835 15.356 10.5006 17.4599 8.72429 19.5767C8.25236 20.1411 7.74764 20.1411 7.28226 19.5831C5.49938 17.4663 3.71651 15.3496 1.94019 13.2264C0.655469 11.687 0.0196641 9.92304 0 8.58885ZM8.00328 4.61836C6.26628 4.61836 4.85047 6.01027 4.85703 7.70367C4.85703 9.38423 6.27939 10.7633 8.00328 10.7633C9.7075 10.7633 11.143 9.35857 11.1364 7.69084C11.1364 6.00386 9.71405 4.61194 8.00328 4.61836Z"
@@ -194,12 +194,12 @@
                 </p>
             </div>
             <hr />
-            <div class="map-view" id="maps">
-                <iframe
+            <div class="map-view" id="map">
+                <!-- <iframe
                     src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13612.269782401412!2d74.2686174!3d31.4673308!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3919051533e95177%3A0xd55e06f9aed17bb8!2sCrymzee%20Networks%20(Pvt.)%20Ltd.!5e0!3m2!1sen!2s!4v1680426688403!5m2!1sen!2s"
                     width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
+                </iframe> -->
             </div>
         </div>
         {% endif %}
@@ -223,15 +223,8 @@
                     <button>Schedule a visit</button>
                 </div>
             </div>
-            {% if publicity.picture %}
-            <a href="{{publicity.url}}" target="_blank" class="sidebar-ad1">
-                <img src="{{publicity.picture}}" loading="lazy" alt="Publicity" />
-            </a>
-            {% else %}
-            <div class="sidebar-ad1">
-                Paid Publicity
+            <div class="sidebar-ad1" id="publicity-1">
             </div>
-            {% endif %}
             <div class="sidebar-ad2">
                 Google Adsense
             </div>
@@ -320,11 +313,17 @@
         </div>
     </div>
 
+    {{property_location|json_script:"property_location"}}
+
     {% endblock %}
 </body>
 {% block scripts %}
-<!-- <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script> -->
+<script>
+    let propertyLocation = JSON.parse(document.getElementById('property_location').textContent);
+    let {lat, lng} = getLatLngFromString(propertyLocation);
+</script>
 <script src="{% static 'Assets/core/js/propertyListing.js' %}"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{key}}&callback=initMap"></script>
 {% endblock %}
 
 </html>

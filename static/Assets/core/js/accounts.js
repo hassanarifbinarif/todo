@@ -151,7 +151,13 @@ async function loginForm(event) {
                             const refreshToken = parseJwt(res.refresh);
                             setCookie("access", res.access, accessToken.exp);
                             setCookie("refresh", res.refresh, refreshToken.exp);
-                            location.href = location.origin + "/";
+                            let queryParams = new URLSearchParams(window.location.search);
+                            if (queryParams.has('next')) {
+                                location.href = queryParams.get('next');
+                            }
+                            else {
+                                location.href = location.origin + "/";
+                            }
                         }
                         afterLoad(button, buttonText);
                     });
@@ -311,12 +317,7 @@ async function registerForm(event) {
                 "X-CSRFToken": data.csrfmiddlewaretoken,
             };
             beforeLoad(button);
-            let response = await requestAPI(
-                `${apiURL}/register`,
-                JSON.stringify(data),
-                headers,
-                "POST"
-            );
+            let response = await requestAPI(`${apiURL}/register`, JSON.stringify(data), headers, "POST");
             if (response.status == 400) {
                 response.json().then(function (res) {
                     if (res.messages.email) {
@@ -431,7 +432,13 @@ async function googleSigninCallback(response) {
                     const refreshToken = parseJwt(resObj.refresh);
                     setCookie("access", resObj.access, accessToken.exp);
                     setCookie("refresh", resObj.refresh, refreshToken.exp);
-                    location.href = location.origin + "/";   
+                    let queryParams = new URLSearchParams(window.location.search);
+                    if (queryParams.has('next')) {
+                        location.href = queryParams.get('next');
+                    }
+                    else {
+                        location.href = location.origin + "/";
+                    }
                 }
             })
         }

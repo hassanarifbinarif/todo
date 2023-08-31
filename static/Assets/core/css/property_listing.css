@@ -378,7 +378,13 @@
     align-items: center;
 }
 
-.sidebar-ad1 > img {
+.sidebar-ad1 > a {
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+}
+
+.sidebar-ad1 img {
     width: 100%;
     height: 100%;
 }
