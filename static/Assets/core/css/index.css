@@ -119,6 +119,8 @@
 
 .filter-btn > span {
     color: #000000;
+    font-family: 'Calibri Light', 'Calibri', sans-serif;
+    font-weight: 300;
 }
 
 .filter-dropdown {
@@ -161,6 +163,8 @@
     border: 1px solid transparent;
     border-radius: 4px;
     padding: 0px 6px;
+    font-family: 'Calibri Light', 'Calibri', sans-serif;
+    font-weight: 300;
 }
 
 .option-row2 {
@@ -194,7 +198,7 @@
     height: 47px;
     background-color: #8DC63F;
     border: 1px solid transparent;
-    border-radius: 2px;
+    border-radius: 4px;
     color: #FFFFFF;
 }
 
@@ -356,8 +360,11 @@
     color: #000000;
 }
 
+.details-row1-column2 {
+    width: 18px;
+}
 
-.spot .details-row1-column2 > label {
+/* .spot .details-row1-column2 > label {
     cursor: pointer;
 }
 
@@ -373,11 +380,12 @@
 .spot .details-row1-column2 > label > input[type=checkbox]:checked + svg > path {
     fill: #8DC63F;
     stroke: #8DC63F;
-}
+} */
 
 
 .favourite-property-checkbox {
     cursor: pointer;
+    width: 100%;
 }
 
 .favourite-property-checkbox input[type=checkbox] {
@@ -386,7 +394,7 @@
 
 .favourite-property-checkbox svg {
     width: 14px;
-    height: 13px;
+    height: 14px;
 }
 
 .favourite-property-checkbox.active input[type=checkbox]:checked + svg > path {

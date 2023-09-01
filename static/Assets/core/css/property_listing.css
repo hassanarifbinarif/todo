@@ -514,6 +514,10 @@
     color: #000000;
 }
 
+.details-row1-column2 {
+    width: 18px;
+}
+
 .spotlight-card-details .details-row2 {
     display: flex;
     flex-direction: column;
@@ -552,6 +556,7 @@
 
 .spotlight-card .favourite-property-checkbox {
     cursor: pointer;
+    width: 100%;
 }
 
 .spotlight-card .favourite-property-checkbox input[type=checkbox] {
@@ -560,7 +565,7 @@
 
 .spotlight-card .favourite-property-checkbox svg {
     width: 14px;
-    height: 13px;
+    height: 14px;
 }
 
 .spotlight-card .favourite-property-checkbox.active input[type=checkbox]:checked + svg > path {

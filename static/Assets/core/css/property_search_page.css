@@ -516,8 +516,13 @@ input[name="criteria_radio"]:checked + .radio-label{
     color: #000000;
 }
 
+.details-row1-column2 {
+    width: 18px;
+}
+
 .favourite-property-checkbox {
     cursor: pointer;
+    width: 100%;
 }
 
 .favourite-property-checkbox input[type=checkbox] {
@@ -526,7 +531,7 @@ input[name="criteria_radio"]:checked + .radio-label{
 
 .favourite-property-checkbox svg {
     width: 14px;
-    height: 13px;
+    height: 14px;
 }
 
 .favourite-property-checkbox.active input[type=checkbox]:checked + svg > path {

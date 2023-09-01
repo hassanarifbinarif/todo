@@ -275,7 +275,10 @@ function openBoostAdModal(modalId, id) {
 }
 
 
-let marker;
+// let marker;
+// let markers = [];
+// let lat;
+// let lng;
 
 // async function initMap() {
 //     const { Map } = await google.maps.importLibrary("maps");
@@ -301,8 +304,60 @@ let marker;
 //     );
 
 //     const addressElement = document.getElementById("location-address");
+//     addressElement.addEventListener('keydown', function(e) {
+//         if(e.keyCode === 13) {
+//             e.preventDefault();
+//         }
+//     })
 //     const searchBox = new google.maps.places.SearchBox(addressElement);
 //     map.addListener("bounds_changed", function() {
 //         searchBox.setBounds(map.getBounds());
+//     });
+
+//     function setMapOnAll(map) {
+//         for (var i = 0; i < markers.length; i++) {
+//             markers[i].setMap(map);
+//         }
+//     }
+
+//     function clearMarkers() {
+//         setMapOnAll(null);
+//     }
+
+//     searchBox.addListener("places_changed", function() {
+//         var places = searchBox.getPlaces();
+//         clearMarkers();
+//         if (places.length == 0) {
+//             return;
+//         } // Clear out the old markers.
+//         var bounds = new google.maps.LatLngBounds();
+//         places.forEach(function(place) {
+//             if (!place.geometry) {
+//                 console.log("Returned place contains no geometry");
+//                 return;
+//             }
+//             const markerIcon = {
+//                 url: "/static/Assets/core/images/map_marker_2.svg",
+//                 scaledSize: new google.maps.Size(30, 30)
+//             };
+//             marker = new google.maps.Marker({
+//                 map: map,
+//                 draggable: true,
+//                 title: place.name,
+//                 position: place.geometry.location,
+//                 icon: markerIcon,
+//             })
+//             clearMarkers();
+//             markers.push(marker);
+//             if (place.geometry.viewport) {
+//                 // Only geocodes have viewport.
+//                 bounds.union(place.geometry.viewport);
+//             } else {
+//                 bounds.extend(place.geometry.location);
+//             }
+//             lat = marker.getPosition().lat();
+//             lng = marker.getPosition().lng();
+//         });
+//         map.fitBounds(bounds);
 //     });
 // }
