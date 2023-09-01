@@ -23,6 +23,13 @@
     url("https://db.onlinewebfonts.com/t/1c45e28f8e86cc89876f003b953cc3e9.svg#SF Pro Text Regular")format("svg");
 }
 
+@font-face {
+    font-family: 'Calibri Light';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Calibri Light'), url('calibril.woff') format('woff');
+}
+
 * {
     font-family: "Calibri", sans-serif;
 }
