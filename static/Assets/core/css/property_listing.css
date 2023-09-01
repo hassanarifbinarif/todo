@@ -556,7 +556,8 @@
 
 .spotlight-card .favourite-property-checkbox {
     cursor: pointer;
-    width: 100%;
+    width: 18px;
+    height: 100%;
 }
 
 .spotlight-card .favourite-property-checkbox input[type=checkbox] {
@@ -564,8 +565,8 @@
 }
 
 .spotlight-card .favourite-property-checkbox svg {
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 16px;
 }
 
 .spotlight-card .favourite-property-checkbox.active input[type=checkbox]:checked + svg > path {
