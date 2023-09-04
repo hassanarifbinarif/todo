@@ -318,6 +318,18 @@ function isValidImage(image) {
 }
 
 
+function isCheckboxChecked(checkbox) {
+    if(checkbox.checked) {
+        checkbox.classList.remove('input-error');
+        return true;
+    }
+    else {
+        checkbox.classList.add('input-error');
+        return false;
+    }
+}
+
+
 function getLatLngFromString(locationString) {
     const match = locationString.match(locationRegex);
     if (match && match.length === 3) {

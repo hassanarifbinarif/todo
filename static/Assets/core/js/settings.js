@@ -644,6 +644,45 @@ async function getUserFavouriteListings() {
 }
 
 
+async function boostAdForm(event, id) {
+    event.preventDefault();
+    let form = event.currentTarget;
+    let formData = new FormData(form);
+    formData.append('is_boosted', true);
+    let token = getAccessTokenFromCookie();
+    let data = formDataToObject(formData);
+    let headers = {
+        "Authorization": `Bearer ${token}`,
+        "X-CSRFToken": data.csrfmiddlewaretoken,
+    };
+    let button = form.querySelector('button[type="submit"]');
+    let buttonText = button.innerText;
+    beforeLoad(button);
+    let response = await requestAPI(`${apiURL}/listings/${id}`, formData, headers, 'PATCH');
+    response.json().then(function(res) {
+        console.log(res);
+        if (response.status == 200) {
+            form.removeAttribute('onsubmit');
+            button.type = 'button';
+            afterLoad(button, 'Boosted');
+            setTimeout(() => {
+                afterLoad(button, buttonText);
+                document.querySelector(`.boost-ad`).click();
+            }, 2000);
+        }
+        else {
+            form.removeAttribute('onsubmit');
+            button.type = 'button';
+            afterLoad(button, 'Error');
+            setTimeout(() => {
+                document.querySelector(`.boost-ad`).click();
+                afterLoad(button, buttonText);
+            }, 3000);
+        }
+    })
+}
+
+
 async function initMap() {
     
 }

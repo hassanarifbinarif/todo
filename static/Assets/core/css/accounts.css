@@ -104,6 +104,10 @@ input[name="authentication_radio"]:checked + .radio-label{
     gap: 30px;
 }
 
+.login-auth-content .input-container {
+    margin-bottom: 20px;
+}
+
 .login-auth-content .input-group,
 .register-auth-content .input-group {
     display: flex;
@@ -261,6 +265,31 @@ input[name="authentication_radio"]:checked + .radio-label{
     justify-content: center;
     align-items: center;
     background-color: #B1B1B1;
+}
+
+.terms-checkbox-container > input {
+    margin-top: 0px;
+}
+
+.terms-checkbox-container > input:checked[type=checkbox] {
+    background-color: #FFFFFF;
+    box-shadow: none;
+    border-color: #CDCDCD;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%238DC63F' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
+}
+
+.terms-link {
+    color: #8DC63F;
+    text-decoration: none;
+}
+
+.terms-link:hover {
+    color: #8DC63F;
+    text-decoration: underline;
+}
+
+.login-auth-content .terms-link {
+    font-size: .875rem;
 }
 
 

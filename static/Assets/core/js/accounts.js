@@ -68,6 +68,7 @@ async function loginForm(event) {
     let passwordMsg = form.querySelector(".password-msg");
     let button = form.querySelector('button[type="submit"]');
     let buttonText = button.innerText;
+    let termsCheckbox = form.querySelector('#terms-checkbox1');
 
     if (!isValidEmail(emailField)) {
         emailField.classList.add("input-error");
@@ -101,6 +102,23 @@ async function loginForm(event) {
                 timeOut = setTimeout(function () {
                     inputField.classList.add("input-error");
                     passwordMsg.classList.add("active");
+                }, 1000);
+            }
+        });
+        return false;
+    } else if (!isCheckboxChecked(termsCheckbox)) {
+        termsCheckbox.classList.add('input-error');
+        termsCheckbox.addEventListener("input", function () {
+            if(isCheckboxChecked(this)) {
+                this.classList.remove('input-error');
+            }
+            else {
+                let inputField = this;
+                if (timeOut) {
+                    clearTimeout(timeOut);
+                }
+                timeOut = setTimeout(function () {
+                    inputField.classList.add("input-error");
                 }, 1000);
             }
         });
@@ -281,6 +299,7 @@ async function registerForm(event) {
     let emailMsg = form.querySelector(".email-msg");
     let passwordMsg = form.querySelector(".password-msg");
     let confirmPasswordMsg = form.querySelector(".confirm-password-msg");
+    let termsCheckbox = form.querySelector('#terms-checkbox');
 
     if (!isValidName(firstName)) {
         firstName.classList.add("input-error");
@@ -305,6 +324,24 @@ async function registerForm(event) {
     } else if (!matchingPassword(passwordField, confirmPassword)) {
         confirmPasswordMsg.classList.add("active");
         confirmPassword.classList.add("input-error");
+        return false;
+    } else if (!isCheckboxChecked(termsCheckbox)) {
+        termsCheckbox.classList.add('input-error');
+        termsCheckbox.scrollIntoView();
+        termsCheckbox.addEventListener("input", function () {
+            if(isCheckboxChecked(this)) {
+                this.classList.remove('input-error');
+            }
+            else {
+                let inputField = this;
+                if (timeOut) {
+                    clearTimeout(timeOut);
+                }
+                timeOut = setTimeout(function () {
+                    inputField.classList.add("input-error");
+                }, 1000);
+            }
+        });
         return false;
     } else {
         try {

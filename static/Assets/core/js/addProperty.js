@@ -190,11 +190,19 @@ async function addPropertyForm(event) {
     if (!isValidImageData(imageContainer)) {
         imageContainer.previousElementSibling.classList.add("active");
         return true;
-    } else 
-    if (!isValidContent(propertyDescription)) {
+    }
+    else if (!isValidContent(propertyDescription)) {
         propertyDescription.nextElementSibling.classList.add("active");
         return false;
-    } else if (tags.length === 0) {
+    }
+    else if(!lat && !lng) {
+        // console.log('here');
+        form.querySelector('.location-msg').classList.add('active');
+        form.querySelector('.location-msg').innerText = 'Select a location';
+        form.querySelector('#location-address').scrollIntoView();
+        return false;
+    }
+    else if (tags.length === 0) {
         tagsContainer.scrollIntoView();
         tagsContainer.nextElementSibling.classList.add('active');
         tagsContainer.nextElementSibling.innerText = 'Add ameneties';
@@ -208,7 +216,7 @@ async function addPropertyForm(event) {
         let formData = new FormData(form);
         let tagText = tags.map((tag) => tag.querySelector('span').innerText).join(',');
         formData.append('ameneties', tagText);
-        formData.append('location', JSON.stringify({"type": "point", "coordinates": [31.460294, 74.288639]}));
+        formData.append('location', JSON.stringify({"type": "point", "coordinates": [lat, lng]}));
         formData.delete('images');
         imageArray.forEach((file) => {
             formData.append('images', file);
@@ -217,6 +225,8 @@ async function addPropertyForm(event) {
         let response = await listingAPI(formData);
         response.json().then(function(res) {
             if(response.status == 201) {
+                form.querySelector('.location-msg').classList.remove('active');
+                form.querySelector('.location-msg').innerText = '';
                 errorMsg.classList.remove('active');
                 errorMsg.innerText = '';
                 openBoostAdModal('boost-ad', res.data.id);
@@ -275,89 +285,128 @@ function openBoostAdModal(modalId, id) {
 }
 
 
-// let marker;
-// let markers = [];
-// let lat;
-// let lng;
+async function boostAdForm(event, id) {
+    event.preventDefault();
+    let form = event.currentTarget;
+    let formData = new FormData(form);
+    formData.append('is_boosted', true);
+    let token = getAccessTokenFromCookie();
+    let data = formDataToObject(formData);
+    let headers = {
+        "Authorization": `Bearer ${token}`,
+        "X-CSRFToken": data.csrfmiddlewaretoken,
+    };
+    let button = form.querySelector('button[type="submit"]');
+    let buttonText = button.innerText;
+    beforeLoad(button);
+    let response = await requestAPI(`${apiURL}/listings/${id}`, formData, headers, 'PATCH');
+    response.json().then(function(res) {
+        console.log(res);
+        if (response.status == 200) {
+            form.removeAttribute('onsubmit');
+            button.type = 'button';
+            afterLoad(button, 'Boosted');
+            setTimeout(() => {
+                afterLoad(button, buttonText);
+                document.querySelector(`.boost-ad`).click();
+            }, 2000);
+        }
+        else {
+            form.removeAttribute('onsubmit');
+            button.type = 'button';
+            afterLoad(button, 'Error');
+            setTimeout(() => {
+                document.querySelector(`.boost-ad`).click();
+                afterLoad(button, buttonText);
+            }, 3000);
+        }
+    })
+}
 
-// async function initMap() {
-//     const { Map } = await google.maps.importLibrary("maps");
+
+let marker;
+let markers = [];
+let lat;
+let lng;
+
+async function initMap() {
+    const { Map } = await google.maps.importLibrary("maps");
   
-//     map = new Map(document.getElementById("map"), {
-//         center: { lat: 31.4, lng: 74.368 },
-//         zoom: 8,
-//         disableDefaultUI: true,
-//         mapTypeId: 'roadmap',
-//     });
+    map = new Map(document.getElementById("map"), {
+        center: { lat: 31.4, lng: 74.368 },
+        zoom: 8,
+        disableDefaultUI: true,
+        mapTypeId: 'roadmap',
+    });
 
-//     navigator.geolocation.getCurrentPosition(
-//         (position) => {
-//           const pos = {
-//                 lat: position.coords.latitude,
-//                 lng: position.coords.longitude,
-//             };
-//             map.setCenter(pos);
-//         },
-//         () => {
-//             map.getCenter();
-//         },
-//     );
+    navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const pos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude,
+            };
+            map.setCenter(pos);
+        },
+        () => {
+            map.getCenter();
+        },
+    );
 
-//     const addressElement = document.getElementById("location-address");
-//     addressElement.addEventListener('keydown', function(e) {
-//         if(e.keyCode === 13) {
-//             e.preventDefault();
-//         }
-//     })
-//     const searchBox = new google.maps.places.SearchBox(addressElement);
-//     map.addListener("bounds_changed", function() {
-//         searchBox.setBounds(map.getBounds());
-//     });
+    const addressElement = document.getElementById("location-address");
+    addressElement.addEventListener('keydown', function(e) {
+        if(e.keyCode === 13) {
+            e.preventDefault();
+        }
+    })
+    const searchBox = new google.maps.places.SearchBox(addressElement);
+    map.addListener("bounds_changed", function() {
+        searchBox.setBounds(map.getBounds());
+    });
 
-//     function setMapOnAll(map) {
-//         for (var i = 0; i < markers.length; i++) {
-//             markers[i].setMap(map);
-//         }
-//     }
+    function setMapOnAll(map) {
+        for (var i = 0; i < markers.length; i++) {
+            markers[i].setMap(map);
+        }
+    }
 
-//     function clearMarkers() {
-//         setMapOnAll(null);
-//     }
+    function clearMarkers() {
+        setMapOnAll(null);
+    }
 
-//     searchBox.addListener("places_changed", function() {
-//         var places = searchBox.getPlaces();
-//         clearMarkers();
-//         if (places.length == 0) {
-//             return;
-//         } // Clear out the old markers.
-//         var bounds = new google.maps.LatLngBounds();
-//         places.forEach(function(place) {
-//             if (!place.geometry) {
-//                 console.log("Returned place contains no geometry");
-//                 return;
-//             }
-//             const markerIcon = {
-//                 url: "/static/Assets/core/images/map_marker_2.svg",
-//                 scaledSize: new google.maps.Size(30, 30)
-//             };
-//             marker = new google.maps.Marker({
-//                 map: map,
-//                 draggable: true,
-//                 title: place.name,
-//                 position: place.geometry.location,
-//                 icon: markerIcon,
-//             })
-//             clearMarkers();
-//             markers.push(marker);
-//             if (place.geometry.viewport) {
-//                 // Only geocodes have viewport.
-//                 bounds.union(place.geometry.viewport);
-//             } else {
-//                 bounds.extend(place.geometry.location);
-//             }
-//             lat = marker.getPosition().lat();
-//             lng = marker.getPosition().lng();
-//         });
-//         map.fitBounds(bounds);
-//     });
-// }
+    searchBox.addListener("places_changed", function() {
+        var places = searchBox.getPlaces();
+        clearMarkers();
+        if (places.length == 0) {
+            return;
+        } // Clear out the old markers.
+        var bounds = new google.maps.LatLngBounds();
+        places.forEach(function(place) {
+            if (!place.geometry) {
+                console.log("Returned place contains no geometry");
+                return;
+            }
+            const markerIcon = {
+                url: "/static/Assets/core/images/map_marker_2.svg",
+                scaledSize: new google.maps.Size(30, 30)
+            };
+            marker = new google.maps.Marker({
+                map: map,
+                draggable: true,
+                title: place.name,
+                position: place.geometry.location,
+                icon: markerIcon,
+            })
+            clearMarkers();
+            markers.push(marker);
+            if (place.geometry.viewport) {
+                // Only geocodes have viewport.
+                bounds.union(place.geometry.viewport);
+            } else {
+                bounds.extend(place.geometry.location);
+            }
+            lat = marker.getPosition().lat();
+            lng = marker.getPosition().lng();
+        });
+        map.fitBounds(bounds);
+    });
+}
