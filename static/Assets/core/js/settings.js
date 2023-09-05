@@ -363,6 +363,8 @@ async function getUserListings() {
 
 let baseView = document.querySelector('.my-ads-card');
 let listingEditView = document.querySelector('.listing-edit-view');
+let lat;
+let lng;
 
 async function toggleListingView(event, data) {
     let element = event.currentTarget;
@@ -412,7 +414,11 @@ async function toggleListingView(event, data) {
                                 <img src="${image.image}" alt="property image" />
                             </div>`;
             imageContainer.insertAdjacentHTML('afterbegin', imageTag);
-        })
+        });
+        let latLng = getLatLngFromString(data.location);
+        lat = latLng.lat;
+        lng = latLng.lng;
+        await initMap(lat, lng);
         form.querySelector('#publish-property-btn').querySelector('.btn-text').innerText = 'Publish';
         form.querySelector('.update-error-msg').classList.remove('active');
         listingEditView.classList.remove('hide');
@@ -683,6 +689,99 @@ async function boostAdForm(event, id) {
 }
 
 
-async function initMap() {
-    
+let marker;
+let markers = [];
+
+
+async function initMap(lat=null, lng=null) {
+    // console.log(lat, lng);
+    // const { Map } = await google.maps.importLibrary("maps");
+  
+    // map = new Map(document.getElementById("map"), {
+    //     center: { lat: lat, lng: lng },
+    //     zoom: 8,
+    //     disableDefaultUI: true,
+    //     mapTypeId: 'roadmap',
+    // });
+
+    // let response = await requestAPI(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${key}`);
+    // console.log(response);
+    // response.json().then(function(res) {
+    //     console.log(res);
+    // })
+
+    // const markerIcon = {
+    //     url: "/static/Assets/core/images/map_marker_2.svg",
+    //     scaledSize: new google.maps.Size(30, 30)
+    // };
+
+    // const addressElement = document.getElementById("location-address");
+    // addressElement.addEventListener('keydown', function(e) {
+    //     if(e.keyCode === 13) {
+    //         e.preventDefault();
+    //     }
+    // })
+
+    // const searchBox = new google.maps.places.SearchBox(addressElement);
+    // map.addListener("bounds_changed", function() {
+    //     searchBox.setBounds(map.getBounds());
+    // });
+
+    // marker = new google.maps.Marker({
+    //     map: map,
+    //     draggable: true,
+    //     // title: place.name,
+    //     position: {
+    //         lat: lat,
+    //         lng: lng
+    //     },
+    //     icon: markerIcon,
+    // })
+
+    // function setMapOnAll(map) {
+    //     for (var i = 0; i < markers.length; i++) {
+    //         markers[i].setMap(map);
+    //     }
+    // }
+
+    // function clearMarkers() {
+    //     setMapOnAll(null);
+    // }
+
+    // searchBox.addListener("places_changed", function() {
+    //     var places = searchBox.getPlaces();
+    //     clearMarkers();
+    //     if (places.length == 0) {
+    //         return;
+    //     } // Clear out the old markers.
+    //     var bounds = new google.maps.LatLngBounds();
+    //     places.forEach(function(place) {
+    //         if (!place.geometry) {
+    //             console.log("Returned place contains no geometry");
+    //             return;
+    //         }
+    //         markerIcon = {
+    //             url: "/static/Assets/core/images/map_marker_2.svg",
+    //             scaledSize: new google.maps.Size(30, 30)
+    //         };
+    //         marker = new google.maps.Marker({
+    //             map: map,
+    //             draggable: true,
+    //             title: place.name,
+    //             position: place.geometry.location,
+    //             icon: markerIcon,
+    //         })
+    //         clearMarkers();
+    //         markers.push(marker);
+    //         if (place.geometry.viewport) {
+    //             // Only geocodes have viewport.
+    //             bounds.union(place.geometry.viewport);
+    //         } else {
+    //             bounds.extend(place.geometry.location);
+    //         }
+    //         lat = marker.getPosition().lat();
+    //         lng = marker.getPosition().lng();
+    //     });
+    //     map.fitBounds(bounds);
+    // });
 }

@@ -56,7 +56,7 @@
                     <div>
                         <span>${{obj.price|floatformat:"2g"}}</span>
                         <div class="property-actions">
-                            <img src="{% static 'Assets/core/images/promotion_logo.svg' %}" onclick="openBoostAdModal('boost-ad', '{{obj.id}}')" alt="Promotion Button" />
+                            <img src="{% if obj.is_boosted %}{% static 'Assets/core/images/promotion_logo_on.svg' %}{% else %}{% static 'Assets/core/images/promotion_logo.svg' %}{% endif %}" {% if obj.is_boosted %}{% else %}onclick="openBoostAdModal('boost-ad', '{{obj.id}}')"{% endif %} alt="Promotion Button" />
                             <img src="{% static 'Assets/core/images/reserved_logo.svg' %}" alt="Reserved Button" />
                             <img src="{% static 'Assets/core/images/editing_logo.svg' %}" id="edit-listing-btn" onclick="toggleListingView(event, {id:'{{obj.id}}', created_at:'{{obj.created_at}}', description:`{{obj.description}}`, criteria:'{{obj.criteria}}', price:'{{obj.price}}', property_type:'{{obj.property_type}}', land:'{{obj.land}}', construction:'{{obj.construction}}', neighbourhood:'{{obj.neighbourhood}}', bedrooms:'{{obj.bedrooms}}', bathrooms:'{{obj.bathrooms}}', city:'{{obj.city}}', parking:'{{obj.parking}}', antiquity:'{{obj.antiquity}}', location:'{{obj.location}}', ameneties:'{{obj.ameneties}}', images: {{obj.images}}})" alt="Editing Button" />
                             <img src="{% static 'Assets/core/images/delete_logo.svg' %}" onclick="openDelListingModal('del-listing', '{{obj.id}}')" alt="Delete Button" />

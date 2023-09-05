@@ -112,7 +112,6 @@ input[name="criteria_radio"]:checked + .radio-label{
     font-weight: 700;
     background-color: #8DC63F;
     border: 0.5px solid #8DC63F;
-    border-radius: 2px;
 }
 
 .criteria-radio-group {
@@ -135,7 +134,7 @@ input[name="criteria_radio"]:checked + .radio-label{
     height: 100%;
     background-color: #FFFFFF;
     border: 0.5px solid #9A9A9A;
-    border-radius: 2px;
+    border-radius: 3px;
     transition: all ease .2s;
     cursor: pointer;
 }
@@ -168,6 +167,7 @@ input[name="criteria_radio"]:checked + .radio-label{
 
 .property-type-checkbox-group .form-check .form-check-label {
     font-weight: 300;
+    font-family: 'Calibri Light', 'Calibri', sans-serif;
     font-size: 1rem;
     line-height: 1rem;
     color: #000000;
@@ -209,7 +209,7 @@ input[name="criteria_radio"]:checked + .radio-label{
     height: 25px;
     background-color: #FFFFFF;
     border: 0.5px solid #9A9A9A;
-    border-radius: 2px;
+    border-radius: 3px;
     padding: 0px 8px;
     font-size: .875rem;
 }
@@ -252,7 +252,7 @@ input[name="criteria_radio"]:checked + .radio-label{
     line-height: .875rem;
     color: #000000;
     border: 0.5px solid #D2D2D2;
-    border-radius: 2px;
+    border-radius: 3px;
     transition: all ease-in-out .2s;
 }
 

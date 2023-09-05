@@ -389,7 +389,7 @@
                                     <p>Location</p>
                                     <div class="search-location">
                                         <input class="general-input" type="text" placeholder="Aires del batan"
-                                            name="location" required />
+                                            name="location" id="location-address" />
                                         <svg width="21" height="21" viewBox="0 0 21 21" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path
@@ -398,7 +398,7 @@
                                         </svg>
                                     </div>
                                     <small class="location-msg input-error-msg"></small>
-                                    <div class="map-view">
+                                    <div class="map-view" id="map">
                                         <iframe
                                             src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13612.269782401412!2d74.2686174!3d31.4673308!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3919051533e95177%3A0xd55e06f9aed17bb8!2sCrymzee%20Networks%20(Pvt.)%20Ltd.!5e0!3m2!1sen!2s!4v1680426688403!5m2!1sen!2s"
                                             style="border:0;" allowfullscreen="" loading="lazy"
@@ -407,9 +407,7 @@
                                     </div>
                                 </div>
                                 <div class="amenety-input">
-                                    <p>Ameneties <span>&nbsp; &nbsp; &nbsp;Seperate with a coma after each
-                                            amenity</span>
-                                    </p>
+                                    <p>Ameneties <span>&nbsp; &nbsp; &nbsp;Seperate with a coma after each amenity</span></p>
                                     <div class="tags-container">
                                         <div class="tags-input">
                                             <div class="tags"></div>
@@ -444,10 +442,15 @@
     <!-- Boost Ad Modal -->
     {% include '../modals/boost-ad-modal.html' %}
 
+    <!-- {{key|json_script:"key"}} -->
+
     {% endblock %}
 </body>
 {% block scripts %}
+<!-- <script>
+    let key = JSON.parse(document.getElementById('key').textContent);
+</script> -->
 <script src="{% static 'Assets/core/js/settings.js' %}"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key={{key}}&callback=initMap"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{key}}&libraries=places&callback=initMap"></script>
 {% endblock %}
 </html>

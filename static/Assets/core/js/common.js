@@ -335,9 +335,6 @@ function getLatLngFromString(locationString) {
     if (match && match.length === 3) {
         const latitude = parseFloat(match[1]);
         const longitude = parseFloat(match[2]);
-      
-        // console.log("Latitude:", latitude);
-        // console.log("Longitude:", longitude);
         return {lat: latitude, lng: longitude};
     } else {
         console.log("Could not extract latitude and longitude.");
