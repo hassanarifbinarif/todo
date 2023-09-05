@@ -418,7 +418,7 @@ async function toggleListingView(event, data) {
         let latLng = getLatLngFromString(data.location);
         lat = latLng.lat;
         lng = latLng.lng;
-        await initMap(lat, lng);
+        // await initMap(lat, lng);
         form.querySelector('#publish-property-btn').querySelector('.btn-text').innerText = 'Publish';
         form.querySelector('.update-error-msg').classList.remove('active');
         listingEditView.classList.remove('hide');
@@ -785,3 +785,49 @@ async function initMap(lat=null, lng=null) {
     //     map.fitBounds(bounds);
     // });
 }
+
+
+// const phoneInuput = document.querySelector("#mobile-number");
+// var phone = window.intlTelInput(document.querySelector("#mobile-number"), {
+//     separateDialCode: true,
+//     initialCountry: "auto",
+//     customPlaceholder: '000 00 000',
+//     showFlags:false,
+//     geoIpLookup: function(success, failure) {
+//         let headers = {
+//             Accept: "application/json",
+//         };
+//         requestAPI("https://ipinfo.io", null, headers, 'GET').then(function(response) {
+//             if (!response.ok) {
+//                 throw new Error("Network response was not ok");
+//             }
+//             return response.json();
+//         }).then(function(resp) {
+//             var countryCode = (resp && resp.country) ? resp.country : "us";
+//             console.log(countryCode);
+//             success(countryCode);
+//         }).catch(function(error) {
+//             if (typeof failure === "function") {
+//                 failure(error.message);
+//             }
+//         })
+//     //   $.get("https://ipinfo.io", function() {}, "jsonp").always(function(resp) {
+//     //     var countryCode = (resp && resp.country) ? resp.country : "us";
+//     //     success(countryCode);
+//     //   });
+//     },
+//     hiddenInput: "full",
+//     // utilsScript: "{% static 'assets/intlTelInput/utils.js' %}"
+// });
+// document.querySelector("#mobile-number").addEventListener("input", function() {
+//     var full_number = phone.getNumber(intlTelInputUtils.numberFormat.INTERNATIONAL);
+//     full_number = full_number.replaceAll(" ", "");
+//     full_number = full_number.replaceAll("-", "");
+//     document.querySelector("input[name='phone'").value = full_number;
+// });
+// document.querySelector("#mobile-number").addEventListener("paste", function() {
+//     var full_number = phone.getNumber(intlTelInputUtils.numberFormat.INTERNATIONAL);
+//     full_number = full_number.replaceAll(" ", "");
+//     full_number = full_number.replaceAll("-", "");
+//     document.querySelector("input[name='phone'").value = full_number;
+// });

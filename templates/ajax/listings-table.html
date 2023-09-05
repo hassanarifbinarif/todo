@@ -29,14 +29,20 @@
             <td></td>
             <td>
                 <div>
-                    {% if obj.is_published %}
-                    <img src="{% static 'Assets/core/images/promotion_logo_on.svg' %}" alt="promotion" />
+                    {% if obj.is_boosted %}
+                    <img src="{% static 'Assets/core/images/promotion_logo_on.svg' %}" class="cursor-pointer" onclick="boostAd(event, '{{obj.id}}', false)" alt="promotion" />
                     {% else %}
-                    <img src="{% static 'Assets/core/images/promotion_logo.svg' %}" alt="promotion" />
+                    <img src="{% static 'Assets/core/images/promotion_logo.svg' %}" class="cursor-pointer" onclick="boostAd(event, '{{obj.id}}', true)" alt="promotion" />
                     {% endif %}
-                    <img src="{% static 'Assets/core/images/reserved_logo.svg' %}" alt="reserved" />
-                    <img src="{% static 'Assets/core/images/editing_logo.svg' %}" onclick="toggleListingView(event, {id:'{{obj.id}}', created_at:'{{obj.created_at}}', description:`{{obj.description}}`, criteria:'{{obj.criteria}}', price:'{{obj.price}}', property_type:'{{obj.property_type}}', land:'{{obj.land}}', construction:'{{obj.construction}}', neighbourhood:'{{obj.neighbourhood}}', bedrooms:'{{obj.bedrooms}}', bathrooms:'{{obj.bathrooms}}', city:'{{obj.city}}', parking:'{{obj.parking}}', antiquity:'{{obj.antiquity}}', location:'{{obj.location}}', ameneties:'{{obj.ameneties}}', images: {{obj.images}}});" id="edit-listing-btn" alt="edit" />
-                    <img src="{% static 'Assets/core/images/delete_logo.svg' %}" onclick="openDelListingModal('del-listing', '{{obj.id}}')" alt="delete" />
+
+                    {% if obj.is_reserved %}
+                    <img src="{% static 'Assets/core/images/reserved_logo_on.svg' %}" class="cursor-pointer" onclick="reserveListing(event, '{{obj.id}}', false)" alt="promotion" alt="reserved" />
+                    {% else %}
+                    <img src="{% static 'Assets/core/images/reserved_logo.svg' %}" class="cursor-pointer" onclick="reserveListing(event, '{{obj.id}}', true)" alt="reserved" />
+                    {% endif %}
+                    
+                    <img src="{% static 'Assets/core/images/editing_logo.svg' %}" class="cursor-pointer" onclick="toggleListingView(event, {id:'{{obj.id}}', created_at:'{{obj.created_at}}', description:`{{obj.description}}`, criteria:'{{obj.criteria}}', price:'{{obj.price}}', property_type:'{{obj.property_type}}', land:'{{obj.land}}', construction:'{{obj.construction}}', neighbourhood:'{{obj.neighbourhood}}', bedrooms:'{{obj.bedrooms}}', bathrooms:'{{obj.bathrooms}}', city:'{{obj.city}}', parking:'{{obj.parking}}', antiquity:'{{obj.antiquity}}', location:'{{obj.location}}', ameneties:'{{obj.ameneties}}', images: {{obj.images}}});" id="edit-listing-btn" alt="edit" />
+                    <img src="{% static 'Assets/core/images/delete_logo.svg' %}" class="cursor-pointer" onclick="openDelListingModal('del-listing', '{{obj.id}}')" alt="delete" />
                 </div>
             </td>
         </tr>

@@ -524,6 +524,10 @@ input[name="my_ads_radio"]:checked + .radio-label{
     border-radius: 5px;
 }
 
+/* input[name="phone"] {
+    padding-left: 80px!important;
+} */
+
 .save-profile-details-btn {
     margin-top: 50px;
     width: 320px;
@@ -558,7 +562,8 @@ input[name="my_ads_radio"]:checked + .radio-label{
 
 .plan-card {
     background-color: #FFFFFF;
-    border: 0.25px solid #9A9A9A;
+    /* border: 0.25px solid #9A9A9A; */
+    border: 0.25px solid rgba(154, 154, 154, .75);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
     padding: 22px 28px;
@@ -602,6 +607,10 @@ input[name="my_ads_radio"]:checked + .radio-label{
     line-height: 1.25rem;
 }
 
+.plan-card .plan-duration .plan-period span {
+    font-family: 'Calibri Light', 'Calibri', sans-serif;
+}
+
 .plan-card .plan-features > span {
     font-weight: 700;
     font-size: 1.5rem;
@@ -617,8 +626,13 @@ input[name="my_ads_radio"]:checked + .radio-label{
     line-height: 1.25rem;
 }
 
+.plan-card .plan-features ul li {
+    font-family: 'Calibri Light', 'Calibri', sans-serif;
+}
+
 .plan-card .plan-features ul li span {
     font-weight: 700;
+    font-family: 'Calibri', sans-serif;
 }
 
 .change-plan-btn {

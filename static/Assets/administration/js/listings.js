@@ -332,3 +332,91 @@ async function deleteListingAPI(data, id) {
         return response;
     }
 }
+
+
+async function boostAd(event, id, boost=false) {
+    event.preventDefault();
+    let element = event.target;
+    let formData = new FormData();
+    formData.append('is_boosted', boost);
+    let response = await boostAdAPI(formData, id);
+    response.json().then(function(res) {
+        if (response.status == 200) {
+            if (res.data.is_boosted) {
+                element.src = '/static/Assets/core/images/promotion_logo_on.svg';
+                element.setAttribute('onclick', `boostAd(event, '${res.data.id}', false)`);
+            }
+            else {
+                element.src = '/static/Assets/core/images/promotion_logo.svg';
+                element.setAttribute('onclick', `boostAd(event, '${res.data.id}', true)`);
+            }
+        }
+        else {
+        }
+    })
+}
+
+
+async function boostAdAPI(formData, id) {
+    let token = getCookie('admin_access');
+    let headers = {
+        "Authorization": `Bearer ${token}`,
+    };
+    let response = await requestAPI(`${apiURL}/admin/listings/${id}`, formData, headers, 'PATCH');
+    if(response.status == 401) {
+        let myRes = await onAdminRefreshToken();
+        if(myRes.status == 200) {
+            return boostAdAPI(formData, id);
+        }
+        else {
+            adminLogout();
+        }
+    }
+    else {
+        return response;
+    }
+}
+
+
+async function reserveListing(event, id, reserve=false) {
+    event.preventDefault();
+    let element = event.target;
+    let formData = new FormData();
+    formData.append('is_reserved', reserve);
+    let response = await reserveListingAPI(formData, id);
+    response.json().then(function(res) {
+        if (response.status == 200) {
+            if (res.data.is_reserved) {
+                element.src = '/static/Assets/core/images/reserved_logo_on.svg';
+                element.setAttribute('onclick', `reserveListing(event, '${res.data.id}', false)`);
+            }
+            else {
+                element.src = '/static/Assets/core/images/reserved_logo.svg';
+                element.setAttribute('onclick', `reserveListing(event, '${res.data.id}', true)`);
+            }
+        }
+        else {
+        }
+    })
+}
+
+
+async function reserveListingAPI(formData, id) {
+    let token = getCookie('admin_access');
+    let headers = {
+        "Authorization": `Bearer ${token}`,
+    };
+    let response = await requestAPI(`${apiURL}/admin/listings/${id}`, formData, headers, 'PATCH');
+    if(response.status == 401) {
+        let myRes = await onAdminRefreshToken();
+        if(myRes.status == 200) {
+            return reserveListingAPI(formData, id);
+        }
+        else {
+            adminLogout();
+        }
+    }
+    else {
+        return response;
+    }
+}
