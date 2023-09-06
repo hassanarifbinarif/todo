@@ -346,11 +346,16 @@ function openBoostAdModal(modalId, id) {
 // Get User Listings
 
 async function getUserListings() {
-    listingTableContent.innerHTML = '<div class="w-100 d-flex justify-content-center align-items-center pt-2 pb-2"><span class="spinner-border spinner-border-md" style="color: #8DC63F;" role="status" aria-hidden="true"></span></div>';
+    if (isMobile) {
+        document.getElementById('listing-body').innerHTML = '<div class="w-100 d-flex justify-content-center align-items-center pt-2 pb-2"><span class="spinner-border spinner-border-md" style="color: #8DC63F;border-width: .25em!important;" role="status" aria-hidden="true"></span></div>';
+    }
+    else {
+        document.getElementById('listing-body').innerHTML = '<div class="w-100 d-flex justify-content-center align-items-center pt-2 pb-2" style="transform: translate(45vw, 10px);"><span class="spinner-border spinner-border-md" style="color: #8DC63F;border-width: .25em!important;" role="status" aria-hidden="true"></span></div>';
+    }
     let response = await requestAPI('/get-user-listings/', null, {}, 'GET');
     response.json().then(function(res) {
         if(res.success) {
-            listingTableContent.innerHTML = res.listing_data;
+            document.getElementById('listing-body').innerHTML = res.listing_data;
         }
         else {
             listingTableContent.innerHTML = '<div class="w-100 d-flex justify-content-center align-items-center pt-2 pb-2"><span class="no-record-row">No records found</span></div>';
@@ -618,7 +623,12 @@ async function removeFavourite(event, id) {
     let headers = {
         "Authorization": `Bearer ${token}`
     };
-    favouriteTableContent.innerHTML = '<div class="w-100 d-flex justify-content-center align-items-center pt-2 pb-2"><span class="spinner-border spinner-border-md" style="color: #8DC63F;" role="status" aria-hidden="true"></span></div>';
+    if (isMobile) {
+        document.getElementById('favourite-body').innerHTML = '<div class="w-100 d-flex justify-content-center align-items-center pt-2 pb-2"><span class="spinner-border spinner-border-md" style="color: #8DC63F;border-width: .25em!important;" role="status" aria-hidden="true"></span></div>';
+    }
+    else {
+        document.getElementById('favourite-body').innerHTML = '<div class="w-100 d-flex justify-content-center align-items-center pt-2 pb-2" style="transform: translate(45vw, 10px);"><span class="spinner-border spinner-border-md" style="color: #8DC63F;border-width: .25em!important;" role="status" aria-hidden="true"></span></div>';
+    }
     let response = await requestAPI(`${apiURL}/listings/favourites/${id}`, null, headers, 'DELETE');
     if(response.status == 401) {
         let myRes = await onRefreshToken();
@@ -638,10 +648,17 @@ async function removeFavourite(event, id) {
 // Get User Listings
 
 async function getUserFavouriteListings() {
+    if (isMobile) {
+        document.getElementById('favourite-body').innerHTML = '<div class="w-100 d-flex justify-content-center align-items-center pt-2 pb-2"><span class="spinner-border spinner-border-md" style="color: #8DC63F;border-width: .25em!important;" role="status" aria-hidden="true"></span></div>';
+    }
+    else {
+        document.getElementById('favourite-body').innerHTML = '<div class="w-100 d-flex justify-content-center align-items-center pt-2 pb-2" style="transform: translate(45vw, 10px);"><span class="spinner-border spinner-border-md" style="color: #8DC63F;border-width: .25em!important;" role="status" aria-hidden="true"></span></div>';
+    }
     let response = await requestAPI('/get-user-favourite-listings/', null, {}, 'GET');
     response.json().then(function(res) {
+        console.log(res);
         if(res.success) {
-            favouriteTableContent.innerHTML = res.favourite_listing_data;
+            document.getElementById('favourite-body').innerHTML = res.favourite_listing_data;
         }
         else {
             favouriteTableContent.innerHTML = '<div class="w-100 d-flex justify-content-center align-items-center pt-2 pb-2"><span class="no-record-row">No records found</span></div>';
@@ -666,7 +683,7 @@ async function boostAdForm(event, id) {
     beforeLoad(button);
     let response = await requestAPI(`${apiURL}/listings/${id}`, formData, headers, 'PATCH');
     response.json().then(function(res) {
-        console.log(res);
+        // console.log(res);
         if (response.status == 200) {
             form.removeAttribute('onsubmit');
             button.type = 'button';

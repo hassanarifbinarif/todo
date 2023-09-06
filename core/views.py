@@ -26,7 +26,8 @@ def index(request):
     try:
         loc_status, loc_response = requestAPI('GET', 'https://ipinfo.io/json', {}, {})
         lat, lng = loc_response['loc'].split(',')
-        spotlight_status, spotlight_response = requestAPI('GET', f'{django_settings.API_URL}/search-listings?location=SRID=4326;POINT ({lng} {lat})', headers, {})
+        spotlight_status, spotlight_response = requestAPI('GET', f'{django_settings.API_URL}/search-listings?is_boosted=true&location=SRID=4326;POINT ({lng} {lat})', headers, {})
+        print(spotlight_response)
         context['spotlight_properties'] = spotlight_response
     except Exception as e:
         print(e)
@@ -203,13 +204,14 @@ def get_user_listings(request):
     context = {}
     context['msg'] = None
     context['success'] = False
+    context['is_mobile'] = request.user_agent.is_mobile
     try:
         user_access_token = request.COOKIES.get('user_access_token')
         headers = {"Authorization": f'Bearer {user_access_token}'}
         status, response = requestAPI('GET', 'https://api-dev.todo.com.ec/api/listings', headers, {})
         if status == 200:
             text_template = loader.get_template('ajax/users-listing-table.html')
-            html = text_template.render({'listings':response})
+            html = text_template.render({'listings':response, 'is_mobile': context['is_mobile']})
             context['listing_data'] = html
             context['msg'] = 'Listings retrieved'
             context['success'] = True
@@ -223,13 +225,14 @@ def get_user_favourite_listings(request):
     context = {}
     context['msg'] = None
     context['success'] = False
+    context['is_mobile'] = request.user_agent.is_mobile
     try:
         user_access_token = request.COOKIES.get('user_access_token')
         headers = {"Authorization": f'Bearer {user_access_token}'}
         status, response = requestAPI('GET', 'https://api-dev.todo.com.ec/api/listings/favourites', headers, {})
         if status == 200:
             text_template = loader.get_template('ajax/users-favourite-listing-table.html')
-            html = text_template.render({'favourite_listings':response})
+            html = text_template.render({'favourite_listings':response, 'is_mobile': context['is_mobile']})
             context['favourite_listing_data'] = html
             context['msg'] = 'Favourite Listings retrieved'
             context['success'] = True

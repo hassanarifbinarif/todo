@@ -345,10 +345,12 @@ async function boostAd(event, id, boost=false) {
             if (res.data.is_boosted) {
                 element.src = '/static/Assets/core/images/promotion_logo_on.svg';
                 element.setAttribute('onclick', `boostAd(event, '${res.data.id}', false)`);
+                element.closest('tr').querySelector('.boost-field').innerText = 'YES';
             }
             else {
                 element.src = '/static/Assets/core/images/promotion_logo.svg';
                 element.setAttribute('onclick', `boostAd(event, '${res.data.id}', true)`);
+                element.closest('tr').querySelector('.boost-field').innerText = 'NO';
             }
         }
         else {
