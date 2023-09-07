@@ -520,18 +520,18 @@ async function initMap() {
         mapTypeId: google.maps.MapTypeId.ROADMAP
     });
 
-    navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const pos = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude,
-            };
-            map.setCenter(pos);
-        },
-        () => {
-            map.getCenter();
-        },
-    );
+    // navigator.geolocation.getCurrentPosition(
+    //     (position) => {
+    //       const pos = {
+    //             lat: position.coords.latitude,
+    //             lng: position.coords.longitude,
+    //         };
+    //         map.setCenter(pos);
+    //     },
+    //     () => {
+    //         map.getCenter();
+    //     },
+    // );
 
     const addressElement = document.getElementById("location-address");
     addressElement.addEventListener('keydown', function(e) {
@@ -578,7 +578,12 @@ async function initMap() {
                 position: place.geometry.location,
                 icon: markerIcon,
             })
-            clearMarkers();
+            lat = marker.getPosition().lat();
+            lng = marker.getPosition().lng();
+            google.maps.event.addListener(marker, 'dragend', function(event) {
+                setLatLng(marker.getPosition().lat(), marker.getPosition().lng());
+            });
+            // clearMarkers();
             markers.push(marker);
             if (place.geometry.viewport) {
                 // Only geocodes have viewport.
@@ -609,10 +614,17 @@ function createMarkers(map, lat, lng) {
         draggable: true,
         animation: google.maps.Animation.DROP
     });
+    google.maps.event.addListener(marker, 'dragend', function(event) {
+        setLatLng(marker.getPosition().lat(), marker.getPosition().lng());
+    });
     markers.push(marker);
     map.setCenter(markers[0].position);
 }
 
+function setLatLng(newLat, newLng) {
+    lat = newLat;
+    lng = newLng;
+}
 
 function deleteMarkers() {
     for (let i = 0; i < markers.length; i++) {
