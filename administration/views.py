@@ -32,6 +32,7 @@ def listings(request):
     except Exception as e:
         print(e)
     context['active_page'] = 'listings'
+    context['key'] = django_settings.GOOGLE_MAPS_API_KEY
     return render(request, 'administration_templates/listings.html', context)
 
 

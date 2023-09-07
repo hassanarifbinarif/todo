@@ -356,6 +356,26 @@ async function getUserListings() {
     response.json().then(function(res) {
         if(res.success) {
             document.getElementById('listing-body').innerHTML = res.listing_data;
+            let checkedListings = document.querySelectorAll('.listing-checkbox-input');
+
+            if(checkedListings) {
+                checkedListings.forEach((checkbox) => {
+                    checkbox.addEventListener('change', function() {
+                        let checkedCount = 0;
+                        checkedListings.forEach((checkbox) => {
+                            if(checkbox.checked) {
+                                checkedCount++;
+                            }
+                        })
+                        if(checkedCount > 0) {
+                            document.querySelector('.send-col').classList.remove('hide');
+                        }
+                        else {
+                            document.querySelector('.send-col').classList.add('hide');
+                        }
+                    })
+                })
+            }
         }
         else {
             listingTableContent.innerHTML = '<div class="w-100 d-flex justify-content-center align-items-center pt-2 pb-2"><span class="no-record-row">No records found</span></div>';
@@ -370,9 +390,15 @@ let baseView = document.querySelector('.my-ads-card');
 let listingEditView = document.querySelector('.listing-edit-view');
 let lat;
 let lng;
+let del_images = [];
+let imageArray = [];
 
 async function toggleListingView(event, data) {
     let element = event.currentTarget;
+    del_images = [];
+    imageArray = [];
+    deleteMarkers();
+
     if(element.id == 'edit-listing-btn' && listingEditView.classList.contains('hide')) {
 
         // Populating fields in edit listing UI when edit button is clicked on a listing row
@@ -400,7 +426,7 @@ async function toggleListingView(event, data) {
         form.querySelector('input[name="city"]').value = data.city;
         form.querySelector('input[name="parking"]').value = data.parking;
         form.querySelector('input[name="antiquity"]').value = data.antiquity;
-        form.querySelector('input[name="location"]').value = data.location;
+        // form.querySelector('input[name="location"]').value = data.location;
         document.querySelectorAll('.tag').forEach(function(tag) {
             tag.parentNode.removeChild(tag);
         })
@@ -416,14 +442,24 @@ async function toggleListingView(event, data) {
         })
         data.images.forEach((image) => {
             let imageTag = `<div class="uploaded-image">
-                                <img src="${image.image}" alt="property image" />
+                                <svg class="del-img-btn" onclick="delPropertyImage(event);" width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_4674_1683)">
+                                        <path d="M15.4999 2.58301C8.357 2.58301 2.58325 8.35676 2.58325 15.4997C2.58325 22.6426 8.357 28.4163 15.4999 28.4163C22.6428 28.4163 28.4166 22.6426 28.4166 15.4997C28.4166 8.35676 22.6428 2.58301 15.4999 2.58301ZM21.9583 20.1368L20.137 21.958L15.4999 17.3209L10.8628 21.958L9.04159 20.1368L13.6787 15.4997L9.04159 10.8626L10.8628 9.04134L15.4999 13.6784L20.137 9.04134L21.9583 10.8626L17.3212 15.4997L21.9583 20.1368Z" fill="#FC0909"/>
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_4674_1683">
+                                            <rect width="31" height="31" fill="white"/>
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                                <img src="${image.image}" data-id="${image.id}" alt="property image" />
                             </div>`;
             imageContainer.insertAdjacentHTML('afterbegin', imageTag);
         });
         let latLng = getLatLngFromString(data.location);
         lat = latLng.lat;
         lng = latLng.lng;
-        // await initMap(lat, lng);
+        createMarkers(map, lat, lng);
         form.querySelector('#publish-property-btn').querySelector('.btn-text').innerText = 'Publish';
         form.querySelector('.update-error-msg').classList.remove('active');
         listingEditView.classList.remove('hide');
@@ -431,6 +467,7 @@ async function toggleListingView(event, data) {
     else if(element.id == 'back-btn' && baseView.classList.contains('hide')) {
         listingEditView.classList.add('hide');
         baseView.classList.remove('hide');
+        listingEditView.querySelector('form').reset();
     }
 }
 
@@ -439,7 +476,6 @@ async function toggleListingView(event, data) {
 
 let imageContainer = document.getElementById("uploaded-image-container");
 let imageInput = document.getElementById("image-input");
-let imageArray = [];
 
 
 // Previewing and inserting images in array on upload
@@ -453,27 +489,35 @@ imageInput.addEventListener("change", function () {
 });
 
 function previewImages(imageFile) {
-    let image = `<div class="uploaded-image">
+    const index = imageArray.indexOf(imageFile);
+    let image = `<div class="uploaded-image" data-index="${index}">
+                    <svg class="del-img-btn" onclick="delPropertyImage(event);" width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_4674_1683)">
+                            <path d="M15.4999 2.58301C8.357 2.58301 2.58325 8.35676 2.58325 15.4997C2.58325 22.6426 8.357 28.4163 15.4999 28.4163C22.6428 28.4163 28.4166 22.6426 28.4166 15.4997C28.4166 8.35676 22.6428 2.58301 15.4999 2.58301ZM21.9583 20.1368L20.137 21.958L15.4999 17.3209L10.8628 21.958L9.04159 20.1368L13.6787 15.4997L9.04159 10.8626L10.8628 9.04134L15.4999 13.6784L20.137 9.04134L21.9583 10.8626L17.3212 15.4997L21.9583 20.1368Z" fill="#FC0909"/>
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_4674_1683">
+                                <rect width="31" height="31" fill="white"/>
+                            </clipPath>
+                        </defs>
+                    </svg>
                     <img src="${URL.createObjectURL(imageFile)}" alt="property image" />
                 </div>`;
     imageContainer.insertAdjacentHTML('afterbegin', image);
 }
 
-{/* <svg class="del-img-btn" onclick="delPropertyImage(event);" width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <g clip-path="url(#clip0_4674_1683)">
-        <path d="M15.4999 2.58301C8.357 2.58301 2.58325 8.35676 2.58325 15.4997C2.58325 22.6426 8.357 28.4163 15.4999 28.4163C22.6428 28.4163 28.4166 22.6426 28.4166 15.4997C28.4166 8.35676 22.6428 2.58301 15.4999 2.58301ZM21.9583 20.1368L20.137 21.958L15.4999 17.3209L10.8628 21.958L9.04159 20.1368L13.6787 15.4997L9.04159 10.8626L10.8628 9.04134L15.4999 13.6784L20.137 9.04134L21.9583 10.8626L17.3212 15.4997L21.9583 20.1368Z" fill="#FC0909"/>
-    </g>
-    <defs>
-        <clipPath id="clip0_4674_1683">
-            <rect width="31" height="31" fill="white"/>
-        </clipPath>
-    </defs>
-</svg> */}
 
 function delPropertyImage(event) {
     let imageElement = event.currentTarget.nextElementSibling;
     let parentElement = imageElement.parentNode;
-    let index = Array.from(parentElement.parentNode.children).indexOf(parentElement);
+    let index;
+    if(imageElement.hasAttribute('data-id')) {
+        del_images.push(imageElement.getAttribute('data-id'));
+        index = Array.from(parentElement.parentNode.children).indexOf(parentElement);
+    }
+    else {
+        index = parentElement.getAttribute('data-index'); 
+    }
     parentElement.remove();
     imageArray.splice(index, 1);
 }
@@ -560,9 +604,14 @@ async function updateListing(event, id) {
         let formData = new FormData(form);
         let tagText = tags.map((tag) => tag.querySelector('span').innerText).join(',');
         formData.append('ameneties', tagText);
+        formData.delete('location');
+        formData.append('location', JSON.stringify({"type": "point", "coordinates": [lat, lng]}));
         formData.delete('images');
         imageArray.forEach((file) => {
             formData.append('images', file);
+        });
+        del_images.forEach((imageId) => {
+            formData.append('del_images', imageId);
         });
         beforeLoad(button);
         let response = await updateListingAPI(formData, id);
@@ -571,6 +620,8 @@ async function updateListing(event, id) {
             errorMsg.classList.remove('active');
             errorMsg.innerText = '';
             getUserListings();
+            del_images = [];
+            imageArray = [];
         }
         else if(response.status == 404) {
             afterLoad(button, 'Not Found');
@@ -688,10 +739,11 @@ async function boostAdForm(event, id) {
             form.removeAttribute('onsubmit');
             button.type = 'button';
             afterLoad(button, 'Boosted');
+            getUserListings();
             setTimeout(() => {
                 afterLoad(button, buttonText);
                 document.querySelector(`.boost-ad`).click();
-            }, 2000);
+            }, 1000);
         }
         else {
             form.removeAttribute('onsubmit');
@@ -706,101 +758,168 @@ async function boostAdForm(event, id) {
 }
 
 
+async function reserveListing(event, id, reserve=false) {
+    event.preventDefault();
+    let element = event.target;
+    let formData = new FormData();
+    formData.append('is_reserved', reserve);
+    let response = await reserveListingAPI(formData, id);
+    response.json().then(function(res) {
+        if (response.status == 200) {
+            if (res.data.is_reserved) {
+                element.src = '/static/Assets/core/images/reserved_logo_on.svg';
+                element.setAttribute('onclick', `reserveListing(event, '${res.data.id}', false)`);
+            }
+            else {
+                element.src = '/static/Assets/core/images/reserved_logo.svg';
+                element.setAttribute('onclick', `reserveListing(event, '${res.data.id}', true)`);
+            }
+        }
+        else {
+        }
+    })
+}
+
+
+async function reserveListingAPI(formData, id) {
+    let token = getAccessTokenFromCookie();
+    let headers = {
+        "Authorization": `Bearer ${token}`,
+    };
+    let response = await requestAPI(`${apiURL}/listings/${id}`, formData, headers, 'PATCH');
+    if(response.status == 401) {
+        let myRes = await onRefreshToken();
+        if(myRes.status == 200) {
+            return reserveListingAPI(formData, id);
+        }
+        else {
+            adminLogout();
+        }
+    }
+    else {
+        return response;
+    }
+}
+
+
 let marker;
 let markers = [];
+let map;
 
-
-async function initMap(lat=null, lng=null) {
-    // console.log(lat, lng);
-    // const { Map } = await google.maps.importLibrary("maps");
+async function initMap() {
+    const { Map } = await google.maps.importLibrary("maps");
   
-    // map = new Map(document.getElementById("map"), {
-    //     center: { lat: lat, lng: lng },
-    //     zoom: 8,
-    //     disableDefaultUI: true,
-    //     mapTypeId: 'roadmap',
-    // });
+    map = new Map(document.getElementById("map"), {
+        center: { lat: 31.4, lng: 74.368 },
+        zoom: 8,
+        disableDefaultUI: true,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+
+    navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const pos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude,
+            };
+            map.setCenter(pos);
+        },
+        () => {
+            map.getCenter();
+        },
+    );
+
+    const addressElement = document.getElementById("location-address");
+    addressElement.addEventListener('keydown', function(e) {
+        if(e.keyCode === 13) {
+            e.preventDefault();
+        }
+    })
+
+    const searchBox = new google.maps.places.SearchBox(addressElement);
+    map.addListener("bounds_changed", function() {
+        searchBox.setBounds(map.getBounds());
+    });
+
+    function setMapOnAll(map) {
+        for (var i = 0; i < markers.length; i++) {
+            markers[i].setMap(map);
+        }
+    }
+
+    function clearMarkers() {
+        setMapOnAll(null);
+    }
+
+    searchBox.addListener("places_changed", function() {
+        var places = searchBox.getPlaces();
+        clearMarkers();
+        if (places.length == 0) {
+            return;
+        } // Clear out the old markers.
+        var bounds = new google.maps.LatLngBounds();
+        places.forEach(function(place) {
+            if (!place.geometry) {
+                console.log("Returned place contains no geometry");
+                return;
+            }
+            markerIcon = {
+                url: "/static/Assets/core/images/map_marker_2.svg",
+                scaledSize: new google.maps.Size(30, 30)
+            };
+            marker = new google.maps.Marker({
+                map: map,
+                draggable: true,
+                title: place.name,
+                position: place.geometry.location,
+                icon: markerIcon,
+            })
+            clearMarkers();
+            markers.push(marker);
+            if (place.geometry.viewport) {
+                // Only geocodes have viewport.
+                bounds.union(place.geometry.viewport);
+            } else {
+                bounds.extend(place.geometry.location);
+            }
+            lat = marker.getPosition().lat();
+            lng = marker.getPosition().lng();
+        });
+        map.fitBounds(bounds);
+    });
 
     // let response = await requestAPI(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${key}`);
     // console.log(response);
     // response.json().then(function(res) {
     //     console.log(res);
     // })
+}
 
-    // const markerIcon = {
-    //     url: "/static/Assets/core/images/map_marker_2.svg",
-    //     scaledSize: new google.maps.Size(30, 30)
-    // };
 
-    // const addressElement = document.getElementById("location-address");
-    // addressElement.addEventListener('keydown', function(e) {
-    //     if(e.keyCode === 13) {
-    //         e.preventDefault();
-    //     }
-    // })
+function createMarkers(map, lat, lng) {
+    const markerIcon = {
+        url: "/static/Assets/core/images/map_marker_2.svg",
+        scaledSize: new google.maps.Size(30, 30)
+    };
+    const marker = new google.maps.Marker({
+        position: {
+            lat: lat,
+            lng: lng,
+        },
+        map,
+        icon: markerIcon,
+        animation: google.maps.Animation.DROP
+    });
+    markers.push(marker);
+    map.setCenter(markers[0].position);
+}
 
-    // const searchBox = new google.maps.places.SearchBox(addressElement);
-    // map.addListener("bounds_changed", function() {
-    //     searchBox.setBounds(map.getBounds());
-    // });
 
-    // marker = new google.maps.Marker({
-    //     map: map,
-    //     draggable: true,
-    //     // title: place.name,
-    //     position: {
-    //         lat: lat,
-    //         lng: lng
-    //     },
-    //     icon: markerIcon,
-    // })
-
-    // function setMapOnAll(map) {
-    //     for (var i = 0; i < markers.length; i++) {
-    //         markers[i].setMap(map);
-    //     }
-    // }
-
-    // function clearMarkers() {
-    //     setMapOnAll(null);
-    // }
-
-    // searchBox.addListener("places_changed", function() {
-    //     var places = searchBox.getPlaces();
-    //     clearMarkers();
-    //     if (places.length == 0) {
-    //         return;
-    //     } // Clear out the old markers.
-    //     var bounds = new google.maps.LatLngBounds();
-    //     places.forEach(function(place) {
-    //         if (!place.geometry) {
-    //             console.log("Returned place contains no geometry");
-    //             return;
-    //         }
-    //         markerIcon = {
-    //             url: "/static/Assets/core/images/map_marker_2.svg",
-    //             scaledSize: new google.maps.Size(30, 30)
-    //         };
-    //         marker = new google.maps.Marker({
-    //             map: map,
-    //             draggable: true,
-    //             title: place.name,
-    //             position: place.geometry.location,
-    //             icon: markerIcon,
-    //         })
-    //         clearMarkers();
-    //         markers.push(marker);
-    //         if (place.geometry.viewport) {
-    //             // Only geocodes have viewport.
-    //             bounds.union(place.geometry.viewport);
-    //         } else {
-    //             bounds.extend(place.geometry.location);
-    //         }
-    //         lat = marker.getPosition().lat();
-    //         lng = marker.getPosition().lng();
-    //     });
-    //     map.fitBounds(bounds);
-    // });
+function deleteMarkers() {
+    for (let i = 0; i < markers.length; i++) {
+        markers[i].setMap(null);
+    }
+    markers = [];
 }
 
 

@@ -14,6 +14,7 @@
 
     <link rel="stylesheet" href="{% static 'Assets/administration/css/listings.css' %}" />
     <link rel="stylesheet" href="{% static 'Assets/administration/css/del_listing_modal.css' %}" />
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
     {% endblock %}
 
@@ -89,7 +90,7 @@
                             <div class="uploaded-image-container" id="uploaded-image-container">
                                 <input type="file" multiple accept="image/jpeg, image/jpg, image/png, image/gif"
                                     name="images" id="image-input" />
-                                <label for="image-input" class="image-input-label hide">
+                                <label for="image-input" class="image-input-label">
                                     <svg width="29" height="29" viewBox="0 0 29 29" fill="none"
                                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                         <rect opacity="0.25" width="29" height="29" fill="url(#pattern0)" />
@@ -244,7 +245,7 @@
                                     <p>Location</p>
                                     <div class="search-location">
                                         <input class="general-input" type="text" placeholder="Aires del batan"
-                                            name="location" required />
+                                            name="location" id="location-address" />
                                         <svg width="21" height="21" viewBox="0 0 21 21" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path
@@ -252,12 +253,12 @@
                                                 fill="#D2D2D2" />
                                         </svg>
                                     </div>
-                                    <div class="map-view">
-                                        <iframe
+                                    <div class="map-view" id="map">
+                                        <!-- <iframe
                                             src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13612.269782401412!2d74.2686174!3d31.4673308!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3919051533e95177%3A0xd55e06f9aed17bb8!2sCrymzee%20Networks%20(Pvt.)%20Ltd.!5e0!3m2!1sen!2s!4v1680426688403!5m2!1sen!2s"
                                             style="border:0;" allowfullscreen="" loading="lazy"
                                             referrerpolicy="no-referrer-when-downgrade">
-                                        </iframe>
+                                        </iframe> -->
                                     </div>
                                 </div>
                                 <div class="amenety-input">
@@ -284,6 +285,7 @@
                                     <span class="btn-text">Publish</span>
                                 </button>
                             </div>
+                            <small class="update-error-msg input-error-msg"></small>
                         </div>
                     </form>
                 </div>
@@ -298,6 +300,7 @@
 </body>
 {% block scripts %}
 <script src="{% static 'Assets/administration/js/listings.js' %}"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{key}}&libraries=places&callback=initMap"></script>
 {% endblock %}
 
 </html>
