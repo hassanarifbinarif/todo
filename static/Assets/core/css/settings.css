@@ -1196,6 +1196,10 @@ select {
     margin-left: auto;
 }
 
+.gmnoprint {
+    display: none!important;
+}
+
 
 @media (max-width: 768px) {
     .add-property-main-content {

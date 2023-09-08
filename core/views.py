@@ -27,7 +27,6 @@ def index(request):
         loc_status, loc_response = requestAPI('GET', 'https://ipinfo.io/json', {}, {})
         lat, lng = loc_response['loc'].split(',')
         spotlight_status, spotlight_response = requestAPI('GET', f'{django_settings.API_URL}/search-listings?is_boosted=true&location=SRID=4326;POINT ({lng} {lat})', headers, {})
-        print(spotlight_response)
         context['spotlight_properties'] = spotlight_response
     except Exception as e:
         print(e)
@@ -185,13 +184,13 @@ def settings(request):
         headers = {"Authorization": f"Bearer {access_token}"}
         status, response = requestAPI('GET', f'{django_settings.API_URL}/me', headers, {})
         if status == 200:
-            # context['profile_info'] = response
-            # plan_status, plan_response = requestAPI('GET', f'{django_settings.API_URL}/plans/list', headers, {})
-            # context['plan_list'] = plan_response
+            context['profile_info'] = response
+            plan_status, plan_response = requestAPI('GET', f'{django_settings.API_URL}/plans/list', headers, {})
+            context['plan_list'] = plan_response
             listing_status, listing_response = requestAPI('GET', f'{django_settings.API_URL}/listings', headers, {})
             context['listings'] = listing_response
-            # favourite_listing_status, favourite_listing_response = requestAPI('GET', f'{django_settings.API_URL}/listings/favourites', headers, {})
-            # context['favourite_listings'] = favourite_listing_response
+            favourite_listing_status, favourite_listing_response = requestAPI('GET', f'{django_settings.API_URL}/listings/favourites', headers, {})
+            context['favourite_listings'] = favourite_listing_response
     except Exception as e:
         print(e)
     context['login'] = True

@@ -328,6 +328,7 @@ let marker;
 let markers = [];
 let lat;
 let lng;
+let bounds;
 
 async function initMap() {
     const { Map } = await google.maps.importLibrary("maps");
@@ -379,7 +380,7 @@ async function initMap() {
         if (places.length == 0) {
             return;
         } // Clear out the old markers.
-        var bounds = new google.maps.LatLngBounds();
+        bounds = new google.maps.LatLngBounds();
         places.forEach(function(place) {
             if (!place.geometry) {
                 console.log("Returned place contains no geometry");
@@ -396,6 +397,11 @@ async function initMap() {
                 position: place.geometry.location,
                 icon: markerIcon,
             })
+            lat = marker.getPosition().lat();
+            lng = marker.getPosition().lng();
+            google.maps.event.addListener(marker, 'dragend', function(event) {
+                setLatLng(marker.getPosition().lat(), marker.getPosition().lng());
+            });
             clearMarkers();
             markers.push(marker);
             if (place.geometry.viewport) {
@@ -404,9 +410,12 @@ async function initMap() {
             } else {
                 bounds.extend(place.geometry.location);
             }
-            lat = marker.getPosition().lat();
-            lng = marker.getPosition().lng();
         });
         map.fitBounds(bounds);
     });
+}
+
+function setLatLng(newLat, newLng) {
+    lat = newLat;
+    lng = newLng;
 }

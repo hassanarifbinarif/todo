@@ -879,7 +879,7 @@ async function initMap() {
             google.maps.event.addListener(marker, 'dragend', function(event) {
                 setLatLng(marker.getPosition().lat(), marker.getPosition().lng());
             });
-            // clearMarkers();
+            clearMarkers();
             markers.push(marker);
             if (place.geometry.viewport) {
                 // Only geocodes have viewport.
