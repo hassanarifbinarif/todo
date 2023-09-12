@@ -157,6 +157,11 @@
 
 .back-btn {
     margin-bottom: 20px;
+    padding-right: 2px;
+}
+
+.back-btn:hover {
+    background-color: #E2E2E2;
 }
 
 .add-property-card {

@@ -24,6 +24,9 @@ def index(request):
         except Exception as e:
             print(e)
     try:
+        search_status, search_response = requestAPI('GET', f'{django_settings.API_URL}/search-listings?perPage=1', {}, {})
+        print(search_response)
+        context['total_properties'] = search_response['pagination']['total']
         loc_status, loc_response = requestAPI('GET', 'https://ipinfo.io/json', {}, {})
         lat, lng = loc_response['loc'].split(',')
         spotlight_status, spotlight_response = requestAPI('GET', f'{django_settings.API_URL}/search-listings?is_boosted=true&location=SRID=4326;POINT ({lng} {lat})', headers, {})
@@ -98,9 +101,6 @@ def get_search_properties(request):
                 request_data['pagination']['next_next_page_number'] = next_next_page_number
         request_data['pagination']['starting_record'] = (request_data['pagination']['currentPage'] - 1) * request_data['pagination']['perPage'] + 1
         request_data['pagination']['ending_record'] = min(request_data['pagination']['starting_record'] + request_data['pagination']['perPage'] - 1, request_data['pagination']['count'])
-        # paginator = Paginator(request_data.get('data'), per_page=1)
-        # print(paginator.count)
-        # print(paginator.page_range)
         text_template = loader.get_template('ajax/property-card.html')
         html = text_template.render({'properties':request_data})
         context['property'] = html

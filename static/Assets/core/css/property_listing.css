@@ -166,6 +166,7 @@
 .property-properties {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
     gap: 20px;
 }
 
@@ -188,6 +189,7 @@
     font-size: 1rem;
     line-height: 1.25rem;
     color: #000000;
+    font-family: 'Calibri Light', 'Calibri', sans-serif;
 }
 
 /* .property-properties>table {
@@ -608,6 +610,19 @@
     justify-content: center;
     align-items: center;
     background-color: #B1B1B1;
+}
+
+
+@media (max-width: 1315px) {
+    .property-properties {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+        gap: 20px;
+    }
+
+    .property-properties .property-attribute {
+        width: 110px;
+    }
 }
 
 /* ---------------------------------------- */

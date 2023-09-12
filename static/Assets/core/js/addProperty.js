@@ -340,18 +340,18 @@ async function initMap() {
         mapTypeId: 'roadmap',
     });
 
-    navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const pos = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude,
-            };
-            map.setCenter(pos);
-        },
-        () => {
-            map.getCenter();
-        },
-    );
+    // navigator.geolocation.getCurrentPosition(
+    //     (position) => {
+    //       const pos = {
+    //             lat: position.coords.latitude,
+    //             lng: position.coords.longitude,
+    //         };
+    //         map.setCenter(pos);
+    //     },
+    //     () => {
+    //         map.getCenter();
+    //     },
+    // );
 
     const addressElement = document.getElementById("location-address");
     addressElement.addEventListener('keydown', function(e) {

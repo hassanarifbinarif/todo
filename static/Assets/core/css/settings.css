@@ -173,6 +173,8 @@ input[name="my_ads_radio"]:checked + .radio-label{
 
 .property-actions > img {
     cursor: pointer;
+    width: 20px;
+    height: 20px;
 }
 
 /* .order-select {
@@ -809,6 +811,11 @@ input[name="plan_radio"]:checked + .plan-card{
 
 .back-btn {
     margin-bottom: 20px;
+    padding-right: 2px;
+}
+
+.back-btn:hover {
+    background-color: #E2E2E2;
 }
 
 .add-property-card {
