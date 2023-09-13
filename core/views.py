@@ -204,10 +204,11 @@ def get_user_listings(request):
     context['msg'] = None
     context['success'] = False
     context['is_mobile'] = request.user_agent.is_mobile
+    request_data = json.loads(request.body.decode('utf-8'))
     try:
         user_access_token = request.COOKIES.get('user_access_token')
         headers = {"Authorization": f'Bearer {user_access_token}'}
-        status, response = requestAPI('GET', 'https://api-dev.todo.com.ec/api/listings', headers, {})
+        status, response = requestAPI('GET', f'{request_data}', headers, {})
         if status == 200:
             text_template = loader.get_template('ajax/users-listing-table.html')
             html = text_template.render({'listings':response, 'is_mobile': context['is_mobile']})
@@ -225,10 +226,11 @@ def get_user_favourite_listings(request):
     context['msg'] = None
     context['success'] = False
     context['is_mobile'] = request.user_agent.is_mobile
+    request_data = json.loads(request.body.decode('utf-8'))
     try:
         user_access_token = request.COOKIES.get('user_access_token')
         headers = {"Authorization": f'Bearer {user_access_token}'}
-        status, response = requestAPI('GET', 'https://api-dev.todo.com.ec/api/listings/favourites', headers, {})
+        status, response = requestAPI('GET', f'{request_data}', headers, {})
         if status == 200:
             text_template = loader.get_template('ajax/users-favourite-listing-table.html')
             html = text_template.render({'favourite_listings':response, 'is_mobile': context['is_mobile']})

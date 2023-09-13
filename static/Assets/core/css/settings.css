@@ -192,6 +192,7 @@ input[name="my_ads_radio"]:checked + .radio-label{
 .order-row {
     align-self: flex-end;
     position: relative;
+    width: 150px;
 }
 
 .favourite-table-container .order-row {
@@ -451,7 +452,7 @@ input[name="my_ads_radio"]:checked + .radio-label{
 .profile-image-container > img {
     width: 100%;
     height: 100%;
-    border-radius: 0px 0px 5px 5px;
+    border-radius: 5px;
 }
 
 .profile-image-container > input[type=file] {

@@ -69,6 +69,7 @@ listingOptions.forEach((option) => {
     option.addEventListener('change', function() {
         if(this.checked) {
             document.getElementById('selected-listing-order').innerText = this.nextElementSibling.innerText;
+            getUserListings(`${apiURL}/listings?ordering=${this.getAttribute('data-id')}`);
         }
     })
 })
@@ -107,6 +108,7 @@ favouriteOptions.forEach((option) => {
     option.addEventListener('change', function() {
         if(this.checked) {
             document.getElementById('selected-favourite-order').innerText = this.nextElementSibling.innerText;
+            getUserFavouriteListings(`${apiURL}/listings/favourites?ordering=${this.getAttribute('data-id')}`);
         }
     })
 })
@@ -324,7 +326,7 @@ async function deleteListing(event, id) {
     let response = await deleteListingAPI(data, id);
     if(response.status == 204) {
         afterLoad(button, "Listing Deleted");
-        getUserListings();
+        getUserListings(requiredUserListingsURL);
     }
     else if(response.status == 404) {
         afterLoad(button, "Listing not found");
@@ -369,14 +371,21 @@ function openBoostAdModal(modalId, id) {
 
 // Get User Listings
 
-async function getUserListings() {
+let requiredUserListingsURL = `${apiURL}/listings?ordering=`;
+
+async function getUserListings(url) {
     if (isMobile) {
         document.getElementById('listing-body').innerHTML = '<div class="w-100 d-flex justify-content-center align-items-center pt-2 pb-2"><span class="spinner-border spinner-border-md" style="color: #8DC63F;border-width: .25em!important;" role="status" aria-hidden="true"></span></div>';
     }
     else {
         document.getElementById('listing-body').innerHTML = '<div class="w-100 d-flex justify-content-center align-items-center pt-2 pb-2" style="transform: translate(45vw, 10px);"><span class="spinner-border spinner-border-md" style="color: #8DC63F;border-width: .25em!important;" role="status" aria-hidden="true"></span></div>';
     }
-    let response = await requestAPI('/get-user-listings/', null, {}, 'GET');
+    let token = getAccessTokenFromCookie();
+    let headers = {
+        "Authorization": `Bearer ${token}`,
+    }
+    let data = url;
+    let response = await requestAPI('/get-user-listings/', JSON.stringify(data), headers, 'POST');
     response.json().then(function(res) {
         if(res.success) {
             document.getElementById('listing-body').innerHTML = res.listing_data;
@@ -643,7 +652,7 @@ async function updateListing(event, id) {
             afterLoad(button, 'Listing Updated');
             errorMsg.classList.remove('active');
             errorMsg.innerText = '';
-            getUserListings();
+            getUserListings(requiredUserListingsURL);
             del_images = [];
             imageArray = [];
         }
@@ -715,23 +724,29 @@ async function removeFavourite(event, id) {
         }
     }
     else if(response.status == 200) {
-        getUserFavouriteListings();
+        getUserFavouriteListings(requiredUserFavouriteURL);
     }
 }
 
 
 // Get User Listings
 
-async function getUserFavouriteListings() {
+let requiredUserFavouriteURL = `${apiURL}/listings/favourites?ordering=`
+
+async function getUserFavouriteListings(url) {
     if (isMobile) {
         document.getElementById('favourite-body').innerHTML = '<div class="w-100 d-flex justify-content-center align-items-center pt-2 pb-2"><span class="spinner-border spinner-border-md" style="color: #8DC63F;border-width: .25em!important;" role="status" aria-hidden="true"></span></div>';
     }
     else {
         document.getElementById('favourite-body').innerHTML = '<div class="w-100 d-flex justify-content-center align-items-center pt-2 pb-2" style="transform: translate(45vw, 10px);"><span class="spinner-border spinner-border-md" style="color: #8DC63F;border-width: .25em!important;" role="status" aria-hidden="true"></span></div>';
     }
-    let response = await requestAPI('/get-user-favourite-listings/', null, {}, 'GET');
+    let token = getAccessTokenFromCookie();
+    let headers = {
+        "Authorization": `Bearer ${token}`,
+    }
+    let data = url;
+    let response = await requestAPI('/get-user-favourite-listings/', JSON.stringify(data), headers, 'POST');
     response.json().then(function(res) {
-        console.log(res);
         if(res.success) {
             document.getElementById('favourite-body').innerHTML = res.favourite_listing_data;
         }
@@ -763,7 +778,7 @@ async function boostAdForm(event, id) {
             form.removeAttribute('onsubmit');
             button.type = 'button';
             afterLoad(button, 'Boosted');
-            getUserListings();
+            getUserListings(requiredUserListingsURL);
             setTimeout(() => {
                 afterLoad(button, buttonText);
                 document.querySelector(`.boost-ad`).click();
