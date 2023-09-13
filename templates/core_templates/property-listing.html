@@ -220,9 +220,15 @@
                 </div>
                 <div class="contact-details">
                     <p>Contact Agent: &nbsp;&nbsp;&nbsp;<span>{{property.data.user.phone|default:"N.A"}}</span></p>
+                    {% if property.data.user.phone %}
                     <a href="http://wa.me/{{property.data.user.phone}}" target="_blank">
                         <button>Schedule a visit</button>
                     </a>
+                    {% else %}
+                    <a href="javascript:void(0)">
+                        <button class="button-disabled">Schedule a visit</button>
+                    </a>
+                    {% endif %}
                 </div>
             </div>
             <div class="sidebar-ad1" id="publicity-1">

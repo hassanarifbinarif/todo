@@ -117,6 +117,11 @@ button {
     font-weight: 700!important;
 }
 
+.button-disabled {
+    opacity: .4!important;
+    cursor: not-allowed!important;
+}
+
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

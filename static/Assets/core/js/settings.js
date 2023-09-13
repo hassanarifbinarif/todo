@@ -229,27 +229,27 @@ async function profileForm(event) {
         });
         return false;
     }
-    else if(!isValidPhoneNumber(phoneNumber)) {
-        phoneNumber.classList.add('input-error');
-        phoneNumberMsg.classList.add('active');
-        phoneNumber.addEventListener('input', function() {
-            if(isValidPhoneNumber(this)) {
-                this.classList.remove('input-error');
-                phoneNumberMsg.classList.remove('active');
-            }
-            else {
-                let inputField = this;
-                if(timeOut) {
-                    clearTimeout(timeOut);
-                }
-                timeOut = setTimeout(function() {
-                    inputField.classList.add('input-error');
-                    phoneNumberMsg.classList.add('active');
-                }, 1500);
-            }
-        });
-        return false;
-    }
+    // else if(!isValidPhoneNumber(phoneNumber)) {
+    //     phoneNumber.classList.add('input-error');
+    //     phoneNumberMsg.classList.add('active');
+    //     phoneNumber.addEventListener('input', function() {
+    //         if(isValidPhoneNumber(this)) {
+    //             this.classList.remove('input-error');
+    //             phoneNumberMsg.classList.remove('active');
+    //         }
+    //         else {
+    //             let inputField = this;
+    //             if(timeOut) {
+    //                 clearTimeout(timeOut);
+    //             }
+    //             timeOut = setTimeout(function() {
+    //                 inputField.classList.add('input-error');
+    //                 phoneNumberMsg.classList.add('active');
+    //             }, 1500);
+    //         }
+    //     });
+    //     return false;
+    // }
     else {
         let formData = new FormData(form);
         formData.append('step','personal_information');

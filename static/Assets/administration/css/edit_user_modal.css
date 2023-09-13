@@ -134,6 +134,10 @@
     gap: 4px;
 }
 
+input::placeholder {
+    color: #9A9A9A;
+}
+
 .profile-details .column .mobile-input > div {
     position: relative;
     display: flex;

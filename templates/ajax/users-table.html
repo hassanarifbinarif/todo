@@ -45,11 +45,8 @@
                             </clipPath>
                         </defs>
                     </svg>
-                    <img src="{% static 'Assets/core/images/editing_logo.svg' %}"
-                        onclick="openEditUserModal('edit-user', '{{obj.id}}')"
-                        alt="edit" />
-                    <img src="{% static 'Assets/core/images/delete_logo.svg' %}"
-                        onclick="openDelUserModal('del-user', '{{obj.id}}')" alt="delete" />
+                    <img src="{% static 'Assets/core/images/editing_logo.svg' %}" class="cursor-pointer" onclick="openEditUserModal('edit-user', '{{obj.id}}')" alt="edit" />
+                    <img src="{% static 'Assets/core/images/delete_logo.svg' %}" class="cursor-pointer" onclick="openDelUserModal('del-user', '{{obj.id}}')" alt="delete" />
                 </div>
             </td>
         </tr>

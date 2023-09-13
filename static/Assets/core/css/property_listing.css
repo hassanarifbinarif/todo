@@ -612,6 +612,10 @@
     background-color: #B1B1B1;
 }
 
+.gmnoprint {
+    display: none!important;
+}
+
 
 @media (max-width: 1315px) {
     .property-properties {

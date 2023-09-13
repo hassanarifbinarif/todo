@@ -319,3 +319,57 @@ async function toggleUserState(event, id, isBlocked) {
         })
     }
 }
+
+
+const phoneInput = document.querySelector("#mobile-number");
+var phone = window.intlTelInput(phoneInput, {
+    separateDialCode: true,
+    initialCountry: "auto",
+    customPlaceholder: '000 00 000',
+    showFlags:false,
+    nationalMode: false,
+    geoIpLookup: function(success, failure) {
+        let headers = {
+            Accept: "application/json",
+        };
+        requestAPI("https://ipinfo.io", null, headers, 'GET').then(function(response) {
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            return response.json();
+        }).then(function(resp) {
+            var countryCode = (resp && resp.country) ? resp.country : "us";
+            success(countryCode);
+        }).catch(function(error) {
+            if (typeof failure === "function") {
+                failure(error.message);
+            }
+        })
+    },
+    hiddenInput: "full",
+    utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
+});
+
+phone.promise.then(() => {
+    phoneInput.value = mobileNo;
+})
+
+document.querySelector("#mobile-number").addEventListener("input", function() {
+    var full_number = phone.getNumber(intlTelInputUtils.numberFormat.INTERNATIONAL);
+    full_number = full_number.replaceAll(" ", "");
+    full_number = full_number.replaceAll("-", "");
+    document.querySelector("input[name='phone'").value = full_number;
+});
+document.querySelector("#mobile-number").addEventListener("change", function() {
+    var full_number = phone.getNumber(intlTelInputUtils.numberFormat.INTERNATIONAL);
+    full_number = full_number.replaceAll(" ", "");
+    full_number = full_number.replaceAll("-", "");
+    document.querySelector("input[name='phone'").value = full_number;
+});
+document.querySelector("#mobile-number").addEventListener("paste", function() {
+    console.log('in paste');
+    var full_number = phone.getNumber(intlTelInputUtils.numberFormat.INTERNATIONAL);
+    full_number = full_number.replaceAll(" ", "");
+    full_number = full_number.replaceAll("-", "");
+    document.querySelector("input[name='phone'").value = full_number;
+});
