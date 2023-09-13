@@ -163,9 +163,11 @@ async function profileForm(event) {
     let firstName = form.querySelector('input[name="first_name"]');
     let lastName = form.querySelector('input[name="last_name"]');
     let emailField = form.querySelector('input[name="email"]');
+    let phoneNumber = form.querySelector('input[name="phone"]');
     let firstNameMsg = form.querySelector('.first-name-msg');
     let lastNameMsg = form.querySelector('.last-name-msg');
     let emailMsg = form.querySelector('.email-msg');
+    let phoneNumberMsg = form.querySelector('.mobile-msg');
 
     if(!isValidName(firstName)) {
         firstName.classList.add('input-error');
@@ -227,6 +229,27 @@ async function profileForm(event) {
         });
         return false;
     }
+    else if(!isValidPhoneNumber(phoneNumber)) {
+        phoneNumber.classList.add('input-error');
+        phoneNumberMsg.classList.add('active');
+        phoneNumber.addEventListener('input', function() {
+            if(isValidPhoneNumber(this)) {
+                this.classList.remove('input-error');
+                phoneNumberMsg.classList.remove('active');
+            }
+            else {
+                let inputField = this;
+                if(timeOut) {
+                    clearTimeout(timeOut);
+                }
+                timeOut = setTimeout(function() {
+                    inputField.classList.add('input-error');
+                    phoneNumberMsg.classList.add('active');
+                }, 1500);
+            }
+        });
+        return false;
+    }
     else {
         let formData = new FormData(form);
         formData.append('step','personal_information');
@@ -236,6 +259,7 @@ async function profileForm(event) {
         let response = await profileAPI(formData);
         response.json().then(function(res) {
             if(response.status == 200) {
+                console.log(res);
                 afterLoad(button, 'Profile Updated');
                 setTimeout(() => {
                     afterLoad(button, buttonText);
@@ -934,47 +958,55 @@ function deleteMarkers() {
 }
 
 
-// const phoneInuput = document.querySelector("#mobile-number");
-// var phone = window.intlTelInput(document.querySelector("#mobile-number"), {
-//     separateDialCode: true,
-//     initialCountry: "auto",
-//     customPlaceholder: '000 00 000',
-//     showFlags:false,
-//     geoIpLookup: function(success, failure) {
-//         let headers = {
-//             Accept: "application/json",
-//         };
-//         requestAPI("https://ipinfo.io", null, headers, 'GET').then(function(response) {
-//             if (!response.ok) {
-//                 throw new Error("Network response was not ok");
-//             }
-//             return response.json();
-//         }).then(function(resp) {
-//             var countryCode = (resp && resp.country) ? resp.country : "us";
-//             console.log(countryCode);
-//             success(countryCode);
-//         }).catch(function(error) {
-//             if (typeof failure === "function") {
-//                 failure(error.message);
-//             }
-//         })
-//     //   $.get("https://ipinfo.io", function() {}, "jsonp").always(function(resp) {
-//     //     var countryCode = (resp && resp.country) ? resp.country : "us";
-//     //     success(countryCode);
-//     //   });
-//     },
-//     hiddenInput: "full",
-//     // utilsScript: "{% static 'assets/intlTelInput/utils.js' %}"
-// });
-// document.querySelector("#mobile-number").addEventListener("input", function() {
-//     var full_number = phone.getNumber(intlTelInputUtils.numberFormat.INTERNATIONAL);
-//     full_number = full_number.replaceAll(" ", "");
-//     full_number = full_number.replaceAll("-", "");
-//     document.querySelector("input[name='phone'").value = full_number;
-// });
-// document.querySelector("#mobile-number").addEventListener("paste", function() {
-//     var full_number = phone.getNumber(intlTelInputUtils.numberFormat.INTERNATIONAL);
-//     full_number = full_number.replaceAll(" ", "");
-//     full_number = full_number.replaceAll("-", "");
-//     document.querySelector("input[name='phone'").value = full_number;
-// });
+const phoneInput = document.querySelector("#mobile-number");
+var phone = window.intlTelInput(phoneInput, {
+    separateDialCode: true,
+    initialCountry: "auto",
+    customPlaceholder: '000 00 000',
+    showFlags:false,
+    nationalMode: false,
+    geoIpLookup: function(success, failure) {
+        let headers = {
+            Accept: "application/json",
+        };
+        requestAPI("https://ipinfo.io", null, headers, 'GET').then(function(response) {
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            return response.json();
+        }).then(function(resp) {
+            var countryCode = (resp && resp.country) ? resp.country : "us";
+            success(countryCode);
+        }).catch(function(error) {
+            if (typeof failure === "function") {
+                failure(error.message);
+            }
+        })
+    },
+    hiddenInput: "full",
+    utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
+});
+
+phone.promise.then(() => {
+    phoneInput.value = mobileNo;
+})
+
+document.querySelector("#mobile-number").addEventListener("input", function() {
+    var full_number = phone.getNumber(intlTelInputUtils.numberFormat.INTERNATIONAL);
+    full_number = full_number.replaceAll(" ", "");
+    full_number = full_number.replaceAll("-", "");
+    document.querySelector("input[name='phone'").value = full_number;
+});
+document.querySelector("#mobile-number").addEventListener("change", function() {
+    var full_number = phone.getNumber(intlTelInputUtils.numberFormat.INTERNATIONAL);
+    full_number = full_number.replaceAll(" ", "");
+    full_number = full_number.replaceAll("-", "");
+    document.querySelector("input[name='phone'").value = full_number;
+});
+document.querySelector("#mobile-number").addEventListener("paste", function() {
+    console.log('in paste');
+    var full_number = phone.getNumber(intlTelInputUtils.numberFormat.INTERNATIONAL);
+    full_number = full_number.replaceAll(" ", "");
+    full_number = full_number.replaceAll("-", "");
+    document.querySelector("input[name='phone'").value = full_number;
+});

@@ -17,8 +17,10 @@
     <link rel="stylesheet" href="{% static 'Assets/core/css/boost_ad_modal.css' %}">
     <script src="https://kit.fontawesome.com/0d5a0a2089.js" crossorigin="anonymous"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.3/css/intlTelInput.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.3/js/intlTelInput.min.js"></script> -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.3/css/intlTelInput.min.css" /> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css">
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.3/js/intlTelInput.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
 
     {% endblock %}
 
@@ -255,69 +257,6 @@
                         <form class="plan-container">
                             <span>Plan</span>
                             <div class="plan-card-container">
-                                <!-- <div class="plan-radio-btn">
-                                    <input id="basic" type="radio" name="plan_radio">
-                                    <label for="basic" class="plan-card">
-                                        <div class="plan-duration">
-                                            <div class="plan-price">
-                                                <p><span>$0.</span><span>00</span></p>
-                                            </div>
-                                            <div class="plan-period">
-                                                <span>Monthly</span>
-                                            </div>
-                                        </div>
-                                        <div class="plan-features">
-                                            <span>Basic Plan</span>
-                                            <ul>
-                                                <li>Upload up to <span>5</span> properties</li>
-                                                <li>Maximum <span>5</span> images per listing</li>
-                                                <li>Contact via Whatsapp</li>
-                                            </ul>
-                                        </div>
-                                    </label>
-                                </div>
-                                <div class="plan-radio-btn">
-                                    <input id="corredor" type="radio" checked name="plan_radio">
-                                    <label for="corredor" class="plan-card">
-                                        <div class="plan-duration">
-                                            <div class="plan-price">
-                                                <p><span>$20.</span><span>00</span></p>
-                                            </div>
-                                            <div class="plan-period">
-                                                <span>Monthly</span>
-                                            </div>
-                                        </div>
-                                        <div class="plan-features">
-                                            <span>Plan Corredor</span>
-                                            <ul>
-                                                <li>Upload up to <span>25</span> properties</li>
-                                                <li>Maximum <span>15</span> images per listing</li>
-                                                <li>Contact via Whatsapp</li>
-                                            </ul>
-                                        </div>
-                                    </label>
-                                </div>
-                                <div class="plan-radio-btn">
-                                    <input id="inmobilaria" type="radio" name="plan_radio">
-                                    <label for="inmobilaria" class="plan-card">
-                                        <div class="plan-duration">
-                                            <div class="plan-price">
-                                                <p><span>$40.</span><span>00</span></p>
-                                            </div>
-                                            <div class="plan-period">
-                                                <span>Monthly</span>
-                                            </div>
-                                        </div>
-                                        <div class="plan-features">
-                                            <span>Plan Inmobilaria</span>
-                                            <ul>
-                                                <li>Upload up to <span>50</span> properties</li>
-                                                <li>Maximum <span>30</span> images per listing</li>
-                                                <li>Contact via Whatsapp</li>
-                                            </ul>
-                                        </div>
-                                    </label>
-                                </div> -->
                                 {% if plan_list %}
                                 {% for obj in plan_list.data %}
                                 <div class="plan-radio-btn">
@@ -575,18 +514,16 @@
     <!-- Boost Ad Modal -->
     {% include '../modals/boost-ad-modal.html' %}
 
-    <!-- {{key|json_script:"key"}} -->
 
     {{is_mobile|json_script:'is_mobile'}}
+    {{profile_info.phone|json_script:'mobile_no'}}
 
     {% endblock %}
 </body>
 {% block scripts %}
-<!-- <script>
-    let key = JSON.parse(document.getElementById('key').textContent);
-</script> -->
 <script>
     let isMobile = JSON.parse(document.getElementById('is_mobile').textContent);
+    let mobileNo = JSON.parse(document.getElementById('mobile_no').textContent);
 </script>
 <script src="{% static 'Assets/core/js/settings.js' %}"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key={{key}}&libraries=places&callback=initMap"></script>

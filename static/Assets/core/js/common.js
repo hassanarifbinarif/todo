@@ -303,6 +303,28 @@ function isValidNumber(number) {
 }
 
 
+function isValidPhoneNumber(number) {
+    let numberMsg = number.closest('.mobile-input').querySelector('.mobile-msg');
+    if(number.value.trim().length == 0) {
+        numberMsg.innerText = 'Required Field';
+        return false;
+    }
+    else if(!(/^\d+(\.\d+)?$/.test(number.value.split('+')[1]))) {
+        numberMsg.innerText = 'Number is invalid';
+        return false;
+    }
+    else {
+        number.classList.remove('input-error');
+        numberMsg.innerText = '';
+        numberMsg.classList.remove('active');
+        if(timeOut) {
+            clearTimeout(timeOut);
+        }
+        return true;
+    }
+}
+
+
 function isValidImage(image) {
     let pictureMsg = image.closest('.image-input-container').querySelector('.picture-msg');
     if(image.files.length == 0) {
