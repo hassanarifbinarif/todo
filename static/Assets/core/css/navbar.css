@@ -124,6 +124,7 @@ nav {
 .navbar-input-group {
     height: 42px;
     max-width: 883px;
+    margin: 0px 10px;
 }
 
 .navbar-input-group > input:first-of-type {

@@ -6,7 +6,6 @@ from django.conf import settings as django_settings
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.template import loader
-from django.core.paginator import Paginator
 import math
 
 
@@ -25,7 +24,6 @@ def index(request):
             print(e)
     try:
         search_status, search_response = requestAPI('GET', f'{django_settings.API_URL}/search-listings?perPage=1', {}, {})
-        print(search_response)
         context['total_properties'] = search_response['pagination']['total']
         loc_status, loc_response = requestAPI('GET', 'https://ipinfo.io/json', {}, {})
         lat, lng = loc_response['loc'].split(',')
