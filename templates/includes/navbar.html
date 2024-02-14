@@ -22,6 +22,20 @@
         </div>
     </form>
     <div class="nav-functions">
+        <div class="dropdown language-dropdown">
+            <div class="language-dropdown-btn" id="filter-menu2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div class="d-flex align-items-center justify-content-between h-100">
+                    <div class="lang-name" id="current-lang-name">English</div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M6.32243 10.1164C5.93822 9.71987 5.94824 9.08692 6.34479 8.7027C6.74135 8.31848 7.37428 8.3285 7.75849 8.72507L11.9833 13.0859L16.344 8.86091C16.7406 8.47669 17.3735 8.4867 17.7577 8.88327C18.1419 9.27985 18.1319 9.9128 17.7354 10.297L12.6566 15.2177C12.2601 15.6019 11.6271 15.5919 11.2429 15.1953L6.32243 10.1164Z" fill="#FFFFFF"/>
+                    </svg>
+                </div>
+            </div>
+            <ul id="filter-menu2" class="dropdown-menu language-dropdown-menu">
+                <li class="dropdown-item" onclick="changeLanguage(this,'en');">English</li>
+                <li class="dropdown-item" onclick="changeLanguage(this,'es');">Spanish</li>
+            </ul>
+        </div>
         <a href="{% url 'add_property' %}">
             <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="11" cy="11" r="11" fill="white" />

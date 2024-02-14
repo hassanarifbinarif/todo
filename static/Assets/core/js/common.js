@@ -387,3 +387,10 @@ function roundDecimalPlaces(number) {
     let roundedValue = Math.round(value * 100) / 100;
     return roundedValue.toFixed(2);
 }
+
+
+function changeLanguage(option, value){
+    setCookie('lang', value, 99999999999);
+    document.getElementById('current-lang-name').textContent = option.textContent;
+    // location.reload(true);
+}
