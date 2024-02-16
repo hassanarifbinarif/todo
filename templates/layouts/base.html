@@ -17,6 +17,15 @@
     <link rel="stylesheet" href="{% static 'Assets/core/css/footer.css' %}">
     <link rel="icon" type="image/x-icon" href="{% static 'Assets/core/images/favicon.svg' %}">
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.i18n/1.0.9/jquery.i18n.min.js" integrity="sha512-EkS8Kq86l7dHt/dOBniHgtYvAScDqFw/lIPX5VCwaVKsufs0pY44I2cguqZ45QaFOGGwVd3T1nXvVJYIEjRsjA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.i18n/1.0.9/jquery.i18n.messagestore.min.js" integrity="sha512-Ejnbo8F6SIU18Tj9hZyJzVbhWtbC40Fyvuyfs6InZloy043xEvICul37BxuUGZG1ia8RQky7uBOwBdLsGKDu1w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.i18n/1.0.9/jquery.i18n.fallbacks.min.js" integrity="sha512-FvKl0c+LXuYS0OlbGXHLIt/VUxLHgVG2wMHB8BwMDzEwwNACtxhutxl4jxlnuNfEuzKPLarLsf17UP7UgPMs6w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.i18n/1.0.9/jquery.i18n.language.min.js" integrity="sha512-XaRK7YZ6nqPsjMAMUysMC0J7zqEOp3K74pUzIADUd3Ql8qpFpuwpR5jm+TVyzJc8C5fvVkjC3yOjF0gWmmCtDA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.i18n/1.0.9/jquery.i18n.parser.min.js" integrity="sha512-v3mCT0T3rETWJU4RZKWHobzvOdJUcaojtxFBYVY371L/3aaWj9Dg2MNl6Q46wr19u4YHHnyzAR99wWAr9mB3ZA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.i18n/1.0.9/jquery.i18n.emitter.min.js" integrity="sha512-FXATL79ewicv4U54AgQVVHBBsinKwHuIZJZFUIJqhqpA6UV0XuAFAhTjGuA9JX0HmzwKW+frVH2MuHCzpDgSMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.i18n/1.0.9/jquery.i18n.emitter.bidi.min.js" integrity="sha512-EP79zV22G1pPO28sRgwfVyEPEhu1RXA2ovHJNqlev1pIGEAs0CBzi6F6UMkPBaPS78O3KeEVqpicEYah+zbXhg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     {% block links %}
 
     {% endblock %}
@@ -38,6 +47,7 @@
         crossorigin="anonymous"></script>
 </body>
 <script src="{% static 'Assets/core/js/common.js' %}"></script>
+<script src="{% static 'Assets/translations/localization.js' %}"></script>
 {% block scripts %}
 {% endblock %}
 
