@@ -13,6 +13,7 @@
     {% block links %}
 
     <link rel="stylesheet" href="{% static 'Assets/core/css/settings.css' %}">
+    <link rel="stylesheet" href="{% static 'Assets/core/css/subscription_modal.css' %}">
     <link rel="stylesheet" href="{% static 'Assets/administration/css/del_listing_modal.css' %}">
     <link rel="stylesheet" href="{% static 'Assets/core/css/boost_ad_modal.css' %}">
     <script src="https://kit.fontawesome.com/0d5a0a2089.js" crossorigin="anonymous"></script>
@@ -252,14 +253,14 @@
                                 <span class="btn-text">Save Changes</span>
                             </button>
                         </form>
-                        <form class="plan-container">
+                        <form class="plan-container" onsubmit="changePlan(event);">
                             <span>Plan</span>
                             <div class="plan-card-container">
                                 {% if plan_list %}
                                 {% for obj in plan_list.data %}
                                 <div class="plan-radio-btn">
-                                    <input id="{{obj.id}}" type="radio" name="plan_radio">
-                                    <label for="{{obj.id}}" class="plan-card">
+                                    <input id="plan-card-{{obj.id}}" {% if forloop.counter0 == 0 %}checked{% elif obj.is_subscribed == True %}checked{% endif %} type="radio" value="{{obj.id}}" name="plan_radio">
+                                    <label for="plan-card-{{obj.id}}" class="plan-card">
                                         <div class="plan-duration">
                                             <div class="plan-price">
                                                 <p><span>${{obj.price|floatformat:"0"}}.</span><span>{{obj.price|slice:"-2:"}}</span></p>
@@ -281,7 +282,11 @@
                                 {% endfor %}
                                 {% endif %}
                             </div>
-                            <button class="change-plan-btn" type="button">Change Plan</button>
+                            <button class="change-plan-btn" type="submit">
+                                <span class="spinner-border spinner-border-sm hide" role="status" aria-hidden="true"></span>
+                                <span class="btn-text">Change Plan</span>
+                            </button>
+                            <small class="subscription-msg input-error-msg"></small>
                         </form>
                     </div>
                 </div>
@@ -512,9 +517,13 @@
     <!-- Boost Ad Modal -->
     {% include '../modals/boost-ad-modal.html' %}
 
+    <!-- Subscription Modal -->
+    {% include '../modals/subscription-modal.html' %}
+
 
     {{is_mobile|json_script:'is_mobile'}}
     {{profile_info.phone|json_script:'mobile_no'}}
+    {{plan_list.data|json_script:"planList"}}
 
     {% endblock %}
 </body>
@@ -522,8 +531,11 @@
 <script>
     let isMobile = JSON.parse(document.getElementById('is_mobile').textContent);
     let mobileNo = JSON.parse(document.getElementById('mobile_no').textContent);
+    const planList = JSON.parse(document.getElementById('planList').textContent) || [];
 </script>
+<script src="https://js.stripe.com/v3/"></script>
 <script src="{% static 'Assets/core/js/settings.js' %}"></script>
+<script src="{% static 'Assets/core/js/subscription.js' %}"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key={{key}}&libraries=places&callback=initMap"></script>
 {% endblock %}
 </html>
