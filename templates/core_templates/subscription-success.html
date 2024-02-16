@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% extends '../layouts/base.html' %}
+    {% load static %}
+
+    {% block links %}
+
+    <link rel="stylesheet" href="{% static 'Assets/core/css/subscription_success.css' %}">
+    <script src="https://kit.fontawesome.com/0d5a0a2089.js" crossorigin="anonymous"></script>
+
+    {% endblock %}
+
+    <title>{% block title %}Todo Subscription Success{% endblock %}</title>
+</head>
+
+<body>
+    {% block body %}
+    <section class="success-section">
+        <div class="success-container">
+            <div class="success-card">
+                <div class="post-content" id="post-content">
+                    <div class="post-content-container">
+                        <div class="content-header">
+                            <svg width="66" height="66" viewBox="0 0 66 66" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <rect x="5" y="5" width="56" height="56" rx="28" fill="#D1FADF" />
+                                <path
+                                    d="M27.7502 33.0002L31.2502 36.5002L38.2502 29.5002M44.6668 33.0002C44.6668 39.4435 39.4435 44.6668 33.0002 44.6668C26.5568 44.6668 21.3335 39.4435 21.3335 33.0002C21.3335 26.5568 26.5568 21.3335 33.0002 21.3335C39.4435 21.3335 44.6668 26.5568 44.6668 33.0002Z"
+                                    stroke="#039855" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                <rect x="5" y="5" width="56" height="56" rx="28" stroke="#ECFDF3" stroke-width="10" />
+                            </svg>
+                            <h2>Plan Subscribed</h2>
+                            <p>The selected plan has been subscribed successfully.</p>
+                        </div>
+                        <a class="back-link" href="{% url 'settings' %}#profile">
+                            <svg width="21" height="20" viewBox="0 0 21 20" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M16.3332 10H4.6665M4.6665 10L10.4998 15.8333M4.6665 10L10.4998 4.16667"
+                                    stroke="#475467" stroke-width="1.66667" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                            <span>Back to profile</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom-page-ad">
+            <div>
+                <span>Google Adsense</span>
+            </div>
+        </div>
+    </section>
+
+    {% endblock %}
+</body>
+{% block scripts %}
+{% endblock %}
+
+</html>

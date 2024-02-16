@@ -241,6 +241,12 @@ def get_user_favourite_listings(request):
 
 
 @signin_required
+def subscription_success(request):
+    context = {}
+    return render(request, 'core_templates/subscription-success.html', context)
+
+
+@signin_required
 def add_property(request):
     context = {}
     context['login'] = True
