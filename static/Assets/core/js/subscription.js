@@ -76,7 +76,6 @@ async function changePlan(event) {
             }
             else {
                 let client_Secret = res.data.latest_payment_client_secret;
-                console.log(client_Secret);
                 document.querySelector("#payment-form").addEventListener("submit", handleSubmit);
 
                 const appearance = { theme: 'stripe' };
@@ -88,6 +87,11 @@ async function changePlan(event) {
                 document.querySelector('.subscription-modal').click();
                 afterLoad(button, buttonText);
             }
+        }
+        else {
+            subscriptionMsg.classList.add('active');
+            afterLoad(button, buttonText);
+            displayMessages(res.messages, subscriptionMsg);
         }
     })
 }

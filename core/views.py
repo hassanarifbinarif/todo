@@ -243,6 +243,7 @@ def get_user_favourite_listings(request):
 @signin_required
 def subscription_success(request):
     context = {}
+    context['login'] = True
     return render(request, 'core_templates/subscription-success.html', context)
 
 
