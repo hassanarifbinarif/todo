@@ -395,3 +395,25 @@ function changeLocale(option, value){
     changeLanguage(value);
     // location.reload(true);
 }
+
+
+
+function displayMessages(obj, errorElement) {
+    for (const key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            if (Array.isArray(obj[key])) {
+                obj[key].forEach(element => {
+                    if (typeof element === 'object') {
+                        displayMessages(element, errorElement);
+                    } else {
+                        errorElement.innerHTML += `${key}: ${element} <br />`;
+                    }
+                });
+            } else if (typeof obj[key] === 'object') {
+                displayMessages(obj[key], errorElement);
+            } else {
+                errorElement.innerHTML += `${key}: ${element} <br />`;
+            }
+        }
+    }
+}

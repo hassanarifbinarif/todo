@@ -1,4 +1,4 @@
-window.onload = () => {
+window.addEventListener('DOMContentLoaded', function() {
     if(location.href.includes('#profile')) {
         document.querySelector('#listing').checked = false;
         document.querySelector('#profile').checked = true;
@@ -11,7 +11,7 @@ window.onload = () => {
             listingTableContent.classList.add('hide');
         }
     }
-}
+})
 
 // Toggling between listings, favourites and profile views
 

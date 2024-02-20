@@ -18,4 +18,5 @@ urlpatterns = [
     path('privacy-policy/', views.privacy_policy, name='privacy_policy'),
     path('get-user-listings/', views.get_user_listings, name='get_user_listings'),
     path('get-user-favourite-listings/', views.get_user_favourite_listings, name='get_user_favourite_listings'),
+    path('success/', views.subscription_success, name='subscription_success')
 ]
