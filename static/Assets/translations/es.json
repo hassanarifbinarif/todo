@@ -77,5 +77,65 @@
     "search-page-search-this-area": "Buscar en esta area",
 
 
-    "property-new": "Nuevo"
+    "property-page-view-map": "Ver Mapa",
+    "property-page-land": "TERRENO",
+    "property-page-construction": "CONSTRUCCION",
+    "property-page-property-type": "TIPO DE PROPIEDAD",
+    "property-page-bedrooms": "DORMITORIOS",
+    "property-page-bathrooms": "BANOS",
+    "property-page-parking": "PARQUEO",
+    "property-page-antiquity": "ANTIGUEDAD",
+    "property-page-ameneties": "AMENIDADES",
+    "property-page-description": "DESCRIPCION",
+    "property-page-similar-properties": "Propiedades similares",
+    "property-page-contact-agent": "Contactar Agent",
+    "property-page-schedule-visit": "Agendar Visita",
+    "property-page-no-similar-properties": "No hay propiedades similares",
+
+
+    "login-page-login": "Ingresar",
+    "login-page-register": "Registrar",
+    "login-page-agree-to-these": "Estoy de acuerdo con estos",
+    "login-page-terms-and-conditions": "Terminos y Condiciones",
+    "login-page-email": "Correo electrónico",
+    "login-page-password": "Contraseña",
+    "login-page-forgot-password": "Olvidado Contraseña?",
+
+
+    "register-page-first-name": "Nombre de pila",
+    "register-page-last-name": "Apellido",
+    "register-page-confirm-password": "Confirmar Contraseña",
+
+
+    "post-register-page-we-are-almost-ready": "Ya estamos casi listos!",
+    "post-register-page-message-1": "Por favor active su cuenta haciendo click en el link que le acaba de llegar por correo electronico.",
+    "post-register-page-message-2": "No recibio el correo? Por favor revise su buzon de mensajes no deseados, si no esta ahi, podemos volver a intentar.",
+    "post-register-page-resend-email": "Reenviar correo",
+
+
+    "forgot-password-page-forgot-password": "Olvidado contraseña?",
+    "forgot-password-page-message": "No te preocupes, te enviaremos instrucciones para restablecerlo.",
+    "forgot-password-page-email": "Correo electrónico",
+    "forgot-password-page-enter-your-email": "Introduce tu correo electrónico",
+    "forgot-password-page-reset-password": "Restablecer la contraseña",
+
+
+    "resend-email-page": "Consultar su correo electrónico",
+    "resend-email-page-message": "Enviamos un enlace para restablecer la contraseña a",
+    "resend-email-page-didnt-receive-email": "No recibiste el correo electrónico?",
+    "resend-email-page-click-to-resend": "Haga clic para reenviar",
+
+
+    "reset-password-page-set-new-password": "Establecer nueva contraseña",
+    "reset-password-page-message": "Su nueva contraseña debe ser diferente a las contraseñas utilizadas anteriormente.",
+    "reset-password-page-password": "Contraseña",
+    "reset-password-page-reset-password": "Restablecer la Contraseña",
+
+
+    "successful-reset-page-password-reset": "Restablecimiento de contraseña",
+    "successful-reset-page-message": "Su contraseña se ha restablecido correctamente.",
+
+
+    "property-new": "Nuevo",
+    "back-to-login": "Atrás para iniciar sesión"
 }

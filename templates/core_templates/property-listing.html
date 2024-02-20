@@ -119,7 +119,7 @@
                                 d="M0 8.58885C0 4.6376 1.89431 1.78321 4.93568 0.590133C9.5764 -1.23155 14.8791 1.30213 15.8427 6.40797C16.3212 8.94164 15.705 11.2316 14.0467 13.2329C12.2835 15.356 10.5006 17.4599 8.72429 19.5767C8.25236 20.1411 7.74764 20.1411 7.28226 19.5831C5.49938 17.4663 3.71651 15.3496 1.94019 13.2264C0.655469 11.687 0.0196641 9.92304 0 8.58885ZM8.00328 4.61836C6.26628 4.61836 4.85047 6.01027 4.85703 7.70367C4.85703 9.38423 6.27939 10.7633 8.00328 10.7633C9.7075 10.7633 11.143 9.35857 11.1364 7.69084C11.1364 6.00386 9.71405 4.61194 8.00328 4.61836Z"
                                 fill="#8DC63F" />
                         </svg>
-                        <span>View Map</span>
+                        <span data-i18n="property-page-view-map">View Map</span>
                     </a>
                 </div>
                 <div class="property-links">
@@ -147,37 +147,37 @@
             <hr />
             <div class="property-properties">
                 <div class="property-attribute">
-                    <span>LAND</span>
+                    <span data-i18n="property-page-land">LAND</span>
                     <span>{{property.data.land}}m<sup>2</sup></span>
                 </div>
                 <div class="property-attribute">
-                    <span>CONSTRUCTION</span>
+                    <span data-i18n="property-page-construction">CONSTRUCTION</span>
                     <span>{{property.data.construction}}m<sup>2</sup></span>
                 </div>
                 <div class="property-attribute">
-                    <span>PROPERTY TYPE</span>
+                    <span data-i18n="property-page-property-type">PROPERTY TYPE</span>
                     <span>{{property.data.property_type|title}}</span>
                 </div>
                 <div class="property-attribute">
-                    <span>BEDROOMS</span>
+                    <span data-i18n="property-page-bedrooms">BEDROOMS</span>
                     <span>{{property.data.bedrooms}}</span>
                 </div>
                 <div class="property-attribute">
-                    <span>BATHROOMS</span>
+                    <span data-i18n="property-page-bathrooms">BATHROOMS</span>
                     <span>{{property.data.bathrooms}}</span>
                 </div>
                 <div class="property-attribute">
-                    <span>PARKING</span>
+                    <span data-i18n="property-page-parking">PARKING</span>
                     <span>{{property.data.parking}}</span>
                 </div>
                 <div class="property-attribute">
-                    <span>ANTIQUITY</span>
+                    <span data-i18n="property-page-antiquity">ANTIQUITY</span>
                     <span>{{property.data.antiquity}}</span>
                 </div>
             </div>
             <hr />
             <div class="property-ameneties">
-                <h3>AMENETIES</h3>
+                <h3 data-i18n="property-page-ameneties">AMENETIES</h3>
                 <div class="ameneties-list">
                     <div class="ameneties-row">
                         {% for amenety in property.data.ameneties|split_string:"," %}
@@ -188,7 +188,7 @@
             </div>
             <hr />
             <div class="property-description">
-                <h3>DESCRIPTION</h3>
+                <h3 data-i18n="property-page-description">DESCRIPTION</h3>
                 <p>
                     {{property.data.description|linebreaksbr}}
                 </p>
@@ -219,14 +219,14 @@
                     </div>
                 </div>
                 <div class="contact-details">
-                    <p>Contact Agent: &nbsp;&nbsp;&nbsp;<span>{{property.data.user.phone|default:"N.A"}}</span></p>
+                    <p><span data-i18n="property-page-contact-agent">Contact Agent</span>: &nbsp;&nbsp;&nbsp;<span>{{property.data.user.phone|default:"N.A"}}</span></p>
                     {% if property.data.user.phone %}
                     <a href="http://wa.me/{{property.data.user.phone}}" target="_blank">
-                        <button>Schedule a visit</button>
+                        <button data-i18n="property-page-schedule-visit">Schedule a visit</button>
                     </a>
                     {% else %}
                     <a href="javascript:void(0)">
-                        <button class="button-disabled">Schedule a visit</button>
+                        <button class="button-disabled" data-i18n="property-page-schedule-visit">Schedule a visit</button>
                     </a>
                     {% endif %}
                 </div>
@@ -240,7 +240,7 @@
     </section>
 
     <section class="similar-properties">
-        <h2>Similar properties that might interest you</h2>
+        <h2 data-i18n="property-page-similar-properties">Similar properties that might interest you</h2>
         <div class="spotlight-card-container">
             {% if similar_properties %}
             <div class="spotlight">
@@ -251,7 +251,7 @@
                             <div class="spotlight-card-image-container">
                                 {% if obj.is_new %}
                                 <div class="card-type">
-                                    <span>New</span>
+                                    <span data-i18n="property-new">New</span>
                                 </div>
                                 {% endif %}
                                 <img src="{{obj.images.0.image}}" loading="lazy" alt="Property Image" />
@@ -306,7 +306,7 @@
                     </a>
                     {% empty %}
                     <div>
-                        <span>No Similar Properties</span>
+                        <span data-i18n="property-page-no-similar-properties">No Similar Properties</span>
                     </div>
                     {% endfor %}
                 </div>

@@ -7,7 +7,7 @@
         <div class="property-card-image-container">
             {% if obj.is_new %}
             <div class="card-type">
-                <span>New</span>
+                <span data-i18n="property-new">New</span>
             </div>
             {% endif %}
             <img src="{{obj.images.0.image}}" loading="lazy" alt="Property Image" />

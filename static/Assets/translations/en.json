@@ -77,5 +77,65 @@
     "search-page-search-this-area": "Search this area",
 
 
-    "property-new": "New"
+    "property-page-view-map": "View Map",
+    "property-page-land": "LAND",
+    "property-page-construction": "CONSTRUCTION",
+    "property-page-property-type": "PROPERTY TYPE",
+    "property-page-bedrooms": "BEDROOMS",
+    "property-page-bathrooms": "BATHROOMS",
+    "property-page-parking": "PARKING",
+    "property-page-antiquity": "ANTIQUITY",
+    "property-page-ameneties": "AMENETIES",
+    "property-page-description": "DESCRIPTION",
+    "property-page-similar-properties": "Similar properties that might interest you",
+    "property-page-contact-agent": "Contact Agent",
+    "property-page-schedule-visit": "Schedule a visit",
+    "property-page-no-similar-properties": "No Similar Properties",
+
+
+    "login-page-login": "Login",
+    "login-page-register": "Register",
+    "login-page-agree-to-these": "I agree to these",
+    "login-page-terms-and-conditions": "Terms & Conditions",
+    "login-page-email": "Email",
+    "login-page-password": "Password",
+    "login-page-forgot-password": "Forgot Password?",
+
+
+    "register-page-first-name": "First Name",
+    "register-page-last-name": "Last Name",
+    "register-page-confirm-password": "Confirm Password",
+
+
+    "post-register-page-we-are-almost-ready": "We are almost ready!",
+    "post-register-page-message-1": "Please activate your account by clicking on the link that you just received by email.",
+    "post-register-page-message-2": "Did not receive the mail? Please check your spam mailbox, if it is not there, we can try again.",
+    "post-register-page-resend-email": "Resend Email",
+
+
+    "forgot-password-page-forgot-password": "Forgot password?",
+    "forgot-password-page-message": "No worries, we'll send you reset instructions.",
+    "forgot-password-page-email": "Email",
+    "forgot-password-page-enter-your-email": "Enter your email",
+    "forgot-password-page-reset-password": "Reset Password",
+
+
+    "resend-email-page": "Check your email",
+    "resend-email-page-message": "We sent a password reset link to",
+    "resend-email-page-didnt-receive-email": "Didn't receive the email?",
+    "resend-email-page-click-to-resend": "Click to resend",
+    
+    
+    "reset-password-page-set-new-password": "Set new password",
+    "reset-password-page-message": "Your new password must be different to previously used passwords.",
+    "reset-password-page-password": "Password",
+    "reset-password-page-reset-password": "Reset Password",
+
+
+    "successful-reset-page-password-reset": "Password reset",
+    "successful-reset-page-message": "Your password has been successfully reset.",
+
+
+    "property-new": "New",
+    "back-to-login": "Back to log in"
 }

@@ -1,4 +1,5 @@
 let currentLang = getCookie('lang') || 'en';
+var i18n;
 
 window.addEventListener('DOMContentLoaded', function() {
     if (currentLang == 'en')
@@ -8,21 +9,33 @@ window.addEventListener('DOMContentLoaded', function() {
 })
 
 
-jQuery(document).ready(function() { 
-    $.i18n({locale: currentLang})
-    .load({ en: location.origin + "/static/Assets/translations/en.json", es: location.origin + "/static/Assets/translations/es.json" })
-    .done(function() {
-        updateContent();
-    }) 
+jQuery(document).ready(function() {
+    i18n = $.i18n();
+    i18n.locale = currentLang;
+    i18n.load({ en: location.origin + "/static/Assets/translations/en.json", es: location.origin + "/static/Assets/translations/es.json" })
+        .done(function() {
+            updateContent()
+        })
+    // $.i18n({locale: currentLang})
+    // .load({ en: location.origin + "/static/Assets/translations/en.json", es: location.origin + "/static/Assets/translations/es.json" })
+    // .done(function() {
+    //     updateContent();
+    // })
 });
 
 
 function changeLanguage(lang) {
-    if ($.i18n().locale != lang)
-        $.i18n().locale = lang;
+    // if ($.i18n().locale != lang) {
+    //     $.i18n().locale = lang;
+    //     updateContent();
+    // }
+
+    if (i18n.locale != lang) {
+        i18n.locale = lang;
         updateContent();
+    }
 }
 
-function updateContent(key) {
+function updateContent() {
     $('body').i18n();
 }

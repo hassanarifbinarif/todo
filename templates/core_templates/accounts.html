@@ -27,11 +27,11 @@
                 <div class="authentication-radio-group">
                     <div class="authentication-radio-btn">
                         <input id="login" type="radio" checked name="authentication_radio">
-                        <label for="login" class="radio-label">Login</label>
+                        <label for="login" class="radio-label" data-i18n="login-page-login">Login</label>
                     </div>
                     <div class="authentication-radio-btn">
                         <input id="register" type="radio" name="authentication_radio">
-                        <label for="register" class="radio-label">Register</label>
+                        <label for="register" class="radio-label" data-i18n="login-page-register">Register</label>
                     </div>
                 </div>
                 <div class="login-auth-content" id="login-content">
@@ -63,14 +63,14 @@
                         {% csrf_token %}
                         <div class="input-group">
                             <div class="input">
-                                <span class="input-label">Email</span>
+                                <span class="input-label" data-i18n="login-page-email">Email</span>
                                 <input class="input-field" type="email" name="email" id="login-email" tabindex="1" />
                                 <small class="email-msg input-error-msg"></small>
                             </div>
                             <div class="password-input">
                                 <div>
-                                    <span class="input-label">Password</span>
-                                    <a href="{% url 'forgot_password' %}" tabindex="4" >Forgot Password?</a>
+                                    <span class="input-label" data-i18n="login-page-password">Password</span>
+                                    <a href="{% url 'forgot_password' %}" tabindex="4" data-i18n="login-page-forgot-password">Forgot Password?</a>
                                 </div>
                                 <div>
                                     <i class="fa fa-eye-slash hide-password-field"></i>
@@ -81,12 +81,12 @@
                         </div>
                         <button type="submit" class="login-btn" tabindex="3">
                             <span class="spinner-border spinner-border-sm hide" role="status" aria-hidden="true"></span>
-                            <span class="btn-text">Login</span>
+                            <span class="btn-text" data-i18n="login-page-login">Login</span>
                         </button>
                         <div class="form-check align-self-center d-flex align-items-center gap-1 cursor-pointer terms-checkbox-container">
                             <input type="checkbox" required checked name="terms_conditions"
                                 id="terms-checkbox1" class="form-check-input cursor-pointer" />
-                            <label for="terms-checkbox1" class="terms-checkbox-label cursor-pointer">I agree to these <a href="/terms-and-conditions/" class="terms-link">Terms & Conditions</a></label>
+                            <label for="terms-checkbox1" class="terms-checkbox-label cursor-pointer"><span data-i18n="login-page-agree-to-these">I agree to these</span> <a href="/terms-and-conditions/" class="terms-link" data-i18n="login-page-terms-and-conditions">Terms & Conditions</a></label>
                         </div>
                     </form>
                     <!-- <p>Terms & Conditions</p> -->
@@ -117,22 +117,22 @@
                         {% csrf_token %}
                         <div class="input-group">
                             <div class="input">
-                                <span class="input-label">First Name</span>
+                                <span class="input-label" data-i18n="register-page-first-name">First Name</span>
                                 <input class="input-field" type="text" name="first_name" />
                                 <small class="first-name-msg input-error-msg"></small>
                             </div>
                             <div class="input">
-                                <span class="input-label">Last Name</span>
+                                <span class="input-label" data-i18n="register-page-last-name">Last Name</span>
                                 <input class="input-field" type="text" name="last_name" />
                                 <small class="last-name-msg input-error-msg"></small>
                             </div>
                             <div class="input">
-                                <span class="input-label">Email</span>
+                                <span class="input-label" data-i18n="login-page-email">Email</span>
                                 <input class="input-field" type="email" name="email" id="register-email" />
                                 <small class="email-msg input-error-msg"></small>
                             </div>
                             <div class="password-input">
-                                <span class="input-label">Password</span>
+                                <span class="input-label" data-i18n="login-page-password">Password</span>
                                 <div>
                                     <i class="fa fa-eye-slash hide-password-field"></i>
                                     <input class="input-field register-password-field" type="password"
@@ -141,7 +141,7 @@
                                 <small class="password-msg input-error-msg"></small>
                             </div>
                             <div class="password-input">
-                                <span class="input-label">Confirm Password</span>
+                                <span class="input-label" data-i18n="register-page-confirm-password">Confirm Password</span>
                                 <div>
                                     <i class="fa fa-eye-slash hide-password-field"></i>
                                     <input class="input-field register-confirm-password-field" type="password"
@@ -152,29 +152,29 @@
                         </div>
                         <button type="submit" class="register-btn" id="register-btn">
                             <span class="spinner-border spinner-border-sm hide" role="status" aria-hidden="true"></span>
-                            <span class="btn-text">Register</span>
+                            <span class="btn-text" data-i18n="login-page-register">Register</span>
                         </button>
                         <div class="form-check align-self-center d-flex align-items-center gap-1 cursor-pointer terms-checkbox-container">
                             <input type="checkbox" required checked name="terms_conditions"
                                 id="terms-checkbox" class="form-check-input cursor-pointer" />
-                            <label for="terms-checkbox" class="terms-checkbox-label cursor-pointer">I agree to these <a href="/terms-and-conditions/" class="terms-link">Terms & Conditions</a></label>
+                            <label for="terms-checkbox" class="terms-checkbox-label cursor-pointer"><span data-i18n="login-page-agree-to-these">I agree to these</span> <a href="/terms-and-conditions/" class="terms-link" data-i18n="login-page-terms-and-conditions">Terms & Conditions</a></label>
                         </div>
                     </form>
                     <!-- <p>Terms & Conditions</p> -->
                 </div>
                 <div class="post-registration-content hide" id="post-registration-content">
                     <div class="post-registration-message">
-                        <h2>We are almost ready!</h2>
-                        <p>
+                        <h2 data-i18n="post-register-page-we-are-almost-ready">We are almost ready!</h2>
+                        <p data-i18n="post-register-page-message-1">
                             Please activate your account by clicking on the link that you just received by email.</p>
-                        <p>Did not receive the mail? Please check your spam mailbox, if it is not there, we can try again.</p>
+                        <p data-i18n="post-register-page-message-2">Did not receive the mail? Please check your spam mailbox, if it is not there, we can try again.</p>
                     </div>
                     <form action="" class="d-flex flex-column" onsubmit="resendConfirmationEmail(event);">
                         {% csrf_token %}
                         <input type="hidden" name="email" id="post-registration-email" />
                         <button type="submit">
                             <span class="spinner-border spinner-border-sm hide" role="status" aria-hidden="true"></span>
-                            <span class="btn-text">Resend Email</span>
+                            <span class="btn-text" data-i18n="post-register-page-resend-email">Resend Email</span>
                         </button>
                         <small class="resend-email-msg input-error-msg"></small>
                     </form>
