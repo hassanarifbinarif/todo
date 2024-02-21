@@ -39,15 +39,15 @@
                 <div class="my-ads-radio-group">
                     <div class="my-ads-radio-btn">
                         <input id="listing" type="radio" checked name="my_ads_radio">
-                        <label for="listing" class="radio-label">My Listings</label>
+                        <label for="listing" class="radio-label" data-i18n="settings-page-my-listings">My Listings</label>
                     </div>
                     <div class="my-ads-radio-btn">
                         <input id="favourite" type="radio" name="my_ads_radio">
-                        <label for="favourite" class="radio-label">Favourites</label>
+                        <label for="favourite" class="radio-label" data-i18n="settings-page-favourites">Favourites</label>
                     </div>
                     <div class="my-ads-radio-btn">
                         <input id="profile" type="radio" name="my_ads_radio">
-                        <label for="profile" class="radio-label">My Profile</label>
+                        <label for="profile" class="radio-label" data-i18n="settings-page-my-profile">My Profile</label>
                     </div>
                 </div>
                 <div class="listing-table-container" id="listing-table">
@@ -55,7 +55,7 @@
                     <div class="mobile-view">
                         <div class="order-row">
                             <button class="order-btn" id="listing-order" type="button">
-                                <span id="selected-listing-order">Order</span>
+                                <span id="selected-listing-order" data-i18n="settings-page-order">Order</span>
                                 <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M10 0.863883C9.95436 1.10388 9.77171 1.24788 9.63473 1.43988C8.26486 2.87988 6.895 4.31988 5.52514 5.75988C5.29683 5.99988 5.06852 6.09588 4.74888 5.95188C4.65756 5.95188 4.52057 5.85588 4.47491 5.75988C3.05938 4.27188 1.64386 2.78388 0.228334 1.29588C-0.136963 0.911883 -0.0456384 0.287883 0.410983 0.0958825C0.639293 -0.0481175 0.913266 -0.000117473 1.09591 0.143883C1.14158 0.143883 1.18724 0.239883 1.2329 0.287883C2.46578 1.58388 3.65299 2.83188 4.88587 4.12788C4.88587 4.12788 4.93153 4.17588 4.97719 4.22388C4.97719 4.22388 5.02286 4.17588 5.06852 4.12788C6.30139 2.83188 7.53427 1.53588 8.76715 0.239883C8.99546 -0.000117473 9.22377 -0.0961175 9.5434 0.0478825C9.77171 0.143883 9.9087 0.287883 10 0.527883C10 0.527883 10 0.575883 10 0.623883V0.911883V0.863883Z" fill="#9A9A9A"/>
                                 </svg>
@@ -63,11 +63,11 @@
                             <div class="order-dropdown" id="listing-order-dropdown">
                                 <div class="radio-btn">
                                     <input id="order1" data-id="-created_at" type="radio" name="listing_radio">
-                                    <label for="order1" class="radio-label">Created At</label>
+                                    <label for="order1" class="radio-label" data-i18n="settings-page-created-at">Created At</label>
                                 </div>
                                 <div class="radio-btn">
                                     <input id="order2" data-id="-city" type="radio" name="listing_radio">
-                                    <label for="order2" class="radio-label">City</label>
+                                    <label for="order2" class="radio-label" data-i18n="settings-page-city">City</label>
                                 </div>
                             </div>
                         </div>
@@ -82,21 +82,21 @@
                                 <th scope="col"></th>
                                 <th scope="col">
                                     <div class="send-col hide">
-                                        <span>Send</span>
+                                        <span data-i18n="settings-page-send">Send</span>
                                     </div>
                                 </th>
-                                <th scope="col">Listing Date</th>
-                                <th scope="col">Property Type</th>
-                                <th scope="col">Location</th>
-                                <th scope="col">Construction</th>
-                                <th scope="col">Land</th>
-                                <th scope="col">Bedrooms</th>
-                                <th scope="col">Bathrooms</th>
-                                <th scope="col">Price</th>
+                                <th scope="col" data-i18n="settings-page-listing-date">Listing Date</th>
+                                <th scope="col" data-i18n="settings-page-property-type">Property Type</th>
+                                <th scope="col" data-i18n="settings-page-location">Location</th>
+                                <th scope="col" data-i18n="settings-page-construction">Construction</th>
+                                <th scope="col" data-i18n="settings-page-land">Land</th>
+                                <th scope="col" data-i18n="settings-page-bedrooms">Bedrooms</th>
+                                <th scope="col" data-i18n="settings-page-bathrooms">Bathrooms</th>
+                                <th scope="col" data-i18n="settings-page-price">Price</th>
                                 <th scope="col">
                                     <div class="order-row">
                                         <button class="order-btn" id="listing-order" type="button">
-                                            <span id="selected-listing-order">Order</span>
+                                            <span id="selected-listing-order" data-i18n="settings-page-order">Order</span>
                                             <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M10 0.863883C9.95436 1.10388 9.77171 1.24788 9.63473 1.43988C8.26486 2.87988 6.895 4.31988 5.52514 5.75988C5.29683 5.99988 5.06852 6.09588 4.74888 5.95188C4.65756 5.95188 4.52057 5.85588 4.47491 5.75988C3.05938 4.27188 1.64386 2.78388 0.228334 1.29588C-0.136963 0.911883 -0.0456384 0.287883 0.410983 0.0958825C0.639293 -0.0481175 0.913266 -0.000117473 1.09591 0.143883C1.14158 0.143883 1.18724 0.239883 1.2329 0.287883C2.46578 1.58388 3.65299 2.83188 4.88587 4.12788C4.88587 4.12788 4.93153 4.17588 4.97719 4.22388C4.97719 4.22388 5.02286 4.17588 5.06852 4.12788C6.30139 2.83188 7.53427 1.53588 8.76715 0.239883C8.99546 -0.000117473 9.22377 -0.0961175 9.5434 0.0478825C9.77171 0.143883 9.9087 0.287883 10 0.527883C10 0.527883 10 0.575883 10 0.623883V0.911883V0.863883Z" fill="#9A9A9A"/>
                                             </svg>
@@ -104,11 +104,11 @@
                                         <div class="order-dropdown" id="listing-order-dropdown">
                                             <div class="radio-btn">
                                                 <input id="order1" data-id="-created_at" type="radio" name="listing_radio">
-                                                <label for="order1" class="radio-label">Created At</label>
+                                                <label for="order1" class="radio-label" data-i18n="settings-page-created-at">Created At</label>
                                             </div>
                                             <div class="radio-btn">
                                                 <input id="order2" data-id="-city" type="radio" name="listing_radio">
-                                                <label for="order2" class="radio-label">City</label>
+                                                <label for="order2" class="radio-label" data-i18n="settings-page-city">City</label>
                                             </div>
                                         </div>
                                     </div>
@@ -126,7 +126,7 @@
                     <div class="mobile-view">
                         <div class="order-row">
                             <button class="order-btn" id="favourite-order" type="button">
-                                <span id="selected-favourite-order">Order</span>
+                                <span id="selected-favourite-order" data-i18n="settings-page-order">Order</span>
                                 <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M10 0.863883C9.95436 1.10388 9.77171 1.24788 9.63473 1.43988C8.26486 2.87988 6.895 4.31988 5.52514 5.75988C5.29683 5.99988 5.06852 6.09588 4.74888 5.95188C4.65756 5.95188 4.52057 5.85588 4.47491 5.75988C3.05938 4.27188 1.64386 2.78388 0.228334 1.29588C-0.136963 0.911883 -0.0456384 0.287883 0.410983 0.0958825C0.639293 -0.0481175 0.913266 -0.000117473 1.09591 0.143883C1.14158 0.143883 1.18724 0.239883 1.2329 0.287883C2.46578 1.58388 3.65299 2.83188 4.88587 4.12788C4.88587 4.12788 4.93153 4.17588 4.97719 4.22388C4.97719 4.22388 5.02286 4.17588 5.06852 4.12788C6.30139 2.83188 7.53427 1.53588 8.76715 0.239883C8.99546 -0.000117473 9.22377 -0.0961175 9.5434 0.0478825C9.77171 0.143883 9.9087 0.287883 10 0.527883C10 0.527883 10 0.575883 10 0.623883V0.911883V0.863883Z" fill="#9A9A9A"/>
                                 </svg>
@@ -134,11 +134,11 @@
                             <div class="order-dropdown" id="favourite-order-dropdown">
                                 <div class="radio-btn">
                                     <input id="order-1" data-id="-created_at" type="radio" name="favourite_radio">
-                                    <label for="order-1" class="radio-label">Created At</label>
+                                    <label for="order-1" class="radio-label" data-i18n="settings-page-created-at">Created At</label>
                                 </div>
                                 <div class="radio-btn">
                                     <input id="order-2" data-id="-city" type="radio" name="favourite_radio">
-                                    <label for="order-2" class="radio-label">City</label>
+                                    <label for="order-2" class="radio-label" data-i18n="settings-page-city">City</label>
                                 </div>
                             </div>
                         </div>
@@ -151,18 +151,18 @@
                         <thead>
                             <tr>
                                 <th scope="col"></th>
-                                <th scope="col">Listing Date</th>
-                                <th scope="col">Property Type</th>
-                                <th scope="col">Location</th>
-                                <th scope="col">Construction</th>
-                                <th scope="col">Land</th>
-                                <th scope="col">Bedrooms</th>
-                                <th scope="col">Bathrooms</th>
-                                <th scope="col">Price</th>
+                                <th scope="col" data-i18n="settings-page-listing-date">Listing Date</th>
+                                <th scope="col" data-i18n="settings-page-property-type">Property Type</th>
+                                <th scope="col" data-i18n="settings-page-location">Location</th>
+                                <th scope="col" data-i18n="settings-page-construction">Construction</th>
+                                <th scope="col" data-i18n="settings-page-land">Land</th>
+                                <th scope="col" data-i18n="settings-page-bedrooms">Bedrooms</th>
+                                <th scope="col" data-i18n="settings-page-bathrooms">Bathrooms</th>
+                                <th scope="col" data-i18n="settings-page-price">Price</th>
                                 <th scope="col">
                                     <div class="order-row">
                                         <button class="order-btn" id="favourite-order" type="button">
-                                            <span id="selected-favourite-order">Order</span>
+                                            <span id="selected-favourite-order" data-i18n="settings-page-order">Order</span>
                                             <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M10 0.863883C9.95436 1.10388 9.77171 1.24788 9.63473 1.43988C8.26486 2.87988 6.895 4.31988 5.52514 5.75988C5.29683 5.99988 5.06852 6.09588 4.74888 5.95188C4.65756 5.95188 4.52057 5.85588 4.47491 5.75988C3.05938 4.27188 1.64386 2.78388 0.228334 1.29588C-0.136963 0.911883 -0.0456384 0.287883 0.410983 0.0958825C0.639293 -0.0481175 0.913266 -0.000117473 1.09591 0.143883C1.14158 0.143883 1.18724 0.239883 1.2329 0.287883C2.46578 1.58388 3.65299 2.83188 4.88587 4.12788C4.88587 4.12788 4.93153 4.17588 4.97719 4.22388C4.97719 4.22388 5.02286 4.17588 5.06852 4.12788C6.30139 2.83188 7.53427 1.53588 8.76715 0.239883C8.99546 -0.000117473 9.22377 -0.0961175 9.5434 0.0478825C9.77171 0.143883 9.9087 0.287883 10 0.527883C10 0.527883 10 0.575883 10 0.623883V0.911883V0.863883Z" fill="#9A9A9A"/>
                                             </svg>
@@ -170,11 +170,11 @@
                                         <div class="order-dropdown" id="favourite-order-dropdown">
                                             <div class="radio-btn">
                                                 <input id="order-1" data-id="-created_at" type="radio" name="favourite_radio">
-                                                <label for="order-1" class="radio-label">Created At</label>
+                                                <label for="order-1" class="radio-label" data-i18n="settings-page-created-at">Created At</label>
                                             </div>
                                             <div class="radio-btn">
                                                 <input id="order-2" data-id="-city" type="radio" name="favourite_radio">
-                                                <label for="order-2" class="radio-label">City</label>
+                                                <label for="order-2" class="radio-label" data-i18n="settings-page-city">City</label>
                                             </div>
                                         </div>
                                     </div>
@@ -192,13 +192,13 @@
                         <form class="profile-details-container" onsubmit="profileForm(event);">
                             {% csrf_token %}
                             <div class="profile-photo-container">
-                                <span>Logo/Photo</span>
+                                <span data-i18n="profile-page-logo-slash-photo">Logo/Photo</span>
                                 <div class="profile-image-container">
                                     <img src="{{profile_info.profile_picture}}" id="profile-image" alt="Profile Image" />
                                     <input type="file" accept="image/jpeg, image/jpg, image/png" name="profile_picture" id="profile-image-input"
                                         onchange="previewImage(event);">
                                     <label for="profile-image-input">
-                                        <span>Upload</span>
+                                        <span data-i18n="profile-page-upload">Upload</span>
                                         <img src="{% static 'Assets/core/images/upload_logo.svg' %}" alt="update logo" />
                                     </label>
                                 </div>
@@ -206,22 +206,22 @@
                             <div class="profile-details">
                                 <div class="column">
                                     <div class="input">
-                                        <label for="first-name">First Name</label>
+                                        <label for="first-name" data-i18n="profile-page-first-name">First Name</label>
                                         <input type="text" value="{{profile_info.first_name}}" name="first_name" id="first-name">
                                         <small class="first-name-msg input-error-msg"></small>
                                     </div>
                                     <div class="input">
-                                        <label for="last-name">Last Name</label>
+                                        <label for="last-name" data-i18n="profile-page-last-name">Last Name</label>
                                         <input type="text" value="{{profile_info.last_name}}" name="last_name" id="last-name">
                                         <small class="last-name-msg input-error-msg"></small>
                                     </div>
                                     <div class="input">
-                                        <label for="email">Email</label>
+                                        <label for="email" data-i18n="profile-page-email">Email</label>
                                         <input type="email" value="{{profile_info.email}}" name="email" id="email">
                                         <small class="email-msg input-error-msg"></small>
                                     </div>
                                     <div class="input mobile-input">
-                                        <label for="mobile-number">Mobile Number</label>
+                                        <label for="mobile-number" data-i18n="profile-page-mobile-number">Mobile Number</label>
                                         <div>
                                             <input type="tel" value="{{profile_info.phone}}" name="phone" id="mobile-number" />
                                             <img src="{% static 'Assets/core/images/whatsapp_logo.svg' %}" alt="whatsapp logo" />
@@ -231,18 +231,18 @@
                                 </div>
                                 <div class="column">
                                     <div class="input">
-                                        <label for="business-name">Business Name</label>
+                                        <label for="business-name" data-i18n="profile-page-business-name">Business Name</label>
                                         <input type="text" value="{{profile_info.business_name}}" name="business_name" id="business-name" />
                                         <small class="business-name-msg input-error-msg"></small>
                                     </div>
                                     <div class="input">
-                                        <label for="address">Address</label>
+                                        <label for="address" data-i18n="profile-page-address">Address</label>
                                         <input type="text" value="{{profile_info.address}}" name="address"
                                             id="address" />
                                         <small class="address-msg input-error-msg"></small>
                                     </div>
                                     <div class="input">
-                                        <label for="city">City</label>
+                                        <label for="city" data-i18n="profile-page-city">City</label>
                                         <input type="text" value="{{profile_info.city}}" name="city" id="city" />
                                         <small class="city-msg input-error-msg"></small>
                                     </div>
@@ -250,11 +250,11 @@
                             </div>
                             <button type="submit" class="save-profile-details-btn">
                                 <span class="spinner-border spinner-border-sm hide" role="status" aria-hidden="true"></span>
-                                <span class="btn-text">Save Changes</span>
+                                <span class="btn-text" data-i18n="profile-page-save-changes">Save Changes</span>
                             </button>
                         </form>
                         <form class="plan-container" onsubmit="changePlan(event);">
-                            <span>Plan</span>
+                            <span data-i18n="profile-page-plan">Plan</span>
                             <div class="plan-card-container">
                                 {% if plan_list %}
                                 {% for obj in plan_list.data %}
@@ -266,15 +266,15 @@
                                                 <p><span>${{obj.price|floatformat:"0"}}.</span><span>{{obj.price|slice:"-2:"}}</span></p>
                                             </div>
                                             <div class="plan-period">
-                                                <span>Monthly</span>
+                                                <span data-i18n="profile-page-monthly">Monthly</span>
                                             </div>
                                         </div>
                                         <div class="plan-features">
                                             <span>{{obj.name}}</span>
                                             <ul>
-                                                <li>Upload up to <span>{{obj.num_of_listings}}</span> properties</li>
-                                                <li>Maximum <span>{{obj.num_of_images}}</span> images per listing</li>
-                                                <li>Contact via Whatsapp</li>
+                                                <li><span data-i18n="profile-page-upload-up-to">Upload up to</span> <span class="focus">{{obj.num_of_listings}}</span> <span data-i18n="profile-page-properties">properties</span></li>
+                                                <li><span data-i18n="profile-page-maximum">Maximum</span> <span class="focus">{{obj.num_of_images}}</span> <span data-i18n="profile-page-images-per-listing">images per listing</span></li>
+                                                <li data-i18n="profile-page-contact-via-whatsapp">Contact via Whatsapp</li>
                                             </ul>
                                         </div>
                                     </label>
@@ -284,7 +284,7 @@
                             </div>
                             <button class="change-plan-btn" type="submit">
                                 <span class="spinner-border spinner-border-sm hide" role="status" aria-hidden="true"></span>
-                                <span class="btn-text">Change Plan</span>
+                                <span class="btn-text" data-i18n="profile-page-change-plan">Change Plan</span>
                             </button>
                             <small class="subscription-msg input-error-msg"></small>
                         </form>
