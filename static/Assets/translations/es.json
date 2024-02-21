@@ -181,6 +181,55 @@
     "profile-page-change-plan": "Cambio Plan",
 
 
+    "add-property-page-list-your-property": "Lista tu propiedad",
+    "add-property-page-upload-images-here": "Sube tus imágenes aquí",
+    "add-property-page-description": "Descripción",
+    "add-property-page-criteria": "Criterio",
+    "add-property-page-sell": "Vender",
+    "add-property-page-rent": "Alquilar",
+    "add-property-page-price": "Precio",
+    "add-property-page-property-type": "Tipo de propiedad",
+    "add-property-page-choose": "Elija",
+    "add-property-page-house": "Casa",
+    "add-property-page-apartment": "Departamento",
+    "add-property-page-land": "Terreno",
+    "add-property-page-retail-space": "Local Commercial",
+    "add-property-page-office": "Officina",
+    "add-property-page-practice": "Consultorio",
+    "add-property-page-warehouse": "Bodega",
+    "add-property-page-suite": "Suite",
+    "add-property-page-construction": "Construccion",
+    "add-property-page-neighbourhood": "Vecindario",
+    "add-property-page-bedrooms": "Dormitorios",
+    "add-property-page-bathrooms": "Baños",
+    "add-property-page-city": "Ciudad",
+    "add-property-page-parking": "Parqueo",
+    "add-property-page-antiquity": "Antiguedad",
+    "add-property-page-location": "Ubicación",
+    "add-property-page-ameneties": "Amenidades",
+    "add-property-page-amenety-message": "Sepárelo con una coma después de cada servicio.",
+    "add-property-page-publish": "Publicar",
+
+
+    "successful-listing-page-property-listed": "Propiedad Listada!",
+    "successful-listing-page-message": "Pronto recibirás un correo electrónico de confirmación. No recibiste un correo electrónico? Por favor revise su carpeta de spam, si aún no aparece, verifique si la propiedad aparece en su perfil.",
+    "successful-listing-page-my-listings": "Mis Listados",
+
+
+    "about-us-page-heading-message-1": "La estrategia de Todo.com.ec es convertirse en el lugar al que acuden primero cuando esten en busca de un bien.",
+    "about-us-page-heading-message-2": "Lograremos esto mediante la creación de un mercado digital más simple y eficiente.",
+    "about-us-page-card-1-heading": "Nuestra Mision",
+    "about-us-page-card-1-message": "Nuestra misión es interrumpir la industria de bienes raíces y el mercado de bienes online de Ecuador, proporcionando a los compradores, vendedores y agentes inmobiliarios los recursos que necesitan, para tener todo en un solo lugar.",
+    "about-us-page-card-2-pre-heading": "Apoyando a los corredores e inmobiliarias",
+    "about-us-page-card-2-heading": "Un solo lugar con todos los bienes del pais a tu disposicion.",
+    "about-us-page-card-2-message-part-1": "Lograremos ser el primer sitio con todos los bienes disponibles a nivel nacional, por una sola razon, el costo.",
+    "about-us-page-card-2-message-part-2": "En Todo.com.ec podras empezar a anunciar sin nigun costo.",
+    "about-us-page-news": "Noticias",
+
+
+    "news-page-return": "Volver",
+
+
     "property-new": "Nuevo",
     "back-to-login": "Atrás para iniciar sesión"
 }

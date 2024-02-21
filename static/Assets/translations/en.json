@@ -181,6 +181,55 @@
     "profile-page-change-plan": "Change Plan",
 
 
+    "add-property-page-list-your-property": "List your property",
+    "add-property-page-upload-images-here": "Upload your images here",
+    "add-property-page-description": "Description",
+    "add-property-page-criteria": "Criteria",
+    "add-property-page-sell": "Sell",
+    "add-property-page-rent": "Rent",
+    "add-property-page-price": "Price",
+    "add-property-page-property-type": "Property Type",
+    "add-property-page-choose": "Choose",
+    "add-property-page-house": "House",
+    "add-property-page-apartment": "Apartment",
+    "add-property-page-land": "Land",
+    "add-property-page-retail-space": "Retail Space",
+    "add-property-page-office": "Office",
+    "add-property-page-practice": "Practice",
+    "add-property-page-warehouse": "Warehouse",
+    "add-property-page-suite": "Suite",
+    "add-property-page-construction": "Construction",
+    "add-property-page-neighbourhood": "Neighbourhood",
+    "add-property-page-bedrooms": "Bedrooms",
+    "add-property-page-bathrooms": "Bathrooms",
+    "add-property-page-city": "City",
+    "add-property-page-parking": "Parking",
+    "add-property-page-antiquity": "Antiquity",
+    "add-property-page-location": "Location",
+    "add-property-page-ameneties": "Ameneties",
+    "add-property-page-amenety-message": "Seperate with a coma after each amenity",
+    "add-property-page-publish": "Publish",
+
+
+    "successful-listing-page-property-listed": "Property Listed!",
+    "successful-listing-page-message": "You will soon receive a confirmation email. Didn’t receive an email? Please check your spam folder, if it still doesn’t show, verify if the property is listed in your profile.",
+    "successful-listing-page-my-listings": "My Listings",
+
+
+    "about-us-page-heading-message-1": "The strategy of Todo.com.ec is to become the place they go first when they are looking for a good.",
+    "about-us-page-heading-message-2": "We will achieve this by creating a simpler and more efficient digital marketplace.",
+    "about-us-page-card-1-heading": "Our Mission",
+    "about-us-page-card-1-message": "Our mission is to disrupt the real estate industry and Ecuador's online property market, providing buyers, sellers and real estate agents with the resources they need, to have everything in one place.",
+    "about-us-page-card-2-pre-heading": "Supporting brokers and real estate agents",
+    "about-us-page-card-2-heading": "A single place with all the country's goods at your disposal.",
+    "about-us-page-card-2-message-part-1": "We will be the first site with all the goods available nationwide, for one reason only, cost.",
+    "about-us-page-card-2-message-part-2": "At Todo.com.ec you can start advertising at no cost.",
+    "about-us-page-news": "News",
+
+
+    "news-page-return": "Return",
+
+
     "property-new": "New",
     "back-to-login": "Back to log in"
 }
