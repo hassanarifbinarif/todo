@@ -161,6 +161,38 @@
     "settings-page-city": "Ciudad",
 
 
+    "edit-property-page-edit-property": "Editar Propiedad",
+    "edit-property-page-listing-ref": "Referencia de Listado",
+    "edit-property-page-listing-date": "Fecha de Listado",
+    "edit-property-page-load-more": "Cargar Mas",
+    "edit-property-page-description": "Descripción",
+    "edit-property-page-criteria": "Criterio",
+    "edit-property-page-sell": "Vender",
+    "edit-property-page-rent": "Alquilar",
+    "edit-property-page-price": "Precio",
+    "edit-property-page-property-type": "Tipo de propiedad",
+    "edit-property-page-choose": "Elija",
+    "edit-property-page-house": "Casa",
+    "edit-property-page-apartment": "Departamento",
+    "edit-property-page-land": "Terreno",
+    "edit-property-page-retail-space": "Local Commercial",
+    "edit-property-page-office": "Officina",
+    "edit-property-page-practice": "Consultorio",
+    "edit-property-page-warehouse": "Bodega",
+    "edit-property-page-suite": "Suite",
+    "edit-property-page-construction": "Construccion",
+    "edit-property-page-neighbourhood": "Vecindario",
+    "edit-property-page-bedrooms": "Dormitorios",
+    "edit-property-page-bathrooms": "Baños",
+    "edit-property-page-city": "Ciudad",
+    "edit-property-page-parking": "Parqueo",
+    "edit-property-page-antiquity": "Antiguedad",
+    "edit-property-page-location": "Ubicación",
+    "edit-property-page-ameneties": "Amenidades",
+    "edit-property-page-amenety-message": "Sepárelo con una coma después de cada servicio.",
+    "edit-property-page-publish": "Publicar",
+
+
     "profile-page-logo-slash-photo": "Logotipo/Foto",
     "profile-page-upload": "Subir",
     "profile-page-first-name": "Nombre de pila",
@@ -228,6 +260,18 @@
 
 
     "news-page-return": "Volver",
+
+
+    "boost-modal-feature-ad": "Destacar tu anuncio?",
+    "boost-modal-message": "Deseas destacar tu anuncio por 30 dias por tan solo",
+    "boost-modal-feature": "Destacar",
+    "boost-modal-no-thanks": "No, Gracias",
+
+
+    "delete-listing-modal-delete-listing": "Eliminar Listado?",
+    "delete-listing-modal-message": "Está seguro de que desea eliminar el siguiente listado?",
+    "delete-listing-modal-confirm": "Confirmar",
+    "delete-listing-modal-back": "Atrás",
 
 
     "property-new": "Nuevo",

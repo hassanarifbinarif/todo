@@ -299,12 +299,12 @@
                 </svg>
                 <div class="add-property-card">
                     <div class="add-property-container-header">
-                        <span>Edit Property</span>
+                        <span data-i18n="edit-property-page-edit-property">Edit Property</span>
                     </div>
                     <form class="add-property-main-content" onsubmit="updateListing(event);">
                         {% csrf_token %}
-                        <p>Listing Ref: <span id="listing-id"></span></p>
-                        <p>Listing Date: <span id="listing-date"></span></p>
+                        <p><span data-i18n="edit-property-page-listing-ref">Listing Ref</span>: <span id="listing-id"></span></p>
+                        <p><span data-i18n="edit-property-page-listing-date">Listing Date</span>: <span id="listing-date"></span></p>
                         <div class="image-input-container">
                             <div class="uploaded-image-container" id="uploaded-image-container">
                                 <input type="file" multiple accept="image/jpeg, image/jpg, image/png, image/gif"
@@ -322,13 +322,13 @@
                                                 xlink:href="data:image/png;base64,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" />
                                         </defs>
                                     </svg>
-                                    <span>Load More</span>
+                                    <span data-i18n="edit-property-page-load-more">Load More</span>
                                 </label>
                             </div>
                             <small class="image-msg input-error-msg"></small>
                         </div>
                         <div class="property-description-input">
-                            <span>Description</span>
+                            <span data-i18n="edit-property-page-description">Description</span>
                             <textarea name="description" placeholder="Samborondon, Ceibos etc"
                                 id="property-description" cols="30" rows="10"></textarea>
                             <small class="description-msg input-error-msg"></small>
@@ -336,55 +336,55 @@
                         <div class="property-details-input-container">
                             <div class="property-details-input-group">
                                 <div class="">
-                                    <p>Criteria</p>
+                                    <p data-i18n="edit-property-page-criteria">Criteria</p>
                                     <div class="criteria-radio-container">
                                         <div class="criteria-radio-btn">
                                             <input id="sell" type="radio" name="criteria" value="sell" required />
-                                            <label for="sell" class="radio-label">Sell</label>
+                                            <label for="sell" class="radio-label" data-i18n="edit-property-page-sell">Sell</label>
                                         </div>
                                         <div class="criteria-radio-btn">
                                             <input id="rent" type="radio" name="criteria" value="rent" required />
-                                            <label for="rent" class="radio-label">Rent</label>
+                                            <label for="rent" class="radio-label" data-i18n="edit-property-page-rent">Rent</label>
                                         </div>
                                     </div>
                                     <small class="criteria-msg input-error-msg"></small>
                                 </div>
                                 <div class="">
-                                    <p>Price</p>
+                                    <p data-i18n="edit-property-page-price">Price</p>
                                     <input class="general-input" type="number" step="any" min="0.0" placeholder="$450,000"
                                         name="price" id="price" required />
                                 </div>
                                 <div class="">
-                                    <p>Property Type</p>
+                                    <p data-i18n="edit-property-page-property-type">Property Type</p>
                                     <select class="" name="property_type" id="property-type" required>
-                                        <option value disabled selected hidden>Choose</option>
-                                        <option value="house">House</option>
-                                        <option value="apartment">Apartment</option>
-                                        <option value="land">Land</option>
-                                        <option value="retail_space">Retail Space</option>
-                                        <option value="office">Office</option>
-                                        <option value="practice">Practice</option>
-                                        <option value="warehouse">Warehouse</option>
-                                        <option value="suite">Suite</option>
+                                        <option data-i18n="edit-property-page-choose" value disabled selected hidden>Choose</option>
+                                        <option data-i18n="edit-property-page-house" value="house">House</option>
+                                        <option data-i18n="edit-property-page-apartment" value="apartment">Apartment</option>
+                                        <option data-i18n="edit-property-page-land" value="land">Land</option>
+                                        <option data-i18n="edit-property-page-retail-space" value="retail_space">Retail Space</option>
+                                        <option data-i18n="edit-property-page-office" value="office">Office</option>
+                                        <option data-i18n="edit-property-page-practice" value="practice">Practice</option>
+                                        <option data-i18n="edit-property-page-warehouse" value="warehouse">Warehouse</option>
+                                        <option data-i18n="edit-property-page-suite" value="suite">Suite</option>
                                     </select>
                                 </div>
                                 <div class="">
-                                    <p>Land</p>
+                                    <p data-i18n="edit-property-page-land">Land</p>
                                     <input class="general-input" type="number" step="any" placeholder="450m2" min="0" name="land"
                                         id="land" required />
                                 </div>
                                 <div class="">
-                                    <p>Construction</p>
+                                    <p data-i18n="edit-property-page-construction">Construction</p>
                                     <input class="general-input" type="number" step="any" placeholder="450m2" min="0"
                                         name="construction" id="construction" required />
                                 </div>
                                 <div class="neighbourhood-input">
-                                    <p>Neighbourhood</p>
+                                    <p data-i18n="edit-property-page-neighbourhood">Neighbourhood</p>
                                     <input class="general-input" type="text" placeholder="Samborondon, Ceibos etc"
                                         name="neighbourhood" id="neighbourhood" required />
                                 </div>
                                 <div class="bedroom-input">
-                                    <p>Bedrooms</p>
+                                    <p data-i18n="edit-property-page-bedrooms">Bedrooms</p>
                                     <div class="btn-group bedroom-count-radio-group" role="group"
                                         aria-label="Basic radio toggle button group">
                                         <input type="radio" class="btn-check" name="bedrooms" id="bedroombtnradio1"
@@ -414,7 +414,7 @@
                                     </div>
                                 </div>
                                 <div class="bathroom-input">
-                                    <p>Bathrooms</p>
+                                    <p data-i18n="edit-property-page-bathrooms">Bathrooms</p>
                                     <div class="btn-group bedroom-count-radio-group" role="group"
                                         aria-label="Basic radio toggle button group">
                                         <input type="radio" class="btn-check" name="bathrooms" id="bathroombtnradio1"
@@ -444,24 +444,24 @@
                                     </div>
                                 </div>
                                 <div class="city-input">
-                                    <p>City</p>
+                                    <p data-i18n="edit-property-page-city">City</p>
                                     <input class="general-input" type="text" placeholder="Guayaquil, Quito etc"
                                         name="city" id="city" required />
                                 </div>
                                 <div class="">
-                                    <p>Parking</p>
+                                    <p data-i18n="edit-property-page-parking">Parking</p>
                                     <input class="general-input" type="number" min="0" placeholder="2" name="parking"
                                         id="parking" required />
                                 </div>
                                 <div class="">
-                                    <p>Antiquity</p>
+                                    <p data-i18n="edit-property-page-antiquity">Antiquity</p>
                                     <input class="general-input" type="number" min="0" placeholder="10" name="antiquity"
                                         id="antiquity" required />
                                 </div>
                             </div>
                             <div class="other-inputs">
                                 <div class="location-input">
-                                    <p>Location</p>
+                                    <p data-i18n="edit-property-page-location">Location</p>
                                     <div class="search-location">
                                         <input class="general-input" type="text" placeholder="Aires del batan"
                                             name="location" id="location-address" />
@@ -482,7 +482,7 @@
                                     </div>
                                 </div>
                                 <div class="amenety-input">
-                                    <p>Ameneties <span>&nbsp; &nbsp; &nbsp;Seperate with a coma after each amenity</span></p>
+                                    <p><span data-i18n="edit-property-page-ameneties">Ameneties</span> &nbsp; &nbsp; &nbsp;<span data-i18n="edit-property-page-amenety-message">Seperate with a coma after each amenity</span></p>
                                     <div class="tags-container">
                                         <div class="tags-input">
                                             <div class="tags"></div>
@@ -495,7 +495,7 @@
                                 <button type="submit" class="publish-property-btn" id="publish-property-btn">
                                     <span class="spinner-border spinner-border-sm hide" role="status"
                                         aria-hidden="true"></span>
-                                    <span class="btn-text">Publish</span>
+                                    <span class="btn-text" data-i18n="edit-property-page-publish">Publish</span>
                                 </button>
                                 <small class="update-error-msg input-error-msg"></small>
                             </div>

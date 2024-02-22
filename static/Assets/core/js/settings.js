@@ -308,7 +308,8 @@ function openDelListingModal(modalId, id) {
     let modal = document.querySelector(`#${modalId}`);
     let form = modal.querySelector('form');
     form.setAttribute('onsubmit', `deleteListing(event, '${id}')`);
-    form.querySelector('.btn-text').innerText = 'Confirm';
+    // form.querySelector('.btn-text').innerText = 'Confirm';
+    form.querySelector('.btn-text').innerText = i18n.messageStore.messages[currentLang]['delete-listing-modal-confirm'] || 'Confirm';
     document.querySelector(`.${modalId}`).click();
 }
 
@@ -327,6 +328,9 @@ async function deleteListing(event, id) {
     if(response.status == 204) {
         afterLoad(button, "Listing Deleted");
         getUserListings(requiredUserListingsURL);
+        setTimeout(() => {
+            document.querySelector('.del-listing').click();
+        }, 1500)
     }
     else if(response.status == 404) {
         afterLoad(button, "Listing not found");
@@ -493,7 +497,8 @@ async function toggleListingView(event, data) {
         lat = latLng.lat;
         lng = latLng.lng;
         createMarkers(map, lat, lng);
-        form.querySelector('#publish-property-btn').querySelector('.btn-text').innerText = 'Publish';
+        // form.querySelector('#publish-property-btn').querySelector('.btn-text').innerText = 'Publish';
+        form.querySelector('#publish-property-btn').querySelector('.btn-text').innerText = i18n.messageStore.messages[currentLang]['edit-property-page-publish'] || 'Publish';
         form.querySelector('.update-error-msg').classList.remove('active');
         listingEditView.classList.remove('hide');
     }

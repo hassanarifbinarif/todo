@@ -32,6 +32,7 @@ function changeLanguage(lang) {
 
     if (i18n.locale != lang) {
         i18n.locale = lang;
+        currentLang = lang;
         updateContent();
     }
 }

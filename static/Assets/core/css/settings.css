@@ -1120,7 +1120,7 @@ select {
     width: 100%;
 }
 
-.amenety-input>p>span {
+.amenety-input>p>span:last-of-type {
     font-weight: 300;
     font-size: .875rem;
     line-height: 1rem;

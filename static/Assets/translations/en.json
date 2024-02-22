@@ -159,6 +159,38 @@
     "settings-page-order": "Order",
     "settings-page-created-at": "Created At",
     "settings-page-city": "City",
+
+
+    "edit-property-page-edit-property": "Edit Property",
+    "edit-property-page-listing-ref": "Listing Ref",
+    "edit-property-page-listing-date": "Listing Date",
+    "edit-property-page-load-more": "Load More",
+    "edit-property-page-description": "Description",
+    "edit-property-page-criteria": "Criteria",
+    "edit-property-page-sell": "Sell",
+    "edit-property-page-rent": "Rent",
+    "edit-property-page-price": "Price",
+    "edit-property-page-property-type": "Property Type",
+    "edit-property-page-choose": "Choose",
+    "edit-property-page-house": "House",
+    "edit-property-page-apartment": "Apartment",
+    "edit-property-page-land": "Land",
+    "edit-property-page-retail-space": "Retail Space",
+    "edit-property-page-office": "Office",
+    "edit-property-page-practice": "Practice",
+    "edit-property-page-warehouse": "Warehouse",
+    "edit-property-page-suite": "Suite",
+    "edit-property-page-construction": "Construction",
+    "edit-property-page-neighbourhood": "Neighbourhood",
+    "edit-property-page-bedrooms": "Bedrooms",
+    "edit-property-page-bathrooms": "Bathrooms",
+    "edit-property-page-city": "City",
+    "edit-property-page-parking": "Parking",
+    "edit-property-page-antiquity": "Antiquity",
+    "edit-property-page-location": "Location",
+    "edit-property-page-ameneties": "Ameneties",
+    "edit-property-page-amenety-message": "Seperate with a coma after each amenity",
+    "edit-property-page-publish": "Publish",
     
     
     "profile-page-logo-slash-photo": "Logo/Photo",
@@ -228,6 +260,18 @@
 
 
     "news-page-return": "Return",
+
+
+    "boost-modal-feature-ad": "Feature your ad?",
+    "boost-modal-message": "Do you want to feature your ad for 30 days for only",
+    "boost-modal-feature": "Feature",
+    "boost-modal-no-thanks": "No, Thanks",
+
+
+    "delete-listing-modal-delete-listing": "Delete Listing?",
+    "delete-listing-modal-message": "Are you sure you wish to delete the following listing?",
+    "delete-listing-modal-confirm": "Confirm",
+    "delete-listing-modal-back": "Back",
 
 
     "property-new": "New",
