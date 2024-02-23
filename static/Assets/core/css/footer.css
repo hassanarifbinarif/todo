@@ -89,6 +89,14 @@ footer a:hover {
     margin-top: 8px;
 }
 
+.footer-links .column-2 {
+    padding-left: 0px;
+}
+
+.footer-privacy-terms-row > div {
+    padding: 0px;
+}
+
 
 @media (max-width: 768px) {
 
@@ -120,6 +128,15 @@ footer a:hover {
 
     .subscribe-btn {
         width: 100%;
+    }
+
+    .footer-links .column-2 {
+        padding-left: calc(var(--bs-gutter-x) * .5);
+    }
+
+    .footer-privacy-terms-row {
+        gap: 10px;
+        padding-left: calc(var(--bs-gutter-x) * .5);
     }
 }
 

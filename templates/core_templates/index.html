@@ -26,11 +26,11 @@
                 <span>Google Adsense</span>
             </div>
         </div>
-        <h1>Find the house of your dreams</h1>
+        <h1 data-i18n="home-welcome-sentence">Find the house of your dreams</h1>
         <div class="filter-property-container">
             <div class="property-tab-container">
                 <div class="property-tab">
-                    <span>Property</span>
+                    <span data-i18n="home-property">Property</span>
                 </div>
             </div>
             <form class="property-select-options" action="/property-search/" method="post">
@@ -38,9 +38,9 @@
                 <div class="option-row1">
                     <div class="option-row1-col">
                         <div class="option">
-                            <span>Buy or Rent</span>
+                            <span data-i18n="home-buy-or-rent">Buy or Rent</span>
                             <button class="filter-btn" id="criteria" type="button">
-                                <span id="selected-criteria">Choose</span>
+                                <span id="selected-criteria" data-i18n="home-choose">Choose</span>
                                 <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M10 0.863883C9.95436 1.10388 9.77171 1.24788 9.63473 1.43988C8.26486 2.87988 6.895 4.31988 5.52514 5.75988C5.29683 5.99988 5.06852 6.09588 4.74888 5.95188C4.65756 5.95188 4.52057 5.85588 4.47491 5.75988C3.05938 4.27188 1.64386 2.78388 0.228334 1.29588C-0.136963 0.911883 -0.0456384 0.287883 0.410983 0.0958825C0.639293 -0.0481175 0.913266 -0.000117473 1.09591 0.143883C1.14158 0.143883 1.18724 0.239883 1.2329 0.287883C2.46578 1.58388 3.65299 2.83188 4.88587 4.12788C4.88587 4.12788 4.93153 4.17588 4.97719 4.22388C4.97719 4.22388 5.02286 4.17588 5.06852 4.12788C6.30139 2.83188 7.53427 1.53588 8.76715 0.239883C8.99546 -0.000117473 9.22377 -0.0961175 9.5434 0.0478825C9.77171 0.143883 9.9087 0.287883 10 0.527883C10 0.527883 10 0.575883 10 0.623883V0.911883V0.863883Z" fill="#000000"/>
                                 </svg>
@@ -48,18 +48,18 @@
                             <div class="filter-dropdown" id="criteria-dropdown">
                                 <div class="radio-btn">
                                     <input id="buy" type="radio" value="sell" name="criteria_radio">
-                                    <label for="buy" class="radio-label">Buy</label>
+                                    <label for="buy" class="radio-label" data-i18n="home-buy">Buy</label>
                                 </div>
                                 <div class="radio-btn">
                                     <input id="rent" type="radio" value="rent" name="criteria_radio">
-                                    <label for="rent" class="radio-label">Rent</label>
+                                    <label for="rent" class="radio-label" data-i18n="home-rent">Rent</label>
                                 </div>
                             </div>
                         </div>
                         <div class="option">
-                            <span>Type of Property</span>
+                            <span data-i18n="home-type-of-property">Type of Property</span>
                             <button class="filter-btn" id="type-of-property" type="button">
-                                <span id="selected-property-type">Choose</span>
+                                <span id="selected-property-type" data-i18n="home-choose">Choose</span>
                                 <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M10 0.863883C9.95436 1.10388 9.77171 1.24788 9.63473 1.43988C8.26486 2.87988 6.895 4.31988 5.52514 5.75988C5.29683 5.99988 5.06852 6.09588 4.74888 5.95188C4.65756 5.95188 4.52057 5.85588 4.47491 5.75988C3.05938 4.27188 1.64386 2.78388 0.228334 1.29588C-0.136963 0.911883 -0.0456384 0.287883 0.410983 0.0958825C0.639293 -0.0481175 0.913266 -0.000117473 1.09591 0.143883C1.14158 0.143883 1.18724 0.239883 1.2329 0.287883C2.46578 1.58388 3.65299 2.83188 4.88587 4.12788C4.88587 4.12788 4.93153 4.17588 4.97719 4.22388C4.97719 4.22388 5.02286 4.17588 5.06852 4.12788C6.30139 2.83188 7.53427 1.53588 8.76715 0.239883C8.99546 -0.000117473 9.22377 -0.0961175 9.5434 0.0478825C9.77171 0.143883 9.9087 0.287883 10 0.527883C10 0.527883 10 0.575883 10 0.623883V0.911883V0.863883Z" fill="#000000"/>
                                 </svg>
@@ -67,42 +67,42 @@
                             <div class="filter-dropdown" id="type-of-property-dropdown">
                                 <div class="radio-btn">
                                     <input id="house" type="radio" value="house" name="property_radio">
-                                    <label for="house" class="radio-label">House</label>
+                                    <label for="house" class="radio-label" data-i18n="home-house">House</label>
                                 </div>
                                 <div class="radio-btn">
                                     <input id="apartment" type="radio" value="apartment" name="property_radio">
-                                    <label for="apartment" class="radio-label">Apartment</label>
+                                    <label for="apartment" class="radio-label" data-i18n="home-apartment">Apartment</label>
                                 </div>
                                 <div class="radio-btn">
                                     <input id="land" type="radio" value="land" name="property_radio">
-                                    <label for="land" class="radio-label">Land</label>
+                                    <label for="land" class="radio-label" data-i18n="home-land">Land</label>
                                 </div>
                                 <div class="radio-btn">
                                     <input id="retail_space" type="radio" value="retail_space" name="property_radio">
-                                    <label for="retail_space" class="radio-label">Retail Space</label>
+                                    <label for="retail_space" class="radio-label" data-i18n="home-retail-space">Retail Space</label>
                                 </div>
                                 <div class="radio-btn">
                                     <input id="office" type="radio" value="office" name="property_radio">
-                                    <label for="office" class="radio-label">Office</label>
+                                    <label for="office" class="radio-label" data-i18n="home-office">Office</label>
                                 </div>
                                 <div class="radio-btn">
                                     <input id="practice" type="radio" value="practice" name="property_radio">
-                                    <label for="practice" class="radio-label">Practice</label>
+                                    <label for="practice" class="radio-label" data-i18n="home-practice">Practice</label>
                                 </div>
                                 <div class="radio-btn">
                                     <input id="warehouse" type="radio" value="warehouse" name="property_radio">
-                                    <label for="warehouse" class="radio-label">Warehouse</label>
+                                    <label for="warehouse" class="radio-label" data-i18n="home-warehouse">Warehouse</label>
                                 </div>
                                 <div class="radio-btn">
                                     <input id="suite" type="radio" value="suite" name="property_radio">
-                                    <label for="suite" class="radio-label">Suite</label>
+                                    <label for="suite" class="radio-label" data-i18n="home-suite">Suite</label>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="option-row1-col">
                         <div class="option">
-                            <span>Price</span>
+                            <span data-i18n="home-price">Price</span>
                             <div class="min-max-inputs">
                                 <input type="number" placeholder="Min" name="min_price" />
                                 <input type="number" placeholder="Max" name="max_price" />
@@ -112,13 +112,13 @@
                 </div>
                 <div class="option-row2">
                     <div class="option">
-                        <span>City</span>
+                        <span data-i18n="home-city">City</span>
                         <input type="text" name="city" id="city" />
                     </div>
                     <!-- <a href="{% url 'property_search' %}"> -->
                         <button type="submit" class="search-home-btn">
-                            <span>Search Homes</span>
-                            <span>{{total_properties}} Listings found</span>
+                            <span data-i18n="home-search-homes">Search Homes</span>
+                            <span>{{total_properties}} <span data-i18n="home-listings-found">Listings found</span></span>
                         </button>
                     <!-- </a> -->
                 </div>
@@ -130,7 +130,7 @@
         <div class="main-content">
             <div class="spotlight">
                 <div class="spotlight-header">
-                    <h2>Spotlight</h2>
+                    <h2 data-i18n="home-spotlight">Spotlight</h2>
                     <div class="spotlight-navigations hide">
                         <svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -152,7 +152,7 @@
                             <div class="spotlight-card-image-container">
                                 {% if obj.is_new %}
                                 <div class="card-type">
-                                    <span>New</span>
+                                    <span data-i18n="property-new">New</span>
                                 </div>
                                 {% endif %}
                                 <img src="{{obj.images.0.image}}" loading="lazy" alt="Property Image" />
@@ -207,7 +207,7 @@
                     </a>
                     {% empty %}
                     <div>
-                        <span>No Spotlight Properties</span>
+                        <span data-i18n="home-no-spotlight-properties">No Spotlight Properties</span>
                     </div>
                     {% endfor %}
                     {% endif %}
@@ -216,7 +216,7 @@
             {% if recently_viewed %}
             <div class="spotlight">
                 <div class="spotlight-header">
-                    <h2>Recently Viewed</h2>
+                    <h2 data-i18n="home-recently-viewed">Recently Viewed</h2>
                     <div class="spotlight-navigations hide">
                         <svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -237,7 +237,7 @@
                             <div class="spotlight-card-image-container">
                                 {% if obj.is_new %}
                                 <div class="card-type">
-                                    <span>New</span>
+                                    <span data-i18n="property-new">New</span>
                                 </div>
                                 {% endif %}
                                 <img src="{{obj.images.0.image}}" loading="lazy" alt="Property Image" />
@@ -292,7 +292,7 @@
                     </a>
                     {% empty %}
                     <div>
-                        <span>Nothing Viewed Recently</span>
+                        <span data-i18n="home-nothing-viewed-recently">Nothing Viewed Recently</span>
                     </div>
                     {% endfor %}
                 </div>

@@ -389,6 +389,15 @@ function roundDecimalPlaces(number) {
 }
 
 
+function changeLocale(option, value){
+    setCookie('lang', value, 99999999999);
+    document.getElementById('current-lang-name').textContent = option.textContent;
+    changeLanguage(value);
+    // location.reload(true);
+}
+
+
+
 function displayMessages(obj, errorElement) {
     for (const key in obj) {
         if (obj.hasOwnProperty(key)) {

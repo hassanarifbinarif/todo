@@ -37,7 +37,7 @@
             <div class="filter-form-wrapper" id="filter-form-wrapper">
                 <form class="filter-form" id="filter-form" onchange="filterPropertyForm(event);">
                     <div class="criteria-search">
-                        <span>Criteria</span>
+                        <span data-i18n="search-page-criteria">Criteria</span>
                         <div class="criteria-radio-group">
                             <div class="criteria-radio-btn">
                                 <input id="buy" type="radio" {% if criteria == 'sell' %}checked{% endif %} value="sell" name="criteria_radio">
@@ -50,67 +50,67 @@
                         </div>
                     </div>
                     <div class="property-type-filter">
-                        <span>Property Type</span>
+                        <span data-i18n="search-page-property-type">Property Type</span>
                         <div class="property-type-checkbox-group">
                             <div class="form-check">
                                 <input class="form-check-input" {% if property_type == 'house' %}checked{% endif %} name="property_type" type="checkbox" value="house" id="house">
-                                <label class="form-check-label" for="house">
+                                <label class="form-check-label" for="house" data-i18n="search-page-house">
                                     House
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" {% if property_type == 'apartment' %}checked{% endif %} name="property_type" type="checkbox" value="apartment" id="apartment">
-                                <label class="form-check-label" for="apartment">
+                                <label class="form-check-label" for="apartment" data-i18n="search-page-apartment">
                                     Apartment
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" {% if property_type == 'land' %}checked{% endif %} name="property_type" type="checkbox" value="land" id="land">
-                                <label class="form-check-label" for="land">
+                                <label class="form-check-label" for="land" data-i18n="search-page-land">
                                     Land
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" {% if property_type == 'retail_space' %}checked{% endif %} name="property_type" type="checkbox" value="retail_space" id="retail">
-                                <label class="form-check-label" for="retail_space">
+                                <label class="form-check-label" for="retail_space" data-i18n="search-page-retail-space">
                                     Retail Space
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" {% if property_type == 'office' %}checked{% endif %} name="property_type" type="checkbox" value="office" id="office">
-                                <label class="form-check-label" for="office">
+                                <label class="form-check-label" for="office" data-i18n="search-page-office">
                                     Office
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" {% if property_type == 'practice' %}checked{% endif %} type="checkbox" value="practice" id="practice">
-                                <label class="form-check-label" for="practice">
+                                <label class="form-check-label" for="practice" data-i18n="search-page-practice">
                                     Practice
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" {% if property_type == 'warehouse' %}checked{% endif %} name="property_type" type="checkbox" value="warehouse" id="warehouse">
-                                <label class="form-check-label" for="warehouse">
+                                <label class="form-check-label" for="warehouse" data-i18n="search-page-warehouse">
                                     Warehouse
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" {% if property_type == 'suite' %}checked{% endif %} name="property_type" type="checkbox" value="suite" id="suite">
-                                <label class="form-check-label" for="suite">
+                                <label class="form-check-label" for="suite" data-i18n="search-page-suite">
                                     Suite
                                 </label>
                             </div>
                         </div>
                     </div>
                     <div class="property-price">
-                        <span>Price</span>
+                        <span data-i18n="search-page-price">Price</span>
                         <div class="property-minmax-price-input-group">
                             <input type="number" {% if min_price%}value="{{min_price}}"{% endif %} name="min_price" id="" placeholder="Min">
                             <input type="number" {% if max_price%}value="{{max_price}}"{% endif %} name="max_price" id="" placeholder="Max">
                         </div>
                     </div>
                     <div class="bedroom-count-filter">
-                        <span>Bedrooms</span>
+                        <span data-i18n="search-page-bedrooms">Bedrooms</span>
                         <div class="btn-group bedroom-count-radio-group" role="group"
                             aria-label="Basic radio toggle button group">
                             <input type="radio" class="btn-check" name="bedroombtnradio" value="1" id="bedroombtnradio1">
@@ -130,7 +130,7 @@
                         </div>
                     </div>
                     <div class="bedroom-count-filter">
-                        <span>Bathrooms</span>
+                        <span data-i18n="search-page-bathrooms">Bathrooms</span>
                         <div class="btn-group bedroom-count-radio-group" role="group"
                             aria-label="Basic radio toggle button group">
                             <input type="radio" class="btn-check" name="bathroombtnradio" value="1" id="bathroombtnradio1">
@@ -150,67 +150,67 @@
                         </div>
                     </div>
                     <div class="property-price">
-                        <span>Construction</span>
+                        <span data-i18n="search-page-construction">Construction</span>
                         <div class="property-minmax-price-input-group">
                             <input type="number" name="min_construction_area" id="" placeholder="Min">
                             <input type="number" name="max_construction_area" id="" placeholder="Max">
                         </div>
                     </div>
                     <div class="property-price">
-                        <span>Land</span>
+                        <span data-i18n="search-page-land">Land</span>
                         <div class="property-minmax-price-input-group">
                             <input type="number" name="min_land_area" id="" placeholder="Min">
                             <input type="number" name="max_land_area" id="" placeholder="Max">
                         </div>
                     </div>
                     <div class="property-type-filter">
-                        <span>Ameneties</span>
+                        <span data-i18n="search-page-ameneties">Ameneties</span>
                         <div class="property-type-checkbox-group">
                             <div class="form-check">
                                 <input class="form-check-input" name="ameneties" type="checkbox" value="pool" id="pool">
-                                <label class="form-check-label" for="pool">
+                                <label class="form-check-label" for="pool" data-i18n="search-page-pool">
                                     Pool
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" name="ameneties" type="checkbox" value="park" id="park">
-                                <label class="form-check-label" for="park">
+                                <label class="form-check-label" for="park" data-i18n="search-page-park">
                                     Park
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" name="ameneties" type="checkbox" value="parking" id="parking">
-                                <label class="form-check-label" for="parking">
+                                <label class="form-check-label" for="parking" data-i18n="search-page-parking">
                                     Parking
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" name="ameneties" type="checkbox" value="gated_community" id="gated-community">
-                                <label class="form-check-label" for="gated-community">
+                                <label class="form-check-label" for="gated-community" data-i18n="search-page-gated-community">
                                     Gated Community
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" name="ameneties" type="checkbox" value="gym" id="gym">
-                                <label class="form-check-label" for="gym">
+                                <label class="form-check-label" for="gym" data-i18n="search-page-gym">
                                     Gym
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" name="ameneties" type="checkbox" value="courts" id="courts">
-                                <label class="form-check-label" for="courts">
+                                <label class="form-check-label" for="courts" data-i18n="search-page-courts">
                                     Courts
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="quiet" id="quiet">
-                                <label class="form-check-label" for="quiet">
+                                <label class="form-check-label" for="quiet" data-i18n="search-page-quiet">
                                     Quiet
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" name="ameneties" type="checkbox" value="central_ac" id="central-ac">
-                                <label class="form-check-label" for="central-ac">
+                                <label class="form-check-label" for="central-ac" data-i18n="search-page-central-ac">
                                     Central A/C
                                 </label>
                             </div>
@@ -223,10 +223,10 @@
         </div>
         <div class="property-search-results">
             <div class="property-search-results-header">
-                <span>Search Results</span>
+                <span data-i18n="search-page-search-results">Search Results</span>
                 <div>
                     <button class="filter-btn" id="filter-btn">
-                        <span>Filters</span>
+                        <span data-i18n="search-page-filters">Filters</span>
                         <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M10 0.863883C9.95436 1.10388 9.77171 1.24788 9.63473 1.43988C8.26486 2.87988 6.895 4.31988 5.52514 5.75988C5.29683 5.99988 5.06852 6.09588 4.74888 5.95188C4.65756 5.95188 4.52057 5.85588 4.47491 5.75988C3.05938 4.27188 1.64386 2.78388 0.228334 1.29588C-0.136963 0.911883 -0.0456384 0.287883 0.410983 0.0958825C0.639293 -0.0481175 0.913266 -0.000117473 1.09591 0.143883C1.14158 0.143883 1.18724 0.239883 1.2329 0.287883C2.46578 1.58388 3.65299 2.83188 4.88587 4.12788C4.88587 4.12788 4.93153 4.17588 4.97719 4.22388C4.97719 4.22388 5.02286 4.17588 5.06852 4.12788C6.30139 2.83188 7.53427 1.53588 8.76715 0.239883C8.99546 -0.000117473 9.22377 -0.0961175 9.5434 0.0478825C9.77171 0.143883 9.9087 0.287883 10 0.527883C10 0.527883 10 0.575883 10 0.623883V0.911883V0.863883Z" fill="#9A9A9A"/>
                         </svg>                            
@@ -234,7 +234,7 @@
                     <div class="filter-dropdown" id="filter-dropdown">
                     </div>
                     <button class="view-map-btn">
-                        <span>View Map</span>
+                        <span data-i18n="search-page-view-map">View Map</span>
                         <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_21_121)">
                                 <path
@@ -252,7 +252,7 @@
                         </svg>
                     </button>
                     <button class="view-grid-btn hide">
-                        <span>Grid View</span>
+                        <span data-i18n="search-page-grid-view">Grid View</span>
                         <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect width="6" height="6" rx="1" fill="#D9D9D9" />
                             <rect y="7" width="6" height="6" rx="1" fill="#D9D9D9" />
@@ -262,7 +262,7 @@
                     </button>
                     <div class="order-row">
                         <button class="order-btn" id="order" type="button">
-                            <span id="selected-order">Order</span>
+                            <span id="selected-order" data-i18n="search-page-order">Order</span>
                             <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M10 0.863883C9.95436 1.10388 9.77171 1.24788 9.63473 1.43988C8.26486 2.87988 6.895 4.31988 5.52514 5.75988C5.29683 5.99988 5.06852 6.09588 4.74888 5.95188C4.65756 5.95188 4.52057 5.85588 4.47491 5.75988C3.05938 4.27188 1.64386 2.78388 0.228334 1.29588C-0.136963 0.911883 -0.0456384 0.287883 0.410983 0.0958825C0.639293 -0.0481175 0.913266 -0.000117473 1.09591 0.143883C1.14158 0.143883 1.18724 0.239883 1.2329 0.287883C2.46578 1.58388 3.65299 2.83188 4.88587 4.12788C4.88587 4.12788 4.93153 4.17588 4.97719 4.22388C4.97719 4.22388 5.02286 4.17588 5.06852 4.12788C6.30139 2.83188 7.53427 1.53588 8.76715 0.239883C8.99546 -0.000117473 9.22377 -0.0961175 9.5434 0.0478825C9.77171 0.143883 9.9087 0.287883 10 0.527883C10 0.527883 10 0.575883 10 0.623883V0.911883V0.863883Z" fill="#9A9A9A"/>
                             </svg>

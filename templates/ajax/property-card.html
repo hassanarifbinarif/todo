@@ -7,7 +7,7 @@
         <div class="property-card-image-container">
             {% if obj.is_new %}
             <div class="card-type">
-                <span>New</span>
+                <span data-i18n="property-new">New</span>
             </div>
             {% endif %}
             <img src="{{obj.images.0.image}}" loading="lazy" alt="Property Image" />
@@ -110,9 +110,9 @@
     </div>
     <p class="total-search-count">
         {% if properties.pagination.count == 0 %}
-        0-0 of 0 Properties
+        0-0 <span data-i18n="search-page-of">of</span> 0 <span data-i18n="search-page-properties">Properties</span>
         {% else %}
-        {{properties.pagination.starting_record}}-{{properties.pagination.ending_record}} of {{properties.pagination.count}} Properties
+        {{properties.pagination.starting_record}}-{{properties.pagination.ending_record}} <span data-i18n="search-page-of">of</span> {{properties.pagination.count}} <span data-i18n="search-page-properties">Properties</span>
         {% endif %}
     </p>
 </div>

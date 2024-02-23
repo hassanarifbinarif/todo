@@ -242,6 +242,7 @@ async function getListings(url) {
                 let resp = await requestAPI('/get-search-properties/', JSON.stringify(res), {}, 'POST');
                 resp.json().then(function(myRes) {
                     document.querySelector('#property-search-result-card-container').innerHTML = myRes.property;
+                    updateContent();
                 })
             }
         })
@@ -580,6 +581,12 @@ function createCenterControl(map) {
     controlButton.style.textAlign = "center";
     controlButton.textContent = "Search this area";
     controlButton.type = "button";
+    controlButton.setAttribute('data-i18n', "search-page-search-this-area");
+    $.i18n({locale: currentLang})
+        .load({ en: location.origin + "/static/Assets/translations/en.json", es: location.origin + "/static/Assets/translations/es.json" })
+        .done(function() {
+            controlButton.textContent = $.i18n( 'search-page-search-this-area');
+        })
     controlButton.addEventListener("click", () => {
         // map.setCenter(chicago);
         // alert('button clicked');

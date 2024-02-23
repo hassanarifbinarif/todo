@@ -52,6 +52,7 @@ criteriaOptions.forEach((option) => {
     option.addEventListener('change', function() {
         if(this.checked) {
             document.getElementById('selected-criteria').innerText = this.nextElementSibling.innerText;
+            document.getElementById('selected-criteria').setAttribute('data-i18n', this.nextElementSibling.getAttribute('data-i18n'));
         }
     })
 })

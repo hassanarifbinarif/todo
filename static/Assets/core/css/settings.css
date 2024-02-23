@@ -633,7 +633,7 @@ input[name="my_ads_radio"]:checked + .radio-label{
     font-family: 'Calibri Light', 'Calibri', sans-serif;
 }
 
-.plan-card .plan-features ul li span {
+.plan-card .plan-features ul li .focus {
     font-weight: 700;
     font-family: 'Calibri', sans-serif;
 }
@@ -1120,7 +1120,7 @@ select {
     width: 100%;
 }
 
-.amenety-input>p>span {
+.amenety-input>p>span:last-of-type {
     font-weight: 300;
     font-size: .875rem;
     line-height: 1rem;
