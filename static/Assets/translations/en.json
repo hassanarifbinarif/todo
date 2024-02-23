@@ -32,6 +32,8 @@
     "home-property": "Property",
     "home-buy-or-rent": "Buy or Rent",
     "home-choose": "Choose",
+    "home-buy": "Buy",
+    "home-rent": "Rent",
     "home-type-of-property": "Type of Property",
     "home-price": "Price",
     "home-city": "City",
@@ -47,6 +49,8 @@
     "home-practice": "Practice",
     "home-warehouse": "Warehouse",
     "home-suite": "Suite",
+    "home-no-spotlight-properties": "No Spotlight Properties",
+    "home-nothing-viewed-recently": "Nothing Viewed Recently",
 
 
     "search-page-criteria": "Criteria",

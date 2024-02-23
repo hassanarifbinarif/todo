@@ -32,6 +32,8 @@
     "home-property": "Propiedad",
     "home-buy-or-rent": "Comprar o Alquilar",
     "home-choose": "Elija",
+    "home-buy": "Comprar",
+    "home-rent": "Alquilar",
     "home-type-of-property": "Tipo de propiedad",
     "home-price": "Precio",
     "home-city": "Ciudad",
@@ -47,6 +49,8 @@
     "home-practice": "Consultorio",
     "home-warehouse": "Bodega",
     "home-suite": "Suite",
+    "home-no-spotlight-properties": "Sin propiedades destacadas",
+    "home-nothing-viewed-recently": "Nada visto recientemente",
 
 
     "search-page-criteria": "Criterio",

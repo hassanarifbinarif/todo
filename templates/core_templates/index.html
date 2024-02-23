@@ -48,11 +48,11 @@
                             <div class="filter-dropdown" id="criteria-dropdown">
                                 <div class="radio-btn">
                                     <input id="buy" type="radio" value="sell" name="criteria_radio">
-                                    <label for="buy" class="radio-label">Buy</label>
+                                    <label for="buy" class="radio-label" data-i18n="home-buy">Buy</label>
                                 </div>
                                 <div class="radio-btn">
                                     <input id="rent" type="radio" value="rent" name="criteria_radio">
-                                    <label for="rent" class="radio-label">Rent</label>
+                                    <label for="rent" class="radio-label" data-i18n="home-rent">Rent</label>
                                 </div>
                             </div>
                         </div>
@@ -207,7 +207,7 @@
                     </a>
                     {% empty %}
                     <div>
-                        <span>No Spotlight Properties</span>
+                        <span data-i18n="home-no-spotlight-properties">No Spotlight Properties</span>
                     </div>
                     {% endfor %}
                     {% endif %}
@@ -292,7 +292,7 @@
                     </a>
                     {% empty %}
                     <div>
-                        <span>Nothing Viewed Recently</span>
+                        <span data-i18n="home-nothing-viewed-recently">Nothing Viewed Recently</span>
                     </div>
                     {% endfor %}
                 </div>
