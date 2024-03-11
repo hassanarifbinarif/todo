@@ -11,6 +11,10 @@ window.addEventListener('DOMContentLoaded', function() {
             listingTableContent.classList.add('hide');
         }
     }
+    this.document.querySelector('#nav-profile-btn').addEventListener('click', function(event) {
+        event.preventDefault();
+        document.querySelector('#profile').click();
+    })
 })
 
 // Toggling between listings, favourites and profile views
