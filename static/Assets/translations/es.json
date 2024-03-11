@@ -54,6 +54,8 @@
 
 
     "search-page-criteria": "Criterio",
+    "search-page-buy": "Comprar",
+    "search-page-rent": "Alquilar",
     "search-page-property-type": "Tipo de propiedad",
     "search-page-house": "Casa",
     "search-page-apartment": "Departamento",
@@ -81,6 +83,7 @@
     "search-page-grid-view": "Ver Grilla",
     "search-page-order": "Ordenar",
     "search-page-filters": "Filtros",
+    "search-page-no-properties-found": "No se encontraron propiedades",
     "search-page-of": "de",
     "search-page-properties": "Propiedades",
     "search-page-search-this-area": "Buscar en esta area",
@@ -163,6 +166,7 @@
     "settings-page-order": "Ordenar",
     "settings-page-created-at": "Creado en",
     "settings-page-city": "Ciudad",
+    "settings-page-no-record-available": "No hay registros disponibles",
 
 
     "edit-property-page-edit-property": "Editar Propiedad",

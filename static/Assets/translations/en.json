@@ -54,6 +54,8 @@
 
 
     "search-page-criteria": "Criteria",
+    "search-page-buy": "Buy",
+    "search-page-rent": "Rent",
     "search-page-property-type": "Property Type",
     "search-page-house": "House",
     "search-page-apartment": "Apartment",
@@ -81,6 +83,7 @@
     "search-page-grid-view": "Grid View",
     "search-page-order": "Order",
     "search-page-filters": "Filters",
+    "search-page-no-properties-found": "No Properties Found",
     "search-page-of": "of",
     "search-page-properties": "Properties",
     "search-page-search-this-area": "Search this area",
@@ -163,6 +166,7 @@
     "settings-page-order": "Order",
     "settings-page-created-at": "Created At",
     "settings-page-city": "City",
+    "settings-page-no-record-available": "No record available",
 
 
     "edit-property-page-edit-property": "Edit Property",
