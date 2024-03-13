@@ -69,7 +69,7 @@ async function changePlan(event) {
         if (response.status == 200) {
             if (res.data.plan.id == 1) {
                 currenSelectedPlan = res.data.plan.id;
-                afterLoad(button, 'Plan Saved');
+                afterLoad(button, i18n.messageStore.messages[currentLang]['profile-page-plan-saved'] || 'Plan Saved');
                 setTimeout(() => {
                     afterLoad(button, buttonText);
                 }, 2000);

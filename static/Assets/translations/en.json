@@ -82,6 +82,8 @@
     "search-page-view-map": "View Map",
     "search-page-grid-view": "Grid View",
     "search-page-order": "Order",
+    "search-page-created-at": "Created At",
+    "search-page-city": "City",
     "search-page-filters": "Filters",
     "search-page-no-properties-found": "No Properties Found",
     "search-page-of": "of",
@@ -139,6 +141,7 @@
     "resend-email-page-message": "We sent a password reset link to",
     "resend-email-page-didnt-receive-email": "Didn't receive the email?",
     "resend-email-page-click-to-resend": "Click to resend",
+    "resend-email-page-resent-successfully": "Resent successfully!",
     
     
     "reset-password-page-set-new-password": "Set new password",
@@ -199,6 +202,7 @@
     "edit-property-page-ameneties": "Ameneties",
     "edit-property-page-amenety-message": "Seperate with a coma after each amenity",
     "edit-property-page-publish": "Publish",
+    "edit-property-page-listing-updated": "Listing Updated",
     
     
     "profile-page-logo-slash-photo": "Logo/Photo",
@@ -211,6 +215,7 @@
     "profile-page-address": "Address",
     "profile-page-city": "City",
     "profile-page-save-changes": "Save Changes",
+    "profile-page-profile-updated": "Profile Updated",
     "profile-page-plan": "Plan",
     "profile-page-monthly": "Monthly",
     "profile-page-upload-up-to": "Upload up to",
@@ -219,6 +224,7 @@
     "profile-page-images-per-listing": "images per listing",
     "profile-page-contact-via-whatsapp": "Contact via Whatsapp",
     "profile-page-change-plan": "Change Plan",
+    "profile-page-plan-saved": "Plan Saved",
 
 
     "add-property-page-list-your-property": "List your property",
@@ -273,12 +279,15 @@
     "boost-modal-feature-ad": "Feature your ad?",
     "boost-modal-message": "Do you want to feature your ad for 30 days for only",
     "boost-modal-feature": "Feature",
+    "boost-modal-ad-featured": "Ad Featured",
     "boost-modal-no-thanks": "No, Thanks",
 
 
     "delete-listing-modal-delete-listing": "Delete Listing?",
     "delete-listing-modal-message": "Are you sure you wish to delete the following listing?",
     "delete-listing-modal-confirm": "Confirm",
+    "delete-listing-modal-listing-deleted": "Listing Deleted",
+    "delete-listing-modal-listing-not-found": "Listing not found",
     "delete-listing-modal-back": "Back",
 
 
