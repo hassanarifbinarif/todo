@@ -265,8 +265,7 @@ async function profileForm(event) {
         let response = await profileAPI(formData);
         response.json().then(function(res) {
             if(response.status == 200) {
-                console.log(res);
-                afterLoad(button, 'Profile Updated');
+                afterLoad(button, i18n.messageStore.messages[currentLang]['profile-page-profile-updated'] || 'Profile Updated');
                 setTimeout(() => {
                     afterLoad(button, buttonText);
                 }, 2000);
@@ -330,14 +329,14 @@ async function deleteListing(event, id) {
     beforeLoad(button);
     let response = await deleteListingAPI(data, id);
     if(response.status == 204) {
-        afterLoad(button, "Listing Deleted");
+        afterLoad(button, i18n.messageStore.messages[currentLang]['delete-listing-modal-listing-deleted'] || 'Listing Deleted');
         getUserListings(requiredUserListingsURL);
         setTimeout(() => {
             document.querySelector('.del-listing').click();
         }, 1500)
     }
     else if(response.status == 404) {
-        afterLoad(button, "Listing not found");
+        afterLoad(button, i18n.messageStore.messages[currentLang]['delete-listing-modal-listing-not-found'] || 'Listing not found');
     }
     else {
         afterLoad(button, "Error! Retry");
@@ -658,7 +657,7 @@ async function updateListing(event, id) {
         beforeLoad(button);
         let response = await updateListingAPI(formData, id);
         if(response.status == 200) {
-            afterLoad(button, 'Listing Updated');
+            afterLoad(button, i18n.messageStore.messages[currentLang]['edit-property-page-listing-updated'] || 'Listing Updated');
             errorMsg.classList.remove('active');
             errorMsg.innerText = '';
             getUserListings(requiredUserListingsURL);
@@ -786,7 +785,7 @@ async function boostAdForm(event, id) {
         if (response.status == 200) {
             form.removeAttribute('onsubmit');
             button.type = 'button';
-            afterLoad(button, 'Boosted');
+            afterLoad(button, i18n.messageStore.messages[currentLang]['boost-modal-ad-featured'] || 'Ad Featured');
             getUserListings(requiredUserListingsURL);
             setTimeout(() => {
                 afterLoad(button, buttonText);

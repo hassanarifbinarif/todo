@@ -107,7 +107,7 @@ async function resendVerificationEmailForm(event) {
             } else if (response.status == 201 || response.status == 200) {
                 emailMsg.classList.remove("active");
                 emailMsg.innerText = "";
-                afterLoad(button, "Resent successfully!");
+                afterLoad(button, i18n.messageStore.messages[currentLang]['resend-email-page-resent-successfully'] || 'Resent successfully');
                 setTimeout(() => {
                     afterLoad(button, buttonText);
                 }, 2000);

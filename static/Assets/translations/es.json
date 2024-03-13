@@ -54,6 +54,8 @@
 
 
     "search-page-criteria": "Criterio",
+    "search-page-buy": "Comprar",
+    "search-page-rent": "Alquilar",
     "search-page-property-type": "Tipo de propiedad",
     "search-page-house": "Casa",
     "search-page-apartment": "Departamento",
@@ -80,7 +82,10 @@
     "search-page-view-map": "Ver Mapa",
     "search-page-grid-view": "Ver Grilla",
     "search-page-order": "Ordenar",
+    "search-page-created-at": "Creado en",
+    "search-page-city": "Ciudad",
     "search-page-filters": "Filtros",
+    "search-page-no-properties-found": "No se encontraron propiedades",
     "search-page-of": "de",
     "search-page-properties": "Propiedades",
     "search-page-search-this-area": "Buscar en esta area",
@@ -136,6 +141,7 @@
     "resend-email-page-message": "Enviamos un enlace para restablecer la contraseña a",
     "resend-email-page-didnt-receive-email": "No recibiste el correo electrónico?",
     "resend-email-page-click-to-resend": "Haga clic para reenviar",
+    "resend-email-page-resent-successfully": "Reenviar exitosamente",
 
 
     "reset-password-page-set-new-password": "Establecer nueva contraseña",
@@ -163,6 +169,7 @@
     "settings-page-order": "Ordenar",
     "settings-page-created-at": "Creado en",
     "settings-page-city": "Ciudad",
+    "settings-page-no-record-available": "No hay registros disponibles",
 
 
     "edit-property-page-edit-property": "Editar Propiedad",
@@ -195,6 +202,7 @@
     "edit-property-page-ameneties": "Amenidades",
     "edit-property-page-amenety-message": "Sepárelo con una coma después de cada servicio.",
     "edit-property-page-publish": "Publicar",
+    "edit-property-page-listing-updated": "Listado actualizado",
 
 
     "profile-page-logo-slash-photo": "Logotipo/Foto",
@@ -207,6 +215,7 @@
     "profile-page-address": "Dirección",
     "profile-page-city": "Ciudad",
     "profile-page-save-changes": "Guardar cambios",
+    "profile-page-profile-updated": "Perfil actualizado",
     "profile-page-plan": "Plan",
     "profile-page-monthly": "Mensual",
     "profile-page-upload-up-to": "Subir hasta",
@@ -215,6 +224,7 @@
     "profile-page-images-per-listing": "imágenes por listado",
     "profile-page-contact-via-whatsapp": "Contactar vía WhatsApp",
     "profile-page-change-plan": "Cambio Plan",
+    "profile-page-plan-saved": "Plan guardado",
 
 
     "add-property-page-list-your-property": "Lista tu propiedad",
@@ -269,12 +279,15 @@
     "boost-modal-feature-ad": "Destacar tu anuncio?",
     "boost-modal-message": "Deseas destacar tu anuncio por 30 dias por tan solo",
     "boost-modal-feature": "Destacar",
+    "boost-modal-ad-featured": "Anuncio destacado",
     "boost-modal-no-thanks": "No, Gracias",
 
 
     "delete-listing-modal-delete-listing": "Eliminar Listado?",
     "delete-listing-modal-message": "Está seguro de que desea eliminar el siguiente listado?",
     "delete-listing-modal-confirm": "Confirmar",
+    "delete-listing-modal-listing-deleted": "Listado eliminado",
+    "delete-listing-modal-listing-not-found": "Listado no encontrado",
     "delete-listing-modal-back": "Atrás",
 
 

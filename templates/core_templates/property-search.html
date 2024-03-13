@@ -41,11 +41,11 @@
                         <div class="criteria-radio-group">
                             <div class="criteria-radio-btn">
                                 <input id="buy" type="radio" {% if criteria == 'sell' %}checked{% endif %} value="sell" name="criteria_radio">
-                                <label for="buy" class="radio-label">Buy</label>
+                                <label for="buy" class="radio-label" data-i18n="search-page-buy">Buy</label>
                             </div>
                             <div class="criteria-radio-btn">
                                 <input id="rent" type="radio" {% if criteria == 'rent' %}checked{% endif %} value="rent" name="criteria_radio">
-                                <label for="rent" class="radio-label">Rent</label>
+                                <label for="rent" class="radio-label" data-i18n="search-page-rent">Rent</label>
                             </div>
                         </div>
                     </div>
@@ -269,12 +269,12 @@
                         </button>
                         <div class="order-dropdown" id="order-dropdown">
                             <div class="radio-btn">
-                                <input id="order1" type="radio" name="order_radio">
-                                <label for="order1" class="radio-label">Order 1</label>
+                                <input id="order1" type="radio" value="-created_at" name="order_radio">
+                                <label for="order1" class="radio-label" data-i18n="search-page-created-at">Created At</label>
                             </div>
                             <div class="radio-btn">
-                                <input id="order2" type="radio" name="order_radio">
-                                <label for="order2" class="radio-label">Order 2</label>
+                                <input id="order2" type="radio" value="-city" name="order_radio">
+                                <label for="order2" class="radio-label" data-i18n="search-page-city">City</label>
                             </div>
                         </div>
                     </div>

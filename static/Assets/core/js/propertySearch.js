@@ -162,12 +162,16 @@ sidebar.addEventListener("change", function (event) {
 let orderDropdown = document.getElementById('order-dropdown');
 let orderDropdownBtn = document.getElementById('order');
 let orderOptions = document.querySelectorAll('input[name="order_radio"]');
+let currentOrder;
 
 
 orderOptions.forEach((option) => {
     option.addEventListener('change', function() {
         if(this.checked) {
             document.getElementById('selected-order').innerText = this.nextElementSibling.innerText;
+            queryString = queryString == '' ? `${apiURL}/search-listings?perPage=20&ordering=${this.value}` : setParams(queryString, 'ordering', this.value);
+            currentOrder = this.value;
+            getListings(queryString);
         }
     })
 })
@@ -217,7 +221,12 @@ async function filterPropertyForm(event) {
     ameneties = ameneties.length === 0 ? '' : ameneties.join(',');
     let bedrooms = data.bedroombtnradio || '';
     let bathrooms = data.bathroombtnradio || '';
-    queryString = `${apiURL}/search-listings?perPage=20&criteria=${data.criteria_radio || ''}&property_type__in=${property_type}&price__gte=${data.min_price || ''}&price__lte=${data.max_price || ''}&${bedrooms >= 5 ? 'bedrooms__gte' : 'bedrooms'}=${bedrooms}&${bathrooms >= 5 ? 'bathrooms__gte' : 'bathrooms'}=${bathrooms}&construction__gte=${data.min_construction_area || ''}&construction__lte=${data.max_construction_area}&land__gte=${data.min_land_area || ''}&land__lte=${data.max_land_area}&ameneties__contains=${ameneties}`;
+    if (queryString.includes('ordering')) {
+        queryString = `${apiURL}/search-listings?perPage=20&criteria=${data.criteria_radio || ''}&property_type__in=${property_type}&price__gte=${data.min_price || ''}&price__lte=${data.max_price || ''}&${bedrooms >= 5 ? 'bedrooms__gte' : 'bedrooms'}=${bedrooms}&${bathrooms >= 5 ? 'bathrooms__gte' : 'bathrooms'}=${bathrooms}&construction__gte=${data.min_construction_area || ''}&construction__lte=${data.max_construction_area}&land__gte=${data.min_land_area || ''}&land__lte=${data.max_land_area}&ameneties__contains=${ameneties}&ordering=${currentOrder}`;
+    }
+    else {
+        queryString = `${apiURL}/search-listings?perPage=20&criteria=${data.criteria_radio || ''}&property_type__in=${property_type}&price__gte=${data.min_price || ''}&price__lte=${data.max_price || ''}&${bedrooms >= 5 ? 'bedrooms__gte' : 'bedrooms'}=${bedrooms}&${bathrooms >= 5 ? 'bathrooms__gte' : 'bathrooms'}=${bathrooms}&construction__gte=${data.min_construction_area || ''}&construction__lte=${data.max_construction_area}&land__gte=${data.min_land_area || ''}&land__lte=${data.max_land_area}&ameneties__contains=${ameneties}`;
+    }
     getListings(queryString);
 }
 
@@ -243,6 +252,12 @@ async function getListings(url) {
                 resp.json().then(function(myRes) {
                     document.querySelector('#property-search-result-card-container').innerHTML = myRes.property;
                     updateContent();
+                    if (currentOrder != undefined && currentOrder == '-created_at') {
+                        document.getElementById('selected-order').innerText = i18n.messageStore.messages[currentLang]['search-page-created-at'] || 'Created At';
+                    }
+                    else if (currentOrder != undefined && currentOrder == '-city') {
+                        document.getElementById('selected-order').innerText = i18n.messageStore.messages[currentLang]['search-page-city'] || 'City';
+                    }
                 })
             }
         })

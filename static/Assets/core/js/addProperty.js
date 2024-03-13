@@ -305,7 +305,7 @@ async function boostAdForm(event, id) {
         if (response.status == 200) {
             form.removeAttribute('onsubmit');
             button.type = 'button';
-            afterLoad(button, 'Boosted');
+            afterLoad(button, i18n.messageStore.messages[currentLang]['boost-modal-ad-featured'] || 'Ad Featured');
             setTimeout(() => {
                 afterLoad(button, buttonText);
                 document.querySelector(`.boost-ad`).click();
