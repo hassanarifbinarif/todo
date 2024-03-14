@@ -423,7 +423,7 @@ function removeExponentFromNumberInputs() {
     let numberInputs = document.querySelectorAll('input[type=number]');
     numberInputs.forEach((input) => {
         input.addEventListener('beforeinput', function (event) {
-            if (event.data === "e")
+            if (event.data === "e" || event.data === "E")
                 event.preventDefault();
             else
                 return event;
@@ -431,4 +431,4 @@ function removeExponentFromNumberInputs() {
     })
 }
 
-window.addEventListener('load', removeExponentFromNumberInputs);
+window.addEventListener('DOMContentLoaded', removeExponentFromNumberInputs);
